@@ -39,7 +39,7 @@ Fülle danach `vorlagen/steckbrief.md` aus und lass ihn bestätigen.
   - Teil A: eine Handlungsaufgabe in einer **neuen** Situation (anderer Kunde, anderes Gerät), ohne Tipps, mit Prüfpunkten je Lernziel.
   - Teil B: je Lernziel mindestens zwei Fragen pro Versuch aus einem Pool von mindestens vier, gemischte Fragetypen.
   - Bestehensgrenze 80 %, beliebig oft wiederholbar, bestes Ergebnis zählt. Nicht verhandeln, außer die Lehrkraft entscheidet ausdrücklich anders – dann im Steckbrief begründen.
-- Fülle `vorlagen/lernziel-nachweis.md` aus. Prüfe: Hat jedes Lernziel mindestens zwei Prüfungen (Prüfpunkte + Fragen)? Wird nichts geprüft, was nicht geübt wird?
+- Fülle `vorlagen/lernziele-nachweis.md` aus. Prüfe: Hat jedes Lernziel mindestens zwei Prüfungen (Prüfpunkte + Fragen)? Wird nichts geprüft, was nicht geübt wird?
 
 ### 3. Entwerfen – Drehbuch
 

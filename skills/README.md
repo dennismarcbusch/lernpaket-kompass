@@ -1,6 +1,6 @@
 # Skill-Set zum Lernpaket-Kompass
 
-Fünf Skills für Claude, die den [Lernpaket-Kompass](../docs/leitfaden-lernpakete.md) umsetzen. Jede Phase des Entwicklungsprozesses (Leitfaden Teil C1) hat einen Skill; alle greifen auf dieselbe Referenz zurück. **Anleitung für Kolleginnen und Kollegen:** [docs/skill-set-anleitung.md](../docs/skill-set-anleitung.md).
+Der Gesamt-Skill `lernpaket-kompass` und fünf Einzel-Skills für Claude, die den [Lernpaket-Kompass](../docs/leitfaden-lernpakete.md) umsetzen. Kolleginnen und Kollegen laden nur den Gesamt-Skill hoch: Er enthält alle fünf Phasen und führt der Reihe nach hindurch. Jede Phase des Entwicklungsprozesses (Leitfaden Teil C1) hat einen Skill; alle greifen auf dieselbe Referenz zurück. **Anleitung für Kolleginnen und Kollegen:** [docs/skill-set-anleitung.md](../docs/skill-set-anleitung.md).
 
 | Skill | Phase | Ergebnis |
 |---|---|---|
@@ -19,11 +19,14 @@ skills/
     prozess-und-struktur.md, gestaltung.md, technik.md, checkliste.md   aus Leitfaden C1–C6
     fragenformat.md        Format von js/inhalt.js (Fragen, Stationen, Interaktionen)
     scripts/pruefe_paket.py  automatischer Paket-Test (nachgebauter SCORM-Player, Playwright)
-  lernpaket-*/ , fragenpool-erstellen/   die fünf Skills; referenz/ ist eine Kopie, nicht von Hand ändern
+  lernpaket-*/ , fragenpool-erstellen/   die fünf Einzel-Skills; referenz/ ist eine Kopie, nicht von Hand ändern
+  _gesamt/SKILL.md         Einstieg des Gesamt-Skills (Phasenwahl, Führung durch die Phasen, Ordnerübersicht)
+  gesamt_bauen.py          setzt dist/build/lernpaket-kompass/ zusammen: SKILL.md, phasen/1-planen.md … (SKILL.md der
+                           Einzel-Skills ohne Kopf, Skill-Namen als Phasen), referenz/, vorlagen/, vorlage/, scripts/
   lernpaket-bauen/vorlage/ Kompass-Vorlage: index.html, css/stil.css, js/engine.js, js/inhalt.js (Beispiel), imsmanifest.xml,
                            optionales Tafelbild: js/tafel.js, css/tafel.css
   lernpaket-bauen/vorlagen-lehrkraft/  Ablaufplan für einen Input mit Tafelbild (nicht im Paket)
-  baue-skills.sh           verteilt die Referenz und baut dist/skill_<name>.zip
+  baue-skills.sh           verteilt die Referenz und baut dist/skill_<name>.zip und dist/skill_lernpaket-kompass.zip
 ```
 
 ## Pflege

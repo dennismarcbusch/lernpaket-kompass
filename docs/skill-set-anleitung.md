@@ -4,15 +4,17 @@ Diese Anleitung richtet sich an Kolleginnen und Kollegen, die ein Lernpaket für
 
 ## Worum es geht
 
-Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 13 Prinzipien, eine feste Paketstruktur und eine Checkliste. Das **Skill-Set** sind fünf Arbeitsanweisungen für die KI Claude, die genau diesen Leitfaden (den Lernpaket-Kompass) umsetzen. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt die richtigen Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
+Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 13 Prinzipien, eine feste Paketstruktur und eine Checkliste. Der Skill **`lernpaket-kompass`** ist eine Arbeitsanweisung für die KI Claude, die genau diesen Leitfaden umsetzt und dich in fünf Schritten durch dein Lernpaket führt. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt die richtigen Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
 
-| Schritt | Skill | Du bringst ein | Du bekommst |
-|---|---|---|---|
-| 1 Planen | `lernpaket-planen` | Thema, Klasse, typische Schülerfehler | Steckbrief, Lernziele, Drehbuch |
-| 2 Fragen | `fragenpool-erstellen` | Prüfung der Fragen | Fragenpool mit Feedback |
-| 3 Bauen | `lernpaket-bauen` | Rückmeldung zum Prototyp | ZIP-Datei für die Lernplattform |
-| 4 Prüfen | `lernpaket-pruefen` | Paket | Prüfbericht mit Ampel |
-| 5 Auswerten | `lernpaket-auswerten` | Bericht aus der Lernplattform (ohne Namen) | Auswertung und Änderungsvorschläge |
+| Schritt | Du bringst ein | Du bekommst |
+|---|---|---|
+| 1 Planen | Thema, Klasse, typische Schülerfehler | Steckbrief, Lernziele, Drehbuch |
+| 2 Fragen | Prüfung der Fragen | Fragenpool mit Feedback |
+| 3 Bauen | Rückmeldung zum Prototyp | ZIP-Datei für die Lernplattform |
+| 4 Prüfen | Paket | Prüfbericht mit Ampel |
+| 5 Auswerten | Bericht aus der Lernplattform (ohne Namen) | Auswertung und Änderungsvorschläge |
+
+Am Ende jedes Schritts schlägt Claude den nächsten vor; ein „Ja, weiter“ genügt. Du kannst aber auch mitten einsteigen, z. B. nur ein vorhandenes Paket prüfen lassen.
 
 **Wichtig:** Die KI kann fachliche Fehler machen. Jede Musterlösung und jede Frage prüfst du selbst. Schülerdaten gibst du nur ohne Namen weiter. Lernziele und Bewertung entscheidest du.
 
@@ -27,24 +29,22 @@ Du brauchst ein Claude-Konto (claude.ai). Skills funktionieren in allen Tarifen,
 
 Die Menünamen können sich je nach Version und Sprache leicht unterscheiden. Die aktuelle Beschreibung steht in der [Hilfe von Claude](https://support.claude.com/en/articles/12512180-use-skills-in-claude).
 
-### 2. Die fünf Skills herunterladen
+### 2. Den Skill herunterladen
 
-Lade die fünf ZIP-Dateien herunter, z. B. aus den [Releases](https://github.com/dennismarcbusch/lernpaket-kompass/releases) oder von der [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/):
+Lade die Datei **`skill_lernpaket-kompass.zip`** herunter, z. B. aus den [Releases](https://github.com/dennismarcbusch/lernpaket-kompass/releases) oder von der [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/).
 
-`skill_lernpaket-planen.zip`, `skill_fragenpool-erstellen.zip`, `skill_lernpaket-bauen.zip`, `skill_lernpaket-pruefen.zip`, `skill_lernpaket-auswerten.zip`
-
-**Nicht entpacken und nicht umbenennen.**
+**Nicht entpacken und nicht umbenennen.** Daneben liegen die fünf Schritte auch als einzelne Skills (`skill_lernpaket-planen.zip` usw.). Die brauchst du nicht; lade entweder den Gesamt-Skill oder die Einzel-Skills hoch, nicht beides.
 
 ### 3. Hochladen
 
-Für jede der fünf Dateien:
+So geht es:
 
 1. In Claude **Customize → Skills** öffnen.
 2. Auf **+** und dann **Create skill → Upload a skill** klicken.
 3. Die ZIP-Datei auswählen.
 4. Den Skill einschalten (Schalter rechts).
 
-Danach stehen alle fünf in deiner Skill-Liste. In Team-Konten kann die Verwaltung die Skills auch für alle bereitstellen; dann entfällt dieser Schritt.
+Danach steht `lernpaket-kompass` in deiner Skill-Liste. In Team-Konten kann die Verwaltung den Skill auch für alle bereitstellen; dann entfällt dieser Schritt.
 
 ### 4. Ein Projekt je Lernpaket (empfohlen)
 
@@ -52,11 +52,11 @@ Lege in Claude für jedes Lernpaket ein **Projekt** an (z. B. „Lernpaket Dreis
 
 ## Arbeiten mit dem Skill-Set
 
-Du schreibst in normaler Sprache. Wenn du den Namen des Skills dazuschreibst, nutzt Claude ihn sicher; meist erkennt Claude ihn aber auch so.
+Du schreibst in normaler Sprache. Wenn du „Lernpaket-Kompass“ dazuschreibst, nutzt Claude den Skill sicher; meist erkennt Claude ihn aber auch so.
 
 ### Schritt 1: Planen
 
-> Ich möchte ein Lernpaket planen: Dreisatz für die Berufsintegrationsklasse, etwa 90 Minuten. Nutze den Skill lernpaket-planen.
+> Ich möchte ein Lernpaket planen: Dreisatz für die Berufsintegrationsklasse, etwa 90 Minuten. Nutze den Lernpaket-Kompass.
 
 Claude stellt dir in mehreren Runden Fragen: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Welche Situation aus Beruf oder Alltag passt? **Nimm dir für die typischen Fehler Zeit** – daraus entstehen gute Falschantworten und gutes Feedback.
 
@@ -64,13 +64,13 @@ Danach schlägt Claude Lernziele vor („Ich kann …“) und legt fest, wie das
 
 ### Schritt 2: Fragen
 
-> Erstelle jetzt mit fragenpool-erstellen den Fragenpool zu den Lernzielen aus dem Drehbuch.
+> Ja, weiter: Erstelle jetzt den Fragenpool zu den Lernzielen aus dem Drehbuch.
 
 Du bekommst die Fragen zusätzlich als Tabelle. **Geh jede Frage durch**: Stimmt die richtige Antwort? Sind die Falschantworten typische Fehler deiner Schüler? Ist das Feedback verständlich? Schreib Änderungen einfach hin („Frage F7: Option c ist zu leicht zu erkennen“).
 
 ### Schritt 3: Prototyp und Ausbau
 
-> Bau mit lernpaket-bauen einen Prototyp mit Station 1.
+> Bau einen Prototyp mit Station 1.
 
 Claude baut eine erste Station und gibt dir eine ZIP-Datei. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
 
@@ -98,7 +98,7 @@ Nicht jedes Paket braucht einen Input – ohne Tafelbild funktioniert alles wie 
 
 ### Schritt 4: Prüfen
 
-> Prüfe das Paket mit lernpaket-pruefen.
+> Prüfe das Paket.
 
 Du bekommst einen Prüfbericht mit Ampel und den drei wichtigsten Änderungen. Danach:
 
@@ -120,9 +120,9 @@ Bestanden ist ein Paket ab 80 %. Der Nachweis ist keine Prüfung im rechtlichen 
 1. In der Aktivität unter **Berichte** den Bericht mit den Interaktionen (Antworten je Frage) als CSV oder Excel herunterladen. **Namensspalten vorher löschen**, wenn möglich.
 2. Die Datei an Claude geben:
 
-> Werte diesen Export mit lernpaket-auswerten aus. Das Paket ist im Projekt.
+> Werte diesen Export mit dem Lernpaket-Kompass aus. Das Paket ist im Projekt.
 
-Du siehst, welche Fragen zu schwer oder zu leicht sind, bei welchem Lernziel die Klasse hängt und welche Falschantwort besonders oft gewählt wurde. Über die Änderungen entscheidest du; Claude setzt sie mit `lernpaket-bauen` um.
+Du siehst, welche Fragen zu schwer oder zu leicht sind, bei welchem Lernziel die Klasse hängt und welche Falschantwort besonders oft gewählt wurde. Über die Änderungen entscheidest du; Claude setzt sie im Schritt Bauen um.
 
 ## Was in deiner Verantwortung bleibt
 
@@ -135,7 +135,7 @@ Du siehst, welche Fragen zu schwer oder zu leicht sind, bei welchem Lernziel die
 
 | Problem | Lösung |
 |---|---|
-| Claude nutzt den Skill nicht | Den Namen des Skills in die Nachricht schreiben. Prüfen, ob er unter *Customize → Skills* eingeschaltet ist. |
+| Claude nutzt den Skill nicht | „Lernpaket-Kompass“ in die Nachricht schreiben. Prüfen, ob er unter *Customize → Skills* eingeschaltet ist. |
 | Hochladen des Skills klappt nicht | Die ZIP-Datei unverändert hochladen (nicht entpacken, nicht umbenennen). Bei Team-Konten kann das Hochladen gesperrt sein – die Verwaltung fragen. |
 | Roter Kasten „Hinweis für Autor:innen“ im Paket | Im Prototyp normal. Im fertigen Paket Claude bitten: „Behebe die Hinweise im roten Kasten.“ |
 | Claude schreibt, der Browser-Test fehle | Das Paket einmal selbst vollständig durchspielen, inklusive Nachweis. |
@@ -146,4 +146,4 @@ Du siehst, welche Fragen zu schwer oder zu leicht sind, bei welchem Lernziel die
 
 Das Format der Skills (Ordner mit einer Datei `SKILL.md`) ist offen; auch andere KI-Werkzeuge können solche Skills lesen. Planen und Fragen erstellen klappt notfalls in jedem Chatbot: Lade dazu `prinzipien.md` und die Vorlagen aus dem Skill-Ordner hoch und bitte darum, danach zu arbeiten. Für Bauen und Prüfen braucht das Werkzeug die Möglichkeit, Programme auszuführen.
 
-**Für Fortgeschrittene (Claude Code):** Die Skill-Ordner aus `skills/` nach `~/.claude/skills/` kopieren oder im Repository unter `.claude/skills/` ablegen. Vorher `skills/baue-skills.sh` ausführen, damit jeder Skill seine Referenz enthält.
+**Für Fortgeschrittene (Claude Code):** `skills/baue-skills.sh` ausführen und dann entweder den Gesamt-Skill `dist/build/lernpaket-kompass/` oder die fünf Einzel-Skill-Ordner aus `skills/` nach `~/.claude/skills/` kopieren (bzw. im Repository unter `.claude/skills/` ablegen).

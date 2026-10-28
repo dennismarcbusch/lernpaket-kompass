@@ -7,11 +7,13 @@ Der Lernpaket-Kompass hilft Lehrkräften, interaktive Lernpakete (SCORM 1.2, z. 
 | | |
 |---|---|
 | 📖 **Leitfaden** | [docs/leitfaden-lernpakete.md](docs/leitfaden-lernpakete.md) – Forschungslage (u. a. Kerres, Mayer, 4C/ID), 13 Prinzipien mit Aufwand, Paketstruktur, Entwicklungsprozess, technische Standards und Qualitätscheckliste |
-| 🧰 **Skill-Set für Claude** | [skills/](skills) – fünf Skills für Planen, Fragen erstellen, Bauen, Prüfen und Auswerten, mit Paketvorlage und automatischem Prüfskript |
+| 🧰 **Skill-Set für Claude** | [skills/](skills) – der Gesamt-Skill `lernpaket-kompass` führt durch alle fünf Phasen (Planen, Fragen erstellen, Bauen, Prüfen, Auswerten); dazu die fünf Phasen als Einzel-Skills, Paketvorlage und automatisches Prüfskript |
 | 🚀 **Einstieg für Kolleginnen und Kollegen** | [docs/skill-set-anleitung.md](docs/skill-set-anleitung.md) – Einrichten in etwa 10 Minuten, Arbeitsschritte mit Beispiel-Prompts |
-| ⬇️ **Download** | Skill-ZIPs zum Hochladen in Claude unter [Releases](../../releases) und auf der [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/) |
+| ⬇️ **Download** | `skill_lernpaket-kompass.zip` zum Hochladen in Claude unter [Releases](../../releases) und auf der [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/) |
 
 ## Das Skill-Set
+
+Kolleginnen und Kollegen laden nur einen Skill hoch: **`lernpaket-kompass`**. Er erkennt, wo die Lehrkraft gerade steht, liest jeweils nur die Anleitung der aktuellen Phase und schlägt am Ende jeder Phase die nächste vor. Er wird beim Bauen automatisch aus den fünf Einzel-Skills zusammengesetzt, die es für Fortgeschrittene auch einzeln gibt:
 
 | Skill | Phase | Ergebnis |
 |---|---|---|
@@ -35,9 +37,11 @@ docs/
   skill-set-anleitung.md    Anleitung zum Skill-Set für Kolleginnen und Kollegen
 skills/
   _gemeinsam/               gemeinsame Referenz (Prinzipien, Auszüge aus dem Leitfaden, Fragenformat, Prüfskript)
-  lernpaket-*/, fragenpool-erstellen/   die fünf Skills
+  lernpaket-*/, fragenpool-erstellen/   die fünf Einzel-Skills (Phasen)
+  _gesamt/SKILL.md          Einstieg des Gesamt-Skills lernpaket-kompass
+  gesamt_bauen.py           setzt den Gesamt-Skill aus den Einzel-Skills zusammen
   lernpaket-bauen/vorlage/  Kompass-Vorlage (Engine, Stil, Beispielinhalt, Manifest, optionales Tafelbild)
-  baue-skills.sh            verteilt die Referenz und baut dist/skill_<name>.zip
+  baue-skills.sh            verteilt die Referenz und baut dist/skill_<name>.zip, auch den Gesamt-Skill
   leitfaden_sync.py         übernimmt Änderungen am Leitfaden in die Skill-Referenz
 ```
 
@@ -45,7 +49,7 @@ skills/
 
 - **Leitfaden geändert?** `python3 skills/leitfaden_sync.py --export <markdown-export>` und danach `skills/baue-skills.sh` (Details in [skills/README.md](skills/README.md)).
 - **Vorlage geändert?** `python3 skills/_gemeinsam/scripts/pruefe_paket.py skills/lernpaket-bauen/vorlage` muss komplett grün sein (Voraussetzung: `pip install playwright && playwright install chromium`).
-- **Veröffentlichen:** Tag `v1.0` setzen und pushen. Die GitHub Action baut die Skill-ZIPs, hängt sie an ein Release und stellt sie auf GitHub Pages (Voraussetzung: *Settings → Pages → Source: GitHub Actions*).
+- **Veröffentlichen:** neuen Tag setzen und pushen (z. B. `v1.1`). Die GitHub Action baut die Skill-ZIPs, hängt sie an ein Release und stellt sie auf GitHub Pages (Voraussetzung: *Settings → Pages → Source: GitHub Actions*).
 
 ZIPs werden nicht eingecheckt (`dist/` ist ignoriert).
 

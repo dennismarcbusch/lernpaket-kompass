@@ -23,7 +23,7 @@ Der Leitfaden hat drei Teile: **A** fasst die Forschungslage zusammen, **B** wä
 
 Wer wenig Zeit hat, liest diese zehn Sätze, Teil B (Prinzipienübersicht) und Teil C6 (Checkliste).
 
-**Skill-Set:** Wer ein Paket bauen möchte, muss den Leitfaden nicht auswendig kennen. Fünf Skills für Claude führen durch Planung, Fragen, Bau, Prüfung und Auswertung und wenden die Prinzipien dabei automatisch an (Teil C7). Einrichtung und Beispiel-Prompts: [Anleitung zum Skill-Set](skill-set-anleitung.md).
+**Skill-Set:** Wer ein Paket bauen möchte, muss den Leitfaden nicht auswendig kennen. Ein einziger Skill für Claude, der Lernpaket-Kompass, führt durch Planung, Fragen, Bau, Prüfung und Auswertung und wendet die Prinzipien dabei automatisch an (Teil C7). Einrichtung und Beispiel-Prompts: [Anleitung zum Skill-Set](skill-set-anleitung.md).
 
 ## Teil A1: Was die Forschung sagt und wie verlässlich sie ist
 
@@ -406,7 +406,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 
 Der Leitfaden ist zusätzlich als Skill-Set für Claude umgesetzt: Jede Phase aus Teil C1 bekommt einen Skill, der die Lehrkraft im Gespräch durch die Phase führt und die Prinzipien automatisch anwendet. So müssen Einsteiger den Leitfaden nicht auswendig kennen, um ihn einzuhalten.
 
-**So bekommst du das Skill-Set:** Die fünf Skills liegen im Repository [lernpaket-kompass unter skills/](../skills) und als ZIP-Dateien in den [Releases](https://github.com/dennismarcbusch/lernpaket-kompass/releases). Jede ZIP-Datei wird in Claude unter *Customize → Skills* hochgeladen. Die [Anleitung zum Skill-Set](skill-set-anleitung.md) beschreibt Einrichtung, Arbeitsschritte mit Beispiel-Prompts, Upload in die ByCS-Lernplattform und häufige Probleme.
+**So bekommst du das Skill-Set:** Für den Einstieg genügt ein einziger Skill, `lernpaket-kompass`. Er enthält alle fünf Skills, erkennt, wo die Lehrkraft gerade steht, und führt Phase für Phase weiter. Er liegt als ZIP-Datei `skill_lernpaket-kompass.zip` in den [Releases](https://github.com/dennismarcbusch/lernpaket-kompass/releases) und wird in Claude unter *Customize → Skills* hochgeladen. Die fünf Einzel-Skills liegen im Repository [lernpaket-kompass unter skills/](../skills) und ebenfalls in den Releases; sie sind für Fortgeschrittene gedacht, die nur einzelne Phasen nutzen. Die [Anleitung zum Skill-Set](skill-set-anleitung.md) beschreibt Einrichtung, Arbeitsschritte mit Beispiel-Prompts, Upload in die ByCS-Lernplattform und häufige Probleme.
 
 **Was dahintersteckt:** `lernpaket-bauen` arbeitet mit einer Paketvorlage, die die Paketstruktur aus Teil C2 und die technischen Mindeststandards aus Teil C5 bereits enthält: Selbsteinschätzung, Kurz-Checks, gestufte Tipps, Nachweis ab 80 %, Auswertung je Lernziel, Merkblatt, SCORM-Datenübergabe und optional ein Tafelbild für den Input. Pro Paket werden nur Inhalte und Interaktionen geschrieben, deshalb sehen alle Pakete gleich aus und bedienen sich gleich. Ein Prüfskript spielt jedes Paket automatisch mit der Musterlösung durch und testet Datenübergabe, Wiedereinstieg und Tablet-Ansicht; es lässt sich auch auf ältere Pakete anwenden.
 
