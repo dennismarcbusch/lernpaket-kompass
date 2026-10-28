@@ -1,6 +1,6 @@
 ---
 name: lernpaket-planen
-description: Plant ein neues SCORM-Lernpaket nach dem PING-Leitfaden im Gespräch mit der Lehrkraft – Steckbrief, Lernziele mit Nachweis, Drehbuch. Für „Lernpaket planen“ oder „neues Lernmodul“.
+description: Plant ein neues SCORM-Lernpaket nach dem Lernpaket-Kompass im Gespräch mit der Lehrkraft – Steckbrief, Lernziele mit Nachweis, Drehbuch. Für „Lernpaket planen“ oder „neues Lernmodul“.
 ---
 
 # Lernpaket planen (Phasen 1–3 des Leitfadens)

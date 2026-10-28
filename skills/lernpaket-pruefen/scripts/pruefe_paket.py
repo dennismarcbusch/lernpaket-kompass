@@ -5,7 +5,7 @@ Aufruf:
     python3 pruefe_paket.py <ordner-oder-zip> [--bericht bericht.json] [--bilder ordner] [--ohne-browser]
 
 1. Statische Prüfung (immer): Manifest im Wurzelverzeichnis, SCORM 1.2, masteryscore 80,
-   Identifier mit Präfix "ping-", alle Dateien vorhanden und im Manifest, keine externen
+   Identifier im Format "<präfix>-<name>", alle Dateien vorhanden und im Manifest, keine externen
    Server, Größe, JavaScript-Syntax (wenn node installiert ist).
 2. Browser-Prüfung (wenn Python-Playwright mit Chromium installiert ist): lädt das Paket in
    einem nachgebauten SCORM-1.2-Player, löst bei Paketen aus der Vorlage alle Stationen,
@@ -50,7 +50,8 @@ def statisch(root):
     sv = r.find('.//c:schemaversion', ns)
     punkt(sv is not None and sv.text.strip() == '1.2', 'Format', f'SCORM-Version: {sv.text.strip() if sv is not None else "fehlt"} (Soll: 1.2).')
     ident = r.get('identifier', '')
-    punkt(ident.startswith('ping-'), 'Format', f'Manifest-Identifier "{ident}" ' + ('hat das Präfix ping-.' if ident.startswith('ping-') else 'sollte mit "ping-" beginnen.'), gelb=True)
+    id_ok = bool(re.fullmatch(r'[a-z0-9]+-[a-z0-9]+(?:-[a-z0-9]+)*', ident))
+    punkt(id_ok, 'Format', f'Manifest-Identifier "{ident}" ' + ('hat das Format <präfix>-<name>.' if id_ok else 'sollte "<präfix>-<name>" lauten (Kleinbuchstaben, Ziffern, Bindestriche).'), gelb=True)
     ms = r.find('.//a:masteryscore', ns)
     msv = ms.text.strip() if ms is not None and ms.text else None
     punkt(msv == '80', 'Datenübergabe', f'masteryscore im Manifest: {msv or "fehlt"} (Soll: 80).')
@@ -170,7 +171,7 @@ def browser(root, href, bilder):
         if bilder:
             os.makedirs(bilder, exist_ok=True)
         if not vorlage:
-            punkt(False, 'Test', 'Paket stammt nicht aus der PING-Vorlage: nur Laden, Anmeldung und Darstellung geprüft. Aufgaben bitte von Hand durchspielen.', gelb=True)
+            punkt(False, 'Test', 'Paket stammt nicht aus der Kompass-Vorlage: nur Laden, Anmeldung und Darstellung geprüft. Aufgaben bitte von Hand durchspielen.', gelb=True)
             if bilder:
                 pg.screenshot(path=os.path.join(bilder, 'start.png'), full_page=True)
             _schmal(ctx, url, bilder, None)

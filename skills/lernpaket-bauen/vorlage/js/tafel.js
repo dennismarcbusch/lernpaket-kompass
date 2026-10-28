@@ -1,5 +1,5 @@
 /* =====================================================================
-   Tafelbild-Baustein der PING-Vorlage (optional, Leitfaden C2)
+   Tafelbild-Baustein der Kompass-Vorlage (optional, Leitfaden C2)
    Präsentationsmodus für den freiwilligen Lehrer-Input: dieselben
    interaktiven Bilder wie im Paket, aber groß, ohne erklärenden Text,
    Schritt für Schritt per Klick, Pfeiltaste oder Presenter.

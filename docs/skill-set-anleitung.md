@@ -4,7 +4,7 @@ Diese Anleitung richtet sich an Kolleginnen und Kollegen, die ein Lernpaket für
 
 ## Worum es geht
 
-Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 13 Prinzipien, eine feste Paketstruktur und eine Checkliste. Das **Skill-Set** sind fünf Arbeitsanweisungen für die KI Claude, die genau diesen Leitfaden umsetzen. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt die richtigen Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
+Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 13 Prinzipien, eine feste Paketstruktur und eine Checkliste. Das **Skill-Set** sind fünf Arbeitsanweisungen für die KI Claude, die genau diesen Leitfaden (den Lernpaket-Kompass) umsetzen. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt die richtigen Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
 
 | Schritt | Skill | Du bringst ein | Du bekommst |
 |---|---|---|---|
@@ -29,7 +29,7 @@ Die Menünamen können sich je nach Version und Sprache leicht unterscheiden. Di
 
 ### 2. Die fünf Skills herunterladen
 
-Lade die fünf ZIP-Dateien herunter, z. B. aus den [Releases des PING-Repositorys](https://github.com/dennismarcbusch/PING/releases) oder von der [Paketseite](https://dennismarcbusch.github.io/PING/):
+Lade die fünf ZIP-Dateien herunter, z. B. aus den [Releases](https://github.com/dennismarcbusch/lernpaket-kompass/releases) oder von der [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/):
 
 `skill_lernpaket-planen.zip`, `skill_fragenpool-erstellen.zip`, `skill_lernpaket-bauen.zip`, `skill_lernpaket-pruefen.zip`, `skill_lernpaket-auswerten.zip`
 

@@ -1,4 +1,4 @@
-/* Tafelbild-Baustein der PING-Vorlage (optional). Nicht pro Paket verändern.
+/* Tafelbild-Baustein der Kompass-Vorlage (optional). Nicht pro Paket verändern.
    Groß, kontrastreich, ohne erklärenden Text; Bedienelemente mindestens 48 px (Board, Tablet). */
 html.tafel-offen,html.tafel-offen body{overflow:hidden}
 .tafel{position:fixed;inset:0;z-index:1000;background:var(--bg);display:flex;flex-direction:column;outline:none}

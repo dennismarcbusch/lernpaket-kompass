@@ -1,0 +1,58 @@
+name: Release
+
+# Tag "v1.0" -> baut die Skill-ZIPs (dist/skill_<name>.zip), legt ein Release an
+# und stellt die ZIPs mit einer Übersichtsseite auf GitHub Pages.
+on:
+  push:
+    tags: ['v*']
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Skill-ZIPs bauen
+        run: skills/baue-skills.sh
+      - uses: actions/upload-artifact@v4
+        with:
+          name: skills
+          path: dist/*.zip
+      - name: Release anlegen
+        if: startsWith(github.ref, 'refs/tags/')
+        uses: softprops/action-gh-release@v2
+        with:
+          files: dist/*.zip
+          generate_release_notes: true
+      - name: Pages-Seite vorbereiten
+        run: |
+          mkdir -p site && cp dist/*.zip site/
+          repo="https://github.com/${GITHUB_REPOSITORY}/blob/main"
+          {
+            echo '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lernpaket-Kompass</title>'
+            echo '<style>body{font:16px/1.5 system-ui,sans-serif;max-width:42rem;margin:2rem auto;padding:0 1rem}</style>'
+            echo "<h1>Lernpaket-Kompass</h1><p>Leitfaden für interaktive Lernpakete · Stand: ${GITHUB_REF_NAME}</p>"
+            echo "<p><a href=\"${repo}/docs/leitfaden-lernpakete.md\">Leitfaden lesen</a> · <a href=\"${repo}/docs/skill-set-anleitung.md\">Anleitung zum Skill-Set</a></p>"
+            echo '<h2>Skills zum Hochladen in Claude</h2><p>Nicht entpacken und nicht umbenennen.</p><ul>'
+            for f in site/*.zip; do n=$(basename "$f"); echo "<li><a href=\"$n\">$n</a></li>"; done
+            echo '</ul>'
+          } > site/index.html
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: site
+
+  pages:
+    needs: build
+    if: startsWith(github.ref, 'refs/tags/')
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deploy.outputs.page_url }}
+    steps:
+      - id: deploy
+        uses: actions/deploy-pages@v4

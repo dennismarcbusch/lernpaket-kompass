@@ -1,6 +1,6 @@
 # Gestaltungsregeln, SeGeL und klassischer Unterricht
 
-Quelle: Leitfaden „Evidenzbasierte Lernpakete (SCORM) gestalten“, docs/leitfaden-lernpakete.md im PING-Repository.
+Quelle: Lernpaket-Kompass – Leitfaden für interaktive Lernpakete, docs/leitfaden-lernpakete.md im Repository lernpaket-kompass.
 
 ## Teil C3: Gestaltungsregeln
 

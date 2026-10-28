@@ -1,6 +1,6 @@
 # Technische Mindeststandards
 
-Quelle: Leitfaden „Evidenzbasierte Lernpakete (SCORM) gestalten“, docs/leitfaden-lernpakete.md im PING-Repository.
+Quelle: Lernpaket-Kompass – Leitfaden für interaktive Lernpakete, docs/leitfaden-lernpakete.md im Repository lernpaket-kompass.
 
 ## Teil C5: Technische Mindeststandards
 

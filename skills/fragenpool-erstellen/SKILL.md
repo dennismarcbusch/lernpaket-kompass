@@ -1,6 +1,6 @@
 ---
 name: fragenpool-erstellen
-description: Erstellt Fragen für Lernpakete nach dem PING-Leitfaden – je Lernziel, Falschantworten aus typischen Schülerfehlern, erklärendes Feedback. Für Kurz-Checks, Nachweis und Selbsttest.
+description: Erstellt Fragen für Lernpakete nach dem Lernpaket-Kompass – je Lernziel, Falschantworten aus typischen Schülerfehlern, erklärendes Feedback. Für Kurz-Checks, Nachweis und Selbsttest.
 ---
 
 # Fragenpool erstellen

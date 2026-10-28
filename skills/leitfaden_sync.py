@@ -16,7 +16,7 @@ HIER = os.path.dirname(os.path.abspath(__file__))
 REPO = os.path.dirname(HIER)
 MD = os.path.join(REPO, 'docs', 'leitfaden-lernpakete.md')
 G = os.path.join(HIER, '_gemeinsam')
-QUELLE = 'Quelle: Leitfaden „Evidenzbasierte Lernpakete (SCORM) gestalten“, docs/leitfaden-lernpakete.md im PING-Repository.\n\n'
+QUELLE = 'Quelle: Lernpaket-Kompass – Leitfaden für interaktive Lernpakete, docs/leitfaden-lernpakete.md im Repository lernpaket-kompass.\n\n'
 ERSATZ = {
     r'&#91;embedded content: Mayer \(2017\)[^\]]*\\\]': '*(Diagramm mit den Effektstärken der zwölf Mayer-Prinzipien nach Mayer 2017 und der Re-Analyse von Cromley et al.: nur in der Dokumentfassung. Im Mittel g ≈ 0,37.)*',
     r'&#91;embedded content: Entwicklungsprozess[^\]]*\\\]': '*(Ablaufdiagramm: Klären → Zielen → Entwerfen → Prototyp bauen → Erproben → Einsetzen und auswerten, mit Rücksprüngen nach Erprobung und Auswertung; nur in der Dokumentfassung.)*',
@@ -33,7 +33,8 @@ def export_uebernehmen(pfad):
     for a, b in ERSATZ.items():
         md = re.sub(a, b, md)
     md = md.replace('Durchgezogene Pfeile zeigen den Regelablauf, gestrichelte die Rücksprünge nach Erprobung und Auswertung.\n\n', '')
-    md = md.replace('https://github.com/dennismarcbusch/PING/blob/main/docs/', '').replace('https://github.com/dennismarcbusch/PING/tree/main/skills', '../skills')
+    for alt in ('PING', 'lernpaket-kompass'):
+        md = md.replace(f'https://github.com/dennismarcbusch/{alt}/blob/main/docs/', '').replace(f'https://github.com/dennismarcbusch/{alt}/tree/main/skills', '../skills')
     if 'embedded content' in md:
         print('Achtung: unbekannte eingebettete Grafik im Export – bitte von Hand ersetzen.')
     open(MD, 'w', encoding='utf-8').write(md)

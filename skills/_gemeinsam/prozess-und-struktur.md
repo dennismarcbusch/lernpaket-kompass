@@ -1,6 +1,6 @@
 # Entwicklungsprozess und Paketstruktur
 
-Quelle: Leitfaden „Evidenzbasierte Lernpakete (SCORM) gestalten“, docs/leitfaden-lernpakete.md im PING-Repository.
+Quelle: Lernpaket-Kompass – Leitfaden für interaktive Lernpakete, docs/leitfaden-lernpakete.md im Repository lernpaket-kompass.
 
 ## Teil C1: Der Entwicklungsprozess in sechs Phasen
 
@@ -40,7 +40,7 @@ Jedes Paket folgt demselben Grundmuster aus fünf Teilen. Es ist aus den PING-Pa
 - Das Tafelbild speichert nichts und verändert weder Fortschritt noch Ergebnis.
 - Zum Input gehört ein **Ablaufplan** für die Lehrkraft (Szene, Klicks, Impulsfrage, erwartete Fehlvorstellung, Merksatz), abgelegt neben dem Paket, nicht im ZIP.
 
-Beispiel: „Netzwerktopologien erleben“ (Version 2) mit sechs Szenen und Ablaufplan unter `packages/netzwerktopologien/lehrer/`.
+Beispiel: „Netzwerktopologien erleben“ (Version 2) mit sechs Szenen und Ablaufplan im [PING-Repository unter `packages/netzwerktopologien/lehrer/`](https://github.com/dennismarcbusch/PING/tree/main/packages/netzwerktopologien/lehrer).
 
 **Größe.** Ein Paket deckt ein Thema ab, das sich in einem Satz benennen lässt. Wird das Drehbuch länger als etwa acht Stationen, lohnt es sich, zwei Pakete daraus zu machen.
 

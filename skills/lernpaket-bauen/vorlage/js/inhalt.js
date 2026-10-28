@@ -79,7 +79,7 @@ var IP_SVG = function (bits) {
 };
 
 window.PAKET = {
-  id: 'ping-bits-und-bytes',          // = Identifier im imsmanifest.xml
+  id: 'beispiel-bits-und-bytes',          // = Identifier im imsmanifest.xml
   titel: 'Bits & Bytes',
   untertitel: 'Binärzahlen lesen und schreiben',
   version: '1.0',

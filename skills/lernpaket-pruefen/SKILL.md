@@ -1,11 +1,11 @@
 ---
 name: lernpaket-pruefen
-description: Prüft ein SCORM-Lernpaket gegen Checkliste und Prinzipien des PING-Leitfadens – Technik-Test, Lösbarkeit, Didaktik, Bedienung, Barrierefreiheit. Ergebnis ist ein Prüfbericht mit Ampel.
+description: Prüft ein SCORM-Lernpaket gegen Checkliste und Prinzipien des Lernpaket-Kompasses – Technik-Test, Lösbarkeit, Didaktik, Bedienung, Barrierefreiheit. Ergebnis ist ein Prüfbericht mit Ampel.
 ---
 
 # Lernpaket prüfen (Phase 5 des Leitfadens)
 
-Du prüfst ein fertiges oder fast fertiges Lernpaket (ZIP oder Ordner) und schreibst einen Prüfbericht, mit dem die Lehrkraft und eine zweite Lehrkraft (Review) arbeiten können. Du prüfst Pakete aus der PING-Vorlage genauso wie ältere oder fremde SCORM-Pakete.
+Du prüfst ein fertiges oder fast fertiges Lernpaket (ZIP oder Ordner) und schreibst einen Prüfbericht, mit dem die Lehrkraft und eine zweite Lehrkraft (Review) arbeiten können. Du prüfst Pakete aus der Kompass-Vorlage genauso wie ältere oder fremde SCORM-Pakete.
 
 **Lies vor dem Start:** `referenz/checkliste.md` (Qualitätscheckliste, Teil C6), `referenz/prinzipien.md` (Prüffragen P1–P13), `referenz/gestaltung.md` (Abschnitt „Orientierung“), `referenz/technik.md`.
 

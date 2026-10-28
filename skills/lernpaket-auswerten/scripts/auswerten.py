@@ -8,7 +8,7 @@ Schritt 1 – Datenschutz: Spalten mit Namen, E-Mail, Benutzerkennung o. Ä. wer
 entfernt und nicht weiterverarbeitet. Mit --anonym wird die bereinigte Tabelle gespeichert.
 Schritt 2 – Auswertung (soweit die Daten es hergeben):
   * je Frage: Lösungsquote, Anzahl, häufigste falsche Antworten (Ablenker-Analyse);
-    Fragen-IDs der PING-Vorlage haben die Form N<Versuch>_<Frage-ID>, z. B. N2_F07;
+    Fragen-IDs der Kompass-Vorlage haben die Form N<Versuch>_<Frage-ID>, z. B. N2_F07;
   * je Lernziel (cmi.objectives, Spaltenwerte LZ1, LZ2 …): mittlerer Prozentwert;
   * Gesamtbewertung: Verteilung, Bestehensquote.
 Markierungen: Lösungsquote unter 40 % = „schwer“ (Frage oder Station prüfen),

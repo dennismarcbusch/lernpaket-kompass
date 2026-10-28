@@ -1,6 +1,6 @@
 ---
 name: lernpaket-auswerten
-description: Wertet den Berichtsexport der Lernplattform zu einem Lernpaket aus (ohne Namen) – schwere und zu leichte Fragen, Lernziele, Bestehensquote – und leitet Änderungen nach dem PING-Leitfaden ab.
+description: Wertet den Berichtsexport der Lernplattform zu einem Lernpaket aus (ohne Namen) – schwere und zu leichte Fragen, Lernziele, Bestehensquote – und leitet Änderungen nach dem Lernpaket-Kompass ab.
 ---
 
 # Lernpaket auswerten (Phase 6 des Leitfadens)
@@ -30,7 +30,7 @@ In der Aktivität „Lernpaket“ unter **Berichte** gibt es Berichte für Bewer
    python3 <skill>/scripts/auswerten.py <export.csv|xlsx> [weitere] --inhalt <paket>/js/inhalt.js --anonym bereinigt.csv --bericht zahlen.md
    ```
 
-   Das Skript erkennt PING-Fragen-IDs (`N<Versuch>_<Frage-ID>`), Lernziel-Werte (`LZ1` …) und Bewertungen anhand des Inhalts. Erkennt es nichts, sieh dir die bereinigte Datei selbst an und werte mit eigenem Code aus.
+   Das Skript erkennt Fragen-IDs der Kompass-Vorlage (`N<Versuch>_<Frage-ID>`), Lernziel-Werte (`LZ1` …) und Bewertungen anhand des Inhalts. Erkennt es nichts, sieh dir die bereinigte Datei selbst an und werte mit eigenem Code aus.
 
 2. **Vorsicht bei kleinen Zahlen:** Unter etwa 15 Versuchen nur Tendenzen nennen („deutet darauf hin“). Fragen mit weniger als fünf Antworten nicht bewerten.
 

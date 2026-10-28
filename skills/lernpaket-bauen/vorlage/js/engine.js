@@ -1,5 +1,5 @@
 /* =====================================================================
-   Lernpaket-Engine (PING) – setzt den Leitfaden technisch um.
+   Lernpaket-Engine (Lernpaket-Kompass) – setzt den Leitfaden technisch um.
    Diese Datei wird NICHT pro Paket verändert. Inhalte stehen in js/inhalt.js.
    Aufbau: Start (Lernziele, Selbsteinschätzung, Vorwissens-Check) → ① Entdecken
    (Stationen mit Lösungsbeispiel und Kurz-Check) → ② Üben (3 gestufte Tipps,
@@ -84,7 +84,7 @@
   function pruefeInhalt() {
     var fehler = [], hinweise = [], ids = {};
     function id(x, wo) { if (!x) fehler.push(wo + ': id fehlt'); else if (ids[x]) fehler.push('Doppelte id: ' + x); else ids[x] = 1; }
-    if (!P.id || !/^ping-[a-z0-9-]+$/.test(P.id)) hinweise.push('PAKET.id sollte "ping-<name>" lauten (wie der Manifest-Identifier).');
+    if (!P.id || !/^[a-z0-9]+-[a-z0-9]+(-[a-z0-9]+)*$/.test(P.id)) hinweise.push('PAKET.id sollte "<präfix>-<name>" lauten, z. B. ping-dreisatz (wie der Manifest-Identifier).');
     if (BESTEHEN !== 80) hinweise.push('Bestehensgrenze ist ' + BESTEHEN + ' %, der Leitfaden sieht 80 % vor.');
     if (LZ.length < 3 || LZ.length > 8) hinweise.push('Leitfaden: drei bis acht Lernziele (jetzt ' + LZ.length + ').');
     LZ.forEach(function (z) { id(z.id, 'Lernziel'); if (!/^Ich kann/.test(z.text || '')) hinweise.push(z.id + ': Lernziel in Schülersprache beginnen („Ich kann …“).'); });

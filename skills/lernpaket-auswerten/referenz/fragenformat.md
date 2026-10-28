@@ -1,4 +1,4 @@
-# Format für Fragen und Paketinhalt (PING-Vorlage)
+# Format für Fragen und Paketinhalt (Kompass-Vorlage)
 
 Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`. Die Engine (`js/engine.js`) setzt daraus Start, Entdecken, Üben, Nachweis und Abschluss zusammen und erfüllt dabei die technischen Muss-Punkte des Leitfadens automatisch. Die Beispieldatei in der Vorlage („Bits & Bytes“) zeigt jedes Feld im Einsatz.
 
@@ -38,7 +38,7 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 
 | Feld | Bedeutung |
 |---|---|
-| `id` | `ping-<name>`, gleich dem Identifier im Manifest |
+| `id` | `<präfix>-<name>` (Präfix für Projekt oder Fach, z. B. `ping-`), gleich dem Identifier im Manifest |
 | `titel`, `untertitel`, `version`, `dauer` | Anzeige |
 | `bestehen` | 80 (Leitfaden) |
 | `figur` | `{name, rolle}` der Story-Figur (Sprechblasen) |

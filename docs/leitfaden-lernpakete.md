@@ -1,10 +1,10 @@
-# Leitfaden: Evidenzbasierte Lernpakete (SCORM) gestalten
+# Lernpaket-Kompass – Leitfaden für interaktive Lernpakete
 
 Entwurf · Stand 28.10.2026 · Dennis Busch
 
 ## Zweck und Kurzfassung
 
-Gute Lernpakete entstehen nicht durch mehr Technik, sondern durch wenige gut belegte Gestaltungsprinzipien, die konsequent umgesetzt werden. Dieser Leitfaden bündelt diese Prinzipien für das Projekt PING und für künftige Pakete in anderen Fächern. Er richtet sich ausdrücklich auch an Kolleginnen und Kollegen, die bisher weder Software entwickelt noch KI über einfache Chatbots hinaus genutzt haben.
+Gute Lernpakete entstehen nicht durch mehr Technik, sondern durch wenige gut belegte Gestaltungsprinzipien, die konsequent umgesetzt werden. Dieser Leitfaden bündelt diese Prinzipien für Lernpakete in allen Fächern. Er ist im Projekt [PING](https://github.com/dennismarcbusch/PING) (IT-Lernpakete für Fachinformatiker) entstanden, dessen Pakete in den Beispielen auftauchen. Er richtet sich ausdrücklich auch an Kolleginnen und Kollegen, die bisher weder Software entwickelt noch KI über einfache Chatbots hinaus genutzt haben.
 
 Der Leitfaden hat drei Teile: **A** fasst die Forschungslage zusammen, **B** wählt daraus die für uns relevanten Prinzipien aus und wägt sie gegen den Aufwand ab, **C** ist der eigentliche Leitfaden mit Prozess, Paketstruktur, Checklisten und dem Vorschlag für ein Skill-Set.
 
@@ -186,7 +186,7 @@ Jedes Paket folgt demselben Grundmuster aus fünf Teilen. Es ist aus den PING-Pa
 - Das Tafelbild speichert nichts und verändert weder Fortschritt noch Ergebnis.
 - Zum Input gehört ein **Ablaufplan** für die Lehrkraft (Szene, Klicks, Impulsfrage, erwartete Fehlvorstellung, Merksatz), abgelegt neben dem Paket, nicht im ZIP.
 
-Beispiel: „Netzwerktopologien erleben“ (Version 2) mit sechs Szenen und Ablaufplan unter `packages/netzwerktopologien/lehrer/`.
+Beispiel: „Netzwerktopologien erleben“ (Version 2) mit sechs Szenen und Ablaufplan im [PING-Repository unter `packages/netzwerktopologien/lehrer/`](https://github.com/dennismarcbusch/PING/tree/main/packages/netzwerktopologien/lehrer).
 
 **Größe.** Ein Paket deckt ein Thema ab, das sich in einem Satz benennen lässt. Wird das Drehbuch länger als etwa acht Stationen, lohnt es sich, zwei Pakete daraus zu machen.
 
@@ -406,7 +406,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 
 Der Leitfaden ist zusätzlich als Skill-Set für Claude umgesetzt: Jede Phase aus Teil C1 bekommt einen Skill, der die Lehrkraft im Gespräch durch die Phase führt und die Prinzipien automatisch anwendet. So müssen Einsteiger den Leitfaden nicht auswendig kennen, um ihn einzuhalten.
 
-**So bekommst du das Skill-Set:** Die fünf Skills liegen im [PING-Repository unter skills/](../skills) und als ZIP-Dateien in den [Releases](https://github.com/dennismarcbusch/PING/releases). Jede ZIP-Datei wird in Claude unter *Customize → Skills* hochgeladen. Die [Anleitung zum Skill-Set](skill-set-anleitung.md) beschreibt Einrichtung, Arbeitsschritte mit Beispiel-Prompts, Upload in die ByCS-Lernplattform und häufige Probleme.
+**So bekommst du das Skill-Set:** Die fünf Skills liegen im Repository [lernpaket-kompass unter skills/](../skills) und als ZIP-Dateien in den [Releases](https://github.com/dennismarcbusch/lernpaket-kompass/releases). Jede ZIP-Datei wird in Claude unter *Customize → Skills* hochgeladen. Die [Anleitung zum Skill-Set](skill-set-anleitung.md) beschreibt Einrichtung, Arbeitsschritte mit Beispiel-Prompts, Upload in die ByCS-Lernplattform und häufige Probleme.
 
 **Was dahintersteckt:** `lernpaket-bauen` arbeitet mit einer Paketvorlage, die die Paketstruktur aus Teil C2 und die technischen Mindeststandards aus Teil C5 bereits enthält: Selbsteinschätzung, Kurz-Checks, gestufte Tipps, Nachweis ab 80 %, Auswertung je Lernziel, Merkblatt, SCORM-Datenübergabe und optional ein Tafelbild für den Input. Pro Paket werden nur Inhalte und Interaktionen geschrieben, deshalb sehen alle Pakete gleich aus und bedienen sich gleich. Ein Prüfskript spielt jedes Paket automatisch mit der Musterlösung durch und testet Datenübergabe, Wiedereinstieg und Tablet-Ansicht; es lässt sich auch auf ältere Pakete anwenden.
 

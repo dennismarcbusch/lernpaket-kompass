@@ -1,11 +1,11 @@
 ---
 name: lernpaket-bauen
-description: Baut ein SCORM-1.2-Lernpaket für die ByCS-Lernplattform aus Drehbuch und Fragenpool mit der PING-Vorlage – einheitlicher Look, Nachweis ab 80 %, Merkblatt. Erst Prototyp, dann Ausbau.
+description: Baut ein SCORM-1.2-Lernpaket für die ByCS-Lernplattform aus Drehbuch und Fragenpool mit der Kompass-Vorlage – einheitlicher Look, Nachweis ab 80 %, Merkblatt. Erst Prototyp, dann Ausbau.
 ---
 
 # Lernpaket bauen (Phase 4 des Leitfadens)
 
-Du baust aus Drehbuch und Fragenpool ein fertiges SCORM-1.2-Paket (ZIP), das die Lehrkraft in die ByCS-Lernplattform hochlädt. Grundlage ist die **PING-Vorlage** in `vorlage/`: Sie enthält die Engine, die die technischen und didaktischen Muss-Bausteine bereits umsetzt. Du schreibst nur den Inhalt (`js/inhalt.js`) und die paketspezifischen Interaktionen.
+Du baust aus Drehbuch und Fragenpool ein fertiges SCORM-1.2-Paket (ZIP), das die Lehrkraft in die ByCS-Lernplattform hochlädt. Grundlage ist die **Kompass-Vorlage** in `vorlage/`: Sie enthält die Engine, die die technischen und didaktischen Muss-Bausteine bereits umsetzt. Du schreibst nur den Inhalt (`js/inhalt.js`) und die paketspezifischen Interaktionen.
 
 **Lies vor dem Start:** `referenz/fragenformat.md` (Inhaltsformat), `referenz/gestaltung.md` (Gestaltungsregeln, v. a. „Orientierung“ und „Aufgaben“), `referenz/technik.md`. Sieh dir `vorlage/js/inhalt.js` an – das Beispielpaket „Bits & Bytes“ zeigt jedes Feld.
 
@@ -28,8 +28,10 @@ Drehbuch (`drehbuch.md`) und Fragenpool sollten vorliegen. Fehlen sie, schlage v
 ### 1. Paket anlegen
 
 ```bash
-python3 <skill>/scripts/paket.py neu <arbeitsordner>/<name> --id ping-<name> --titel "Titel"
+python3 <skill>/scripts/paket.py neu <arbeitsordner>/<name> --id <präfix>-<name> --titel "Titel"
 ```
+
+Das Präfix steht für das Projekt oder Fach und kommt aus dem Steckbrief (z. B. `ping-` für die IT-Pakete, `bwl-` oder `deutsch-`). Ist keins festgelegt, frag die Lehrkraft; alle Pakete eines Projekts nutzen dasselbe Präfix.
 
 ### 2. Prototyp: eine Station, zwei Fragen
 
@@ -100,7 +102,7 @@ Das aktualisiert die Dateiliste im Manifest, übernimmt Titel, ID und Bestehensg
 4. Danach: Review durch eine Kollegin oder einen Kollegen (Skill `lernpaket-pruefen`) und Test mit drei bis fünf Schülern.
 5. Bei Paketen mit Tafelbild: Für den Input den entpackten Ordner öffnen und `index.html#tafel` aufrufen (F = Vollbild), den Ablaufplan mitgeben und einmal am echten Board ausprobieren.
 
-Wenn im PING-Repository gearbeitet wird: Quellen nach `packages/<name>/src/`, Steckbrief nach `packages/<name>/README.md`, Planung nach `packages/<name>/planung/`, Ablaufplan für einen Input nach `packages/<name>/lehrer/`; ZIPs nicht einchecken (`./build.sh` baut sie).
+Wenn in einem Repository mit mehreren Paketen gearbeitet wird (z. B. PING): Quellen nach `packages/<name>/src/`, Steckbrief nach `packages/<name>/README.md`, Planung nach `packages/<name>/planung/`, Ablaufplan für einen Input nach `packages/<name>/lehrer/`; ZIPs nicht einchecken (`./build.sh` baut sie).
 
 ## Änderungen an bestehenden Paketen
 

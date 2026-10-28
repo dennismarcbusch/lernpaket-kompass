@@ -12,5 +12,5 @@
 | **Zeitrahmen** | z. B. etwa 90 Minuten, in Einheiten von 30–45 Minuten |
 | **Leitsituation (Idee)** | Betrieb bzw. Alltagssituation, Kundenauftrag, Story-Figur |
 | **Typische Fehler und Fehlvorstellungen** | 1. … 2. … 3. … (mindestens drei) |
-| **Paket-ID** | `ping-<name>` (Kleinbuchstaben, Bindestriche) |
+| **Paket-ID** | `<präfix>-<name>` (Kleinbuchstaben, Bindestriche; Präfix für Projekt oder Fach, z. B. `ping-`, `bwl-`) |
 | **Lizenz** | z. B. CC BY-SA 4.0 |
