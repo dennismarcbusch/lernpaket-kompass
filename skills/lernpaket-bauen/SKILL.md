@@ -33,6 +33,8 @@ Drehbuch (`drehbuch.md`) und Fragenpool sollten vorliegen. Fehlen sie, schlage v
 python3 <skill>/scripts/paket.py neu <arbeitsordner>/<name> --id <präfix>-<name> --titel "Titel"
 ```
 
+Setze in `js/inhalt.js` die `version`: `'0.1'` für den Prototyp, `'1.0'` für die erste Fassung im Unterricht. Sie steht klein in der Kopfzeile und auf den Ausdrucken, damit Lehrkraft und Schüler sehen, welche Fassung sie vor sich haben.
+
 Das Präfix steht für das Projekt oder Fach und kommt aus dem Steckbrief (z. B. `ping-` für die IT-Pakete, `bwl-` oder `deutsch-`). Ist keins festgelegt, frag die Lehrkraft; alle Pakete eines Projekts nutzen dasselbe Präfix.
 
 ### 2. Prototyp: eine Station, zwei Fragen

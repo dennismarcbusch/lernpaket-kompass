@@ -199,6 +199,9 @@ def _vorlage(pg, bilder):
     punkt(not pi['fehler'], 'Inhalt', 'Inhaltsprüfung der Vorlage: keine Fehler.' if not pi['fehler'] else 'Inhaltsfehler: ' + '; '.join(pi['fehler'][:8]))
     for h in pi['hinweise'][:12]:
         punkt(False, 'Inhalt', 'Hinweis: ' + h, gelb=True)
+    ver = pg.evaluate("(() => { const v = document.getElementById('version'); if (!v) return null; const r = v.getBoundingClientRect(); return {text: v.textContent.trim(), sichtbar: r.width > 0 && r.height > 0 && r.top >= 0 && r.bottom <= innerHeight}; })()")
+    punkt(bool(ver and ver['text'] and ver['sichtbar']), 'Bedienung',
+          f'Versionsnummer „{ver["text"]}“ steht sichtbar in der Kopfzeile.' if ver and ver['text'] and ver['sichtbar'] else 'Keine sichtbare Versionsnummer in der Kopfzeile (PAKET.version setzen).')
     info = pg.evaluate('({st: PAKET.stationen.map(s => s.id), ue: (PAKET.uebungen||[]).map(u => u.id), a: !!(PAKET.nachweis && PAKET.nachweis.teilA)})')
     ansichten = []
     if bilder:

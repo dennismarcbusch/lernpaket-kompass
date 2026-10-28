@@ -85,6 +85,7 @@
     var fehler = [], hinweise = [], ids = {};
     function id(x, wo) { if (!x) fehler.push(wo + ': id fehlt'); else if (ids[x]) fehler.push('Doppelte id: ' + x); else ids[x] = 1; }
     if (!P.id || !/^[a-z0-9]+-[a-z0-9]+(-[a-z0-9]+)*$/.test(P.id)) hinweise.push('PAKET.id sollte "<präfix>-<name>" lauten, z. B. ping-dreisatz (wie der Manifest-Identifier).');
+    if (!/^\d+\.\d+(\.\d+)?$/.test(String(P.version || ''))) fehler.push('PAKET.version fehlt oder hat nicht die Form 1.0 (wird klein in der Kopfzeile und auf den Ausdrucken angezeigt).');
     if (BESTEHEN !== 80) hinweise.push('Bestehensgrenze ist ' + BESTEHEN + ' %, der Leitfaden sieht 80 % vor.');
     if (LZ.length < 3 || LZ.length > 8) hinweise.push('Leitfaden: drei bis acht Lernziele (jetzt ' + LZ.length + ').');
     LZ.forEach(function (z) { id(z.id, 'Lernziel'); if (!/^Ich kann/.test(z.text || '')) hinweise.push(z.id + ': Lernziel in Schülersprache beginnen („Ich kann …“).'); });
@@ -320,7 +321,9 @@
   }
   function anzahl(o) { return Object.keys(o).filter(function (k) { return o[k]; }).length; }
   function kopf() {
-    document.getElementById('titel').textContent = P.titel || '';
+    var ti = document.getElementById('titel');
+    ti.textContent = P.titel || '';
+    if (P.version) ti.appendChild(el('span', { class: 'version', id: 'version', title: 'Version des Lernpakets', 'aria-label': 'Version ' + P.version, text: 'v' + P.version }));
     document.getElementById('untertitel').textContent = P.untertitel || '';
     document.title = P.titel || 'Lernpaket';
     var fp = document.getElementById('fortschritt'); fp.innerHTML = '';
@@ -812,19 +815,22 @@
       });
       h += '</ol>';
     }
-    return h;
+    return h + '<p class="klein druckfuss">' + esc(druckVermerk()) + '</p>';
   }
   function ergebnisHtml(name) {
     var h = '<h1>Ergebnis: ' + esc(P.titel || '') + '</h1><p>Name: <b>' + esc(name || '________________') + '</b> · Datum: ' + new Date().toLocaleDateString('de-DE') + '</p>';
     h += '<p>Bestes Ergebnis im Kompetenznachweis: <b>' + S.best + ' %</b> (' + (S.best >= BESTEHEN ? 'bestanden' : 'nicht bestanden') + ', Grenze ' + BESTEHEN + ' %) · Versuche: ' + S.n + '</p>';
     h += '<table class="tab"><tr><th>Lernziel</th><th>Letzter Versuch</th><th>Selbsteinschätzung vorher → nachher</th></tr>';
     LZ.forEach(function (z) { h += '<tr><td><b>' + esc(z.id) + '</b> ' + z.text + '</td><td>' + (S.lz[z.id] || 0) + ' %</td><td>' + (S.se[z.id] || '–') + ' → ' + (S.sn[z.id] || '–') + ' (von 5)</td></tr>'; });
-    return h + '</table>';
+    return h + '</table><p class="klein druckfuss">' + esc(druckVermerk()) + '</p>';
+  }
+  function druckVermerk() {
+    return 'Lernpaket „' + (P.titel || '') + '“' + (P.version ? ' · Version ' + P.version : '') + ' · gedruckt am ' + new Date().toLocaleDateString('de-DE');
   }
 
   /* ---------- Schnittstelle für automatische Tests ---------- */
   window.LERNPAKET = {
-    version: '1.1',
+    version: '1.2',
     pruefeInhalt: pruefeInhalt,
     zustand: function () { return JSON.parse(JSON.stringify(S)); },
     ansicht: function () { return ANSICHT; },

@@ -6,7 +6,7 @@
       und setzt Identifier und Titel im Manifest. Danach js/inhalt.js ersetzen.
 
   python3 paket.py zip <paketordner> [--aus <datei.zip>]
-      Aktualisiert die Dateiliste im Manifest, gleicht Titel und masteryscore mit
+      Aktualisiert die Dateiliste im Manifest, gleicht Titel, Version und masteryscore mit
       js/inhalt.js ab und packt das ZIP so, dass imsmanifest.xml im Wurzelverzeichnis liegt.
       Standardname: <name>_scorm12.zip neben dem Paketordner.
 """
@@ -52,6 +52,9 @@ def zippen(a):
         ti = re.search(r"titel:\s*'((?:[^'\\]|\\.)*)'", s)
         if ti:
             t = re.sub(r'<title>[^<]*</title>', f'<title>{escape(ti.group(1))}</title>', t)
+        v = re.search(r"\bversion:\s*'(\d+\.\d+(?:\.\d+)?)'", s)
+        if v:
+            t = re.sub(r'(<manifest[^>]*?\sversion=")[^"]*"', r'\g<1>' + v.group(1) + '"', t, count=1)
         i = re.search(r"id:\s*'([a-z0-9]+-[a-z0-9-]+)'", s)
         if i:
             t = re.sub(r'(<manifest[^>]*?identifier=")[^"]*"', r'\g<1>' + i.group(1) + '"', t, count=1)

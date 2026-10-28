@@ -46,6 +46,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Tastaturbedienung, Kontrast und Alternativtexte geprüft.
 - [ ] Gesprochenes ist auch als Text verfügbar (Untertitel oder Transkript); keine Information nur über Ton.
 - [ ] Keine externen Verbindungen, keine personenbezogenen Daten außerhalb der Lernplattform.
+- [ ] Versionsnummer klein in der Kopfzeile sichtbar und auf Ergebnis-PDF und Merkblatt; nach jeder Änderung erhöht.
 
 **Soll**
 

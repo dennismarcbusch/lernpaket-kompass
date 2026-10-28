@@ -39,7 +39,8 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 | Feld | Bedeutung |
 |---|---|
 | `id` | `<präfix>-<name>` (Präfix für Projekt oder Fach, z. B. `ping-`), gleich dem Identifier im Manifest |
-| `titel`, `untertitel`, `version`, `dauer` | Anzeige |
+| `titel`, `untertitel`, `dauer` | Anzeige |
+| `version` | Pflicht, Form `'1.0'`. Steht klein in der Kopfzeile („v1.0“), in der Fußzeile und auf Ergebnis-PDF und Merkblatt; `paket.py zip` überträgt sie ins Manifest. Bei jeder Änderung erhöhen: Korrektur 1.0 → 1.1, neue Inhalte 2.0. |
 | `bestehen` | 80 (Leitfaden) |
 | `figur` | `{name, rolle}` der Story-Figur (Sprechblasen) |
 | `leitsituation` | Einstiegstext der Figur (HTML) |
