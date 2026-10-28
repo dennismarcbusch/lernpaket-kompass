@@ -9,6 +9,8 @@ Nach dem Einsatz eines Pakets liest du den Berichtsexport aus der ByCS-Lernplatt
 
 **Lies vor dem Start:** `referenz/prinzipien.md` (für die Begründung der Vorschläge), `referenz/fragenformat.md` (Fragen-IDs).
 
+**Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
+
 `<skill>` steht für den Ordner, in dem diese SKILL.md liegt.
 
 ## Datenschutz zuerst

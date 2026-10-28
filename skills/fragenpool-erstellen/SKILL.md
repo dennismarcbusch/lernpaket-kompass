@@ -9,6 +9,8 @@ Du schreibst die Fragen eines Lernpakets: Kurz-Checks, Fragenpool für den Nachw
 
 **Lies vor dem Start:** `referenz/fragenformat.md` (Format und Mengen), in `referenz/prinzipien.md` die Prinzipien P5, P6, P8 und P10.
 
+**Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
+
 ## Was du brauchst (sonst nachfragen)
 
 1. Die Lernziele („Ich kann …“) – aus `lernziele-nachweis.md`, falls vorhanden.

@@ -27,7 +27,7 @@ Erkenne die Phase aus dem, was die Lehrkraft schreibt oder hochlädt, und frage 
 - Ein fertiges Paket (ZIP oder Ordner) soll begutachtet werden → **Prüfen**
 - Ein Bericht oder Export aus der Lernplattform liegt vor → **Auswerten**
 
-Ist es unklar, frage einmal kurz mit Auswahl: „Wo stehst du gerade? Neues Paket planen · Fragen erstellen · Paket bauen · Paket prüfen · Ergebnisse auswerten“. Arbeitet ihr in einem Claude-Projekt, schau zuerst in die Projektdateien: Steckbrief, Drehbuch oder Fragenpool zeigen oft schon, wie weit ihr seid.
+Ist es unklar, frage einmal kurz zum Anklicken: „Wo stehst du gerade?“ mit den Optionen „Neues Paket planen“, „Fragen erstellen“, „Paket bauen“ und „Paket prüfen oder Ergebnisse auswerten“. Arbeitet ihr in einem Claude-Projekt, schau zuerst in die Projektdateien: Steckbrief, Drehbuch oder Fragenpool zeigen oft schon, wie weit ihr seid.
 
 ## Durch die Phasen führen
 
@@ -48,6 +48,7 @@ Alle Pfade in den Phasen-Anleitungen beziehen sich auf den Ordner dieses Skills 
 
 ## Immer gilt
 
+- **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
 - Einfache Sprache, Fachbegriffe kurz erklären. Die Lehrkraft entscheidet über Inhalte, Lernziele und Bewertung.
 - Keine Schülernamen oder anderen personenbezogenen Daten von Schülern, auch nicht in Beispielen.
 - Paket-IDs haben die Form `<präfix>-<name>`; das Präfix steht für Projekt oder Fach und kommt aus dem Steckbrief.
