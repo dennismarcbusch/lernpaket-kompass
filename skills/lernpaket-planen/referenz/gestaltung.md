@@ -6,7 +6,7 @@ Quelle: Lernpaket-Kompass – Leitfaden für interaktive Lernpakete, docs/leitfa
 
 Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern steht der Fachbegriff, unter dem man bei Bedarf mehr dazu findet.
 
-**Szene zuerst, eigene Welt (P14)**
+**Spielidee und Szene zuerst, eigene Welt (P12, P14)**
 
 - Jede Station ist eine Szene, in der die Lernenden etwas bewegen: ein Dokument prüfen, ein Formular ausfüllen, im nachgebauten Portal recherchieren, ein Gespräch führen, sortieren, ein Gerät einstellen. Erst die Szene planen, dann den Text.
 - Die Szene steht groß in der Mitte und ohne Scrollen im Blick. Der Auftrag steht als Sprechblase der Figur (1–2 Sätze), „Kurz erklärt“ in einer schmalen Notiz daneben (höchstens etwa 40 Wörter); zusammen höchstens etwa 90 Wörter je Station.
@@ -15,7 +15,7 @@ Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern st
 - Realistisch, aber erfunden: Dokumente, Portale und Geräte sehen aus wie im Beruf, mit erfundenen Firmen und Daten. Echte Webseiten werden als Übungsversion nachgebaut, nicht kopiert.
 - Fehler wirken sich in der Szene aus wie in echt (die Kundin fragt nach, der Server antwortet nicht), dazu ein Satz zur Fehlvorstellung.
 - Gleiche Bedienung, eigene Welt: Aufbau und Bedienung sind in allen Paketen gleich; jedes Paket hat eigene Farben, eine Kulisse und illustrierte Figuren passend zum Fach. Figuren vielfältig besetzen, keine realen Personen nachbilden.
-- Ein Spielrahmen (Mission mit Karte, jede Station ein Ort) nur, wenn der Lerninhalt die Spielhandlung ist. Story und Kulisse ohne Bezug zum Lernziel sind verführerische Details (Teil A2).
+- Die Spielidee aus der Phase „Erfinden“ gibt den Rahmen vor: ein Spiel über alle Stationen (Spielmodus, Stationen sind Level, Üben und Nachweis nutzen dieselbe Mechanik mit neuen Fällen) oder ein Spielrahmen (Mission mit Karte, jede Station ein Ort). In beiden Fällen ist der Lerninhalt die Spielregel, Fehler haben Folgen im Spiel, und es gibt keinen Zeitdruck und keine Ranglisten. Story und Kulisse ohne Bezug zum Lernziel sind verführerische Details (Teil A2).
 - Ein Szenen-Katalog mit Beispielen für alle Fächer liegt im Skill-Set (`szenen.md`).
 
 **Bildschirm und Darstellung (nach Mayer)**

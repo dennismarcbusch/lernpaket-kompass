@@ -7,7 +7,7 @@
 - Einstiegstext der Figur (2–4 Sätze): …
 - **Welt:** Thema (wirtschaft · technik · sprache · natur · gesundheit · gestaltung), Kulisse (buero · lager · werkstatt · serverraum · laden · stadt · natur · klasse), Symbol
 - **Arbeitsmittel aus dem Beruf**, die als Szene nachgebaut werden (Dokumente, Programme, Geräte, Gespräche): …
-- **Spielrahmen (optional):** keiner / Mission „…“ mit Ziel „…“ und Zähler „…“; je Station ein Ort auf der Karte
+- **Spielidee** (aus `spielidee.md`): Spielmodus „…“ (Stationen = Level) / Spielrahmen „…“ mit Ziel und Zähler, je Station ein Ort / Simulation ohne Spiel (Begründung)
 
 ## Einstieg
 
@@ -21,7 +21,16 @@
 |---|---|---|
 | | | ☐ |
 
-## ① Entdecken – Stationen
+## ① Entdecken – Level (nur im Spielmodus)
+
+### Level 1: <Titel> (LZ…)
+- **Neue Regeln** in diesem Level (so, wie sie im Spiel stehen): …
+- **Geführter erster Fall** (Lösungsbeispiel im Spiel): wer führt, welche Schritte werden hervorgehoben …
+- **Fälle** (6–10): | Fall | richtige Entscheidung | typischer Fehler | Folge im Spiel und erklärender Satz |
+- **Geschafft, wenn:** … (z. B. höchstens zwei Fehler, sonst Level neu)
+- **Zwischenbilanz:** höchstens drei Kurz-Check-Fragen (IDs), ein Mitdenken-Auftrag mit Muster
+
+## ① Entdecken – Stationen (ohne Spielmodus)
 
 ### Station 1: <Titel> (LZ…) · Ort auf der Karte: … (nur mit Spielrahmen)
 - **Szene (Kern der Station):**

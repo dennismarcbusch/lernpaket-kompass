@@ -8,7 +8,7 @@ Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehe
 
 | Schritt | Du bringst ein | Du bekommst |
 |---|---|---|
-| 1 Planen | Thema, Klasse, typische Schülerfehler | Steckbrief, Lernziele, Drehbuch |
+| 1 Planen | Thema, Klasse, typische Schülerfehler, Wahl einer Spielidee | Steckbrief, Spielidee, Lernziele, Drehbuch |
 | 2 Fragen | Prüfung der Fragen | Fragenpool mit Feedback |
 | 3 Bauen | Rückmeldung zum Prototyp | ZIP-Datei für die Lernplattform |
 | 4 Prüfen | Paket | Prüfbericht mit Ampel |
@@ -58,9 +58,9 @@ Du schreibst in normaler Sprache. Wenn du „Lernpaket-Kompass“ dazuschreibst,
 
 > Ich möchte ein Lernpaket planen: Dreisatz für die Berufsintegrationsklasse, etwa 90 Minuten. Nutze den Lernpaket-Kompass.
 
-Claude stellt dir in mehreren Runden Fragen: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Welche Situation aus Beruf oder Alltag passt? Mit welchen Dokumenten, Programmen oder Geräten arbeiten sie dort? Daraus entstehen die **Szenen**: In jeder Station bewegen die Schüler etwas, zum Beispiel ein Formular ausfüllen, ein Dokument prüfen, im nachgebauten Portal recherchieren oder ein Kundengespräch führen. Auf Wunsch gibt es einen **Spielrahmen** mit Missionskarte. **Nimm dir für die typischen Fehler Zeit** – daraus entstehen gute Falschantworten und gutes Feedback.
+Claude stellt dir in mehreren Runden Fragen: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Welche Situation aus Beruf oder Alltag passt? Mit welchen Dokumenten, Programmen oder Geräten arbeiten sie dort? Dann kommt die **kreative Phase**: Claude schlägt dir drei Spielideen vor, in denen der Lernstoff die Spielregel ist – zum Beispiel einen Schalter-Simulator, in dem die Schüler am Registergericht Anmeldungen stempeln, oder ein Sammelspiel, in dem sie Firmen mit dem richtigen Registerball fangen. Zu jeder Idee steht, warum die Lernplattform das allein nicht könnte. Du wählst oder kombinierst. Wird es kein Spiel, entstehen **Szenen**: In jeder Station bewegen die Schüler etwas, zum Beispiel ein Formular ausfüllen, ein Dokument prüfen oder ein Kundengespräch führen. **Nimm dir für die typischen Fehler Zeit** – daraus entstehen gute Falschantworten und gutes Feedback.
 
-Danach schlägt Claude Lernziele vor („Ich kann …“) und legt fest, wie das Können im Nachweis geprüft wird. Korrigiere, was nicht passt. Am Ende bekommst du Steckbrief, Lernziel-Nachweis-Tabelle und Drehbuch.
+Danach schlägt Claude Lernziele vor („Ich kann …“) und legt fest, wie das Können im Nachweis geprüft wird. Korrigiere, was nicht passt. Am Ende bekommst du Steckbrief, Spielidee, Lernziel-Nachweis-Tabelle und Drehbuch.
 
 ### Schritt 2: Fragen
 
@@ -72,7 +72,7 @@ Du bekommst die Fragen zusätzlich als Tabelle. **Geh jede Frage durch**: Stimmt
 
 > Bau einen Prototyp mit Station 1.
 
-Claude baut eine erste Station als Szene in der Welt deines Pakets (eigene Farben, Kulisse, Figuren) und gibt dir eine ZIP-Datei. Mit „Zeig’s mir“ führt das Paket das Lösungsbeispiel in der Szene vor. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
+Claude baut eine erste Station als Szene (bei einem Spiel: Level 1, spielbar) in der Welt deines Pakets (eigene Farben, Kulisse, Figuren) und gibt dir eine ZIP-Datei. Mit „Zeig’s mir“ führt das Paket das Lösungsbeispiel in der Szene vor. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
 
 Gib Rückmeldung wie einer Kollegin:
 

@@ -221,7 +221,8 @@ def _vorlage(pg, bilder):
         ansichten.append((f'Station {sid}', _primaer(pg)))
         m = pg.evaluate("""(() => {
             const teile = LERNPAKET.aktuelleTeile();
-            const b = document.querySelector('.buehne');
+            const spiel = !!document.querySelector('.spielbuehne');
+            const b = document.querySelector('.spielbuehne') || document.querySelector('.buehne');
             const r = b ? b.getBoundingClientRect() : null;
             // sichtbarer Text außerhalb der Bühne, ohne zugeklappte Bereiche und Kurz-Check
             const st = document.querySelector('.station');
@@ -231,14 +232,14 @@ def _vorlage(pg, bilder):
               c.querySelectorAll('.buehne, details:not([open]), details.check, .steuerung, .live').forEach(x => x.remove());
               w = LERNPAKET.woerter(c.innerHTML);
             }
-            return {demo: teile.some(t => t.art === 'demo'), buehne: !!b, oben: r ? Math.round(r.top) : null, hoehe: r ? Math.round(r.height) : 0, woerter: w, vh: innerHeight};
+            return {spiel: spiel, demo: spiel || teile.some(t => t.art === 'demo'), buehne: !!b, oben: r ? Math.round(r.top) : null, hoehe: r ? Math.round(r.height) : 0, woerter: w, vh: innerHeight};
           })()""")
         if not m['buehne']:
             ohne_buehne.append(sid)
         else:
             if not m['demo']:
                 ohne_demo.append(sid)
-            if m['oben'] is None or m['oben'] > m['vh'] * 0.6 or m['hoehe'] < 260:
+            if m['oben'] is None or m['oben'] > m['vh'] * 0.6 or m['hoehe'] < (450 if m['spiel'] else 260):
                 buehne_tief.append(f"{sid} (oben {m['oben']} px, {m['hoehe']} px hoch)")
         if m['woerter'] > 160:
             viel_text.append(f"{sid} ({m['woerter']} Wörter)")

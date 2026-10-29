@@ -11,7 +11,7 @@ Dieser Skill fasst die fünf Einzel-Skills des Kompasses zusammen. Jede Phase ha
 
 | Phase | Anleitung | Ergebnis |
 |---|---|---|
-| 1 Planen | `phasen/1-planen.md` | Steckbrief, Lernziel-Nachweis-Tabelle, Drehbuch |
+| 1 Planen | `phasen/1-planen.md` | Steckbrief, drei Spielideen zur Wahl, Lernziel-Nachweis-Tabelle, Drehbuch |
 | 2 Fragen | `phasen/2-fragen.md` | Fragenpool mit Feedback und Prüftabelle |
 | 3 Bauen | `phasen/3-bauen.md` | SCORM-ZIP, erst Prototyp, dann Ausbau |
 | 4 Prüfen | `phasen/4-pruefen.md` | Prüfbericht mit Ampel |
@@ -43,14 +43,15 @@ Alle Pfade in den Phasen-Anleitungen beziehen sich auf den Ordner dieses Skills 
 - `referenz/` – Prinzipien, Szenen-Katalog, Prozess und Paketstruktur, Gestaltung, Technik, Checkliste, Fragenformat (gemeinsam für alle Phasen)
 - `vorlagen/` – Steckbrief, Lernziel-Nachweis-Tabelle, Drehbuch (Planen)
 - `vorlage/` – die Kompass-Vorlage für das Paket mit Baukasten für Szenen (Bauen)
-- `beispiele/` – zweites Beispiel aus der Wirtschaft: simulierter Rechner, Portal, Dokument, Gespräch, Spielrahmen (Bauen)
+- `beispiele/` – zwei Spiele zum Handelsregister („Stempel drauf!“, „Firmendex“) und eine Szenen-Station aus der Wirtschaft (Bauen)
 - `vorlagen-lehrkraft/` – Ablaufplan für einen Input mit Tafelbild (Bauen)
 - `scripts/` – `paket.py` (Bauen), `pruefe_paket.py` (Bauen, Prüfen), `auswerten.py` (Auswerten)
 
 ## Immer gilt
 
 - **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
-- **Szene zuerst:** Jede Station ist etwas zum Anfassen (P14) – ein realistischer Ort, ein Dokument, ein Gerät, ein simulierter Rechner oder ein Gespräch, kein Text mit Quiz darunter. Text bleibt knapp (`referenz/szenen.md`).
+- **Spielidee zuerst:** Jedes Paket beginnt nach dem kurzen Interview mit einer kreativen Phase: drei Spielideen, in denen der Lernstoff die Spielregel ist, die Lehrkraft wählt (P12). Was die Lernplattform mit Test oder H5P genauso könnte, ist kein Lernpaket.
+- **Szene statt Text:** Jede Station ist etwas zum Anfassen (P14) – ein realistischer Ort, ein Dokument, ein Gerät, ein simulierter Rechner oder ein Gespräch, kein Text mit Quiz darunter. Text bleibt knapp (`referenz/szenen.md`).
 - Einfache Sprache, Fachbegriffe kurz erklären. Die Lehrkraft entscheidet über Inhalte, Lernziele und Bewertung.
 - Keine Schülernamen oder anderen personenbezogenen Daten von Schülern, auch nicht in Beispielen.
 - Paket-IDs haben die Form `<präfix>-<name>`; das Präfix steht für Projekt oder Fach und kommt aus dem Steckbrief.

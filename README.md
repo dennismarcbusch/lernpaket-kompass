@@ -9,7 +9,7 @@ Der Lernpaket-Kompass hilft Lehrkräften, interaktive Lernpakete (SCORM 1.2, z. 
 | 📖 **Leitfaden** | [docs/leitfaden-lernpakete.md](docs/leitfaden-lernpakete.md) – Forschungslage (u. a. Kerres, Mayer, 4C/ID, Simulationen und Lernspiele), 14 Prinzipien mit Aufwand, Paketstruktur, Entwicklungsprozess, technische Standards und Qualitätscheckliste |
 | 🧰 **Skill-Set für Claude** | [skills/](skills) – der Gesamt-Skill `lernpaket-kompass` führt durch alle fünf Phasen (Planen, Fragen erstellen, Bauen, Prüfen, Auswerten); dazu die fünf Phasen als Einzel-Skills, Paketvorlage und automatisches Prüfskript |
 | 🚀 **Einstieg für Kolleginnen und Kollegen** | [docs/skill-set-anleitung.md](docs/skill-set-anleitung.md) – Einrichten in etwa 10 Minuten, Arbeitsschritte mit Beispiel-Prompts |
-| 🎨 **Beispiele** | Vorlage „Bits & Bytes“ (Welt technik) und [Handelsregister-Station](skills/lernpaket-bauen/beispiele/wirtschaft-handelsregister.js) (Welt wirtschaft) |
+| 🎮 **Beispiele** | Zwei Spiele zum Handelsregister: [„Stempel drauf!“](skills/lernpaket-bauen/beispiele/spiel-stempel-drauf.js) (Schalter-Simulator am Registergericht) und [„Firmendex“](skills/lernpaket-bauen/beispiele/spiel-firmendex.js) (Sammelspiel); dazu die Vorlage „Bits & Bytes“ und eine [Szenen-Station](skills/lernpaket-bauen/beispiele/wirtschaft-handelsregister.js) |
 | ⬇️ **Download** | `skill_lernpaket-kompass.zip` zum Hochladen in Claude unter [Releases](../../releases) und auf der [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/) |
 
 ## Das Skill-Set
@@ -18,11 +18,13 @@ Kolleginnen und Kollegen laden nur einen Skill hoch: **`lernpaket-kompass`**. Er
 
 | Skill | Phase | Ergebnis |
 |---|---|---|
-| `lernpaket-planen` | Klären, Zielen, Entwerfen | Steckbrief, Lernziel-Nachweis-Tabelle, Drehbuch |
+| `lernpaket-planen` | Klären, Erfinden, Zielen, Entwerfen | Steckbrief, drei Spielideen zur Wahl, Lernziel-Nachweis-Tabelle, Drehbuch |
 | `fragenpool-erstellen` | Zielen, Entwerfen | Fragen mit erklärendem Feedback und Prüftabelle |
 | `lernpaket-bauen` | Bauen | SCORM-1.2-ZIP aus der Kompass-Vorlage (erst Prototyp, dann Ausbau) |
 | `lernpaket-pruefen` | Erproben | Prüfbericht mit Ampel (Checkliste, Prinzipien, Technik-Test) |
 | `lernpaket-auswerten` | Auswerten | Auswertung des Berichtsexports (ohne Namen) mit Änderungsvorschlägen |
+
+**Erst die Spielidee** (Prinzip P12): Nach einem kurzen Interview schlägt Claude drei Spielideen vor, in denen der Lernstoff die Spielregel ist – etwa einen Schalter-Simulator oder ein Sammelspiel. Was die Lernplattform mit Test oder H5P genauso könnte, ist kein Lernpaket. Die Lehrkraft wählt, die Vorlage hat dafür einen Spielmodus (ein Spiel über alle Stationen, Üben und Nachweis mit derselben Mechanik).
 
 **Jede Station ist eine Szene zum Anfassen** (Prinzip P14): Die Schüler bedienen einen nachgebauten Rechner, prüfen ein Dokument, führen ein Gespräch, sortieren, stellen ein Gerät ein. Ein Baukasten liefert die Bausteine, jedes Paket bekommt eine eigene Welt (Farben, Kulisse, illustrierte Figuren), auf Wunsch mit Spielrahmen und Missionskarte. Das Lösungsbeispiel wird mit „Zeig’s mir“ in der Szene vorgeführt.
 

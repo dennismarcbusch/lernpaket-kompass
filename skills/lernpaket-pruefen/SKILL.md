@@ -33,7 +33,8 @@ Sieh dir die Screenshots an und mache für jede Ansicht den **Fünf-Sekunden-Tes
 
 Lies `js/inhalt.js` (bzw. die Texte in `index.html`) und beantworte jede Prüffrage P1–P14 und jeden Punkt der Checkliste mit Befund und Fundstelle. Besonders:
 
-- **P14 (zuerst):** Hat jede Station eine Szene, in der die Lernenden etwas bewegen, groß und ohne Scrollen sichtbar? Ist sie realistisch (Dokument, Gerät, Portal, Gespräch wie im Beruf) und reagiert sie auf Fehler? Gibt es eine Vorführung? Bleibt der Text im Budget? Hat das Paket eine eigene Welt (Thema, Kulisse, Figuren)? Ein Arbeitsblatt mit Klick-Quiz ist rot.
+- **P12 (zuerst):** Gibt es ein Spielkonzept mit drei Ideen zur Wahl? Ist der Lernstoff die Spielregel (wer den Stoff nicht kann, scheitert im Spiel, nicht in einem Quiz danach)? Besteht das Paket die Plattform-Probe – oder ließe es sich mit Test, H5P oder Lückentext genauso umsetzen? Dann ist es rot, auch wenn alles andere stimmt.
+- **P14:** Hat jede Station (im Spielmodus: jedes Level) eine Szene, in der die Lernenden etwas bewegen, groß und ohne Scrollen sichtbar? Ist sie realistisch (Dokument, Gerät, Portal, Gespräch wie im Beruf) und reagiert sie auf Fehler? Gibt es eine Vorführung? Bleibt der Text im Budget? Hat das Paket eine eigene Welt (Thema, Kulisse, Figuren)? Ein Arbeitsblatt mit Klick-Quiz ist rot.
 - **P1/P4:** Beginnt jede Station und Übung mit einem Auftrag aus der Leitsituation? Gibt es eine Leitfrage und Rückmeldung?
 - **P3:** Lösungsbeispiel vor jedem neuen Aufgabentyp, mit Begründung je Schritt und Frage zum Selbsterklären, überspringbar? Gibt es Aufträge zum Mitdenken (skizzieren, zusammenfassen, erklären)?
 - **P6:** Hat jede Falschantwort ein eigenes Feedback, das eine Fehlvorstellung anspricht? Stichprobe von mindestens zehn Fragen, bei kleinen Pools alle.

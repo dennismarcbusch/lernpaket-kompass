@@ -10,6 +10,8 @@
    Erklärungen in der Notiz daneben, Lösungsbeispiel als Vorführung „Zeig's mir“),
    eigene Welt je Paket (PAKET.welt), optionaler Spielrahmen (PAKET.spiel).
    Bausteine für Szenen: js/baukasten.js (window.KIT).
+   Spielmodus (PAKET.spielwelt): Das ganze Entdecken ist ein Spiel über die volle
+   Breite (Escape Game, Simulation, Fangspiel …); die Stationen sind seine Level.
    ===================================================================== */
 (function () {
   'use strict';
@@ -52,6 +54,7 @@
   function woerter(html) { var s = String(html || '').replace(/<[^>]*>/g, ' ').replace(/&[a-z]+;/g, ' ').trim(); return s ? s.split(/\s+/).length : 0; }
   var KIT = window.KIT || null;
   var SPIEL = P.spiel || null;
+  var WELTSPIEL = P.spielwelt || null;  // Spielmodus: ein Spiel statt einzelner Szenen
 
   /* ---------- Welt: Farben, Kulisse, Symbol (PAKET.welt) ---------- */
   var WELT = P.welt || {};
@@ -91,7 +94,7 @@
 
   /* ---------- Speicher (suspend_data, max. 4096 Zeichen) ---------- */
   var KEY = 'lernpaket-' + (P.id || 'ohne-id');
-  var S = { se: {}, sn: {}, st: {}, ue: {}, best: null, lz: {}, n: 0, skip: [] };
+  var S = { se: {}, sn: {}, st: {}, ue: {}, best: null, lz: {}, n: 0, skip: [], sp: {} };
   (function laden() {
     var o = {};
     try { var s = SC.aktiv ? SC.get('cmi.suspend_data') : localStorage.getItem(KEY); o = s ? JSON.parse(s) : {}; } catch (_) { o = {}; }
@@ -127,10 +130,13 @@
       else if (f.typ === 'hotspot') { if (!f.svg || !f.bereiche || f.bereiche.filter(function (b) { return b.richtig; }).length !== 1) fehler.push(f.id + ': Hotspot braucht svg und genau einen richtigen Bereich.'); }
       else fehler.push(f.id + ': unbekannter Fragetyp "' + f.typ + '".');
     });
+    if (WELTSPIEL && typeof WELTSPIEL.start !== 'function') fehler.push('PAKET.spielwelt.start(box, api) fehlt.');
+    if (WELTSPIEL && STATIONEN.some(function (s) { return (s.check || []).length > 3; })) hinweise.push('Spielmodus: Zwischenbilanz je Level mit höchstens 3 Fragen halten, damit das Spiel nicht zum Test wird.');
     if (!P.welt || !THEMEN[P.welt.thema]) hinweise.push('PAKET.welt.thema fehlt oder ist unbekannt (' + Object.keys(THEMEN).join(', ') + ') – jedes Paket bekommt eine eigene Welt.');
     if (!KIT) fehler.push('js/baukasten.js ist nicht (vor engine.js) eingebunden.');
     STATIONEN.forEach(function (s, i) {
       id(s.id, 'Station ' + (i + 1));
+      if (WELTSPIEL) { if (!s.titel) hinweise.push(s.id + ': Level ohne Titel.'); var cc = (s.check || []); cc.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); }); return; }
       if (!s.auftrag) hinweise.push(s.id + ': Auftrag aus der Leitsituation fehlt.');
       if (!s.interaktion && !s.ohneInteraktion) fehler.push(s.id + ': keine Szene zum Anfassen (interaktion). Jede Station braucht etwas, das die Lernenden bewegen (Leitfaden P14). Nur in begründeten Ausnahmen ohneInteraktion: "Begründung" setzen.');
       if (!s.interaktion && s.ohneInteraktion) hinweise.push(s.id + ': Station ohne Szene – Begründung: ' + s.ohneInteraktion);
@@ -337,7 +343,7 @@
   var ANSICHT = { teil: 'start', i: 0 };
   var TEILE = [
     { id: 'start', name: 'Start' },
-    { id: 'entdecken', name: '① Entdecken' },
+    { id: 'entdecken', name: WELTSPIEL ? '① ' + (WELTSPIEL.tab || 'Spielen') : '① Entdecken' },
     { id: 'ueben', name: '② Üben' },
     { id: 'nachweis', name: '③ Nachweis' },
     { id: 'abschluss', name: '④ Abschluss' }
@@ -416,7 +422,7 @@
     haupt.innerHTML = '';
     var pr = pruefeInhalt();
     if (pr.fehler.length) haupt.appendChild(msg('<b>Hinweis für Autor:innen – der Inhalt hat Fehler:</b><br>' + pr.fehler.map(esc).join('<br>'), 'bad'));
-    ({ start: vStart, entdecken: vStation, ueben: vUebung, nachweis: vNachweis, abschluss: vAbschluss }[ANSICHT.teil])();
+    ({ start: vStart, entdecken: WELTSPIEL ? vSpiel : vStation, ueben: vUebung, nachweis: vNachweis, abschluss: vAbschluss }[ANSICHT.teil])();
   }
 
   /* ---------- Start ---------- */
@@ -639,6 +645,65 @@
     })));
     return bsp;
   }
+  /* ---------- ① Spielen (Spielmodus) ---------- */
+  // Das Spiel wird einmal gebaut und bleibt beim Wechseln der Ansicht erhalten.
+  var SPIELEL = null, SPIELOBJ = null, SPIELMELD = null, ZWB = null;
+  function spielApi() {
+    return {
+      kit: KIT,
+      level: function (id, text) {  // Level geschafft (= Station erledigt)
+        var s = STATIONEN.filter(function (x) { return x.id === id; })[0];
+        if (!s) { console.warn('Level ' + id + ' gibt es nicht.'); return; }
+        var neu = !S.st[id];
+        S.st[id] = 1; speichern(); kopf();
+        if (neu && SPIELMELD) { SPIELMELD.innerHTML = ''; SPIELMELD.appendChild(msg('🏆 <b>' + esc(s.titel) + ' geschafft!</b> ' + (text || '') + ((s.check || []).length ? ' Unten wartet eine kurze Zwischenbilanz.' : ''), 'ok')); }
+        if (ZWB) ZWB();
+        var b = document.getElementById('weiter'); if (b) leisteSpiel();
+      },
+      geschafft: function (id) { return !!S.st[id]; },
+      speicher: function (k, v) { if (v === undefined) return S.sp[k]; S.sp[k] = v; speichern(); },  // kleiner Spielstand (suspend_data!)
+      lz: function (id) { return lz(id); },
+      levels: function () { return STATIONEN.map(function (s) { return { id: s.id, titel: s.titel, lz: s.lz || [], geschafft: !!S.st[s.id] }; }); }
+    };
+  }
+  function leisteSpiel() {
+    var n = STATIONEN.filter(function (s) { return S.st[s.id]; }).length;
+    var fertig = n === STATIONEN.length;
+    var ziel = UEBUNGEN.length ? { t: 'ueben', label: 'Weiter zu ② Üben →' } : { t: 'nachweis', label: 'Weiter zu ③ Nachweis →' };
+    leiste(fertig ? 'Alle Level geschafft!' : n + ' von ' + STATIONEN.length + ' Level geschafft', ziel.label, function () { zeige(ziel.t, 0); });
+  }
+  function vSpiel() {
+    var c = el('div', { class: 'card spielkarte' });
+    if (!SPIELEL) {
+      SPIELEL = el('div', { class: 'spielbuehne', role: 'application', 'aria-label': WELTSPIEL.titel || 'Spiel' });
+      SPIELMELD = el('div', { 'aria-live': 'polite' });
+      try { SPIELOBJ = WELTSPIEL.start(SPIELEL, spielApi()) || {}; } catch (e) { console.error(e); SPIELEL.appendChild(msg('Das Spiel konnte nicht starten: ' + esc(e.message), 'bad')); SPIELOBJ = {}; }
+    }
+    c.appendChild(SPIELEL);
+    c.appendChild(SPIELMELD);
+    testHaken.push({ art: 'interaktion', obj: SPIELOBJ });
+    haupt.appendChild(c);
+    // Zwischenbilanz: Kurz-Checks der geschafften Level (zählt nicht)
+    var zb = el('div', { class: 'card zwischenbilanz' });
+    haupt.appendChild(zb);
+    ZWB = function () {
+      zb.innerHTML = '';
+      var fertige = STATIONEN.filter(function (s) { return S.st[s.id] && ((s.check || []).length || s.mitdenken); });
+      zb.hidden = !fertige.length;
+      if (!fertige.length) return;
+      zb.appendChild(el('h3', { html: 'Zwischenbilanz <span class="badge zaehlt-nicht">zählt nicht</span>', style: 'margin-top:0' }));
+      fertige.forEach(function (s) {
+        var d = el('details', { class: 'check' }, [el('summary', { text: s.titel + ' · ' + (s.check || []).length + ' Fragen' + (s.mitdenken ? ' + Mitdenken' : '') })]);
+        (s.check || []).forEach(function (id, k) { var q = frage(FR[id], 'lernen', { nr: k + 1 }); d.appendChild(q.el); testHaken.push({ art: 'frage', obj: q }); });
+        if (s.mitdenken) d.appendChild(mitdenken(s.mitdenken));
+        zb.appendChild(d);
+      });
+    };
+    ZWB();
+    if (glossar()) haupt.appendChild(el('div', { class: 'card' }, glossar()));
+    leisteSpiel();
+  }
+
   function vStation() {
     if (!STATIONEN.length) { haupt.appendChild(msg('Keine Stationen vorhanden.', 'warn')); return; }
     var i = Math.min(ANSICHT.i, STATIONEN.length - 1), s = STATIONEN[i];

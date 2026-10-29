@@ -20,7 +20,7 @@ Der Leitfaden hat drei Teile: **A** fasst die Forschungslage zusammen, **B** wä
 8. **Selbststeuerung muss unterstützt werden:** Wahlfreiheit allein verbessert das Lernen nicht; Ziele, Fortschritt und Reflexion schon.
 9. **Einfache Verzweigung statt „intelligenter“ Lernpfade:** Gestufte Tipps und Wiederholungsschleifen leisten fast alles, was wir brauchen.
 10. **Iterativ bauen und mit Schülern erproben:** früh einen Prototyp testen, nach dem Einsatz die Daten aus der Lernplattform auswerten.
-11. **Handeln statt lesen:** Jede Station ist eine realistische Szene zum Anfassen – Dokument, Gerät, nachgebautes Portal, Gespräch. Der Text steht kurz daneben, das Beispiel wird in der Szene vorgeführt.
+11. **Spielen und handeln statt lesen:** Am Anfang jedes Pakets steht eine Spielidee, in der der Lernstoff die Spielregel ist; was die Lernplattform mit Test oder H5P genauso könnte, ist kein Lernpaket. Jede Station ist eine realistische Szene zum Anfassen – Dokument, Gerät, nachgebautes Portal, Gespräch. Der Text steht kurz daneben, das Beispiel wird in der Szene vorgeführt.
 
 Wer wenig Zeit hat, liest diese elf Sätze, Teil B (Prinzipienübersicht) und Teil C6 (Checkliste).
 
@@ -107,14 +107,15 @@ Neben den großen Ansätzen gibt es eine Reihe gut untersuchter Einzelbefunde au
 | Erlaubter Spickzettel in der Prüfung (selbst erstellt) | Prüfung ohne Spickzettel | kein verlässlicher Vorteil; Hinweise, dass man sich auf den Zettel verlässt statt zu lernen | Dickson & Miller 2005; Funk & Dickson 2011; Hamouda & Shaffer 2016 | Merkblatt erst nach dem Nachweis, nicht als Hilfsmittel im Nachweis (P13) |
 | Lernen mit Simulationen (realistische Situationen, in denen man handelt) | Unterricht ohne Simulation | g = 0,85 auf komplexe Fertigkeiten (145 Studien); realistischere Simulationen wirken stärker (0,86 statt 0,58); bei wenig Vorwissen helfen Beispiele | Chernikova et al. 2020 | Jede Station als realistische Szene zum Anfassen, mit Vorführung (P14) |
 | Aktiv, konstruktiv und interaktiv lernen (ICAP) | Nur lesen oder zuhören (passiv) | Lernergebnisse steigen von passiv über aktiv und konstruktiv bis interaktiv | Chi & Wylie 2014 | In der Szene handeln, entscheiden und begründen lassen statt nur lesen |
-| Lernspiele (Serious Games) | Herkömmlicher Unterricht | d = 0,29, stärker mit zusätzlicher Anleitung, mehreren Sitzungen und in Gruppen; g = 0,33, gut gestaltete Spiele bringen weitere 0,34 | Wouters et al. 2013; Clark et al. 2016 | Optionaler Spielrahmen, in dem der Lerninhalt die Spielhandlung ist |
+| Lernspiele (Serious Games) | Herkömmlicher Unterricht | d = 0,29, stärker mit zusätzlicher Anleitung, mehreren Sitzungen und in Gruppen; g = 0,33, gut gestaltete Spiele bringen weitere 0,34 | Wouters et al. 2013; Clark et al. 2016 | Spielidee zuerst: Der Lerninhalt ist die Spielregel (P12) |
+| Lernstoff als Spielregel (intrinsische Integration) | Dasselbe Spiel, Lernstoff als Quiz zwischen den Spielphasen | Mehr Lernzuwachs bei gleicher Spielzeit; frei wählend spielten Kinder die integrierte Version etwa siebenmal so lange (zwei Studien, Mathematik, 7–11 Jahre) | Habgood & Ainsworth 2011 | Phase „Erfinden“ mit drei Spielideen; Spielmechanik prüft das Lernziel (P12) |
 | Verführerische Details (interessant, aber ohne Bezug zum Lernziel) | Material ohne solche Details | g = −0,33 (schlechter) | Sundararajan & Adesope 2020 | Story, Figuren und Kulisse tragen den Inhalt, statt ihn zu schmücken |
 
 **Was nicht belegt ist:** „Lerntypen“ (etwa der „visuelle Typ“) gibt es nach heutigem Forschungsstand nicht in einer Form, die fürs Unterrichten nützt; sie werden nicht berücksichtigt (Pashler et al. 2008; Kerres 2024). Auch „digital ist automatisch besser“ stimmt nicht: Lernen am Computer bringt über Jahrzehnte nur kleine bis mittlere Vorteile, und nur bei guter didaktischer Gestaltung (Tamim et al. 2011).
 
 ## Teil B1: Die vierzehn Prinzipien für unsere Lernpakete
 
-Vierzehn Prinzipien reichen. Neun davon sind gut belegt und mit vertretbarem Aufwand in jedem Paket umsetzbar; sie sind verbindlich („Muss“): P1 bis P8 und P14. Dazu kommt P11, weil alle Pakete für selbstgesteuertes Lernen gebaut werden (Teil C4). Die übrigen vier sind „Soll“-Prinzipien: sinnvoll, aber abhängig von Fach, Thema und verfügbarer Zeit. Die Einschätzung von Beleglage und Aufwand stützt sich auf Teil A.
+Vierzehn Prinzipien reichen. Zehn davon sind gut belegt und mit vertretbarem Aufwand in jedem Paket umsetzbar; sie sind verbindlich („Muss“): P1 bis P8, P12 und P14. Dazu kommt P11, weil alle Pakete für selbstgesteuertes Lernen gebaut werden (Teil C4). Die übrigen drei sind „Soll“-Prinzipien: sinnvoll, aber abhängig von Fach, Thema und verfügbarer Zeit. Die Einschätzung von Beleglage und Aufwand stützt sich auf Teil A.
 
 | Nr. | Prinzip | Wie gut belegt | Aufwand | So sieht es im Paket aus | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -129,7 +130,7 @@ Vierzehn Prinzipien reichen. Neun davon sind gut belegt und mit vertretbarem Auf
 | P9 | Hintergrundwissen und Bedienhinweise trennen | mittel | mittel | Hintergrund in Steckbriefen; Bedienhilfe genau dort, wo sie gebraucht wird | Soll |
 | P10 | Wiederholen verteilen, Aufgaben mischen | gut | mittel | Wiederholungsfragen aus früheren Kapiteln; gemischte Aufgaben im Nachweis | Soll |
 | P11 | Selbstständiges Lernen anleiten statt voraussetzen | mittel bis gut | mittel | Selbsteinschätzung, Fortschrittsanzeige, Reflexionsfrage mit Musterantwort | Muss |
-| P12 | Spielelemente gezielt einsetzen | mittel | gering bis hoch | Rahmengeschichte ja, optional Spielrahmen mit Missionskarte; Punkte und Ranglisten nur mit klarem Zweck | Soll |
+| P12 | Lernstoff als Spielregel: erst die Spielidee | mittel | gering bis hoch | Kreative Phase „Erfinden“ mit drei Spielideen zur Wahl; der Lernstoff ist die Spielregel; Plattform-Probe; Folgen statt Punkte, keine Ranglisten | Muss |
 | P13 | Ergebnisse sichern: Merkblatt selbst ergänzen | mittel | gering bis mittel | Halb vorgefülltes Merkblatt je Lernziel nach dem Nachweis: aus dem Gedächtnis ergänzen, mit dem Muster vergleichen, als PDF mit Selbsttest-Fragen herunterladen | Soll |
 | P14 | Handeln am Gegenstand: Jede Station ist eine Szene zum Anfassen | gut (Simulationen), mittel (Lernspiele) | mittel (mit Baukasten), hoch bei eigenen Geräten | Szene groß in der Mitte: simulierter Rechner, Dokument, Gerät oder Gespräch; Vorführung „Zeig’s mir“; Text kurz daneben; eigene Welt je Paket | Muss |
 
@@ -137,7 +138,9 @@ Vierzehn Prinzipien reichen. Neun davon sind gut belegt und mit vertretbarem Auf
 
 **Zu P14: Handeln am Gegenstand.** Die ersten Pakete nach diesem Leitfaden waren gut belegt, aber oft lange Texte mit einem Quiz darunter. Die PING-Pakete zeigen, was stattdessen motiviert: Man zerlegt einen PC, tippt Befehle in ein simuliertes Terminal, baut ein Netzwerk um. Deshalb ist die Szene der Kern jeder Station, nicht ein Zusatz. Das geht auch außerhalb der IT: Dokumente prüfen, im nachgebauten Portal recherchieren, Formulare ausfüllen, Kundengespräche führen, Belege sortieren. Simulationen wirken stark auf komplexe Fertigkeiten, und zwar umso mehr, je realistischer sie sind (Chernikova et al. 2020). Wer die Geschichte zum Spiel ausbauen will, findet ein Vorbild in [SQL Island](https://sql-island.informatik.uni-kl.de/): Dort ist der Lerninhalt selbst die Spielhandlung. Story, Figuren und Kulisse ohne Bezug zum Lernziel schaden dagegen (verführerische Details, Teil A2).
 
-**Querschnittsprinzip: iterativ entwickeln.** Kein Prinzip ersetzt den Test mit echten Schülern. Deshalb gehört eine kurze Erprobung (Teil C1, Phase 5) zu jedem Paket.
+**Zu P12: Lernstoff als Spielregel.** Auch die Szenen-Pakete blieben zu oft bei dem, was die Lernplattform mit Test, H5P oder Lückentext genauso kann. Ein Lernpaket lohnt sich dort, wo Lernende entdecken, ausprobieren und Folgen sehen. Deshalb beginnt jedes Paket nach dem Klären mit einer kreativen Phase (Teil C1, Phase 2): Claude schlägt drei verschiedene Spielideen vor – etwa einen Schalter-Simulator, in dem man am Registergericht Anmeldungen nach einer Dienstanweisung stempelt, oder ein Sammelspiel, in dem man Firmen mit dem richtigen Registerball fängt. Jede Idee zeigt, welcher Lerninhalt welche Spielregel wird, und besteht die Plattform-Probe („Könnte die Lernplattform das auch? Nein, weil …“). Die Lehrkraft wählt oder kombiniert. Entscheidend ist, dass der Stoff im Spiel selbst steckt: Kinder lernten mit einer Spielversion, in der der Mathestoff die Kampfmechanik war, mehr als mit derselben Spielwelt und dem Stoff als Quiz dazwischen, und spielten sie freiwillig etwa siebenmal so lange (Habgood & Ainsworth 2011). Nicht jedes Thema wird ein Spiel; dann bleibt es eine realistische Simulation mit Begründung im Spielkonzept.
+
+**Querschnittsprinzip: iterativ entwickeln.** Kein Prinzip ersetzt den Test mit echten Schülern. Deshalb gehört eine kurze Erprobung (Teil C1, Phase 6) zu jedem Paket.
 
 **Bezug zu den vorhandenen PING-Paketen:** „Shell Yeah!“, „Get-Going!“, „Plug & Pray“ und „Netzwerktopologien erleben“ erfüllen P1, P2, P4, P5 und P8 bereits weitgehend (Story, Tutorial → Üben → Nachweis, gestufte Tipps, Kurz-Checks, Auswertung je Lernziel). Nachschärfen lassen sich vor allem P6 (Feedback, das erklärt), P10 (verteilte Wiederholung) und P11 (Selbsteinschätzung).
 
@@ -156,18 +159,19 @@ Einige Ideen aus Forschung und Praxis sind entweder schlecht belegt oder für ei
 | Punkte, Abzeichen, Ranglisten als Ersatz für echte Motivation | Wirkung auf das Verhalten klein und unsicher; Belohnungen können die Freude an der Sache sogar schmälern. |
 | Erst ein komplettes Konzept, dann bauen | Mit KI ist ein Probelauf in Stunden gebaut; Fehler zeigen sich am Probelauf schneller als im Konzeptpapier. |
 
-## Teil C1: Der Entwicklungsprozess in sechs Phasen
+## Teil C1: Der Entwicklungsprozess in sieben Phasen
 
-Jedes Paket durchläuft sechs Phasen; sie folgen ADDIE, laufen aber in kurzen Schleifen, und das Bauen beginnt mit einem kleinen Prototyp statt mit dem fertigen Paket. Kerres (2024) empfiehlt ein solches schrittweises Vorgehen ausdrücklich, wenn das Team klein ist, die Lehrkraft selbst inhaltlich mitarbeitet und das Ziel am Anfang noch nicht ganz klar ist: So liegt jederzeit eine nutzbare Version vor, und Wichtiges wird verlässlicher fertig als „schöne Extras“. Zu jeder Phase gehört ein konkretes Ergebnis, das ins Repository kommt.
+Jedes Paket durchläuft sieben Phasen; sie folgen ADDIE, laufen aber in kurzen Schleifen, und das Bauen beginnt mit einem kleinen Prototyp statt mit dem fertigen Paket. Kerres (2024) empfiehlt ein solches schrittweises Vorgehen ausdrücklich, wenn das Team klein ist, die Lehrkraft selbst inhaltlich mitarbeitet und das Ziel am Anfang noch nicht ganz klar ist: So liegt jederzeit eine nutzbare Version vor, und Wichtiges wird verlässlicher fertig als „schöne Extras“. Zu jeder Phase gehört ein konkretes Ergebnis, das ins Repository kommt.
 
-*(Ablaufdiagramm: Klären → Zielen → Entwerfen → Prototyp bauen → Erproben → Einsetzen und auswerten, mit Rücksprüngen nach Erprobung und Auswertung; nur in der Dokumentfassung.)*
+*(Ablaufdiagramm: Klären → Erfinden → Zielen → Entwerfen → Prototyp bauen → Erproben → Einsetzen und auswerten, mit Rücksprüngen nach Erprobung und Auswertung; nur in der Dokumentfassung.)*
 
-1. **Klären (Analyse).** Welches Lernproblem löst das Paket, für wen, in welchem Rahmen? Ein Paket kann nur ein Lernproblem lösen; fehlen Geräte, Zeit oder Begleitung, hilft es allein nicht. Ergebnis: *Steckbrief* (eine Seite) mit Fach, Klasse, Lehrplanbezug, Vorwissen, Motivation und Erfahrung mit selbstständigem Lernen, Einsatzform (SeGeL oder klassisch), Geräten, Zeitrahmen und einer ersten Idee für die Leitsituation.
-2. **Zielen (Lernziele und Nachweis zuerst).** Drei bis acht überprüfbare Lernziele formulieren, dann sofort festlegen, woran man das Können erkennt: eine Handlungsaufgabe (Nachweis Teil A) und mindestens zwei Fragen je Lernziel (Teil B). Ergebnis: *Lernziel-Nachweis-Tabelle*.
-3. **Entwerfen (Drehbuch).** Leitsituation und Story, Aufgabenklassen von einfach nach komplex, Stationen, Lösungsbeispiele, gestufte Tipps. Besonders wichtig: typische Fehler und Fehlvorstellungen der Schüler sammeln, denn daraus entstehen gute Falschantworten und gutes Feedback. Ergebnis: *Drehbuch*.
-4. **Prototyp bauen.** Zuerst eine einzige Station mit zwei Fragen vollständig bauen und im SCORM-Testplayer prüfen; erst wenn Optik, Bedienung und Datenübergabe stimmen, folgt der Rest. Ergebnis: *lauffähiges Paket* (ZIP).
-5. **Erproben.** Selbsttest mit der Checkliste (Teil C6), Review durch eine Kollegin oder einen Kollegen (fachlich und didaktisch), Kurztest mit drei bis fünf Schülern, die laut denken, Test in der echten ByCS-Lernplattform. Ergebnis: *Änderungsliste*; zurück zu Phase 3 oder 4.
-6. **Einsetzen und auswerten.** Nach dem Einsatz den Bericht aus der Lernplattform exportieren: Welche Fragen lösen fast alle falsch (unklar oder zu schwer), welche fast alle richtig (zu leicht)? Reflexionsantworten lesen. Ergebnis: *neue Version* mit Versionsnummer und kurzem Änderungsprotokoll; bei Bedarf zurück zu Phase 2.
+1. **Klären (Analyse).** Welches Lernproblem löst das Paket, für wen, in welchem Rahmen? Ein Paket kann nur ein Lernproblem lösen; fehlen Geräte, Zeit oder Begleitung, hilft es allein nicht. Ergebnis: *Steckbrief* (eine Seite) mit Fach, Klasse, Lehrplanbezug, Vorwissen, Motivation und Erfahrung mit selbstständigem Lernen, Einsatzform (SeGeL oder klassisch), Geräten, Zeitrahmen, einer ersten Idee für die Leitsituation und den Kerninhalten, aus denen später die Spielregeln werden.
+2. **Erfinden (Spielidee).** Die kreative Phase vor allem anderen (P12): drei verschiedene Spielideen, jede mit Genre und Vorbild, Spielschleife in einem Satz, zwei Leveln, der Tabelle „Lernstoff → Spielregel“, den Folgen von Fehlern und der Plattform-Probe. Die Lehrkraft wählt oder kombiniert; im Zweifel werden zwei Ideen als Prototyp gegeneinander gebaut. Ergebnis: *Spielkonzept* mit der Entscheidung (Spiel über alle Stationen, Spielrahmen mit Szenen oder begründet eine Simulation ohne Spiel).
+3. **Zielen (Lernziele und Nachweis zuerst).** Drei bis acht überprüfbare Lernziele formulieren, dann sofort festlegen, woran man das Können erkennt: eine Handlungsaufgabe (Nachweis Teil A) und mindestens zwei Fragen je Lernziel (Teil B). Ergebnis: *Lernziel-Nachweis-Tabelle*.
+4. **Entwerfen (Drehbuch).** Leitsituation und Story, Aufgabenklassen von einfach nach komplex, Stationen, Lösungsbeispiele, gestufte Tipps. Besonders wichtig: typische Fehler und Fehlvorstellungen der Schüler sammeln, denn daraus entstehen gute Falschantworten und gutes Feedback. Ergebnis: *Drehbuch*.
+5. **Prototyp bauen.** Zuerst eine einzige Station (bei einem Spiel: Level 1) mit zwei Fragen vollständig bauen und im SCORM-Testplayer prüfen; erst wenn Optik, Bedienung und Datenübergabe stimmen, folgt der Rest. Ergebnis: *lauffähiges Paket* (ZIP).
+6. **Erproben.** Selbsttest mit der Checkliste (Teil C6), Review durch eine Kollegin oder einen Kollegen (fachlich und didaktisch), Kurztest mit drei bis fünf Schülern, die laut denken, Test in der echten ByCS-Lernplattform. Ergebnis: *Änderungsliste*; zurück zu Phase 4 oder 5.
+7. **Einsetzen und auswerten.** Nach dem Einsatz den Bericht aus der Lernplattform exportieren: Welche Fragen lösen fast alle falsch (unklar oder zu schwer), welche fast alle richtig (zu leicht)? Reflexionsantworten lesen. Ergebnis: *neue Version* mit Versionsnummer und kurzem Änderungsprotokoll; bei Bedarf zurück zu Phase 3.
 
 **Rollen.** Die Lehrkraft verantwortet fachliche Richtigkeit, Lernziele und Nachweis; die KI übernimmt Programmierung, Gestaltung und Entwürfe. Alles, was die KI fachlich formuliert, wird von der Lehrkraft geprüft.
 
@@ -204,7 +208,7 @@ Kerres (2024) nennt als Richtwert Lerneinheiten von 30 bis 45 Minuten, drei bis 
 
 Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern steht der Fachbegriff, unter dem man bei Bedarf mehr dazu findet.
 
-**Szene zuerst, eigene Welt (P14)**
+**Spielidee und Szene zuerst, eigene Welt (P12, P14)**
 
 - Jede Station ist eine Szene, in der die Lernenden etwas bewegen: ein Dokument prüfen, ein Formular ausfüllen, im nachgebauten Portal recherchieren, ein Gespräch führen, sortieren, ein Gerät einstellen. Erst die Szene planen, dann den Text.
 - Die Szene steht groß in der Mitte und ohne Scrollen im Blick. Der Auftrag steht als Sprechblase der Figur (1–2 Sätze), „Kurz erklärt“ in einer schmalen Notiz daneben (höchstens etwa 40 Wörter); zusammen höchstens etwa 90 Wörter je Station.
@@ -213,7 +217,7 @@ Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern st
 - Realistisch, aber erfunden: Dokumente, Portale und Geräte sehen aus wie im Beruf, mit erfundenen Firmen und Daten. Echte Webseiten werden als Übungsversion nachgebaut, nicht kopiert.
 - Fehler wirken sich in der Szene aus wie in echt (die Kundin fragt nach, der Server antwortet nicht), dazu ein Satz zur Fehlvorstellung.
 - Gleiche Bedienung, eigene Welt: Aufbau und Bedienung sind in allen Paketen gleich; jedes Paket hat eigene Farben, eine Kulisse und illustrierte Figuren passend zum Fach. Figuren vielfältig besetzen, keine realen Personen nachbilden.
-- Ein Spielrahmen (Mission mit Karte, jede Station ein Ort) nur, wenn der Lerninhalt die Spielhandlung ist. Story und Kulisse ohne Bezug zum Lernziel sind verführerische Details (Teil A2).
+- Die Spielidee aus der Phase „Erfinden“ gibt den Rahmen vor: ein Spiel über alle Stationen (Spielmodus, Stationen sind Level, Üben und Nachweis nutzen dieselbe Mechanik mit neuen Fällen) oder ein Spielrahmen (Mission mit Karte, jede Station ein Ort). In beiden Fällen ist der Lerninhalt die Spielregel, Fehler haben Folgen im Spiel, und es gibt keinen Zeitdruck und keine Ranglisten. Story und Kulisse ohne Bezug zum Lernziel sind verführerische Details (Teil A2).
 - Ein Szenen-Katalog mit Beispielen für alle Fächer liegt im Skill-Set (`szenen.md`).
 
 **Bildschirm und Darstellung (nach Mayer)**
@@ -386,6 +390,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Jede Antwort bekommt ein Feedback mit Begründung; typische Fehler haben eigenes Feedback. (P6)
 - [ ] Jede Übung hat drei gestufte Tipps. (P2)
 - [ ] Selbsteinschätzung vorher und nachher, Fortschrittsanzeige. (P11)
+- [ ] Es gab drei Spielideen zur Wahl. Im Paket ist der Lernstoff die Spielregel (wer ihn nicht beherrscht, scheitert im Spiel, nicht in einem Quiz danach), und es besteht die Plattform-Probe: Test, H5P oder Lückentext der Lernplattform könnten es nicht genauso. (P12)
 - [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist ohne Scrollen sichtbar, realistisch und reagiert auf Fehler. Das Lösungsbeispiel wird darin vorgeführt, der Text daneben bleibt im Budget. (P14)
 
 **Gestaltung (Muss)**
@@ -438,18 +443,18 @@ Der Leitfaden ist zusätzlich als Skill-Set für Claude umgesetzt: Jede Phase au
 
 | Skill | Phase | Was er tut | Die Lehrkraft liefert | Ergebnis |
 | --- | --- | --- | --- | --- |
-| `lernpaket-planen` | 1–3 | Führt ein Interview (Fach, Klasse, Vorwissen, Einsatzform, optional Input mit Tafelbild, Leitsituation), formuliert Lernziele, schlägt Nachweis und ein Drehbuch mit einer Szene je Station vor; fragt gezielt nach typischen Schülerfehlern | Fachwissen, Unterrichtserfahrung, Entscheidungen | Steckbrief, Lernziel-Nachweis-Tabelle, Drehbuch |
-| `fragenpool-erstellen` | 2–3 | Erzeugt Fragen je Lernziel in den fünf Fragetypen, Falschantworten aus typischen Fehlern, Feedback zu jeder Antwort | Lernziele, typische Fehler, Prüfung der Fragen | Fragenpool (geprüft) |
-| `lernpaket-bauen` | 4 | Baut das SCORM-Paket mit Szenen zum Anfassen aus dem Baukasten in der eigenen Welt des Pakets, mit fertigen Bausteinen (Station, Kurz-Check, Übung mit Tipps, Nachweis, Auswertung, PDF, optional Tafelbild mit Ablaufplan); erst Prototyp, dann Rest | Drehbuch, Rückmeldung zum Prototyp | ZIP-Datei |
-| `lernpaket-pruefen` | 5 | Geht die Checkliste aus Teil C6 durch, testet die Datenübergabe, prüft Lösbarkeit und Barrierefreiheit, erstellt einen Review-Bericht | Paket, Ergebnis des Schülertests | Prüfbericht mit Ampel |
-| `lernpaket-auswerten` | 6 | Liest den Berichtsexport aus der Lernplattform, zeigt schwierige und zu leichte Fragen, fasst Reflexionsantworten zusammen | Berichtsexport (ohne Namen) | Auswertung und Änderungsvorschläge |
+| `lernpaket-planen` | 1–4 | Führt ein Interview (Fach, Klasse, Vorwissen, Einsatzform, optional Input mit Tafelbild, Leitsituation), schlägt drei Spielideen vor, in denen der Lernstoff die Spielregel ist, formuliert Lernziele, schlägt Nachweis und ein Drehbuch mit einer Szene je Station vor; fragt gezielt nach typischen Schülerfehlern | Fachwissen, Unterrichtserfahrung, Entscheidungen | Steckbrief, Spielkonzept, Lernziel-Nachweis-Tabelle, Drehbuch |
+| `fragenpool-erstellen` | 3–4 | Erzeugt Fragen je Lernziel in den fünf Fragetypen, Falschantworten aus typischen Fehlern, Feedback zu jeder Antwort | Lernziele, typische Fehler, Prüfung der Fragen | Fragenpool (geprüft) |
+| `lernpaket-bauen` | 5 | Baut das SCORM-Paket als Spiel oder mit Szenen zum Anfassen aus dem Baukasten in der eigenen Welt des Pakets, mit fertigen Bausteinen (Station, Kurz-Check, Übung mit Tipps, Nachweis, Auswertung, PDF, optional Tafelbild mit Ablaufplan); erst Prototyp, dann Rest | Drehbuch, Rückmeldung zum Prototyp | ZIP-Datei |
+| `lernpaket-pruefen` | 6 | Geht die Checkliste aus Teil C6 durch, testet die Datenübergabe, prüft Lösbarkeit und Barrierefreiheit, erstellt einen Review-Bericht | Paket, Ergebnis des Schülertests | Prüfbericht mit Ampel |
+| `lernpaket-auswerten` | 7 | Liest den Berichtsexport aus der Lernplattform, zeigt schwierige und zu leichte Fragen, fasst Reflexionsantworten zusammen | Berichtsexport (ohne Namen) | Auswertung und Änderungsvorschläge |
 
 Gemeinsame Grundlage aller Skills ist eine Referenzdatei mit den vierzehn Prinzipien und den Regeln aus C3–C5, damit alle Skills dieselben Maßstäbe anlegen. Der vorhandene Skill `bycs-lernmodul` (Look und Einbettung) geht in `lernpaket-bauen` auf.
 
 **So arbeitet eine Kollegin ohne Programmiererfahrung (Beispiel)**
 
 1. Sie öffnet Claude im gemeinsamen Projekt und schreibt: „Ich möchte ein Lernpaket zum Thema Dreisatz für die Berufsintegrationsklasse planen.“ Der Planungs-Skill startet und stellt Fragen.
-2. Sie beantwortet die Fragen, korrigiert die vorgeschlagenen Lernziele und nennt typische Fehler ihrer Schüler. Claude legt Steckbrief und Drehbuch als Dokument ab.
+2. Sie beantwortet die Fragen, korrigiert die vorgeschlagenen Lernziele und nennt typische Fehler ihrer Schüler. Claude schlägt drei Spielideen vor, sie wählt eine; danach legt Claude Steckbrief, Spielkonzept und Drehbuch als Dokument ab.
 3. Sie sagt: „Bau mir den Prototyp.“ Claude baut eine Station und zwei Fragen; sie probiert sie im Browser aus und gibt Rückmeldung in normaler Sprache.
 4. Nach dem Ausbau lässt sie das Paket prüfen, gibt es einer Kollegin zum Review und testet es mit einigen Schülern.
 5. Sie lädt die ZIP-Datei als Aktivität „Lernpaket“ in die ByCS-Lernplattform hoch.
@@ -472,6 +477,7 @@ Gemeinsame Grundlage aller Skills ist eine Referenzdatei mit den vierzehn Prinzi
 - [ ] Eigenen Skill `tafelbild-erstellen` bauen: erzeugt nur ein Tafelbild mit Ablaufplan, ohne Lernpaket – für Themen, die praktisch, in einer anderen Simulation (z. B. Packet Tracer) oder ganz ohne Paket umgesetzt werden.
 - [ ] Bestehensgrenze der vorhandenen PING-Pakete von 70 % bzw. 60 % auf 80 % umstellen (Prüfen, ob die Fragen dazu passen).
 - [ ] Lernpaket-Kompass 2 (29.10.2026): Szene als Pflichtkern jeder Station (P14), Baukasten für Szenen, eigene Welt je Paket, optionaler Spielrahmen; Pilot: Station 1 von „Das Handelsregister“.
+- [ ] Lernpaket-Kompass 3 (29.10.2026): Phase „Erfinden“ mit drei Spielideen und Plattform-Probe, P12 „Lernstoff als Spielregel“ wird Muss, Spielmodus in der Vorlage; Piloten zum Handelsregister: „Stempel drauf!“ (Schalter-Simulator) und „Firmendex“ (Sammelspiel). Erprobung mit Schülern steht aus.
 - [ ] Baukasten nach den ersten Paketen anderer Fächer erweitern (z. B. Tabellenkalkulation, Zeitstrahl, Karte) und Erfahrungen mit dem Spielrahmen sammeln.
 
 ## Literatur
@@ -497,6 +503,7 @@ Links führen zum Volltext oder zu einer Zusammenfassung, die für diesen Entwur
 - Frick, T. W., Chadha, R., Watson, C. & Zlatkovska, E. (2010). [Improving course evaluations to improve instruction and complex learning in higher education](https://bio.tedfrick.me/etrd/ETRD2010ImprovingCourseEvaluations.pdf). *ETR&D, 58*(2), 115–136.
 - Funk, S. C. & Dickson, K. L. (2011). Crib card use during tests: Helpful or a crutch? Teaching of Psychology, 38(2), 114–117. ([Abstract](https://experts.nau.edu/en/publications/crib-card-use-during-testshelpful-or-a-crutch/))
 - Gurlitt, J. & Renkl, A. (2008). Are high-coherent concept maps better for prior knowledge activation? Differential effects of concept mapping tasks on high school vs. university students. Journal of Computer Assisted Learning, 24(5), 407–419.
+- Habgood, M. P. J. & Ainsworth, S. E. (2011). [Motivating children to learn effectively: Exploring the value of intrinsic integration in educational games](https://doi.org/10.1080/10508406.2010.508029). *Journal of the Learning Sciences, 20*(2), 169–206.
 - Hamouda, S. & Shaffer, C. A. (2016). Crib sheets and exam performance in a data structures course. Computer Science Education. ([Volltext](https://people.cs.vt.edu/shaffer/Papers/Crib_Sheets2016.pdf))
 - Hattie, J. (2023). *Visible learning: The sequel*. Routledge. ([Rezension](https://jle.hse.ru/article/download/27821/23245))
 - Iterbeke, K., De Witte, K. & Schelfhout, W. (2021). The effects of computer-assisted adaptive instruction and elaborated feedback on learning outcomes. A randomized control trial. *Computers in Human Behavior, 120*, 106666.

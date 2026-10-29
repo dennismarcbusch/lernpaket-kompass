@@ -14,6 +14,7 @@
 | **Typische Fehler und Fehlvorstellungen** | 1. … 2. … 3. … (mindestens drei) |
 | **Arbeitsmittel aus dem Beruf** | Dokumente, Programme, Geräte, Gespräche, die als Szene nachgebaut werden |
 | **Welt** | Thema (wirtschaft · technik · sprache · natur · gesundheit · gestaltung), Kulisse, Symbol |
-| **Spielrahmen** | keiner (Standard) / Mission mit Karte: Titel, Ziel, Zähler |
+| **Kerninhalte** | Regeln, Begriffe, Einteilungen, Abläufe, die am Ende sitzen müssen (Material für die Spielregeln) |
+| **Spielidee** | wird in der Phase „Erfinden“ gewählt (`spielidee.md`): Spielmodus, Spielrahmen mit Szenen oder Simulation |
 | **Paket-ID** | `<präfix>-<name>` (Kleinbuchstaben, Bindestriche; Präfix für Projekt oder Fach, z. B. `ping-`, `bwl-`) |
 | **Lizenz** | z. B. CC BY-SA 4.0 |

@@ -19,7 +19,7 @@ G = os.path.join(HIER, '_gemeinsam')
 QUELLE = 'Quelle: Lernpaket-Kompass – Leitfaden für interaktive Lernpakete, docs/leitfaden-lernpakete.md im Repository lernpaket-kompass.\n\n'
 ERSATZ = {
     r'&#91;embedded content: Mayer \(2017\)[^\]]*\\\]': '*(Diagramm mit den Effektstärken der zwölf Mayer-Prinzipien nach Mayer 2017 und der Re-Analyse von Cromley et al.: nur in der Dokumentfassung. Im Mittel g ≈ 0,37.)*',
-    r'&#91;embedded content: Entwicklungsprozess[^\]]*\\\]': '*(Ablaufdiagramm: Klären → Zielen → Entwerfen → Prototyp bauen → Erproben → Einsetzen und auswerten, mit Rücksprüngen nach Erprobung und Auswertung; nur in der Dokumentfassung.)*',
+    r'&#91;embedded content: Entwicklungsprozess[^\]]*\\\]': '*(Ablaufdiagramm: Klären → Erfinden → Zielen → Entwerfen → Prototyp bauen → Erproben → Einsetzen und auswerten, mit Rücksprüngen nach Erprobung und Auswertung; nur in der Dokumentfassung.)*',
 }
 
 

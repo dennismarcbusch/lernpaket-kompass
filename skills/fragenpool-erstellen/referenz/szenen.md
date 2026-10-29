@@ -1,6 +1,31 @@
-# Szenen-Katalog: Was bewegen die Lernenden?
+# Spielideen und Szenen: Was bewegen die Lernenden?
 
-Ergänzung zu P14 (Handeln am Gegenstand). Für jede Station wird **zuerst** die Szene festgelegt, dann der Text. Dieser Katalog hilft, auch in Fächern ohne Technik eine Szene zu finden. Die Bausteine (rechte Spalte) stehen in `js/baukasten.js` (`api.kit`), Format in `fragenformat.md` („Interaktionen“ und „Baukasten“).
+Ergänzung zu P12 (Lernstoff als Spielregel) und P14 (Handeln am Gegenstand). **Zuerst** kommt die Spielidee für das ganze Paket, dann je Station die Szene, zuletzt der Text.
+
+## Spielideen (Phase „Erfinden“)
+
+Claude schlägt immer **drei verschiedene** Spielideen vor, mindestens eine davon ein echtes Spiel. Jede Idee hat: Titel, Genre mit Vorbild, Spielschleife in einem Satz („Ich … , dann … , bis …“), die Tabelle **Lernstoff → Spielregel** (jedes Lernziel und jeder typische Fehler wird eine Regel oder Folge im Spiel), was bei einem Fehler passiert, wie Level aufeinander aufbauen, und die **Plattform-Probe** („Könnte die Lernplattform das auch? Nein, weil …“). Die Lehrkraft wählt oder kombiniert. Vorlage: `vorlagen/spielidee.md`.
+
+| Genre | Vorbild | Spielschleife | Passt zu | Beispiel |
+|---|---|---|---|---|
+| Schalter-Simulator | „Papers, Please“ | Antrag kommt → mit Regelbuch prüfen → stempeln → Folgen sehen; jede Woche neue Regeln | Vorschriften, Formvorgaben, Prüfschemata | „Stempel drauf!“: am Registergericht Anmeldungen prüfen |
+| Sammel- und Fangspiel | Pokémon | Wesen finden → mit dem richtigen Werkzeug fangen → im Dex eintragen → weiterentwickeln | Einteilungen, Zuordnungen, Merkmale | „Firmendex“: Firmlinge mit HRA- oder HRB-Ball fangen |
+| Escape Room | Escape-Spiele | Rätsel im Raum → Hinweis kombinieren → Schloss öffnen | Abläufe, Rechenwege, Codes | Tresor öffnet sich mit der richtig berechneten Subnetzmaske |
+| Abenteuer mit Befehlen | SQL Island | Mit dem Lernstoff selbst handeln, um weiterzukommen | Sprachen, Befehle, Formeln | Mit SQL-Abfragen von der Insel entkommen |
+| Detektivfall | Krimi-Rätsel | Spuren sammeln → Verdacht prüfen → Fall lösen | Analyse, Fehlersuche, Quellenarbeit | Gefälschte Rechnungen anhand der Pflichtangaben entlarven |
+| Aufbau und Wirtschaft | Tycoon-Spiele | Entscheiden → Kennzahlen ändern sich → reagieren | Wirkungszusammenhänge, Kalkulation | Eigenen Laden führen, Preis und Absatz ausprobieren |
+| Rollenspiel-Gespräch | Visual Novel | Figur sagt etwas → Antwort wählen → Beziehung und Ausgang ändern sich | Kommunikation, Beratung, Konflikte | Reklamationsgespräch, das je nach Antwort kippt |
+| Baukasten und Puzzle | „Bridge Constructor“ | Teile setzen → testen → scheitert oder hält | Systeme, Schaltungen, Satzbau | Netzwerk bauen, bis alle Geräte erreichbar sind |
+
+Faustregeln: Die Regel des Spiels **ist** der Lernstoff (wer ihn nicht kann, verliert im Spiel, nicht in einem Quiz). Fehler haben Folgen in der Spielwelt und eine Erklärung. Jedes Level bringt neue Regeln (Woche 2 mit neuer Dienstanweisung, Level 2 mit Brutkasten). Kurz-Checks bleiben klein (höchstens drei Fragen je Level, „zählt nicht“). Kein Zeitdruck, keine Ranglisten.
+
+## Spielmodus (PAKET.spielwelt)
+
+Für ein Spiel über alle Stationen: `PAKET.spielwelt = { titel, tab, start(box, api) }`. Die Engine stellt eine große Spielbühne unter „① Spielen“; die Stationen sind die Level (`id`, `titel`, `lz`, `check`, optional `mitdenken`). Das Spiel meldet `api.level(id)`, wenn ein Level geschafft ist; danach erscheinen dessen Kurz-Check und Mitdenken-Auftrag in der Zwischenbilanz. Üben und Nachweis Teil A nutzen dieselbe Spielmechanik in neuen Fällen (Nachweis ohne Rückmeldung und ohne Hilfen). Format: `fragenformat.md` („Spielmodus“), Beispiele: `beispiele/spiel-stempel-drauf.js` und `beispiele/spiel-firmendex.js`.
+
+## Szenen je Station
+
+Gibt es keinen Spielmodus, wird für jede Station **zuerst** die Szene festgelegt, dann der Text. Dieser Katalog hilft, auch in Fächern ohne Technik eine Szene zu finden. Die Bausteine (rechte Spalte) stehen in `js/baukasten.js` (`api.kit`), Format in `fragenformat.md` („Interaktionen“ und „Baukasten“).
 
 ## Die vier Fragen zu jeder Szene
 
@@ -23,9 +48,9 @@ Ergänzung zu P14 (Handeln am Gegenstand). Für jede Station wird **zuerst** die
 | Bauen | Teile zu einem Ganzen zusammensetzen | PC, Netzwerk, Satzbau, Schaltung, Trainingsplan | `sortieren` (Fächer = Plätze) oder eigenes SVG |
 | Fehlersuche | In einem Fall mit eingebauten Fehlern die Fehler finden | Fehlerhafte Rechnung, fehlerhafter Brief, falsch konfigurierter Router, falsche Dosierung (fiktiv) | `dokument`, `formular` |
 
-## Spielrahmen (optional, PAKET.spiel)
+## Spielrahmen (PAKET.spiel)
 
-Ein Spielrahmen verbindet die Stationen zu einer Mission. Er lohnt sich, wenn es eine natürliche Geschichte gibt (Partner prüfen, Kunden betreuen, einen Fall lösen, eine Insel verlassen wie bei SQL Island). Regeln:
+Die leichtere Spielform: Ein Spielrahmen verbindet einzelne Szenen-Stationen zu einer Mission. Er lohnt sich, wenn es eine natürliche Geschichte gibt (Partner prüfen, Kunden betreuen, einen Fall lösen, eine Insel verlassen wie bei SQL Island). Regeln:
 
 - **Der Inhalt ist die Spielhandlung.** Bei SQL Island lernt man SQL, indem man mit SQL-Abfragen von der Insel entkommt. Ein Quiz mit Punkten danach ist kein Spielrahmen.
 - **Jede Station ist ein Ort auf der Karte** (`mission.ort`, `mission.symbol`) und endet mit einem Story-Satz (`mission.ende`), der die Geschichte weiterbringt.

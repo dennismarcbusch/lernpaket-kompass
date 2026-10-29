@@ -46,6 +46,7 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 | `figur` | `{name, rolle, aussehen}` der Story-Figur. `aussehen`: `{haut: 0–5, haare: 'schwarz'·'dunkelbraun'·'braun'·'rot'·'blond'·'grau'·'weiss' oder Hex, frisur: 'kurz'·'lang'·'zopf'·'dutt'·'locken'·'glatze'·'kopftuch', tuch (Farbe), kleidung (Farbe), krawatte (Farbe), brille, bart, ausdruck}` |
 | `figuren` | optional weitere Personen: `{schluessel: {name, rolle, aussehen}}`; in Stationen über `figur: 'schluessel'` als Auftraggeber, in Szenen über `kit.szene(…).person('schluessel')` |
 | `spiel` | optional: Spielrahmen `{titel, intro, ziel, zaehler: {name, symbol}}`; dann je Station `mission: {ort, symbol, ende}` (Ort auf der Karte, Story-Satz nach dem Lösen) |
+| `spielwelt` | optional: **Spielmodus** `{titel, tab, start(box, api)}` – ein Spiel über alle Stationen (siehe „Spielmodus“ unten). Dann sind die Stationen Level: `{id, titel, lz, check (höchstens 3), mitdenken}` ohne eigene Szene. |
 | `leitsituation` | Einstiegstext der Figur (HTML) |
 | `lernziele` | `[{id: 'LZ1', kurz, text: 'Ich kann …'}]` – drei bis acht |
 | `vorwissen` | Liste von Fragen-IDs für den freiwilligen Vorwissens-Check (eine je Lernziel) |
@@ -99,6 +100,28 @@ Regeln:
 - **Bedienung:** Antippen statt nur Ziehen (Tablet), per Tastatur bedienbar (`<button>`), Ziele mindestens 40 px. In der Szene keine Knöpfe mit der Klasse `primaer` – der eine hervorgehobene Knopf ist „Weiter“ unten.
 - **Technik:** Beschriftungen direkt im Bild, Farben über CSS-Variablen (`var(--accent)`, `var(--ok)` usw.), keine externen Dateien, keine `alert/confirm/prompt`.
 - **Nachweis Teil A:** Die Szene läuft ohne Notiz; `meldung` und `erklaere` sind dort stumm. Fehler wirken sich, wo möglich, realistisch aus; `sage` nur für neutrale Story-Sätze.
+
+## Spielmodus (`PAKET.spielwelt`)
+
+Ergebnis der Phase „Erfinden“, wenn die Wahl auf ein richtiges Spiel fällt (P12). Die Engine zeigt unter „① <tab>“ eine große Spielbühne (`.spielbuehne`, mindestens 450 px hoch), darunter die Zwischenbilanz der geschafften Level und das Glossar.
+
+```js
+spielwelt: { titel: 'Stempel drauf!', tab: 'Am Schalter', start: function (box, api) {
+  // box: leeres Element für das Spiel. Eigener Stil als <style> mit Präfix (z. B. .st-…)
+  // api.level(id, text)  Level geschafft (= Station erledigt); Zwischenbilanz erscheint
+  // api.geschafft(id)    schon geschafft?          api.levels()  [{id, titel, lz, geschafft}]
+  // api.speicher(k[, v]) kleiner Spielstand in suspend_data (wenige Zeichen! Grenze 4096 für alles)
+  // api.kit              Baukasten (figur, kulisse, dialog, mischen, wackeln …)
+  return { loesen: function () { /* alle Level richtig durchspielen, für pruefe_paket.py */ } };
+} },
+stationen: [ { id: 'S1', titel: 'Woche 1 · …', lz: ['LZ1', 'LZ2'], check: ['C1', 'C3', 'C4'], mitdenken: { auftrag, muster } } ]
+```
+
+- **Lernstoff als Spielregel:** Die Spielmechanik prüft das Lernziel (richtiger Ball, richtiger Stempel). Fehler haben eine Folge im Spiel und eine Erklärung; danach geht es weiter oder das Level startet neu.
+- **Lösungsbeispiel im Spiel:** Der erste Fall eines Levels wird geführt (Tutorial mit Hervorhebung), danach spielt man allein.
+- **Üben und Nachweis Teil A** nutzen dieselbe Mechanik als Funktion `interaktion(box, api)` mit neuen Fällen: in Übungen mit Rückmeldung und `api.erledigt()`, im Nachweis ohne Rückmeldung und Hilfen, `auswerten()` liefert Prüfpunkte je Lernziel.
+- Die Musterlösung `loesen()` muss ohne Animationen sofort durchlaufen (der Test wartet nicht).
+- Beispiele: `beispiele/spiel-stempel-drauf.js` (Schalter-Simulator) und `beispiele/spiel-firmendex.js` (Sammel- und Fangspiel mit Karte).
 
 ## Baukasten (`api.kit`, js/baukasten.js)
 
