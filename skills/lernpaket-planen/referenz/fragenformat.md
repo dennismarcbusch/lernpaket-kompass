@@ -1,4 +1,4 @@
-# Format für Fragen und Paketinhalt (Kompass-Vorlage)
+# Format für Fragen und Paketinhalt (Kompass-Vorlage 2)
 
 Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`. Die Engine (`js/engine.js`) setzt daraus Start, Entdecken, Üben, Nachweis und Abschluss zusammen und erfüllt dabei die technischen Muss-Punkte des Leitfadens automatisch. Die Beispieldatei in der Vorlage („Bits & Bytes“) zeigt jedes Feld im Einsatz.
 
@@ -42,14 +42,17 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 | `titel`, `untertitel`, `dauer` | Anzeige |
 | `version` | Pflicht, Form `'1.0'`. Steht klein in der Kopfzeile („v1.0“), in der Fußzeile und auf Ergebnis-PDF und Merkblatt; `paket.py zip` überträgt sie ins Manifest. Bei jeder Änderung erhöhen: Korrektur 1.0 → 1.1, neue Inhalte 2.0. |
 | `bestehen` | 80 (Leitfaden) |
-| `figur` | `{name, rolle}` der Story-Figur (Sprechblasen) |
+| `welt` | Pflicht: `{thema, kulisse, symbol, farbe}` – eigene Welt des Pakets. `thema`: `wirtschaft`, `technik`, `sprache`, `natur`, `gesundheit`, `gestaltung` (setzt Farben und Standard-Kulisse); `kulisse`: `buero`, `lager`, `werkstatt`, `serverraum`, `laden`, `stadt`, `natur`, `klasse`; `symbol`: Emoji im Kopf; `farbe`: Akzentfarbe (Hex), nur wenn das Thema nicht passt |
+| `figur` | `{name, rolle, aussehen}` der Story-Figur. `aussehen`: `{haut: 0–5, haare: 'schwarz'·'dunkelbraun'·'braun'·'rot'·'blond'·'grau'·'weiss' oder Hex, frisur: 'kurz'·'lang'·'zopf'·'dutt'·'locken'·'glatze'·'kopftuch', tuch (Farbe), kleidung (Farbe), krawatte (Farbe), brille, bart, ausdruck}` |
+| `figuren` | optional weitere Personen: `{schluessel: {name, rolle, aussehen}}`; in Stationen über `figur: 'schluessel'` als Auftraggeber, in Szenen über `kit.szene(…).person('schluessel')` |
+| `spiel` | optional: Spielrahmen `{titel, intro, ziel, zaehler: {name, symbol}}`; dann je Station `mission: {ort, symbol, ende}` (Ort auf der Karte, Story-Satz nach dem Lösen) |
 | `leitsituation` | Einstiegstext der Figur (HTML) |
 | `lernziele` | `[{id: 'LZ1', kurz, text: 'Ich kann …'}]` – drei bis acht |
 | `vorwissen` | Liste von Fragen-IDs für den freiwilligen Vorwissens-Check (eine je Lernziel) |
 | `glossar` | `[{begriff, erklaerung, vorab}]` – alle Fachbegriffe; `vorab: true` stellt den Begriff schon auf der Startseite vor (Vortraining). Unter jeder Station und Übung aufklappbar. |
-| `stationen` | `[{id, titel, lz: [...], auftrag, leitfrage, inhalt, bild, beispiel: {titel, aufgabe, schritte: [{tun, warum}], selbsterklaerung: {schritt, frage}}, vertiefung, interaktion, mitdenken: {auftrag, muster}, beruf, steckbrief, check: [Fragen-IDs]}]` |
-| `uebungen` | `[{id, titel, lz, auftrag, frage (ID) oder interaktion, tipps: [Denkanstoß, Teillösung, Lösung], mitdenken: {auftrag, muster}, reflexion: {frage, muster}, steckbrief}]` |
-| `nachweis` | `{dauer, gewichtA (Prozent, Standard 50), einleitung, teilA: {titel, auftrag, inhalt, interaktion}, teilB: {proLZ: 2}}` |
+| `stationen` | `[{id, titel, lz: [...], figur, mission, auftrag, leitfrage, inhalt, interaktion (Pflicht), selbsterklaerung: {schritt, frage}, steckbrief, vertiefung, mitdenken: {auftrag, muster}, beruf, check: [Fragen-IDs]}]`. `inhalt` steht als „Kurz erklärt“ in der Notiz neben der Szene (höchstens etwa 40 Wörter). Ohne Szene nur mit `ohneInteraktion: 'Begründung'`; dann wird `beispiel: {titel, aufgabe, schritte: [{tun, warum}]}` als Text gezeigt. |
+| `uebungen` | `[{id, titel, lz, figur, auftrag, interaktion (wo möglich) oder frage (ID), tipps: [Denkanstoß, Teillösung, Lösung], mitdenken: {auftrag, muster}, reflexion: {frage, muster}, steckbrief}]` |
+| `nachweis` | `{dauer, gewichtA (Prozent, Standard 50), einleitung, teilA: {titel, figur, auftrag, inhalt, interaktion}, teilB: {proLZ: 2}}` |
 | `merkblatt` | `[{lz, titel, zeilen: [{text mit ___, loesung}], fehler, beispiel, schema}]` |
 | `selbsttest` | fünf Fragen-IDs für die Rückseite des Merkblatts |
 | `tafel` | optional: Tafelbild für einen freiwilligen Lehrer-Input (siehe „Tafelbild“ unten). Ohne dieses Feld gibt es kein Tafelbild. |
@@ -57,30 +60,67 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 
 ## Zum Mitdenken anregen (generatives Lernen)
 
-- **`beispiel.selbsterklaerung: {schritt, frage}`** – an einem entscheidenden Schritt des Lösungsbeispiels (Nummer ab 1) wird dessen `warum` zunächst verborgen. Die Lernenden lesen die Frage („Warum rechnest du mit 72 weiter?“), überlegen und schreiben, dann klappen sie die Begründung auf. Jedes Lösungsbeispiel sollte eine solche Frage haben.
+- **`selbsterklaerung: {schritt, frage}`** (an der Station) – an einem entscheidenden Schritt der Vorführung (`demo`, Nummer ab 1) wird dessen `warum` zunächst verborgen. Die Lernenden lesen die Frage („Warum rechnest du mit 72 weiter?“), überlegen und schreiben, dann klappen sie die Begründung auf. Jede Vorführung sollte eine solche Frage haben.
 - **`mitdenken: {auftrag, muster}`** – kurzer Auftrag nach einer Station oder Übung: skizzieren, in eigenen Worten zusammenfassen, jemand anderem erklären. Die Musterlösung lässt sich zum Vergleich aufklappen. Einträge werden nicht gespeichert.
 
 ## Ton und Video
 
 Die Vorlage nutzt keinen Ton. Wer Ton oder Video einbaut, liefert immer den Text mit (Untertitel per `<track>` oder ein Transkript direkt darunter) und vermittelt nichts nur über Ton.
 
-## Interaktionen
+## Interaktionen (Szenen zum Anfassen)
 
-Simulationen, Bit-Schalter, Zuordnungen am Bild usw. sind Funktionen in `inhalt.js`:
+Jede Station ist eine Szene (Leitfaden P14). Die Szene steht groß in der Mitte (die „Bühne“), daneben eine schmale Notiz mit „Kurz erklärt“, Live-Erklärungen und Steckbrief. Szenen sind Funktionen in `inhalt.js`:
 
 ```js
 interaktion: function (box, api) {
-  // box: leeres <div>, in das gezeichnet wird
-  // api.erledigt('Text')      → Station/Übung gelöst (zeigt Erfolg und nächsten Schritt)
-  // api.meldung('Text', art)  → Rückmeldung; art 'ok' | 'bad' | 'warn' | ''
+  // box: die Bühne – hier wird die Szene gebaut, am besten mit dem Baukasten api.kit
+  // api.erledigt('Text')        → Station/Übung gelöst (zeigt Erfolg, öffnet den Kurz-Check)
+  // api.meldung('Text', art)    → Rückmeldung unter der Szene; art 'ok' | 'bad' | 'warn' | ''
+  // api.erklaere('<p>…</p>')    → Erklärung in der Notiz, genau passend zur Handlung
+  // api.sage('Text', ausdruck)  → die Auftrag-Figur reagiert in ihrer Sprechblase
+  // api.demo()                  → true, solange die Vorführung läuft (dann zählt nichts)
   return {
+    demo: [                      // Lösungsbeispiel als Vorführung in der Szene („Zeig's mir"), an einem ANDEREN Fall
+      { text: 'Was ich jetzt tue', warum: 'Warum das richtig ist', tun: function () { /* bewegt die Szene */ } }
+    ],
+    zuruecksetzen: function () { /* nach der Vorführung: Szene in den Aufgabenzustand */ },
     loesen: function () { /* setzt die Musterlösung ein – Pflicht, für den automatischen Test */ },
     auswerten: function () { /* nur Nachweis Teil A: [{lz: 'LZ1', text: 'Prüfpunkt', ok: true}] */ }
   };
 }
 ```
 
-Regeln: Antippen statt nur Ziehen (Tablet), per Tastatur bedienbar (`<button>`), Beschriftungen direkt im Bild, Farben über CSS-Variablen (`var(--ok)` usw.), keine externen Dateien, keine `alert/confirm/prompt`. Im Nachweis Teil A gibt es keine Rückmeldung während der Bearbeitung; Fehler wirken sich, wo möglich, realistisch aus.
+Regeln:
+
+- **Szene zuerst:** Zu jeder Station die vier Fragen aus `szenen.md` beantworten (Was sehen, was bewegen, woran Erfolg erkennen, was passiert bei Fehlern).
+- **Sichtbar ohne Scrollen,** mindestens etwa 300 px hoch; Text neben der Szene knapp (Textbudget in `szenen.md`).
+- **Vorführung statt Text-Beispiel:** `demo` mit 2–4 Schritten an einem anderen Fall; `selbsterklaerung` an einem entscheidenden Schritt.
+- **Realistische Rückmeldung:** Fehler wirken sich aus wie in echt (der Server antwortet nicht, die Kundin fragt nach), dazu ein Satz zur Fehlvorstellung (`api.meldung`) oder eine Reaktion der Figur (`api.sage`).
+- **Bedienung:** Antippen statt nur Ziehen (Tablet), per Tastatur bedienbar (`<button>`), Ziele mindestens 40 px. In der Szene keine Knöpfe mit der Klasse `primaer` – der eine hervorgehobene Knopf ist „Weiter“ unten.
+- **Technik:** Beschriftungen direkt im Bild, Farben über CSS-Variablen (`var(--accent)`, `var(--ok)` usw.), keine externen Dateien, keine `alert/confirm/prompt`.
+- **Nachweis Teil A:** Die Szene läuft ohne Notiz; `meldung` und `erklaere` sind dort stumm. Fehler wirken sich, wo möglich, realistisch aus; `sage` nur für neutrale Story-Sätze.
+
+## Baukasten (`api.kit`, js/baukasten.js)
+
+Fertige Bausteine für Szenen. Alle sind per Antippen und Tastatur bedienbar und übernehmen die Farben der Paketwelt. Beispiel mit Rechner, Portal, Dokument und Gespräch: `beispiele/wirtschaft-handelsregister.js`.
+
+| Baustein | Aufruf (Kurzform) | Gibt zurück |
+|---|---|---|
+| Figur | `kit.figur('schluessel' oder aussehen, {ausdruck, rund})` | SVG-Text (Brustbild) |
+| Kulisse | `kit.kulisse('buero')` | SVG-Text (Hintergrund) |
+| Szene | `kit.szene(box, {kulisse, hoehe})` | `{ebene, person(key, {links, rechts, text, groesse}), ding(node, {links, oben})}`; Person: `sage(text, ausdruck)` |
+| Gespräch | `kit.dialog(box, {figur, schritte: [{sagt} oder {frage, antworten: [{text, richtig, reaktion}]}], fertig(fehler)})` | `{loesen(), fehler()}` |
+| Rechner | `kit.computer(box, {apps: [{id, name, symbol, start(fenster, os, daten)}], start})` | `os` mit `oeffne(id, daten)` |
+| Browser | `kit.browser(fenster, {adresse, seiten: {'/': fn(seite, nav, daten)}, beiSeite})` | `{nav(pfad, daten), seite()}` |
+| Postfach | `kit.mail(fenster, {mails: [{id, von, betreff, text, anhang: {name, oeffnen}}], offen: id, beiOeffnen})` | Element |
+| Formular | `kit.formular(box, {titel, felder: [{id, label, typ: 'text'·'zahl'·'auswahl', optionen, richtig, hinweis}], knopf, beiSenden(werte, ok), ohneRueckmeldung})` | `{setze(werte), sende(), werte()}` |
+| Dokument | `kit.dokument(box, {kopf, titel, zeilen: [{id, label, wert}], fuss, stempel, beiWahl(id)})` | `{markiere(id, 'markiert'·'richtig'·'falsch'), zeile(id)}` |
+| Sortieren | `kit.sortieren(box, {karten: [{id, html, ziel}], faecher: [{id, titel, html}], beiFehler, beiRichtig, fertig})` | `{loesen(), lage(), richtig()}` |
+| Reihenfolge | `kit.reihenfolge(box, {schritte: [html in richtiger Folge], beiFehler, fertig})` | `{loesen()}` |
+| Regler | `kit.regler(box, {label, min, max, schritt, wert, einheit, format, beiAenderung(wert)})` | `{wert(), setze(v)}` |
+| Helfer | `kit.el(tag, attrs, kinder)`, `kit.esc`, `kit.mischen`, `kit.wackeln(node)` | |
+
+Eigene Geräte oder Grafiken (z. B. `routerGeraet` im Beispiel) stehen oben in `inhalt.js`; ihr Stil darf dort als `<style>` ergänzt werden, nicht in `stil.css`.
 
 ## Tafelbild (optional)
 
@@ -124,6 +164,8 @@ Regeln:
 
 ## Mengen (Richtwerte aus dem Leitfaden)
 
+- Szene: in jeder Station (Pflicht), mit Vorführung (`demo`, 2–4 Schritte) und Selbsterklär-Frage.
+- Text: höchstens etwa 90 Wörter in Auftrag, Leitfrage und „Kurz erklärt“ je Station.
 - Kurz-Check: 3–5 Fragen je Station, mindestens eine je Lernziel der Station; ab Station 3 eine Frage zu früheren Stationen (P10).
 - Nachweis Teil B: `proLZ` = 2 Fragen je Lernziel pro Versuch; im Pool mindestens 4 je Lernziel, damit Wiederholungen nicht dieselben Fragen ziehen.
 - Teil A: Prüfpunkte so verteilen, dass jedes Lernziel zusammen mit Teil B mindestens zwei Prüfungen hat.

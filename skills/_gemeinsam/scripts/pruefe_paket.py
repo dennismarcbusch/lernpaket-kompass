@@ -7,6 +7,8 @@ Aufruf:
 1. Statische Prüfung (immer): Manifest im Wurzelverzeichnis, SCORM 1.2, masteryscore 80,
    Identifier im Format "<präfix>-<name>", alle Dateien vorhanden und im Manifest, keine externen
    Server, Größe, JavaScript-Syntax (wenn node installiert ist).
+   Interaktivität: jede Station mit Szene zum Anfassen, Vorführung, Szene ohne Scrollen
+   sichtbar, Textbudget neben der Szene.
 2. Browser-Prüfung (wenn Python-Playwright mit Chromium installiert ist): lädt das Paket in
    einem nachgebauten SCORM-1.2-Player, löst bei Paketen aus der Vorlage alle Stationen,
    Übungen und den Nachweis mit der Musterlösung, prüft Datenübergabe, Wiedereinstieg,
@@ -208,16 +210,45 @@ def _vorlage(pg, bilder):
         pg.screenshot(path=os.path.join(bilder, '0-start.png'), full_page=True)
     ansichten.append(('Start', _primaer(pg)))
     loese = """(() => { LERNPAKET.aktuelleTeile().forEach(t => {
+        if (t.art === 'demo' && t.obj && t.obj.alle) t.obj.alle();
         if (t.art === 'interaktion' && t.obj && t.obj.loesen) t.obj.loesen();
         if (t.art === 'frage') { t.obj.loesungEinsetzen(); const b = t.obj.el.querySelector('button.pruefen'); if (b && !b.hidden) b.click(); }
       }); })()"""
+    ohne_demo, ohne_buehne, viel_text, buehne_tief = [], [], [], []
     for i, sid in enumerate(info['st']):
         pg.evaluate(f"LERNPAKET.zeige('entdecken', {i})")
         pg.wait_for_timeout(100)
         ansichten.append((f'Station {sid}', _primaer(pg)))
+        m = pg.evaluate("""(() => {
+            const teile = LERNPAKET.aktuelleTeile();
+            const b = document.querySelector('.buehne');
+            const r = b ? b.getBoundingClientRect() : null;
+            // sichtbarer Text außerhalb der Bühne, ohne zugeklappte Bereiche und Kurz-Check
+            const st = document.querySelector('.station');
+            let w = 0;
+            if (st) {
+              const c = st.cloneNode(true);
+              c.querySelectorAll('.buehne, details:not([open]), details.check, .steuerung, .live').forEach(x => x.remove());
+              w = LERNPAKET.woerter(c.innerHTML);
+            }
+            return {demo: teile.some(t => t.art === 'demo'), buehne: !!b, oben: r ? Math.round(r.top) : null, hoehe: r ? Math.round(r.height) : 0, woerter: w, vh: innerHeight};
+          })()""")
+        if not m['buehne']:
+            ohne_buehne.append(sid)
+        else:
+            if not m['demo']:
+                ohne_demo.append(sid)
+            if m['oben'] is None or m['oben'] > m['vh'] * 0.6 or m['hoehe'] < 260:
+                buehne_tief.append(f"{sid} (oben {m['oben']} px, {m['hoehe']} px hoch)")
+        if m['woerter'] > 160:
+            viel_text.append(f"{sid} ({m['woerter']} Wörter)")
         if bilder and i == 0:
             pg.screenshot(path=os.path.join(bilder, '1-station.png'), full_page=True)
         pg.evaluate(loese)
+    punkt(not ohne_buehne, 'Interaktivität', 'Jede Station hat eine Szene zum Anfassen.' if not ohne_buehne else 'Stationen ohne Szene zum Anfassen: ' + ', '.join(ohne_buehne))
+    punkt(not ohne_demo, 'Interaktivität', 'Jede Szene hat eine Vorführung („Zeig’s mir“).' if not ohne_demo else 'Szene ohne Vorführung (demo): ' + ', '.join(ohne_demo), gelb=True)
+    punkt(not buehne_tief, 'Interaktivität', 'Die Szene steht ohne Scrollen im Blick und ist groß genug.' if not buehne_tief else 'Szene zu weit unten oder zu klein: ' + ', '.join(buehne_tief), gelb=True)
+    punkt(not viel_text, 'Interaktivität', 'Textbudget eingehalten (sichtbarer Text neben der Szene).' if not viel_text else 'Viel sichtbarer Text neben der Szene: ' + ', '.join(viel_text) + ' – Ziel höchstens 160 Wörter.', gelb=True)
     z = pg.evaluate('LERNPAKET.zustand()')
     offen = [s for s in info['st'] if not z['st'].get(s)]
     punkt(not offen, 'Lösbarkeit', 'Alle Stationen sind mit der Musterlösung lösbar.' if not offen else 'Mit der Musterlösung nicht abschließbar: ' + ', '.join(offen))

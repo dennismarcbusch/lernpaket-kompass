@@ -40,15 +40,17 @@ Ist es unklar, frage einmal kurz zum Anklicken: „Wo stehst du gerade?“ mit d
 
 Alle Pfade in den Phasen-Anleitungen beziehen sich auf den Ordner dieses Skills (`<skill>`), in dem diese SKILL.md liegt:
 
-- `referenz/` – Prinzipien, Prozess und Paketstruktur, Gestaltung, Technik, Checkliste, Fragenformat (gemeinsam für alle Phasen)
+- `referenz/` – Prinzipien, Szenen-Katalog, Prozess und Paketstruktur, Gestaltung, Technik, Checkliste, Fragenformat (gemeinsam für alle Phasen)
 - `vorlagen/` – Steckbrief, Lernziel-Nachweis-Tabelle, Drehbuch (Planen)
-- `vorlage/` – die Kompass-Vorlage für das Paket (Bauen)
+- `vorlage/` – die Kompass-Vorlage für das Paket mit Baukasten für Szenen (Bauen)
+- `beispiele/` – zweites Beispiel aus der Wirtschaft: simulierter Rechner, Portal, Dokument, Gespräch, Spielrahmen (Bauen)
 - `vorlagen-lehrkraft/` – Ablaufplan für einen Input mit Tafelbild (Bauen)
 - `scripts/` – `paket.py` (Bauen), `pruefe_paket.py` (Bauen, Prüfen), `auswerten.py` (Auswerten)
 
 ## Immer gilt
 
 - **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
+- **Szene zuerst:** Jede Station ist etwas zum Anfassen (P14) – ein realistischer Ort, ein Dokument, ein Gerät, ein simulierter Rechner oder ein Gespräch, kein Text mit Quiz darunter. Text bleibt knapp (`referenz/szenen.md`).
 - Einfache Sprache, Fachbegriffe kurz erklären. Die Lehrkraft entscheidet über Inhalte, Lernziele und Bewertung.
 - Keine Schülernamen oder anderen personenbezogenen Daten von Schülern, auch nicht in Beispielen.
 - Paket-IDs haben die Form `<präfix>-<name>`; das Präfix steht für Projekt oder Fach und kommt aus dem Steckbrief.

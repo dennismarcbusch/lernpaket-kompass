@@ -6,9 +6,10 @@ Der Lernpaket-Kompass hilft Lehrkräften, interaktive Lernpakete (SCORM 1.2, z. 
 
 | | |
 |---|---|
-| 📖 **Leitfaden** | [docs/leitfaden-lernpakete.md](docs/leitfaden-lernpakete.md) – Forschungslage (u. a. Kerres, Mayer, 4C/ID), 13 Prinzipien mit Aufwand, Paketstruktur, Entwicklungsprozess, technische Standards und Qualitätscheckliste |
+| 📖 **Leitfaden** | [docs/leitfaden-lernpakete.md](docs/leitfaden-lernpakete.md) – Forschungslage (u. a. Kerres, Mayer, 4C/ID, Simulationen und Lernspiele), 14 Prinzipien mit Aufwand, Paketstruktur, Entwicklungsprozess, technische Standards und Qualitätscheckliste |
 | 🧰 **Skill-Set für Claude** | [skills/](skills) – der Gesamt-Skill `lernpaket-kompass` führt durch alle fünf Phasen (Planen, Fragen erstellen, Bauen, Prüfen, Auswerten); dazu die fünf Phasen als Einzel-Skills, Paketvorlage und automatisches Prüfskript |
 | 🚀 **Einstieg für Kolleginnen und Kollegen** | [docs/skill-set-anleitung.md](docs/skill-set-anleitung.md) – Einrichten in etwa 10 Minuten, Arbeitsschritte mit Beispiel-Prompts |
+| 🎨 **Beispiele** | Vorlage „Bits & Bytes“ (Welt technik) und [Handelsregister-Station](skills/lernpaket-bauen/beispiele/wirtschaft-handelsregister.js) (Welt wirtschaft) |
 | ⬇️ **Download** | `skill_lernpaket-kompass.zip` zum Hochladen in Claude unter [Releases](../../releases) und auf der [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/) |
 
 ## Das Skill-Set
@@ -23,7 +24,9 @@ Kolleginnen und Kollegen laden nur einen Skill hoch: **`lernpaket-kompass`**. Er
 | `lernpaket-pruefen` | Erproben | Prüfbericht mit Ampel (Checkliste, Prinzipien, Technik-Test) |
 | `lernpaket-auswerten` | Auswerten | Auswertung des Berichtsexports (ohne Namen) mit Änderungsvorschlägen |
 
-Jedes Paket aus der Vorlage bringt Selbsteinschätzung, Kurz-Checks, gestufte Tipps, Kompetenznachweis (bestanden ab 80 %), Auswertung je Lernziel, Merkblatt und die SCORM-Anbindung schon mit. Paket-IDs haben die Form `<präfix>-<name>`; das Präfix steht für Projekt oder Fach (z. B. `ping-` für die IT-Pakete).
+**Jede Station ist eine Szene zum Anfassen** (Prinzip P14): Die Schüler bedienen einen nachgebauten Rechner, prüfen ein Dokument, führen ein Gespräch, sortieren, stellen ein Gerät ein. Ein Baukasten liefert die Bausteine, jedes Paket bekommt eine eigene Welt (Farben, Kulisse, illustrierte Figuren), auf Wunsch mit Spielrahmen und Missionskarte. Das Lösungsbeispiel wird mit „Zeig’s mir“ in der Szene vorgeführt.
+
+Jedes Paket aus der Vorlage bringt außerdem Selbsteinschätzung, Kurz-Checks, gestufte Tipps, Kompetenznachweis (bestanden ab 80 %), Auswertung je Lernziel, Merkblatt und die SCORM-Anbindung schon mit. Paket-IDs haben die Form `<präfix>-<name>`; das Präfix steht für Projekt oder Fach (z. B. `ping-` für die IT-Pakete).
 
 ## Woher es kommt
 

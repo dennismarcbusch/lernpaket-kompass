@@ -6,6 +6,10 @@
    Reflexion) → ③ Nachweis (Teil A Handlungsaufgabe, Teil B Fragenpool, 80 %) →
    ④ Abschluss (Auswertung je Lernziel, Selbsteinschätzung nachher, Merkblatt).
    Optional: Tafelbild für einen freiwilligen Input (js/tafel.js, PAKET.tafel).
+   Version 2: Jede Station ist eine Bühne zum Anfassen (Interaktion in der Mitte,
+   Erklärungen in der Notiz daneben, Lösungsbeispiel als Vorführung „Zeig's mir“),
+   eigene Welt je Paket (PAKET.welt), optionaler Spielrahmen (PAKET.spiel).
+   Bausteine für Szenen: js/baukasten.js (window.KIT).
    ===================================================================== */
 (function () {
   'use strict';
@@ -45,6 +49,26 @@
   function zahlLesen(s) { s = String(s || '').trim().replace(/\s/g, '').replace(',', '.'); return s === '' || isNaN(+s) ? null : +s; }
   function norm(s) { return String(s || '').trim().toLowerCase().replace(/\s+/g, ' '); }
   var BUCHST = 'abcdefghijklmnopqrstuvwxyz';
+  function woerter(html) { var s = String(html || '').replace(/<[^>]*>/g, ' ').replace(/&[a-z]+;/g, ' ').trim(); return s ? s.split(/\s+/).length : 0; }
+  var KIT = window.KIT || null;
+  var SPIEL = P.spiel || null;
+
+  /* ---------- Welt: Farben, Kulisse, Symbol (PAKET.welt) ---------- */
+  var WELT = P.welt || {};
+  var THEMEN = { wirtschaft: 'buero', technik: 'serverraum', sprache: 'klasse', natur: 'natur', gesundheit: 'stadt', gestaltung: 'werkstatt' };
+  (function welt() {
+    var r = document.documentElement;
+    r.setAttribute('data-thema', THEMEN[WELT.thema] ? WELT.thema : 'technik');
+    if (WELT.farbe) r.style.setProperty('--accent', WELT.farbe);
+    if (WELT.farbeHell) r.style.setProperty('--accent-soft', WELT.farbeHell);
+    if (WELT.kopf) { r.style.setProperty('--kopf-a', WELT.kopf[0]); r.style.setProperty('--kopf-b', WELT.kopf[1] || WELT.kopf[0]); }
+    var k = document.querySelector('.kopf');
+    if (k && KIT) k.insertBefore(el('div', { class: 'kopf-kulisse', 'aria-hidden': 'true', html: KIT.kulisse(WELT.kulisse || THEMEN[WELT.thema] || 'serverraum') }), k.firstChild);
+    var lg = document.querySelector('.kopf .logo');
+    if (lg) lg.innerHTML = '<svg viewBox="0 0 52 52" width="52" height="52"><rect width="52" height="52" rx="14" fill="rgba(255,255,255,.16)" stroke="rgba(255,255,255,.45)"/>' +
+      (WELT.symbol ? '<text x="26" y="35" text-anchor="middle" font-size="26">' + esc(WELT.symbol) + '</text>'
+        : '<circle cx="26" cy="26" r="15" fill="none" stroke="#fff" stroke-width="3"/><path d="M26 13 L30 26 L26 39 L22 26 Z" fill="var(--deko)"/><circle cx="26" cy="26" r="3" fill="#fff"/>') + '</svg>';
+  })();
 
   /* ---------- SCORM 1.2 ---------- */
   var SC = (function () {
@@ -103,9 +127,17 @@
       else if (f.typ === 'hotspot') { if (!f.svg || !f.bereiche || f.bereiche.filter(function (b) { return b.richtig; }).length !== 1) fehler.push(f.id + ': Hotspot braucht svg und genau einen richtigen Bereich.'); }
       else fehler.push(f.id + ': unbekannter Fragetyp "' + f.typ + '".');
     });
+    if (!P.welt || !THEMEN[P.welt.thema]) hinweise.push('PAKET.welt.thema fehlt oder ist unbekannt (' + Object.keys(THEMEN).join(', ') + ') – jedes Paket bekommt eine eigene Welt.');
+    if (!KIT) fehler.push('js/baukasten.js ist nicht (vor engine.js) eingebunden.');
     STATIONEN.forEach(function (s, i) {
       id(s.id, 'Station ' + (i + 1));
       if (!s.auftrag) hinweise.push(s.id + ': Auftrag aus der Leitsituation fehlt.');
+      if (!s.interaktion && !s.ohneInteraktion) fehler.push(s.id + ': keine Szene zum Anfassen (interaktion). Jede Station braucht etwas, das die Lernenden bewegen (Leitfaden P14). Nur in begründeten Ausnahmen ohneInteraktion: "Begründung" setzen.');
+      if (!s.interaktion && s.ohneInteraktion) hinweise.push(s.id + ': Station ohne Szene – Begründung: ' + s.ohneInteraktion);
+      var tw = woerter(s.auftrag) + woerter(s.leitfrage) + woerter(s.inhalt);
+      if (tw > 90) hinweise.push(s.id + ': Textbudget überschritten (' + tw + ' Wörter in Auftrag, Leitfrage und Kurz erklärt; Ziel höchstens 90). Mehr in die Szene, weniger in den Text.');
+      if (s.beispiel && s.beispiel.schritte && s.interaktion) hinweise.push(s.id + ': Lösungsbeispiel als Text (beispiel) – besser als Vorführung in der Szene (demo in der Interaktion).');
+      if (s.interaktion && !s.selbsterklaerung && !(s.beispiel && s.beispiel.selbsterklaerung)) hinweise.push(s.id + ': keine Frage zum Selbsterklären (selbsterklaerung: {schritt, frage}) für die Vorführung.');
       var c = (s.check || []);
       c.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); });
       if (c.length < 3 || c.length > 5) hinweise.push(s.id + ': Kurz-Check mit 3–5 Fragen (jetzt ' + c.length + ').');
@@ -114,6 +146,7 @@
       id(u.id, 'Übung ' + (i + 1));
       if (u.frage && !FR[u.frage]) fehler.push(u.id + ': Frage ' + u.frage + ' gibt es nicht.');
       if (!u.frage && !u.interaktion) fehler.push(u.id + ': braucht frage oder interaktion.');
+      if (u.frage && !u.interaktion) hinweise.push(u.id + ': Übung nur als Frage – wo möglich als Szene (interaktion) in einer neuen Situation.');
       if (!u.tipps || u.tipps.length !== 3) hinweise.push(u.id + ': genau drei gestufte Tipps vorgesehen.');
       if (!u.reflexion || !u.reflexion.muster) hinweise.push(u.id + ': Reflexionsfrage mit Musterantwort fehlt.');
     });
@@ -124,7 +157,8 @@
       else if (n < pro + 2) hinweise.push(z.id + ': Pool klein (' + n + ' Nachweis-Fragen) – Wiederholungen ziehen oft dieselben Fragen.');
     });
     if (!NW.teilA) hinweise.push('Nachweis ohne Teil A (Handlungsaufgabe in neuer Situation).');
-    STATIONEN.forEach(function (s) { if (s.beispiel && !s.beispiel.selbsterklaerung) hinweise.push(s.id + ': Lösungsbeispiel ohne Frage zum Selbsterklären (selbsterklaerung).'); });
+    STATIONEN.forEach(function (s) { if (s.beispiel && s.beispiel.schritte && !s.beispiel.selbsterklaerung) hinweise.push(s.id + ': Lösungsbeispiel ohne Frage zum Selbsterklären (selbsterklaerung).'); });
+    if (SPIEL && !STATIONEN.every(function (s) { return s.mission && s.mission.ort; })) hinweise.push('Spielrahmen: Jede Station braucht mission.ort (Name auf der Karte) und mission.ende (Story nach dem Lösen).');
     if (!STATIONEN.concat(UEBUNGEN).some(function (x) { return x.mitdenken; })) hinweise.push('Keine Aufträge zum Mitdenken (Skizzieren, Zusammenfassen, Erklären).');
     if (!(P.glossar || []).length) hinweise.push('Kein Glossar mit Fachbegriffen.');
     if (/<(audio|video)\b/i.test(JSON.stringify(P, function (k, v) { return typeof v === 'function' ? String(v) : v; }))) hinweise.push('Paket enthält Ton oder Video: Untertitel bzw. Transkript sicherstellen.');
@@ -329,8 +363,9 @@
     var fp = document.getElementById('fortschritt'); fp.innerHTML = '';
     var st = STATIONEN.filter(function (s) { return S.st[s.id]; }).length;
     var ue = UEBUNGEN.filter(function (u) { return S.ue[u.id]; }).length;
-    fp.appendChild(el('span', { class: 'chip' + (st === STATIONEN.length && st ? ' ok' : ''), text: 'Entdecken ' + st + '/' + STATIONEN.length }));
-    fp.appendChild(el('span', { class: 'chip' + (ue === UEBUNGEN.length && ue ? ' ok' : ''), text: 'Üben ' + ue + '/' + UEBUNGEN.length }));
+    if (SPIEL && SPIEL.zaehler) fp.appendChild(el('span', { class: 'chip spielstand' + (st === STATIONEN.length && st ? ' ok' : ''), text: (SPIEL.zaehler.symbol || '★') + ' ' + st + '/' + STATIONEN.length + ' ' + (SPIEL.zaehler.name || '') }));
+    else fp.appendChild(el('span', { class: 'chip' + (st === STATIONEN.length && st ? ' ok' : ''), text: 'Entdecken ' + st + '/' + STATIONEN.length }));
+    if (UEBUNGEN.length) fp.appendChild(el('span', { class: 'chip' + (ue === UEBUNGEN.length && ue ? ' ok' : ''), text: 'Üben ' + ue + '/' + UEBUNGEN.length }));
     if (S.n) {
       var erreicht = LZ.filter(function (z) { return (S.lz[z.id] || 0) >= 80; }).length;
       fp.appendChild(el('span', { class: 'chip' + (erreicht === LZ.length ? ' ok' : ''), text: erreicht + ' von ' + LZ.length + ' Lernzielen erreicht' }));
@@ -351,10 +386,26 @@
   function auftrag(text, leitfrage, was) {
     return el('div', { class: 'auftrag' }, [el('span', { class: 'was', text: was || 'Dein Auftrag' }), el('span', { html: text }), leitfrage ? el('div', { class: 'klein', html: '<b>Leitfrage:</b> ' + leitfrage }) : null]);
   }
-  function figur(text) {
-    var fg = P.figur || {};
-    var ini = (fg.name || '?').split(' ').map(function (w) { return w[0]; }).join('').slice(0, 2);
-    return el('div', { class: 'figur' }, [el('div', { class: 'avatar', 'aria-hidden': 'true', text: ini }), el('div', { class: 'blase' }, [fg.name ? el('div', { class: 'name', text: fg.name + (fg.rolle ? ' · ' + fg.rolle : '') }) : null, el('div', { html: text })])]);
+  function figurDaten(key) { return (key && P.figuren && P.figuren[key]) || P.figur || {}; }
+  function figurBild(key, aus) {
+    if (KIT) return KIT.figur(key && P.figuren && P.figuren[key] ? key : 'figur', { ausdruck: aus });
+    var ini = (figurDaten(key).name || '?').split(' ').map(function (w) { return w[0]; }).join('').slice(0, 2);
+    return '<svg viewBox="0 0 120 140"><circle cx="60" cy="70" r="56" fill="var(--ink)"/><text x="60" y="84" text-anchor="middle" font-size="40" fill="#fff">' + esc(ini) + '</text></svg>';
+  }
+  function figur(text, key) {
+    var fg = figurDaten(key);
+    return el('div', { class: 'figur' }, [el('div', { class: 'avatar', 'aria-hidden': 'true', html: figurBild(key) }), el('div', { class: 'blase' }, [fg.name ? el('div', { class: 'name', text: fg.name + (fg.rolle ? ' · ' + fg.rolle : '') }) : null, el('div', { html: text })])]);
+  }
+  // Auftrag als Sprechblase der Figur; sage() ergänzt eine Reaktion (z. B. aus der Szene)
+  function mission(text, leitfrage, key, was) {
+    var fg = figurDaten(key);
+    var bild = el('div', { class: 'mission-bild', 'aria-hidden': 'true', html: figurBild(key) });
+    var reaktion = el('span', { class: 'reaktion', 'aria-live': 'polite' });
+    var blase = el('div', { class: 'blase' }, [el('span', { class: 'name', text: (was || 'Dein Auftrag') + (fg.name ? ' · ' + fg.name : '') }), el('span', { html: text }), leitfrage ? el('span', { class: 'leitfrage', html: '<b>Leitfrage:</b> ' + leitfrage }) : null, reaktion]);
+    return {
+      el: el('div', { class: 'mission' }, [bild, blase]),
+      sage: function (t, aus) { reaktion.innerHTML = t ? '<span class="leitfrage">' + (fg.name ? '<b>' + esc(fg.name.split(' ')[0]) + ':</b> ' : '') + t + '</span>' : ''; if (aus) bild.innerHTML = figurBild(key, aus); }
+    };
   }
   function naechsteStation(i) { return i + 1 < STATIONEN.length ? { t: 'entdecken', i: i + 1, label: 'Weiter zu Station ' + (i + 2) + ': ' + esc(STATIONEN[i + 1].titel) + ' →' } : { t: 'ueben', i: 0, label: 'Weiter zu ② Üben →' }; }
   function naechsteUebung(i) { return i + 1 < UEBUNGEN.length ? { t: 'ueben', i: i + 1, label: 'Weiter zu Übung ' + (i + 2) + ' →' } : { t: 'nachweis', i: 0, label: 'Weiter zu ③ Nachweis →' }; }
@@ -381,14 +432,47 @@
     });
     return g;
   }
+  function weltkarte() {
+    var n = STATIONEN.length + 1, w = 640, h = 230, pts = [];
+    for (var i = 0; i < n; i++) pts.push([n === 1 ? w / 2 : 100 + i * (w - 200) / (n - 1), 120 + Math.sin(i * 1.7) * 58]);
+    var d = 'M' + pts.map(function (p) { return p[0].toFixed(0) + ' ' + p[1].toFixed(0); }).join(' L');
+    var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" role="group" aria-label="Karte der Missionen"><path d="' + d + '" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 18"/>';
+    pts.forEach(function (p, i) {
+      var s = STATIONEN[i], fertig = s ? !!S.st[s.id] : S.best !== null && S.best >= BESTEHEN;
+      var name = s ? ((s.mission && s.mission.ort) || s.titel) : 'Nachweis';
+      svg += '<g class="ort-knoten" data-i="' + i + '" tabindex="0" role="button" aria-label="' + esc(name) + (fertig ? ' (geschafft)' : '') + '">' +
+        '<circle class="ring" cx="' + p[0] + '" cy="' + p[1] + '" r="24" fill="' + (fertig ? 'var(--ok)' : s ? 'var(--card)' : 'var(--deko)') + '" stroke="' + (fertig ? 'var(--ok)' : 'var(--accent)') + '" stroke-width="3"/>' +
+        '<text x="' + p[0] + '" y="' + (p[1] + 7) + '" text-anchor="middle" font-size="20" font-weight="800" fill="' + (fertig ? '#fff' : 'var(--ink)') + '">' + (fertig ? '✓' : s ? (s.mission && s.mission.symbol) || (i + 1) : '🏁') + '</text>' +
+        '<text x="' + p[0] + '" y="' + (p[1] + (p[1] > 120 ? -34 : 46)) + '" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">' + esc(name.length > 22 ? name.slice(0, 21) + '…' : name) + '</text></g>';
+    });
+    var box = el('div', { class: 'weltkarte', html: (KIT ? KIT.kulisse(WELT.kulisse || THEMEN[WELT.thema] || 'serverraum') : '') + svg + '</svg>' });
+    box.querySelectorAll('.ort-knoten').forEach(function (g) {
+      function geh() { var i = +g.getAttribute('data-i'); if (i < STATIONEN.length) zeige('entdecken', i); else zeige('nachweis'); }
+      g.addEventListener('click', geh);
+      g.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); geh(); } });
+    });
+    return box;
+  }
   function vStart() {
+    if (SPIEL) {
+      var sp = el('div', { class: 'card karte-mission' });
+      sp.appendChild(el('div', {}, [el('div', { class: 'ort klein', text: 'Deine Mission' }), el('h2', { text: SPIEL.titel || P.titel }), figur(SPIEL.intro || P.leitsituation || ''), SPIEL.ziel ? el('p', { html: '<b>Ziel:</b> ' + SPIEL.ziel }) : null]));
+      sp.appendChild(weltkarte());
+      haupt.appendChild(sp);
+    }
+    if (!SPIEL && P.leitsituation && KIT) {
+      var fg = figurDaten();
+      var hero = el('div', { class: 'hero' });
+      hero.innerHTML = KIT.kulisse(WELT.kulisse || THEMEN[WELT.thema] || 'serverraum');
+      hero.appendChild(el('div', { class: 'hero-inhalt' }, [el('div', { class: 'hero-figur', 'aria-hidden': 'true', html: figurBild(null, 'froh') }), el('div', { class: 'hero-text' }, [el('div', { class: 'name', text: (fg.name || '') + (fg.rolle ? ' · ' + fg.rolle : '') }), el('h2', { text: P.titel || '' }), el('div', { html: P.leitsituation })])]));
+      haupt.appendChild(hero);
+    }
     var c = el('div', { class: 'card' });
-    c.appendChild(el('h2', { text: 'Worum es geht' }));
-    if (P.leitsituation) c.appendChild(figur(P.leitsituation));
-    c.appendChild(el('h3', { text: 'So läuft das Lernpaket ab' }));
+    c.appendChild(el('h2', { text: 'So läuft es ab' }));
+    if (P.leitsituation && !SPIEL && !KIT) c.appendChild(figur(P.leitsituation));
     c.appendChild(el('ul', {}, [
-      el('li', { html: '<b>① Entdecken:</b> ' + STATIONEN.length + ' Stationen mit Beispiel und Kurz-Check <span class="badge zaehlt-nicht">zählt nicht</span>' }),
-      el('li', { html: '<b>② Üben:</b> ' + UEBUNGEN.length + ' Aufgaben mit Tipps <span class="badge zaehlt-nicht">zählt nicht</span>' }),
+      el('li', { html: '<b>① Entdecken:</b> ' + STATIONEN.length + (STATIONEN.length === 1 ? ' Station' : ' Stationen') + ' zum Ausprobieren, mit Vorführung und Kurz-Check <span class="badge zaehlt-nicht">zählt nicht</span>' }),
+      UEBUNGEN.length ? el('li', { html: '<b>② Üben:</b> ' + UEBUNGEN.length + (UEBUNGEN.length === 1 ? ' Aufgabe' : ' Aufgaben') + ' mit Tipps <span class="badge zaehlt-nicht">zählt nicht</span>' }) : null,
       el('li', { html: '<b>③ Nachweis:</b> ohne Hilfe, bestanden ab ' + BESTEHEN + ' %, beliebig oft wiederholbar, das beste Ergebnis zählt' }),
       el('li', { html: '<b>④ Abschluss:</b> Auswertung je Lernziel und Merkblatt zum Mitnehmen' })
     ]));
@@ -469,68 +553,143 @@
   }
 
   /* ---------- ① Entdecken ---------- */
-  function seitenliste(items, aktiv, teil, erledigt, praefix) {
-    var ul = el('ul', { class: 'liste', 'aria-label': praefix });
+  function pfad(items, aktiv, teil, erledigt, praefix) {
+    var ol = el('ol', { class: 'pfad' });
     items.forEach(function (s, i) {
       var skip = S.skip.indexOf(s.id) >= 0 && !erledigt[s.id];
-      ul.appendChild(el('li', {}, el('button', { type: 'button', class: i === aktiv ? 'aktiv' : '', 'aria-current': i === aktiv ? 'step' : null, onclick: function () { zeige(teil, i); } }, [
-        el('span', { class: 'haken', 'aria-hidden': 'true', text: erledigt[s.id] ? '✓' : String(i + 1) }),
-        el('span', { html: esc(s.titel) + (erledigt[s.id] ? '<span class="klein"> · erledigt</span>' : skip ? '<span class="klein"> · darfst du überspringen</span>' : '') })
+      ol.appendChild(el('li', { class: erledigt[s.id] ? 'fertig' : '' }, el('button', { type: 'button', class: i === aktiv ? 'aktiv' : '', 'aria-current': i === aktiv ? 'step' : null, title: s.titel, onclick: function () { zeige(teil, i); } }, [
+        el('span', { class: 'nr', 'aria-hidden': 'true', text: erledigt[s.id] ? '✓' : String(i + 1) }),
+        el('span', { class: 'titeltext', html: esc((s.mission && s.mission.ort) || s.titel) + (skip ? ' <span class="skip">· überspringbar</span>' : '') }),
+        el('span', { class: 'sr', text: erledigt[s.id] ? ' (erledigt)' : skip ? ' (darfst du überspringen)' : '' })
       ])));
     });
-    return el('nav', { class: 'card' }, [el('div', { class: 'klein', text: praefix }), ul]);
+    return el('nav', { class: 'card', 'aria-label': praefix, style: 'padding:10px 12px' }, ol);
+  }
+
+  /* ---------- Bühne: Szene groß in der Mitte, Notiz daneben ---------- */
+  // x: Station/Übung/Teil A; modus: 'station' | 'uebung' | 'nachweis'
+  function buehne(x, modus, mis, beiErledigt) {
+    var raster = el('div', { class: 'buehne-raster' });
+    var box = el('div', { class: 'buehne interaktion', 'data-modus': modus });
+    var iMeld = el('div', { 'aria-live': 'polite' });
+    var notiz = el('aside', { class: 'notiz', 'aria-label': 'Notizen zur Szene' });
+    var live = el('div', { class: 'feld live', 'aria-live': 'polite' });
+    raster.appendChild(el('div', {}, [box, iMeld]));
+    if (modus !== 'nachweis') { raster.appendChild(notiz); notiz.appendChild(live); }
+    else raster.style.gridTemplateColumns = '1fr';
+    var b = { el: raster, box: box, notiz: notiz, demoLaeuft: false };
+    var api = {
+      kit: KIT, modus: modus,
+      erledigt: function (t) { if (b.demoLaeuft || modus === 'nachweis') return; iMeld.innerHTML = ''; iMeld.appendChild(msg('✅ ' + (t || 'Erledigt.'), 'ok')); if (beiErledigt) beiErledigt(); },
+      meldung: function (t, art) { if (b.demoLaeuft || modus === 'nachweis') return; iMeld.innerHTML = ''; if (t) iMeld.appendChild(msg(t, art)); },
+      erklaere: function (html, titel) { if (modus === 'nachweis') return; live.innerHTML = html ? '<div class="feldtitel">' + esc(titel || 'Was gerade passiert') + '</div>' + html : ''; b.ordne(); },
+      sage: function (t, aus) { if (mis) mis.sage(t, aus); },
+      demo: function () { return b.demoLaeuft; }
+    };
+    b.api = api;
+    b.ordne = function () { raster.classList.toggle('ohne-notiz', modus === 'nachweis' || (notiz.children.length <= 1 && !live.innerHTML)); };
+    b.start = function () { b.obj = (x.interaktion(box, api) || {}); b.ordne(); return b.obj; };
+    b.feld = function (titel, html, offen) {
+      if (modus === 'nachweis' || !html) return null;
+      var f = offen === false ? el('details', { class: 'feld' }, [el('summary', { text: titel }), el('div', { html: html })]) : el('div', { class: 'feld' }, [el('div', { class: 'feldtitel', text: titel }), el('div', { html: html })]);
+      notiz.appendChild(f); b.ordne(); return f;
+    };
+    return b;
+  }
+  // „Zeig's mir": das Lösungsbeispiel wird in der Szene vorgeführt (P3), danach ist man selbst dran
+  function demoSteuerung(b, se, mis) {
+    var schritte = b.obj.demo, k = -1;
+    var knopf = el('button', { type: 'button', class: 'zeig', text: 'Zeig’s mir (' + schritte.length + ' Schritte)' });
+    var feld = el('div', { class: 'feld demoschritt', hidden: true, 'aria-live': 'polite' });
+    b.notiz.insertBefore(feld, b.notiz.children[1] || null);
+    b.ordne = (function (alt) { return function () { alt(); if (!feld.hidden) b.el.classList.remove('ohne-notiz'); }; })(b.ordne);
+    function zeigeSchritt() {
+      var x = schritte[k], letzte = k === schritte.length - 1;
+      feld.hidden = false; feld.innerHTML = ''; b.ordne();
+      feld.appendChild(el('div', { class: 'feldtitel', text: 'Vorgeführt · Schritt ' + (k + 1) + ' von ' + schritte.length }));
+      feld.appendChild(el('div', { html: x.text }));
+      if (se && se.schritt === k + 1 && x.warum) feld.appendChild(selbsterklaeren(se.frage, x.warum));
+      else if (x.warum) feld.appendChild(el('div', { class: 'warum', html: 'Warum: ' + x.warum }));
+      feld.appendChild(el('div', { class: 'steuerung', style: 'margin-top:6px' }, [el('button', { type: 'button', class: 'demo-weiter', text: letzte ? 'Jetzt du →' : 'Nächster Schritt →', onclick: weiter })]));
+    }
+    function weiter() {
+      if (k >= schritte.length - 1) { ende(); return; }
+      k++; b.demoLaeuft = true; b.box.classList.add('demo');
+      try { if (schritte[k].tun) schritte[k].tun(); } catch (e) { console.error(e); }
+      zeigeSchritt();
+    }
+    function ende() {
+      k = -1; b.demoLaeuft = false; b.box.classList.remove('demo'); feld.hidden = true; b.ordne();
+      if (b.obj.zuruecksetzen) b.obj.zuruecksetzen();
+      knopf.textContent = 'Nochmal zeigen';
+      if (mis) mis.sage('Jetzt du!');
+    }
+    knopf.addEventListener('click', function () { if (b.obj.demoStart) b.obj.demoStart(); k = -1; weiter(); });
+    return { knopf: knopf, alle: function () { if (b.obj.demoStart) b.obj.demoStart(); k = -1; for (var i = 0; i < schritte.length; i++) weiter(); ende(); } };
+  }
+  function legacyBeispiel(s) {
+    if (!s.beispiel || !s.beispiel.schritte) return null;
+    var bsp = el('details', { class: 'beispiel feld' });
+    bsp.appendChild(el('summary', { text: 'Beispiel zum Nachlesen: ' + (s.beispiel.titel || '') }));
+    if (s.beispiel.aufgabe) bsp.appendChild(el('p', { html: s.beispiel.aufgabe }));
+    var se = s.beispiel.selbsterklaerung;
+    bsp.appendChild(el('ol', {}, (s.beispiel.schritte || []).map(function (x, k) {
+      if (se && se.schritt === k + 1 && x.warum) return el('li', {}, [el('div', { html: x.tun }), selbsterklaeren(se.frage, x.warum)]);
+      return el('li', {}, [el('div', { html: x.tun }), x.warum ? el('div', { class: 'warum', html: 'Warum: ' + x.warum }) : null]);
+    })));
+    return bsp;
   }
   function vStation() {
     if (!STATIONEN.length) { haupt.appendChild(msg('Keine Stationen vorhanden.', 'warn')); return; }
     var i = Math.min(ANSICHT.i, STATIONEN.length - 1), s = STATIONEN[i];
-    var r = el('div', { class: 'raster' + (s.steckbrief ? ' mit-seite' : '') });
-    r.appendChild(seitenliste(STATIONEN, i, 'entdecken', S.st, 'Stationen'));
-    var m = el('div', { class: 'card' });
-    m.appendChild(el('div', { class: 'klein', text: 'Station ' + (i + 1) + ' von ' + STATIONEN.length + ((s.lz || []).length ? ' · ' + s.lz.join(', ') : '') }));
-    m.appendChild(el('h2', { text: s.titel }));
-    m.appendChild(auftrag(s.auftrag || '', s.leitfrage));
-    if (s.bild) m.appendChild(el('div', { class: 'bild', html: s.bild }));
-    if (s.inhalt) m.appendChild(el('div', { html: s.inhalt }));
-    if (s.beispiel) {
-      var bsp = el('details', { class: 'beispiel' });
-      if (S.skip.indexOf(s.id) < 0) bsp.open = true;
-      bsp.appendChild(el('summary', { text: 'Gelöstes Beispiel: ' + (s.beispiel.titel || '') + ' (überspringbar)' }));
-      if (s.beispiel.aufgabe) bsp.appendChild(el('p', { html: s.beispiel.aufgabe }));
-      var se = s.beispiel.selbsterklaerung;  // {schritt: Nummer ab 1, frage}
-      bsp.appendChild(el('ol', {}, (s.beispiel.schritte || []).map(function (x, k) {
-        if (se && se.schritt === k + 1 && x.warum) return el('li', {}, [el('div', { html: x.tun }), selbsterklaeren(se.frage, x.warum)]);
-        return el('li', {}, [el('div', { html: x.tun }), x.warum ? el('div', { class: 'warum', html: 'Warum: ' + x.warum }) : null]);
-      })));
-      m.appendChild(bsp);
-    }
-    if (s.vertiefung) m.appendChild(el('details', {}, [el('summary', { text: 'Genauer erklärt (aufklappen)' }), el('div', { html: s.vertiefung })]));
+    haupt.appendChild(pfad(STATIONEN, i, 'entdecken', S.st, SPIEL ? (SPIEL.titel || 'Missionen') : 'Stationen'));
+    var m = el('div', { class: 'card station' });
+    var steuer = el('div', { class: 'steuerung' });
+    m.appendChild(el('div', { class: 'st-kopf' }, [el('div', {}, [el('div', { class: 'ort', text: (s.mission && s.mission.ort ? s.mission.ort + ' · ' : '') + 'Station ' + (i + 1) + ' von ' + STATIONEN.length + ((s.lz || []).length ? ' · ' + s.lz.join(', ') : '') }), el('h2', { text: s.titel })]), steuer]));
+    var mis = mission(s.auftrag || '', s.leitfrage, s.figur);
+    m.appendChild(mis.el);
     var fertigMeldung = el('div', { 'aria-live': 'polite' });
     var nx = naechsteStation(i);
     var status = { interaktion: !s.interaktion, check: !(s.check || []).length };
+    var checkBox = null;
     function pruefeFertig() {
+      if (status.interaktion && checkBox && !checkBox.open) { checkBox.open = true; }
       if (status.interaktion && status.check && !S.st[s.id]) {
         S.st[s.id] = 1; speichern(); kopf();
         fertigMeldung.innerHTML = '';
-        fertigMeldung.appendChild(msg('🎉 <b>Geschafft!</b> ' + nx.label.replace(' →', '') + '.', 'ok'));
+        fertigMeldung.appendChild(msg('🎉 <b>Geschafft!</b> ' + (s.mission && s.mission.ende ? s.mission.ende + ' ' : '') + nx.label.replace(' →', '') + '.', 'ok'));
         var b = document.getElementById('weiter'); if (b) b.focus();
       }
     }
     if (s.interaktion) {
-      var ibox = el('div', { class: 'interaktion' });
-      m.appendChild(ibox);
-      var iMeld = el('div', { 'aria-live': 'polite' });
-      var obj = s.interaktion(ibox, {
-        erledigt: function (t) { iMeld.innerHTML = ''; iMeld.appendChild(msg('✅ ' + (t || 'Erledigt.'), 'ok')); status.interaktion = true; pruefeFertig(); },
-        meldung: function (t, art) { iMeld.innerHTML = ''; if (t) iMeld.appendChild(msg(t, art)); }
-      }) || {};
-      m.appendChild(iMeld);
+      var b = buehne(s, 'station', mis, function () { status.interaktion = true; pruefeFertig(); });
+      m.appendChild(b.el);
+      var obj = b.start();
+      if (s.inhalt) b.feld('Kurz erklärt', s.inhalt);
+      if (s.bild) b.feld('Bild', s.bild);
+      if (s.steckbrief) b.feld('Steckbrief', s.steckbrief, false);
+      if (s.vertiefung) b.feld('Genauer erklärt', s.vertiefung, false);
+      var lb = legacyBeispiel(s); if (lb) b.notiz.appendChild(lb);
+      if (s.beruf) b.feld('Wozu brauchst du das?', s.beruf, false);
+      if (Array.isArray(obj.demo) && obj.demo.length) {
+        var ds = demoSteuerung(b, s.selbsterklaerung || (s.beispiel && s.beispiel.selbsterklaerung), mis);
+        steuer.appendChild(ds.knopf);
+        testHaken.push({ art: 'demo', obj: ds });
+      }
       testHaken.push({ art: 'interaktion', obj: obj });
+    } else {
+      if (s.bild) m.appendChild(el('div', { class: 'bild', html: s.bild }));
+      if (s.inhalt) m.appendChild(el('div', { html: s.inhalt }));
+      var lb2 = legacyBeispiel(s); if (lb2) { lb2.open = S.skip.indexOf(s.id) < 0; m.appendChild(lb2); }
+      if (s.steckbrief) m.appendChild(el('details', {}, [el('summary', { text: 'Steckbrief' }), el('div', { html: s.steckbrief })]));
+      if (s.beruf) m.appendChild(msg('<b>Wozu brauchst du das?</b> ' + s.beruf, ''));
     }
-    if (s.mitdenken) m.appendChild(mitdenken(s.mitdenken));
-    if (s.beruf) m.appendChild(msg('<b>Wozu brauchst du das?</b> ' + s.beruf, ''));
+    var nach = el('div', { class: 'nach' });
     if ((s.check || []).length) {
-      m.appendChild(el('h3', { html: 'Kurz-Check <span class="badge zaehlt-nicht">zählt nicht</span>' }));
-      m.appendChild(el('p', { class: 'klein', text: 'Beantworte die Fragen aus dem Gedächtnis, ohne zurückzuscrollen. Beliebig oft wiederholbar.' }));
+      checkBox = el('details', { class: 'check' });
+      checkBox.open = !s.interaktion || !!S.st[s.id];
+      checkBox.appendChild(el('summary', { html: 'Kurz-Check · ' + s.check.length + ' Fragen <span class="badge zaehlt-nicht">zählt nicht</span>' + (s.interaktion ? ' <span class="klein">– öffnet sich, wenn du die Szene geschafft hast</span>' : '') }));
+      checkBox.appendChild(el('p', { class: 'klein', text: 'Beantworte die Fragen aus dem Gedächtnis. Beliebig oft wiederholbar.' }));
       var geprueft = {}, richtig = {};
       var sum = el('div', { 'aria-live': 'polite' });
       s.check.forEach(function (id, k) {
@@ -539,32 +698,33 @@
           if (anzahl(geprueft) === s.check.length) {
             sum.innerHTML = '';
             var n = anzahl(richtig);
-            sum.appendChild(msg('Kurz-Check: <b>' + n + ' von ' + s.check.length + '</b> auf Anhieb richtig. ' + (n === s.check.length ? 'Sehr gut, du kannst weiter.' : 'Schau dir das Beispiel und die Erklärungen zu den falschen Antworten noch einmal an.'), n === s.check.length ? 'ok' : 'warn'));
+            sum.appendChild(msg('Kurz-Check: <b>' + n + ' von ' + s.check.length + '</b> auf Anhieb richtig. ' + (n === s.check.length ? 'Sehr gut, du kannst weiter.' : 'Schau dir die Szene und die Erklärungen zu den falschen Antworten noch einmal an.'), n === s.check.length ? 'ok' : 'warn'));
             status.check = true; pruefeFertig();
           }
         } });
-        m.appendChild(q.el); testHaken.push({ art: 'frage', obj: q });
+        checkBox.appendChild(q.el); testHaken.push({ art: 'frage', obj: q });
       });
-      m.appendChild(sum);
+      checkBox.appendChild(sum);
+      nach.appendChild(checkBox);
     }
-    m.appendChild(fertigMeldung);
-    if (glossar()) m.appendChild(glossar());
-    r.appendChild(m);
-    if (s.steckbrief) r.appendChild(el('aside', { class: 'seite' }, el('div', { class: 'card' }, [el('div', { class: 'klein', text: 'Steckbrief' }), el('div', { html: s.steckbrief })])));
-    haupt.appendChild(r);
-    leiste('Station ' + (i + 1) + ' von ' + STATIONEN.length, nx.label, function () { zeige(nx.t, nx.i); });
+    if (s.mitdenken) nach.appendChild(mitdenken(s.mitdenken));
+    nach.appendChild(fertigMeldung);
+    if (glossar()) nach.appendChild(glossar());
+    m.appendChild(nach);
+    haupt.appendChild(m);
+    leiste((s.mission && s.mission.ort ? s.mission.ort + ' · ' : '') + 'Station ' + (i + 1) + ' von ' + STATIONEN.length, nx.label, function () { zeige(nx.t, nx.i); });
   }
 
   /* ---------- ② Üben ---------- */
   function vUebung() {
     if (!UEBUNGEN.length) { haupt.appendChild(msg('Keine Übungen vorhanden.', 'warn')); leiste('', 'Weiter zu ③ Nachweis →', function () { zeige('nachweis'); }); return; }
     var i = Math.min(ANSICHT.i, UEBUNGEN.length - 1), u = UEBUNGEN[i];
-    var r = el('div', { class: 'raster' + (u.steckbrief ? ' mit-seite' : '') });
-    r.appendChild(seitenliste(UEBUNGEN, i, 'ueben', S.ue, 'Übungen'));
+    var r = el('div', { class: 'raster' });
+    haupt.appendChild(pfad(UEBUNGEN, i, 'ueben', S.ue, 'Übungen'));
     var m = el('div', { class: 'card' });
-    m.appendChild(el('div', { class: 'klein', html: 'Übung ' + (i + 1) + ' von ' + UEBUNGEN.length + ' · ' + (u.lz || []).join(', ') + ' <span class="badge zaehlt-nicht">zählt nicht</span>' }));
-    m.appendChild(el('h2', { text: u.titel }));
-    m.appendChild(auftrag(u.auftrag || ''));
+    m.appendChild(el('div', { class: 'st-kopf' }, el('div', {}, [el('div', { class: 'ort', html: 'Übung ' + (i + 1) + ' von ' + UEBUNGEN.length + ' · ' + (u.lz || []).join(', ') + ' <span class="badge zaehlt-nicht">zählt nicht</span>' }), el('h2', { text: u.titel })])));
+    var mis = mission(u.auftrag || '', null, u.figur);
+    m.appendChild(mis.el);
     var nx = naechsteUebung(i);
     var meld = el('div', { 'aria-live': 'polite' });
     function geloest() {
@@ -576,10 +736,11 @@
       m.appendChild(q.el); testHaken.push({ art: 'frage', obj: q });
     }
     if (u.interaktion) {
-      var ibox = el('div', { class: 'interaktion' }); m.appendChild(ibox);
-      var iMeld = el('div', { 'aria-live': 'polite' });
-      var obj = u.interaktion(ibox, { erledigt: function (t) { iMeld.innerHTML = ''; iMeld.appendChild(msg('✅ ' + (t || 'Richtig.'), 'ok')); geloest(); }, meldung: function (t, art) { iMeld.innerHTML = ''; if (t) iMeld.appendChild(msg(t, art)); } }) || {};
-      m.appendChild(iMeld); testHaken.push({ art: 'interaktion', obj: obj });
+      var b = buehne(u, 'uebung', mis, geloest);
+      m.appendChild(b.el);
+      var obj = b.start();
+      if (u.steckbrief) b.feld('Steckbrief', u.steckbrief, false);
+      testHaken.push({ art: 'interaktion', obj: obj });
     }
     m.appendChild(meld);
     if ((u.tipps || []).length) {
@@ -605,8 +766,8 @@
       m.appendChild(mu);
     }
     if (glossar()) m.appendChild(glossar());
+    if (u.steckbrief && !u.interaktion) m.appendChild(el('details', {}, [el('summary', { text: 'Steckbrief' }), el('div', { html: u.steckbrief })]));
     r.appendChild(m);
-    if (u.steckbrief) r.appendChild(el('aside', { class: 'seite' }, el('div', { class: 'card' }, [el('div', { class: 'klein', text: 'Steckbrief' }), el('div', { html: u.steckbrief })])));
     haupt.appendChild(r);
     leiste('Übung ' + (i + 1) + ' von ' + UEBUNGEN.length, nx.label, function () { zeige(nx.t, nx.i); });
   }
@@ -645,11 +806,12 @@
       var A = NW.teilA;
       c.appendChild(el('div', { class: 'klein', text: 'Nachweis · Teil A von 2 · keine Tipps' }));
       c.appendChild(el('h2', { text: A.titel || 'Handlungsaufgabe' }));
-      c.appendChild(auftrag(A.auftrag || ''));
+      var misA = mission(A.auftrag || '', null, A.figur);
+      c.appendChild(misA.el);
       if (A.inhalt) c.appendChild(el('div', { html: A.inhalt }));
-      var box = el('div', { class: 'interaktion' }); c.appendChild(box);
-      var meld = el('div', { 'aria-live': 'polite' }); c.appendChild(meld);
-      nwLauf.a = A.interaktion(box, { erledigt: function () {}, meldung: function (t, art) { meld.innerHTML = ''; if (t) meld.appendChild(msg(t, art)); } }) || {};
+      var bA = buehne(A, 'nachweis', misA, null);
+      c.appendChild(bA.el);
+      nwLauf.a = bA.start();
       testHaken.push({ art: 'interaktion', obj: nwLauf.a });
       leiste('Teil A: Wenn du fertig bist, geht es weiter zu Teil B.', 'Weiter zu Teil B →', function () {
         nwLauf.pp = typeof nwLauf.a.auswerten === 'function' ? nwLauf.a.auswerten() : [];
@@ -830,8 +992,9 @@
 
   /* ---------- Schnittstelle für automatische Tests ---------- */
   window.LERNPAKET = {
-    version: '1.2',
+    version: '2.0',
     pruefeInhalt: pruefeInhalt,
+    woerter: woerter,
     zustand: function () { return JSON.parse(JSON.stringify(S)); },
     ansicht: function () { return ANSICHT; },
     zeige: zeige,

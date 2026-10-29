@@ -4,7 +4,7 @@ Diese Anleitung richtet sich an Kolleginnen und Kollegen, die ein Lernpaket für
 
 ## Worum es geht
 
-Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 13 Prinzipien, eine feste Paketstruktur und eine Checkliste. Der Skill **`lernpaket-kompass`** ist eine Arbeitsanweisung für die KI Claude, die genau diesen Leitfaden umsetzt und dich in fünf Schritten durch dein Lernpaket führt. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt die richtigen Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
+Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 14 Prinzipien, eine feste Paketstruktur und eine Checkliste. Der Skill **`lernpaket-kompass`** ist eine Arbeitsanweisung für die KI Claude, die genau diesen Leitfaden umsetzt und dich in fünf Schritten durch dein Lernpaket führt. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt die richtigen Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
 
 | Schritt | Du bringst ein | Du bekommst |
 |---|---|---|
@@ -58,7 +58,7 @@ Du schreibst in normaler Sprache. Wenn du „Lernpaket-Kompass“ dazuschreibst,
 
 > Ich möchte ein Lernpaket planen: Dreisatz für die Berufsintegrationsklasse, etwa 90 Minuten. Nutze den Lernpaket-Kompass.
 
-Claude stellt dir in mehreren Runden Fragen: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Welche Situation aus Beruf oder Alltag passt? **Nimm dir für die typischen Fehler Zeit** – daraus entstehen gute Falschantworten und gutes Feedback.
+Claude stellt dir in mehreren Runden Fragen: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Welche Situation aus Beruf oder Alltag passt? Mit welchen Dokumenten, Programmen oder Geräten arbeiten sie dort? Daraus entstehen die **Szenen**: In jeder Station bewegen die Schüler etwas, zum Beispiel ein Formular ausfüllen, ein Dokument prüfen, im nachgebauten Portal recherchieren oder ein Kundengespräch führen. Auf Wunsch gibt es einen **Spielrahmen** mit Missionskarte. **Nimm dir für die typischen Fehler Zeit** – daraus entstehen gute Falschantworten und gutes Feedback.
 
 Danach schlägt Claude Lernziele vor („Ich kann …“) und legt fest, wie das Können im Nachweis geprüft wird. Korrigiere, was nicht passt. Am Ende bekommst du Steckbrief, Lernziel-Nachweis-Tabelle und Drehbuch.
 
@@ -72,7 +72,7 @@ Du bekommst die Fragen zusätzlich als Tabelle. **Geh jede Frage durch**: Stimmt
 
 > Bau einen Prototyp mit Station 1.
 
-Claude baut eine erste Station und gibt dir eine ZIP-Datei. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
+Claude baut eine erste Station als Szene in der Welt deines Pakets (eigene Farben, Kulisse, Figuren) und gibt dir eine ZIP-Datei. Mit „Zeig’s mir“ führt das Paket das Lösungsbeispiel in der Szene vor. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
 
 Gib Rückmeldung wie einer Kollegin:
 

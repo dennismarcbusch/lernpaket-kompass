@@ -18,6 +18,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Jede Antwort bekommt ein Feedback mit Begründung; typische Fehler haben eigenes Feedback. (P6)
 - [ ] Jede Übung hat drei gestufte Tipps. (P2)
 - [ ] Selbsteinschätzung vorher und nachher, Fortschrittsanzeige. (P11)
+- [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist ohne Scrollen sichtbar, realistisch und reagiert auf Fehler. Das Lösungsbeispiel wird darin vorgeführt, der Text daneben bleibt im Budget. (P14)
 
 **Gestaltung (Muss)**
 
@@ -26,6 +27,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Inhalte sind in kurze Schritte geteilt; kein Bildschirm braucht Scrollen, um eine Aufgabe zu verstehen. (P7)
 - [ ] Fachbegriffe werden eingeführt, bevor sie gebraucht werden. (P7)
 - [ ] Layout und Bedienung entsprechen der Paketreihe.
+- [ ] Das Paket hat eine eigene Welt (Thema, Kulisse, Figuren); Aufbau und Bedienung sind wie in allen Paketen.
 
 * [ ] Wichtiges ist hervorgehoben; Farben und Markierungen haben im ganzen Paket dieselbe Bedeutung. (P7)
 * [ ] Auf jedem Bildschirm ist ohne Suchen erkennbar, was zu tun ist und wo es weitergeht; Fünf-Sekunden-Test bestanden, auch auf dem Tablet. (P7)

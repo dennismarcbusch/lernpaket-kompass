@@ -7,7 +7,7 @@ Erzeugt <zielordner>/lernpaket-kompass/ mit
   SKILL.md                 aus skills/_gesamt/SKILL.md (von Hand gepflegt)
   phasen/1-planen.md …     die SKILL.md der Einzel-Skills ohne YAML-Kopf, Skill-Namen als Phasen
   referenz/                gemeinsame Referenz aus skills/_gemeinsam/
-  vorlagen/, vorlage/, vorlagen-lehrkraft/, scripts/   Dateien der Einzel-Skills (ohne Überschneidungen)
+  vorlagen/, vorlage/, vorlagen-lehrkraft/, scripts/, beispiele/   Dateien der Einzel-Skills (ohne Überschneidungen)
 Wird von skills/baue-skills.sh aufgerufen; das Ergebnis wird nicht eingecheckt.
 """
 import os, re, shutil, sys
@@ -21,7 +21,7 @@ PHASEN = [  # (Einzel-Skill, Datei, Phasenname)
     ('lernpaket-pruefen', '4-pruefen.md', 'Prüfen'),
     ('lernpaket-auswerten', '5-auswerten.md', 'Auswerten'),
 ]
-ORDNER = ['vorlagen', 'vorlage', 'vorlagen-lehrkraft', 'scripts']  # werden aus allen Skills zusammengeführt
+ORDNER = ['vorlagen', 'vorlage', 'vorlagen-lehrkraft', 'scripts', 'beispiele']  # werden aus allen Skills zusammengeführt
 
 
 def phase_text(skill):
@@ -67,7 +67,7 @@ def bauen(ziel):
     fehlt = set()
     for _, datei, _ in PHASEN:
         t = open(os.path.join(out, 'phasen', datei), encoding='utf-8').read()
-        for p in re.findall(r'`(?:<skill>/)?((?:referenz|vorlagen|vorlage|vorlagen-lehrkraft|scripts)/[^`\s]*)`', t):
+        for p in re.findall(r'`(?:<skill>/)?((?:referenz|vorlagen|vorlage|vorlagen-lehrkraft|scripts|beispiele)/[^`\s]*)`', t):
             if not os.path.exists(os.path.join(out, p.rstrip('/'))):
                 fehlt.add(f'{datei}: {p}')
     if fehlt:

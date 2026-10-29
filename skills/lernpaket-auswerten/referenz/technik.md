@@ -21,5 +21,7 @@ Die Standards stammen aus den bisherigen PING-Paketen und den Tests in der ByCS-
 | Lizenz | Lizenz festlegen (z. B. CC BY-SA), damit Kollegen Pakete anpassen und weitergeben dürfen |
 | Tafelbild (optional) | Präsentationsmodus im Paket (`js/tafel.js`, Daten in `PAKET.tafel`); Bedienung per Pfeiltasten und Presenter, Schaltflächen mindestens 48 px, lesbar am Beamer; schreibt keine SCORM-Werte, kein `suspend_data`, kein `localStorage` |
 | Merkblatt (P13) | Wird im Browser als druckbare Seite erzeugt und als PDF gespeichert, ohne Server. Einträge nicht dauerhaft in suspend\_data ablegen (SCORM 1.2: höchstens 4096 Zeichen); das Merkblatt braucht keinen Namen. |
+| Szenen-Baukasten | Fertige Bausteine in der Vorlage (`js/baukasten.js`): Figuren, Kulissen, Gespräch, simulierter Rechner mit Browser und Postfach, Formular, Dokument, Sortieren, Reihenfolge, Regler; alles per Antippen und Tastatur bedienbar, ohne externe Dateien |
+| Schriften | Im Paket eingebettet, mit offener Lizenz (SIL Open Font License): Lexend für Text, Bricolage Grotesque für Überschriften; Lizenztexte liegen im Paket |
 
 Kolleginnen und Kollegen ohne Programmiererfahrung müssen diese Details nicht selbst umsetzen; das Skill-Set (Teil C7) baut sie automatisch ein. Sie sollten aber wissen, dass es sie gibt, um die Checkliste abhaken zu können.

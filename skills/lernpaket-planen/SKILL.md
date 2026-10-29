@@ -1,13 +1,13 @@
 ---
 name: lernpaket-planen
-description: Plant ein neues SCORM-Lernpaket nach dem Lernpaket-Kompass im Gespräch mit der Lehrkraft – Steckbrief, Lernziele mit Nachweis, Drehbuch. Für „Lernpaket planen“ oder „neues Lernmodul“.
+description: Plant ein neues SCORM-Lernpaket nach dem Lernpaket-Kompass im Gespräch mit der Lehrkraft – Steckbrief, Lernziele mit Nachweis, Drehbuch mit Szenen zum Anfassen. Für „Lernpaket planen“.
 ---
 
 # Lernpaket planen (Phasen 1–3 des Leitfadens)
 
 Du begleitest eine Lehrkraft vom ersten Einfall bis zum fertigen Drehbuch eines Lernpakets. Die Lehrkraft bringt Fachwissen und Unterrichtserfahrung mit; Programmier- oder Medienpädagogik-Kenntnisse brauchst du nicht vorauszusetzen. Du sorgst dafür, dass der Plan die Prinzipien des Leitfadens erfüllt, ohne dass sie ihn kennen muss.
 
-**Lies vor dem Start:** `referenz/prinzipien.md` (13 Prinzipien mit Prüffragen) und `referenz/prozess-und-struktur.md` (Phasen, Paketstruktur). Bei Fragen zu SeGeL oder Gestaltung: `referenz/gestaltung.md`.
+**Lies vor dem Start:** `referenz/prinzipien.md` (14 Prinzipien mit Prüffragen), `referenz/szenen.md` (Szenen-Katalog, Spielrahmen, Welt, Textbudget) und `referenz/prozess-und-struktur.md` (Phasen, Paketstruktur). Bei Fragen zu SeGeL oder Gestaltung: `referenz/gestaltung.md`.
 
 **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
 
@@ -31,6 +31,8 @@ Frage in zwei bis drei Runden ab, was noch fehlt:
 4. **Einsatz:** Standard ist SeGeL (selbstgesteuert, das Paket trägt die ganze Einheit). Stationen sollen auch einzeln im klassischen Unterricht nutzbar sein. Nur nachfragen, wenn etwas dagegen spricht. **Freiwilliger Input mit Tafelbild?** Nur ansprechen, wenn sich das Thema gut gemeinsam vorführen lässt (Simulation, Ablauf, Vergleich): „Möchtest du zum Paket einen freiwilligen Input von etwa 20 Minuten anbieten? Dann plane ich ein Tafelbild mit.“ Nicht jedes Paket braucht das.
 5. **Typische Fehler und Fehlvorstellungen der Schüler** – mindestens drei, besser fünf. Das ist die wichtigste Frage: Daraus entstehen gute Falschantworten, gutes Feedback und das Merkblatt. Gib Beispiele, um die Erinnerung anzustoßen.
 6. **Leitsituation:** Gibt es einen Betrieb, Kunden oder eine Alltagssituation, in der das Thema gebraucht wird? Gibt es aus anderen Paketen schon Story-Figuren (bei PING z. B. Korbwerk IT-Service mit Ausbilderin Mira Hofmann)? Wenn nicht, schlage zwei Varianten vor.
+7. **Womit arbeiten die Schüler im Beruf?** Welche Dokumente, Programme, Geräte, Gespräche gehören zum Thema (Rechnung, Portal, Kasse, Kundengespräch …)? Daraus entstehen die Szenen. Gibt es Material (Formulare, Screenshots), das du nachbauen sollst?
+8. **Welt und Rahmen** (zum Anklicken): Thema der Paketwelt (wirtschaft, technik, sprache, natur, gesundheit, gestaltung) mit Kulisse, und ob es einen **Spielrahmen** geben soll („Mission mit Karte, jede Station ein Ort“ oder „Simulation ohne Spielrahmen“). Schlag passend zur Leitsituation vor; Standard ist Simulation ohne Spielrahmen, Spielrahmen dann, wenn es eine natürliche Geschichte gibt (Partner prüfen, Fall lösen, Kunden betreuen).
 
 Fülle danach `vorlagen/steckbrief.md` aus und lass ihn bestätigen.
 
@@ -47,12 +49,12 @@ Fülle danach `vorlagen/steckbrief.md` aus und lass ihn bestätigen.
 
 Fülle `vorlagen/drehbuch.md`. Halte dich an die Paketstruktur (Einstieg → ① Entdecken → ② Üben → ③ Nachweis → ④ Abschluss) und an diese Regeln:
 
-- **Stationen** (höchstens etwa acht; mehr = zwei Pakete): je ein Auftrag aus der Leitsituation („Mira bittet dich …“), eine Leitfrage, eine kurze sichtbare Erklärung, ein **gelöstes Beispiel mit Begründung je Schritt** vor dem ersten eigenen Versuch, eine Idee zum Ausprobieren mit Rückmeldung (was tun die Lernenden, woran erkennt das Paket, dass es geklappt hat?), ein Satz „Wozu brauchst du das?“, ein Kurz-Check mit 3–5 Fragen (ab Station 3 eine Frage zu früheren Stationen).
+- **Stationen** (höchstens etwa acht; mehr = zwei Pakete): **Zuerst die Szene** (P14, `referenz/szenen.md`): Was sehen die Lernenden, was bewegen sie, woran erkennt das Paket den Erfolg, wie reagiert die Szene realistisch auf typische Fehler? Dann: ein Auftrag aus der Leitsituation in 1–2 Sätzen („Mira bittet dich …“), eine Leitfrage, „Kurz erklärt“ in höchstens etwa 40 Wörtern, eine **Vorführung in der Szene** („Zeig’s mir“) an einem anderen Fall mit Begründung je Schritt, ein Satz „Wozu brauchst du das?“, ein Kurz-Check mit 3–5 Fragen (ab Station 3 eine Frage zu früheren Stationen). Eine Station ohne Szene nur mit Begründung, die die Lehrkraft bestätigt. Ein Quiz mit „stimmt / stimmt nicht“ ist keine Szene.
 - **Zum Mitdenken anregen:** In jedem Lösungsbeispiel eine Frage zum Selbsterklären an einem entscheidenden Schritt („Warum …?“). In einigen Stationen oder Übungen ein kurzer Auftrag zum Skizzieren, Zusammenfassen in eigenen Worten oder Erklären für andere, mit Musterlösung.
 - **Fachbegriffe:** Alle Fachbegriffe für das Glossar sammeln und die drei bis fünf wichtigsten markieren, die schon am Anfang vorgestellt werden (Vortraining). Kurze Sätze, geläufige Wörter.
 - **Ton nur mit Text:** Ton oder Video nur, wenn sie wirklich nötig sind, und dann immer mit Untertiteln oder Transkript.
 - **Hintergrund und Bedienung trennen:** Hintergrundwissen als Steckbrief neben der Aufgabe, Bedienhinweise genau dort, wo sie gebraucht werden.
-- **Übungen:** mindestens eine je Lernziel, in **anderen** Situationen als die Stationen, je drei gestufte Tipps (1 Denkanstoß, 2 Teillösung, 3 Lösung mit Begründung) und eine Reflexionsfrage mit Musterantwort.
+- **Übungen:** mindestens eine je Lernziel, wo möglich als Szene, in **anderen** Situationen als die Stationen, je drei gestufte Tipps (1 Denkanstoß, 2 Teillösung, 3 Lösung mit Begründung) und eine Reflexionsfrage mit Musterantwort.
 - **Nachweis:** Teil A ausformulieren (Situation, Auftrag, Prüfpunkte); Teil B als Fragethemen je Lernziel (die Fragen selbst schreibt `fragenpool-erstellen`).
 - **Abschluss:** Merkblatt mit zwei Lückensätzen je Lernziel, dem typischen Fehler, einem kurzen Beispiel und bei Abläufen einem Schritt-Schema; fünf Selbsttest-Fragen; eine Vorwissensfrage je Lernziel.
 - **Input und Tafelbild (nur wenn gewünscht):** Abschnitt „Input und Tafelbild“ im Drehbuch ausfüllen. Höchstens etwa sechs Szenen für 20 Minuten, je Szene eine Kernaussage, eine Vorhersage-Frage an die Klasse und die Station, die das Thema vertieft. Die letzte Szene sichert. Der Input ist Einstieg, nicht Ersatz: Er zeigt nichts, was im Paket fehlt, und lässt mindestens eine Frage bewusst offen (Formeln, Details, Listen bleiben in den Stationen). Auf der Tafel steht kein erklärender Text; die Lehrkraft erklärt mündlich.
@@ -60,7 +62,7 @@ Fülle `vorlagen/drehbuch.md`. Halte dich an die Paketstruktur (Einstieg → ①
 
 ### 4. Selbstprüfung vor der Übergabe
 
-Gehe die **Prüffragen P1–P13** aus `referenz/prinzipien.md` durch und hänge eine kurze Tabelle ans Drehbuch (Prinzip · erfüllt / offen · wo im Drehbuch). Offene Muss-Punkte löst du, bevor du übergibst, oder nennst sie ausdrücklich.
+Gehe die **Prüffragen P1–P14** aus `referenz/prinzipien.md` durch und hänge eine kurze Tabelle ans Drehbuch (Prinzip · erfüllt / offen · wo im Drehbuch). Offene Muss-Punkte löst du, bevor du übergibst, oder nennst sie ausdrücklich.
 
 ## Ergebnis
 

@@ -1,6 +1,6 @@
 # Lernpaket-Kompass – Leitfaden für interaktive Lernpakete
 
-Entwurf · Stand 28.10.2026 · Dennis Busch
+Entwurf · Stand 29.10.2026 · Dennis Busch
 
 ## Zweck und Kurzfassung
 
@@ -8,7 +8,7 @@ Gute Lernpakete entstehen nicht durch mehr Technik, sondern durch wenige gut bel
 
 Der Leitfaden hat drei Teile: **A** fasst die Forschungslage zusammen, **B** wählt daraus die für uns relevanten Prinzipien aus und wägt sie gegen den Aufwand ab, **C** ist der eigentliche Leitfaden mit Prozess, Paketstruktur, Checklisten und dem Vorschlag für ein Skill-Set.
 
-**Die zehn Kernsätze**
+**Die elf Kernsätze**
 
 1. **Ganze Aufgaben als Rückgrat:** Jedes Paket baut auf einer authentischen beruflichen bzw. lebensweltlichen Handlungssituation auf, nicht auf einer Stoffsammlung.
 2. **Vom Einfachen zum Komplexen, Hilfe wird schrittweise zurückgenommen:** zeigen, begleitet üben, selbstständig können.
@@ -20,8 +20,9 @@ Der Leitfaden hat drei Teile: **A** fasst die Forschungslage zusammen, **B** wä
 8. **Selbststeuerung muss unterstützt werden:** Wahlfreiheit allein verbessert das Lernen nicht; Ziele, Fortschritt und Reflexion schon.
 9. **Einfache Verzweigung statt „intelligenter“ Lernpfade:** Gestufte Tipps und Wiederholungsschleifen leisten fast alles, was wir brauchen.
 10. **Iterativ bauen und mit Schülern erproben:** früh einen Prototyp testen, nach dem Einsatz die Daten aus der Lernplattform auswerten.
+11. **Handeln statt lesen:** Jede Station ist eine realistische Szene zum Anfassen – Dokument, Gerät, nachgebautes Portal, Gespräch. Der Text steht kurz daneben, das Beispiel wird in der Szene vorgeführt.
 
-Wer wenig Zeit hat, liest diese zehn Sätze, Teil B (Prinzipienübersicht) und Teil C6 (Checkliste).
+Wer wenig Zeit hat, liest diese elf Sätze, Teil B (Prinzipienübersicht) und Teil C6 (Checkliste).
 
 **Skill-Set:** Wer ein Paket bauen möchte, muss den Leitfaden nicht auswendig kennen. Ein einziger Skill für Claude, der Lernpaket-Kompass, führt durch Planung, Fragen, Bau, Prüfung und Auswertung und wendet die Prinzipien dabei automatisch an (Teil C7). Einrichtung und Beispiel-Prompts: [Anleitung zum Skill-Set](skill-set-anleitung.md).
 
@@ -104,12 +105,16 @@ Neben den großen Ansätzen gibt es eine Reihe gut untersuchter Einzelbefunde au
 | Mit vollständigen Notizen der Lehrkraft wiederholen | Mit eigenen Notizen wiederholen | etwa 17 % bessere Testergebnisse; halbfertige Notizen zum Ergänzen ähnlich gut | Kiewra & Benton 1987; Kiewra et al. 1995 (Übersicht Kiewra) | Muster-Merkblatt mitgeben, halb vorgefüllt zum Ergänzen (P13) |
 | Concept Maps selbst erstellen | Herkömmliche Lernaktivitäten (z. B. Lesen) | g ≈ 0,74 in Klasse 9–12; Schüler profitieren mehr von teilweise vorgegebenen Maps als von leeren | Schroeder et al. 2018; Gurlitt & Renkl 2008 (zit. n. Brod 2021) | Struktur des Merkblatts vorgeben, Lernende füllen die Kernaussagen (P13) |
 | Erlaubter Spickzettel in der Prüfung (selbst erstellt) | Prüfung ohne Spickzettel | kein verlässlicher Vorteil; Hinweise, dass man sich auf den Zettel verlässt statt zu lernen | Dickson & Miller 2005; Funk & Dickson 2011; Hamouda & Shaffer 2016 | Merkblatt erst nach dem Nachweis, nicht als Hilfsmittel im Nachweis (P13) |
+| Lernen mit Simulationen (realistische Situationen, in denen man handelt) | Unterricht ohne Simulation | g = 0,85 auf komplexe Fertigkeiten (145 Studien); realistischere Simulationen wirken stärker (0,86 statt 0,58); bei wenig Vorwissen helfen Beispiele | Chernikova et al. 2020 | Jede Station als realistische Szene zum Anfassen, mit Vorführung (P14) |
+| Aktiv, konstruktiv und interaktiv lernen (ICAP) | Nur lesen oder zuhören (passiv) | Lernergebnisse steigen von passiv über aktiv und konstruktiv bis interaktiv | Chi & Wylie 2014 | In der Szene handeln, entscheiden und begründen lassen statt nur lesen |
+| Lernspiele (Serious Games) | Herkömmlicher Unterricht | d = 0,29, stärker mit zusätzlicher Anleitung, mehreren Sitzungen und in Gruppen; g = 0,33, gut gestaltete Spiele bringen weitere 0,34 | Wouters et al. 2013; Clark et al. 2016 | Optionaler Spielrahmen, in dem der Lerninhalt die Spielhandlung ist |
+| Verführerische Details (interessant, aber ohne Bezug zum Lernziel) | Material ohne solche Details | g = −0,33 (schlechter) | Sundararajan & Adesope 2020 | Story, Figuren und Kulisse tragen den Inhalt, statt ihn zu schmücken |
 
 **Was nicht belegt ist:** „Lerntypen“ (etwa der „visuelle Typ“) gibt es nach heutigem Forschungsstand nicht in einer Form, die fürs Unterrichten nützt; sie werden nicht berücksichtigt (Pashler et al. 2008; Kerres 2024). Auch „digital ist automatisch besser“ stimmt nicht: Lernen am Computer bringt über Jahrzehnte nur kleine bis mittlere Vorteile, und nur bei guter didaktischer Gestaltung (Tamim et al. 2011).
 
-## Teil B1: Die dreizehn Prinzipien für unsere Lernpakete
+## Teil B1: Die vierzehn Prinzipien für unsere Lernpakete
 
-Dreizehn Prinzipien reichen. Acht davon sind gut belegt und mit vertretbarem Aufwand in jedem Paket umsetzbar; sie sind verbindlich („Muss“). Dazu kommt P11, weil alle Pakete für selbstgesteuertes Lernen gebaut werden (Teil C4). Die übrigen vier sind „Soll“-Prinzipien: sinnvoll, aber abhängig von Fach, Thema und verfügbarer Zeit. Die Einschätzung von Beleglage und Aufwand stützt sich auf Teil A.
+Vierzehn Prinzipien reichen. Neun davon sind gut belegt und mit vertretbarem Aufwand in jedem Paket umsetzbar; sie sind verbindlich („Muss“): P1 bis P8 und P14. Dazu kommt P11, weil alle Pakete für selbstgesteuertes Lernen gebaut werden (Teil C4). Die übrigen vier sind „Soll“-Prinzipien: sinnvoll, aber abhängig von Fach, Thema und verfügbarer Zeit. Die Einschätzung von Beleglage und Aufwand stützt sich auf Teil A.
 
 | Nr. | Prinzip | Wie gut belegt | Aufwand | So sieht es im Paket aus | Status |
 | --- | --- | --- | --- | --- | --- |
@@ -124,10 +129,13 @@ Dreizehn Prinzipien reichen. Acht davon sind gut belegt und mit vertretbarem Auf
 | P9 | Hintergrundwissen und Bedienhinweise trennen | mittel | mittel | Hintergrund in Steckbriefen; Bedienhilfe genau dort, wo sie gebraucht wird | Soll |
 | P10 | Wiederholen verteilen, Aufgaben mischen | gut | mittel | Wiederholungsfragen aus früheren Kapiteln; gemischte Aufgaben im Nachweis | Soll |
 | P11 | Selbstständiges Lernen anleiten statt voraussetzen | mittel bis gut | mittel | Selbsteinschätzung, Fortschrittsanzeige, Reflexionsfrage mit Musterantwort | Muss |
-| P12 | Spielelemente gezielt einsetzen | mittel | gering bis hoch | Rahmengeschichte ja; Punkte und Ranglisten nur mit klarem Zweck | Soll |
+| P12 | Spielelemente gezielt einsetzen | mittel | gering bis hoch | Rahmengeschichte ja, optional Spielrahmen mit Missionskarte; Punkte und Ranglisten nur mit klarem Zweck | Soll |
 | P13 | Ergebnisse sichern: Merkblatt selbst ergänzen | mittel | gering bis mittel | Halb vorgefülltes Merkblatt je Lernziel nach dem Nachweis: aus dem Gedächtnis ergänzen, mit dem Muster vergleichen, als PDF mit Selbsttest-Fragen herunterladen | Soll |
+| P14 | Handeln am Gegenstand: Jede Station ist eine Szene zum Anfassen | gut (Simulationen), mittel (Lernspiele) | mittel (mit Baukasten), hoch bei eigenen Geräten | Szene groß in der Mitte: simulierter Rechner, Dokument, Gerät oder Gespräch; Vorführung „Zeig’s mir“; Text kurz daneben; eigene Welt je Paket | Muss |
 
 **Zu P13: Merkblatt statt Spickzettel.** Ein fertiges Cheat Sheet zum Herunterladen sichert allein wenig: Nachlesen ist bloßes Wiederlesen, und erlaubte Spickzettel verbessern das Lernen nachweislich nicht (Teil A2). Wirksam wird das Merkblatt, wenn Lernende es nach dem Nachweis aus dem Gedächtnis ergänzen, mit dem Muster vergleichen und später zum Selbsttest nutzen. So verbindet P13 Abrufen (P5), Feedback (P6) und verteiltes Wiederholen (P10); Aufbau und Ablauf stehen in Teil C2.
+
+**Zu P14: Handeln am Gegenstand.** Die ersten Pakete nach diesem Leitfaden waren gut belegt, aber oft lange Texte mit einem Quiz darunter. Die PING-Pakete zeigen, was stattdessen motiviert: Man zerlegt einen PC, tippt Befehle in ein simuliertes Terminal, baut ein Netzwerk um. Deshalb ist die Szene der Kern jeder Station, nicht ein Zusatz. Das geht auch außerhalb der IT: Dokumente prüfen, im nachgebauten Portal recherchieren, Formulare ausfüllen, Kundengespräche führen, Belege sortieren. Simulationen wirken stark auf komplexe Fertigkeiten, und zwar umso mehr, je realistischer sie sind (Chernikova et al. 2020). Wer die Geschichte zum Spiel ausbauen will, findet ein Vorbild in [SQL Island](https://sql-island.informatik.uni-kl.de/): Dort ist der Lerninhalt selbst die Spielhandlung. Story, Figuren und Kulisse ohne Bezug zum Lernziel schaden dagegen (verführerische Details, Teil A2).
 
 **Querschnittsprinzip: iterativ entwickeln.** Kein Prinzip ersetzt den Test mit echten Schülern. Deshalb gehört eine kurze Erprobung (Teil C1, Phase 5) zu jedem Paket.
 
@@ -170,7 +178,7 @@ Jedes Paket folgt demselben Grundmuster aus fünf Teilen. Es ist aus den PING-Pa
 | Teil | Zweck | Warum so (siehe Teil A) | Mindeststandard |
 | --- | --- | --- | --- |
 | 0 Einstieg | Orientierung und Motivation | Lernen beginnt mit einer echten Aufgabe und knüpft an Vorwissen an; Ziele sind sichtbar | Leitsituation in wenigen Sätzen; Lernziele in Schülersprache, mit kurzer Selbsteinschätzung je Ziel (bloß angezeigte Ziele werden kaum gelesen); kurzer, unbewerteter Vorwissens-Check mit Empfehlung, was übersprungen werden kann; Hinweis auf Dauer und Ablauf |
-| ① Entdecken (Tutorial) | Neues verstehen | Vormachen vor Nachmachen; Bildschirme nach Mayer | Stationen bzw. Kapitel mit je einem Auftrag; Lösungsbeispiel vor eigener Aufgabe; Kurz-Check (3–5 Fragen) am Kapitelende; jede Station endet mit einem Bezug zur echten Praxis |
+| ① Entdecken (Tutorial) | Neues verstehen | Vormachen vor Nachmachen; Handeln in realistischen Situationen; Bildschirme nach Mayer | Stationen als Szene zum Anfassen (P14) mit je einem Auftrag; Lösungsbeispiel als Vorführung in der Szene vor der eigenen Aufgabe; Kurz-Check (3–5 Fragen) am Kapitelende; jede Station endet mit einem Bezug zur echten Praxis |
 | ② Üben | Können aufbauen | Anwenden in wechselnden Situationen, von leicht nach schwer, mit abnehmender Hilfe | Eine Übung je Lernziel oder Kapitel, wechselnde Situationen; drei gestufte Tipps (Denkanstoß, Teillösung, Lösung); Feedback mit Begründung; Reflexionsfrage mit Musterantwort |
 | ③ Kompetenznachweis | Können zeigen | Eine ganze Aufgabe ohne Hilfe lösen; Abfragen festigt das Gelernte | Teil A: Handlungsaufgabe in neuer Situation, ohne Tipps; Teil B: Fragen aus einem Pool, mindestens zwei je Lernziel, gemischte Fragetypen; Bestehensgrenze einheitlich 80 %; beliebig oft wiederholbar, bestes Ergebnis zählt (der Nachweis ist keine Prüfung im rechtlichen Sinne) |
 | 4 Abschluss | Integration, Sicherung und Transfer | Gelerntes einordnen und aus dem Gedächtnis sichern; über das eigene Lernen nachdenken | Auswertung je Lernziel mit Lernempfehlung; Merkblatt zum Ergänzen und Herunterladen (P13, siehe unten); Ergebnis als PDF druckbar; Rückverweis auf passende Stationen |
@@ -196,6 +204,18 @@ Kerres (2024) nennt als Richtwert Lerneinheiten von 30 bis 45 Minuten, drei bis 
 
 Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern steht der Fachbegriff, unter dem man bei Bedarf mehr dazu findet.
 
+**Szene zuerst, eigene Welt (P14)**
+
+- Jede Station ist eine Szene, in der die Lernenden etwas bewegen: ein Dokument prüfen, ein Formular ausfüllen, im nachgebauten Portal recherchieren, ein Gespräch führen, sortieren, ein Gerät einstellen. Erst die Szene planen, dann den Text.
+- Die Szene steht groß in der Mitte und ohne Scrollen im Blick. Der Auftrag steht als Sprechblase der Figur (1–2 Sätze), „Kurz erklärt“ in einer schmalen Notiz daneben (höchstens etwa 40 Wörter); zusammen höchstens etwa 90 Wörter je Station.
+- Erklärungen erscheinen dann, wenn sie gebraucht werden: als Reaktion auf das, was die Lernenden gerade tun.
+- Das Lösungsbeispiel wird in der Szene vorgeführt („Zeig’s mir“), an einem anderen Fall; danach sind die Lernenden dran.
+- Realistisch, aber erfunden: Dokumente, Portale und Geräte sehen aus wie im Beruf, mit erfundenen Firmen und Daten. Echte Webseiten werden als Übungsversion nachgebaut, nicht kopiert.
+- Fehler wirken sich in der Szene aus wie in echt (die Kundin fragt nach, der Server antwortet nicht), dazu ein Satz zur Fehlvorstellung.
+- Gleiche Bedienung, eigene Welt: Aufbau und Bedienung sind in allen Paketen gleich; jedes Paket hat eigene Farben, eine Kulisse und illustrierte Figuren passend zum Fach. Figuren vielfältig besetzen, keine realen Personen nachbilden.
+- Ein Spielrahmen (Mission mit Karte, jede Station ein Ort) nur, wenn der Lerninhalt die Spielhandlung ist. Story und Kulisse ohne Bezug zum Lernziel sind verführerische Details (Teil A2).
+- Ein Szenen-Katalog mit Beispielen für alle Fächer liegt im Skill-Set (`szenen.md`).
+
 **Bildschirm und Darstellung (nach Mayer)**
 
 - Wort und Bild zusammen statt Text allein: Zu jeder Erklärung gehört eine passende Grafik, Skizze oder Animation, die zum Inhalt passt, nicht zu einem angeblichen Lerntyp (Multimedia).
@@ -211,7 +231,7 @@ Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern st
 - Fachbegriffe vorab kurz einführen, bevor sie in einem komplexen Ablauf auftauchen (Vortraining).
 - Denselben Text nicht gleichzeitig vorlesen und anzeigen (Redundanz).
 - Locker und direkt ansprechen („Du“ bzw. „Sie“ je nach Zielgruppe), nicht im Lehrbuchton (Personalisierung).
-- Ein einheitliches Layout über alle Pakete einer Reihe; ein Farbschema mit einem einzigen Akzent.
+- Einheitliche Bedienung und einheitlicher Aufbau über alle Pakete; jedes Paket hat seine eigene Welt (Farben, Kulisse, Figuren) mit einem einzigen Akzent für Handlungsaufforderungen.
 
 Ergänzend nach Kerres (2024, Kap. 6.6):
 
@@ -345,6 +365,8 @@ Die Standards stammen aus den bisherigen PING-Paketen und den Tests in der ByCS-
 | Lizenz | Lizenz festlegen (z. B. CC BY-SA), damit Kollegen Pakete anpassen und weitergeben dürfen |
 | Tafelbild (optional) | Präsentationsmodus im Paket (`js/tafel.js`, Daten in `PAKET.tafel`); Bedienung per Pfeiltasten und Presenter, Schaltflächen mindestens 48 px, lesbar am Beamer; schreibt keine SCORM-Werte, kein `suspend_data`, kein `localStorage` |
 | Merkblatt (P13) | Wird im Browser als druckbare Seite erzeugt und als PDF gespeichert, ohne Server. Einträge nicht dauerhaft in suspend\_data ablegen (SCORM 1.2: höchstens 4096 Zeichen); das Merkblatt braucht keinen Namen. |
+| Szenen-Baukasten | Fertige Bausteine in der Vorlage (`js/baukasten.js`): Figuren, Kulissen, Gespräch, simulierter Rechner mit Browser und Postfach, Formular, Dokument, Sortieren, Reihenfolge, Regler; alles per Antippen und Tastatur bedienbar, ohne externe Dateien |
+| Schriften | Im Paket eingebettet, mit offener Lizenz (SIL Open Font License): Lexend für Text, Bricolage Grotesque für Überschriften; Lizenztexte liegen im Paket |
 
 Kolleginnen und Kollegen ohne Programmiererfahrung müssen diese Details nicht selbst umsetzen; das Skill-Set (Teil C7) baut sie automatisch ein. Sie sollten aber wissen, dass es sie gibt, um die Checkliste abhaken zu können.
 
@@ -364,6 +386,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Jede Antwort bekommt ein Feedback mit Begründung; typische Fehler haben eigenes Feedback. (P6)
 - [ ] Jede Übung hat drei gestufte Tipps. (P2)
 - [ ] Selbsteinschätzung vorher und nachher, Fortschrittsanzeige. (P11)
+- [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist ohne Scrollen sichtbar, realistisch und reagiert auf Fehler. Das Lösungsbeispiel wird darin vorgeführt, der Text daneben bleibt im Budget. (P14)
 
 **Gestaltung (Muss)**
 
@@ -372,6 +395,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Inhalte sind in kurze Schritte geteilt; kein Bildschirm braucht Scrollen, um eine Aufgabe zu verstehen. (P7)
 - [ ] Fachbegriffe werden eingeführt, bevor sie gebraucht werden. (P7)
 - [ ] Layout und Bedienung entsprechen der Paketreihe.
+- [ ] Das Paket hat eine eigene Welt (Thema, Kulisse, Figuren); Aufbau und Bedienung sind wie in allen Paketen.
 
 * [ ] Wichtiges ist hervorgehoben; Farben und Markierungen haben im ganzen Paket dieselbe Bedeutung. (P7)
 * [ ] Auf jedem Bildschirm ist ohne Suchen erkennbar, was zu tun ist und wo es weitergeht; Fünf-Sekunden-Test bestanden, auch auf dem Tablet. (P7)
@@ -414,13 +438,13 @@ Der Leitfaden ist zusätzlich als Skill-Set für Claude umgesetzt: Jede Phase au
 
 | Skill | Phase | Was er tut | Die Lehrkraft liefert | Ergebnis |
 | --- | --- | --- | --- | --- |
-| `lernpaket-planen` | 1–3 | Führt ein Interview (Fach, Klasse, Vorwissen, Einsatzform, optional Input mit Tafelbild, Leitsituation), formuliert Lernziele, schlägt Nachweis und Drehbuch vor; fragt gezielt nach typischen Schülerfehlern | Fachwissen, Unterrichtserfahrung, Entscheidungen | Steckbrief, Lernziel-Nachweis-Tabelle, Drehbuch |
+| `lernpaket-planen` | 1–3 | Führt ein Interview (Fach, Klasse, Vorwissen, Einsatzform, optional Input mit Tafelbild, Leitsituation), formuliert Lernziele, schlägt Nachweis und ein Drehbuch mit einer Szene je Station vor; fragt gezielt nach typischen Schülerfehlern | Fachwissen, Unterrichtserfahrung, Entscheidungen | Steckbrief, Lernziel-Nachweis-Tabelle, Drehbuch |
 | `fragenpool-erstellen` | 2–3 | Erzeugt Fragen je Lernziel in den fünf Fragetypen, Falschantworten aus typischen Fehlern, Feedback zu jeder Antwort | Lernziele, typische Fehler, Prüfung der Fragen | Fragenpool (geprüft) |
-| `lernpaket-bauen` | 4 | Baut das SCORM-Paket im einheitlichen Design mit fertigen Bausteinen (Station, Kurz-Check, Übung mit Tipps, Nachweis, Auswertung, PDF, optional Tafelbild mit Ablaufplan); erst Prototyp, dann Rest | Drehbuch, Rückmeldung zum Prototyp | ZIP-Datei |
+| `lernpaket-bauen` | 4 | Baut das SCORM-Paket mit Szenen zum Anfassen aus dem Baukasten in der eigenen Welt des Pakets, mit fertigen Bausteinen (Station, Kurz-Check, Übung mit Tipps, Nachweis, Auswertung, PDF, optional Tafelbild mit Ablaufplan); erst Prototyp, dann Rest | Drehbuch, Rückmeldung zum Prototyp | ZIP-Datei |
 | `lernpaket-pruefen` | 5 | Geht die Checkliste aus Teil C6 durch, testet die Datenübergabe, prüft Lösbarkeit und Barrierefreiheit, erstellt einen Review-Bericht | Paket, Ergebnis des Schülertests | Prüfbericht mit Ampel |
 | `lernpaket-auswerten` | 6 | Liest den Berichtsexport aus der Lernplattform, zeigt schwierige und zu leichte Fragen, fasst Reflexionsantworten zusammen | Berichtsexport (ohne Namen) | Auswertung und Änderungsvorschläge |
 
-Gemeinsame Grundlage aller Skills ist eine Referenzdatei mit den dreizehn Prinzipien und den Regeln aus C3–C5, damit alle Skills dieselben Maßstäbe anlegen. Der vorhandene Skill `bycs-lernmodul` (Look und Einbettung) geht in `lernpaket-bauen` auf.
+Gemeinsame Grundlage aller Skills ist eine Referenzdatei mit den vierzehn Prinzipien und den Regeln aus C3–C5, damit alle Skills dieselben Maßstäbe anlegen. Der vorhandene Skill `bycs-lernmodul` (Look und Einbettung) geht in `lernpaket-bauen` auf.
 
 **So arbeitet eine Kollegin ohne Programmiererfahrung (Beispiel)**
 
@@ -433,7 +457,7 @@ Gemeinsame Grundlage aller Skills ist eine Referenzdatei mit den dreizehn Prinzi
 
 **Grenzen, die im Leitfaden klar stehen müssen:** Die KI kann fachliche Fehler machen; jede Musterlösung und jede Frage wird von einer Lehrkraft geprüft. Schülerdaten werden nur ohne Namen an die KI gegeben. Die Entscheidung über Lernziele und Bewertung bleibt bei der Lehrkraft.
 
-**Bereitstellung in zwei Formen:** (1) dieses Dokument als Langfassung plus eine zweiseitige Kurzfassung mit den zehn Kernsätzen und der Checkliste; (2) das Skill-Set als Paket für Claude, zusammen mit einer Anleitung zur Einrichtung und Nutzung (umgesetzt).
+**Bereitstellung in zwei Formen:** (1) dieses Dokument als Langfassung plus eine zweiseitige Kurzfassung mit den elf Kernsätzen und der Checkliste; (2) das Skill-Set als Paket für Claude, zusammen mit einer Anleitung zur Einrichtung und Nutzung (umgesetzt).
 
 ## Offene Punkte und nächste Schritte
 
@@ -447,6 +471,8 @@ Gemeinsame Grundlage aller Skills ist eine Referenzdatei mit den dreizehn Prinzi
 - [x] Tafelbild in die Paketvorlage und das Skill-Set übernommen (28.10.2026): `tafel.js`/`tafel.css` in der Vorlage, Startseiten-Karte als Hook in der Engine, Inhaltsprüfung und Prüfskript erweitert, Drehbuch-Abschnitt „Input und Tafelbild“, Ablaufplan-Vorlage.
 - [ ] Eigenen Skill `tafelbild-erstellen` bauen: erzeugt nur ein Tafelbild mit Ablaufplan, ohne Lernpaket – für Themen, die praktisch, in einer anderen Simulation (z. B. Packet Tracer) oder ganz ohne Paket umgesetzt werden.
 - [ ] Bestehensgrenze der vorhandenen PING-Pakete von 70 % bzw. 60 % auf 80 % umstellen (Prüfen, ob die Fragen dazu passen).
+- [ ] Lernpaket-Kompass 2 (29.10.2026): Szene als Pflichtkern jeder Station (P14), Baukasten für Szenen, eigene Welt je Paket, optionaler Spielrahmen; Pilot: Station 1 von „Das Handelsregister“.
+- [ ] Baukasten nach den ersten Paketen anderer Fächer erweitern (z. B. Tabellenkalkulation, Zeitstrahl, Karte) und Erfahrungen mit dem Spielrahmen sammeln.
 
 ## Literatur
 
@@ -458,6 +484,9 @@ Links führen zum Volltext oder zu einer Zusammenfassung, die für diesen Entwur
 - Bisra, K., Liu, Q., Nesbit, J. C., Salimi, F. & Winne, P. H. (2018). Inducing self-explanation: A meta-analysis. Educational Psychology Review, 30(3), 703–725.
 - Brod, G. (2021). Generative learning: Which strategies for what age? Educational Psychology Review, 33, 1295–1318. ([Volltext](https://www.pedocs.de/volltexte/2021/23704/pdf/EPR_2021_4_Brod_Generative_Learning_A.pdf))
 - Brunmair, M. & Richter, T. (2019). [Similarity matters: A meta-analysis of interleaved learning and its moderators](https://www.psychologie.uni-wuerzburg.de/fileadmin/06020400/2019/Brunmair_Richter_in_press__2019_META-ANALYSIS_OF_INTERLEAVED_LEARNING.pdf). *Psychological Bulletin, 145*(11), 1029–1052.
+- Chernikova, O., Heitzmann, N., Stadler, M., Holzberger, D., Seidel, T. & Fischer, F. (2020). Simulation-based learning in higher education: A meta-analysis. Review of Educational Research, 90(4), 499–541. https://doi.org/10.3102/0034654320933544
+- Chi, M. T. H. & Wylie, R. (2014). The ICAP framework: Linking cognitive engagement to active learning outcomes. Educational Psychologist, 49(4), 219–243.
+- Clark, D. B., Tanner-Smith, E. E. & Killingsworth, S. S. (2016). Digital games, design, and learning: A systematic review and meta-analysis. Review of Educational Research, 86(1), 79–122. https://doi.org/10.3102/0034654315582065
 - Collins, A., Brown, J. S. & Newman, S. E. (1989). Cognitive apprenticeship: Teaching the crafts of reading, writing, and mathematics. In L. B. Resnick (Hrsg.), *Knowing, learning, and instruction* (S. 453–494). Erlbaum.
 - Costa, J. M., Miranda, G. & Melo, M. (2022). [The four-component instructional design model (4C/ID): A meta-analysis on use and effect](https://repositorio.iscte-iul.pt/bitstream/10071/23015/1/article_81383.pdf). *Learning Environments Research, 25*(2), 445–463.
 - de Jong, T. (2010). Cognitive load theory, educational research, and instructional design: Some food for thought. Instructional Science, 38(2), 105–134.
@@ -486,6 +515,7 @@ Links führen zum Volltext oder zu einer Zusammenfassung, die für diesen Entwur
 - Sarfo, F. K. & Elen, J. (2007). Developing technical expertise in secondary technical schools: The effect of 4C/ID learning environments. *Learning Environments Research, 10*, 207–221.
 - Schroeder, N. L., Nesbit, J. C., Anguiano, C. J. & Adesope, O. O. (2018). Studying and constructing concept maps: A meta-analysis. Educational Psychology Review, 30(2), 431–455.
 - Shah, A. & Soosai Raj, A. G. (2024). [A review of cognitive apprenticeship methods in computing education research](https://par.nsf.gov//servlets/purl/10491208). *SIGCSE 2024*.
+- Sundararajan, N. & Adesope, O. (2020). Keep it coherent: A meta-analysis of the seductive details effect. Educational Psychology Review, 32(3), 707–734. https://doi.org/10.1007/s10648-020-09522-4
 - Sweller, J. (1988). Cognitive load during problem solving: Effects on learning. Cognitive Science, 12(2), 257–285.
 - Sweller, J., van Merriënboer, J. J. G. & Paas, F. (2019). Cognitive architecture and instructional design: 20 years later. Educational Psychology Review, 31(2), 261–292.
 - Tamim, R. M. u. a. (2011). What forty years of research says about the impact of technology on learning. *Review of Educational Research, 81*(1), 4–28.
@@ -493,3 +523,4 @@ Links führen zum Volltext oder zu einer Zusammenfassung, die für diesen Entwur
 - van Merriënboer, J. J. G., Clark, R. E. & de Croock, M. B. M. (2002). [Blueprints for complex learning: The 4C/ID-model](https://link.springer.com/doi/10.1007/BF02504993). *ETR&D, 50*(2), 39–64.
 - van Merriënboer, J. J. G. & Kirschner, P. A. (2017). *Ten steps to complex learning* (3. Aufl.). Routledge.
 - Wisniewski, B., Zierer, K. & Hattie, J. (2020). [The power of feedback revisited: A meta-analysis of educational feedback research](https://pmc.ncbi.nlm.nih.gov/articles/PMC6987456). *Frontiers in Psychology, 10*, 3087.
+- Wouters, P., van Nimwegen, C., van Oostendorp, H. & van der Spek, E. D. (2013). A meta-analysis of the cognitive and motivational effects of serious games. Journal of Educational Psychology, 105(2), 249–265. https://doi.org/10.1037/a0031311

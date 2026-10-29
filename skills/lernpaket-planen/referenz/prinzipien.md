@@ -1,6 +1,6 @@
-# Die 13 Prinzipien für Lernpakete
+# Die 14 Prinzipien für Lernpakete
 
-Kurzfassung aus dem Leitfaden „Evidenzbasierte Lernpakete (SCORM) gestalten“ (Teil B1). **Muss** = in jedem Paket verbindlich, **Soll** = je nach Fach, Thema und Zeit. Alle Pakete werden für SeGeL (selbstgesteuertes Lernen) gebaut, deshalb ist P11 Muss.
+Kurzfassung aus dem Lernpaket-Kompass (Teil B1). **Muss** = in jedem Paket verbindlich, **Soll** = je nach Fach, Thema und Zeit. Alle Pakete werden für SeGeL (selbstgesteuertes Lernen) gebaut, deshalb ist P11 Muss.
 
 Jedes Prinzip hat: **So geht’s** (konkret im Paket), **Warum** (Mechanismus), **Prüffrage** (für Planung und Review) und **Belege** (für Rückfragen der Lehrkraft; nicht in Schülertexte übernehmen).
 
@@ -19,6 +19,7 @@ Jedes Prinzip hat: **So geht’s** (konkret im Paket), **Warum** (Mechanismus), 
 | P11 | Selbststeuerung anleiten | Muss |
 | P12 | Spielelemente gezielt einsetzen | Soll |
 | P13 | Ergebnisse sichern: Merkblatt | Soll |
+| P14 | Handeln am Gegenstand: jede Station eine Szene | Muss |
 
 Querschnitt: iterativ entwickeln – früh einen Prototyp mit Schülern erproben, nach dem Einsatz die Daten auswerten.
 
@@ -198,6 +199,7 @@ Planen (Ziele einschätzen), Überwachen (Fortschritt, Kurz-Checks), Reflektiere
 - Rahmengeschichte mit wiederkehrenden Figuren, die die Aufgaben verbindet
 - Fortschritt am Lernziel oder an der eigenen früheren Leistung messen
 - Keine Ranglisten, keine Punkte ohne Zweck
+- Optional ein Spielrahmen (PAKET.spiel): Mission mit Karte, jede Station ein Ort, nach dem Lösen geht die Geschichte weiter. Der Lerninhalt ist die Spielhandlung (wie bei SQL Island), nicht Belohnung dafür
 
 Spielelemente nur, wenn sie dem Lernen dienen: Geschichte (Game Fiction) und sichtbarer Fortschritt ja, sozialer Vergleich nein. Sachliche oder individuelle Bezugsnorm statt sozialer.
 
@@ -221,3 +223,20 @@ Das Merkblatt öffnet sich erst nach dem Nachweis, sonst wird es nur gelesen ode
 **Prüffrage:** Öffnet sich nach dem Nachweis ein halb vorgefülltes Merkblatt zum Ergänzen, mit Vergleich zum Muster und PDF mit Selbsttest-Fragen?
 
 **Belege:** Erlaubte Spickzettel verbessern das Lernen nicht, Lernende verlassen sich auf den Zettel (Dickson & Miller 2005; Funk & Dickson 2011). Vollständige Notizen der Lehrkraft helfen beim Wiederholen mehr als eigene (etwa +17 %, Kiewra), halbfertige zum Ergänzen ähnlich gut. Concept Maps selbst erstellen wirkt in Klasse 9–12 mit g = 0,74 (Schroeder 2018), Schüler profitieren aber mehr von teilweise vorgegebenen Maps (Gurlitt & Renkl 2008). Die Selbsttest-Fragen nutzen Abruf und Verteilen (P5, P10).
+
+## P14 · Handeln am Gegenstand: jede Station eine Szene (Muss)
+
+**So geht’s**
+- Jede Station hat eine Szene, in der die Lernenden etwas bewegen: schalten, sortieren, markieren, entscheiden, einen simulierten Rechner bedienen, ein Gespräch führen
+- Die Szene steht groß in der Mitte und ohne Scrollen im Blick; Text steht kurz daneben (höchstens etwa 90 Wörter je Station) und reagiert auf das, was die Lernenden tun
+- Das Lösungsbeispiel (P3) wird in derselben Szene vorgeführt („Zeig’s mir“), an einem anderen Fall, danach ist man selbst dran
+- Die Szene ist realistisch: echte Dokumente, Geräte und Abläufe aus dem Beruf, nachgebaut mit erfundenen Daten; Fehler wirken sich so aus wie in echt
+- Jedes Paket hat eine eigene Welt (Farben, Kulisse, Figuren), die Bedienung ist in allen Paketen gleich
+
+Die Szene ist der Kern der Station, nicht ein Zusatz unter dem Text. Erst festlegen, was die Lernenden tun und woran das Paket den Erfolg erkennt, dann die wenigen Sätze dazu schreiben. Auch in Wirtschaft, Sprache oder Gesundheit geht das fast immer: Dokumente prüfen, Formulare ausfüllen, im Postfach reagieren, Kundengespräche führen, Belege sortieren, Abläufe ordnen, mit Reglern eine Wirkung ausprobieren. Nur wenn sich ein Inhalt wirklich nicht handelnd zeigen lässt, bleibt eine Station ohne Szene (mit Begründung im Drehbuch).
+
+**Warum:** Wer handelt, verarbeitet aktiv: Aufmerksamkeit, Vergleich mit dem eigenen Vorwissen und sofortige Rückmeldung aus der Szene. Realistische Szenen machen Wissen anwendbar (P1) und motivieren, weil man etwas bewirkt. Lesen allein ist die passivste Form des Lernens.
+
+**Prüffrage:** Hat jede Station eine Szene, die ohne Scrollen sichtbar ist und in der die Lernenden etwas bewegen, mit Vorführung, kurzem Text daneben und realistischer Rückmeldung?
+
+**Belege:** Simulationsbasiertes Lernen wirkt stark auf komplexe Fertigkeiten, g = 0,85 über 145 Studien; realistischere Simulationen wirken stärker (g = 0,86 gegenüber 0,58), Lernende mit wenig Vorwissen profitieren von Beispielen (Chernikova et al. 2020). ICAP: Lernergebnisse steigen von passiv über aktiv und konstruktiv bis interaktiv (Chi & Wylie 2014). Lernspiele schlagen herkömmlichen Unterricht, d = 0,29, besonders mit zusätzlicher Anleitung und mehreren Sitzungen (Wouters et al. 2013); g = 0,33, und gut gestaltete Spiele bringen noch einmal 0,34 (Clark, Tanner-Smith & Killingsworth 2016). Grenze: Spannende Details ohne Bezug zum Lernziel schaden, g = −0,33 (Sundararajan & Adesope 2020) – Szene und Story müssen den Lerninhalt tragen, nicht schmücken.

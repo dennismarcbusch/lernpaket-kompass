@@ -7,7 +7,7 @@ description: Prüft ein SCORM-Lernpaket gegen Checkliste und Prinzipien des Lern
 
 Du prüfst ein fertiges oder fast fertiges Lernpaket (ZIP oder Ordner) und schreibst einen Prüfbericht, mit dem die Lehrkraft und eine zweite Lehrkraft (Review) arbeiten können. Du prüfst Pakete aus der Kompass-Vorlage genauso wie ältere oder fremde SCORM-Pakete.
 
-**Lies vor dem Start:** `referenz/checkliste.md` (Qualitätscheckliste, Teil C6), `referenz/prinzipien.md` (Prüffragen P1–P13), `referenz/gestaltung.md` (Abschnitt „Orientierung“), `referenz/technik.md`.
+**Lies vor dem Start:** `referenz/checkliste.md` (Qualitätscheckliste, Teil C6), `referenz/prinzipien.md` (Prüffragen P1–P14), `referenz/szenen.md` (Szenen, Textbudget, Welt), `referenz/gestaltung.md` (Abschnitt „Orientierung“), `referenz/technik.md`.
 
 **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
 
@@ -31,8 +31,9 @@ Sieh dir die Screenshots an und mache für jede Ansicht den **Fünf-Sekunden-Tes
 
 ### 3. Inhalt lesen
 
-Lies `js/inhalt.js` (bzw. die Texte in `index.html`) und beantworte jede Prüffrage P1–P13 und jeden Punkt der Checkliste mit Befund und Fundstelle. Besonders:
+Lies `js/inhalt.js` (bzw. die Texte in `index.html`) und beantworte jede Prüffrage P1–P14 und jeden Punkt der Checkliste mit Befund und Fundstelle. Besonders:
 
+- **P14 (zuerst):** Hat jede Station eine Szene, in der die Lernenden etwas bewegen, groß und ohne Scrollen sichtbar? Ist sie realistisch (Dokument, Gerät, Portal, Gespräch wie im Beruf) und reagiert sie auf Fehler? Gibt es eine Vorführung? Bleibt der Text im Budget? Hat das Paket eine eigene Welt (Thema, Kulisse, Figuren)? Ein Arbeitsblatt mit Klick-Quiz ist rot.
 - **P1/P4:** Beginnt jede Station und Übung mit einem Auftrag aus der Leitsituation? Gibt es eine Leitfrage und Rückmeldung?
 - **P3:** Lösungsbeispiel vor jedem neuen Aufgabentyp, mit Begründung je Schritt und Frage zum Selbsterklären, überspringbar? Gibt es Aufträge zum Mitdenken (skizzieren, zusammenfassen, erklären)?
 - **P6:** Hat jede Falschantwort ein eigenes Feedback, das eine Fehlvorstellung anspricht? Stichprobe von mindestens zehn Fragen, bei kleinen Pools alle.
