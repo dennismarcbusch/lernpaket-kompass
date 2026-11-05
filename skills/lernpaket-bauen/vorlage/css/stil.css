@@ -118,10 +118,10 @@ button.zeig::before{content:"▶ ";color:var(--accent)}
 /* ---------- Start: Szene mit Figur ---------- */
 .hero{position:relative;border-radius:var(--r);overflow:hidden;background:linear-gradient(180deg,var(--card),var(--k1));border:1px solid var(--line);box-shadow:var(--shadow);isolation:isolate}
 .hero .kit-kulisse{position:absolute;inset:0;width:100%;height:100%;z-index:-1;opacity:.9}
-.hero-inhalt{display:flex;gap:18px;align-items:flex-end;padding:20px 20px 0;min-height:260px}
-.hero-figur{width:170px;flex:0 0 auto}
+.hero-inhalt{display:flex;gap:18px;align-items:flex-end;padding:16px 20px 0;min-height:200px}
+.hero-figur{width:140px;flex:0 0 auto}
 .hero-figur svg{display:block;width:100%;height:auto}
-.hero-text{flex:1;align-self:center;background:var(--card);border:2px solid var(--ink);border-radius:18px 18px 18px 4px;padding:14px 18px;margin-bottom:24px;box-shadow:var(--shadow);max-width:760px}
+.hero-text{flex:1;align-self:center;background:var(--card);border:2px solid var(--ink);border-radius:18px 18px 18px 4px;padding:12px 18px;margin-bottom:18px;box-shadow:var(--shadow);max-width:760px}
 .hero-text .name{font-size:.8rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
 .hero-text h2{font-size:1.7rem;margin:.1rem 0 .4rem}
 @media (max-width:700px){.hero-inhalt{flex-direction:column;align-items:flex-start}.hero-figur{width:110px;order:2}.hero-text{margin-bottom:0}}
@@ -227,3 +227,47 @@ dl.glossar dd{margin:0}
 .spielkarte{padding:10px}
 .spielbuehne{position:relative;min-height:560px;border-radius:14px;overflow:hidden;background:var(--canvas);border:1px solid var(--line)}
 .zwischenbilanz[hidden]{display:none}
+
+/* ---------- Startseite: Lernpfad statt Textblöcke (Leitfaden C2, Teil 0) ---------- */
+button.link{background:none;border:none;padding:4px 2px;min-height:36px;color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px}
+button.link:hover{border:none;filter:brightness(.85)}
+.start-extra{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;justify-content:space-between;padding:0 6px}
+.lernpfad{padding:14px 16px}
+.lp-teile{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:10px}
+.lp-teil{position:relative;border:1px solid var(--line);border-radius:14px;padding:8px 10px;background:var(--card2);min-width:0}
+.lp-teil.fertig{border-color:var(--ok);background:var(--ok-soft)}
+.lp-teil+.lp-teil::before{content:"";position:absolute;left:-10px;top:26px;width:10px;height:3px;background:var(--line)}
+.lp-kopf{display:flex;align-items:center;gap:8px;background:none;border:none;padding:0;min-height:34px;font-weight:700;text-align:left}
+.lp-kopf:hover{border:none;text-decoration:underline}
+.lp-nr{width:26px;height:26px;flex:0 0 26px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;background:var(--card);border:2px solid var(--line);font-size:.85rem}
+.lp-teil.fertig .lp-nr{background:var(--ok);border-color:var(--ok);color:#fff}
+.lp-sub{font-size:.82rem;color:var(--muted)}
+.lp-punkte{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 2px}
+.lp-punkt{width:30px;height:30px;min-height:30px;padding:0;border-radius:50%;font-size:.8rem;font-weight:700;background:var(--card);border:2px solid var(--accent);color:var(--ink)}
+.lp-punkt.fertig{background:var(--ok);border-color:var(--ok);color:#fff}
+.lp-punkt.skip{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.lp-ziele{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
+.lp-ziele-titel{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-right:4px}
+.ziel-chip{border-radius:999px;padding:3px 12px 3px 8px;min-height:32px;font-size:.88rem;background:var(--card);display:inline-flex;align-items:center;gap:6px}
+.ziel-chip .zs{width:12px;height:12px;flex:0 0 12px;border-radius:50%;border:2px solid var(--muted);box-sizing:border-box}
+.ziel-chip.halb .zs{border-color:var(--accent);background:linear-gradient(90deg,var(--accent) 50%,transparent 50%)}
+.ziel-chip.ok{border-color:var(--ok);color:var(--ok)}
+.ziel-chip.ok .zs{border-color:var(--ok);background:var(--ok)}
+.ziel-chip[aria-expanded="true"]{border-color:var(--ink);box-shadow:0 0 0 1px var(--ink) inset}
+.lp-zielsatz{margin:6px 0 0;font-size:.92rem;color:var(--ink-soft);min-height:0}
+.lp-zielsatz:empty{display:none}
+@media (max-width:760px){.lp-teile{grid-template-columns:1fr 1fr}.lp-teil+.lp-teil::before{display:none}}
+
+/* ---------- Station: Ziel, Vorab-Frage, neue Begriffe, Einschätzung ---------- */
+.st-ziel{font-size:.92rem;color:var(--ink-soft);margin-top:2px}
+.vorab-karte{border:2px dashed var(--accent);border-radius:14px;padding:12px 14px;margin:6px 0 10px;background:var(--accent-soft)}
+.vorab-karte .vorab-kopf{font-size:1.04rem}
+.vorab-karte .frage{background:var(--card)}
+.vorab-notiz{font-size:.92rem;color:var(--ink-soft);margin:2px 0 8px}
+.neu-begriffe{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.begriff-chip{border-radius:999px;padding:2px 12px;min-height:32px;font-size:.88rem;background:var(--card)}
+.begriff-chip[aria-expanded="true"]{background:var(--accent-soft);border-color:var(--accent)}
+.neu-erkl{font-size:.92rem;margin-top:4px}
+.neu-erkl:empty{display:none}
+.einschaetzung{margin-top:6px}
+.einschaetzung .lzzeile{border-bottom:none}

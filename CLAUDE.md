@@ -8,6 +8,7 @@ Leitfaden (`docs/`) und Skill-Set für Claude (`skills/`) zum Bauen von SCORM-1.
 - Der Leitfaden wird als Dokument gepflegt; Änderungen per `skills/leitfaden_sync.py --export <export>` übernehmen.
 - Nach Änderungen an der Vorlage (`engine.js`, `baukasten.js`, `tafel.js`, Dateien in `css/`) muss `pruefe_paket.py skills/lernpaket-bauen/vorlage` komplett grün sein; danach `paket.py zip` auf die Vorlage, damit das Manifest alle Dateien listet.
 - Jede Station der Vorlage und der Beispiele ist eine Szene zum Anfassen (P14); Textbudget und Interaktivitätsprüfung nicht aufweichen.
+- Die Startseite ist nur Überblick (Szene, Lernpfad mit Ziel-Etiketten, ein Knopf, keine Eingaben); Lernziel als Satz, Vorab-Frage, neue Begriffe und Einschätzung gehören an die Station. Startseitenprüfung im Prüfskript nicht aufweichen.
 - Paket-IDs: `<präfix>-<name>`, Präfix frei je Projekt oder Fach.
 - Skill-Beschreibungen höchstens 200 Zeichen, keine spitzen Klammern.
 - Keine personenbezogenen Daten von Schülern; ZIPs nicht einchecken.

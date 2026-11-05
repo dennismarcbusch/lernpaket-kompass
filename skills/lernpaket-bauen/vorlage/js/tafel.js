@@ -249,14 +249,12 @@
     kopf.insertBefore(b, fp && fp.parentNode === kopf ? fp : null);
   }
   // Karte für die Startseite; engine.js hängt sie in vStart() ein
+  // Startseite: eine Zeile, kein Textblock (Leitfaden C2: Startseite nur als Überblick)
   function startKarte() {
-    return el('div', { class: 'card tafel-hinweis' }, [
-      el('div', { class: 'tafel-hinweis-icon', html: TAFEL_ICON, 'aria-hidden': 'true' }),
-      el('div', {}, [
-        el('h2', { text: 'Lieber erst gemeinsam?' }),
-        el('p', { html: 'Zu diesem Paket gibt es einen <b>freiwilligen Input</b> von etwa ' + (T.dauer || '20 Minuten') + '. Ob du teilnimmst oder gleich hier startest, entscheidest du. Das Tafelbild aus dem Input kannst du dir jederzeit selbst ansehen – mit Erklärungen. Du findest es auch oben unter <b>Tafelbild</b>.' }),
-        el('button', { type: 'button', html: TAFEL_ICON + ' Tafelbild ansehen', onclick: function () { oeffnen({}); } })
-      ])
+    return el('div', { class: 'tafel-hinweis' }, [
+      el('span', { class: 'tafel-hinweis-icon', html: TAFEL_ICON, 'aria-hidden': 'true' }),
+      el('span', { html: 'Lieber erst gemeinsam? Freiwilliger Input, etwa ' + (T.dauer || '20 Minuten') + '.' }),
+      el('button', { type: 'button', class: 'link', text: 'Tafelbild ansehen', onclick: function () { oeffnen({}); } })
     ]);
   }
   function ausAdresse() {

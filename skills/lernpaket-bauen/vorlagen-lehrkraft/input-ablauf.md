@@ -24,7 +24,7 @@ Leitfrage über allen Szenen: **„<Leitfrage aus der Leitsituation>“**
 | 0:00–2:00 | Einstieg | – | <Situation aus der Leitsituation> | Vermutungen sammeln, nicht auflösen | – |
 | … | 1 … | | | | |
 | … | letzte Szene (Sicherung) | | | | |
-| 19:00–20:00 | Übergang | Esc | „Im Paket startet ihr mit Station 1. Wer dabei war, darf den Vorwissens-Check machen und überspringen, was sitzt.“ | – | – |
+| 19:00–20:00 | Übergang | Esc | „Im Paket startet ihr mit Station 1. Wer dabei war, kann auf der Startseite „Ich kenne mich schon aus“ wählen und überspringen, was sitzt.“ | – | – |
 
 Alle Zahlen in dieser Tabelle sind mit dem Paket nachgeprüft.
 

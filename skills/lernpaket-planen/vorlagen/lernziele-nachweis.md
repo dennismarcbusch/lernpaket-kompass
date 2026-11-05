@@ -4,7 +4,7 @@ Bestehensgrenze 80 %, beliebig oft wiederholbar, bestes Ergebnis zählt.
 
 ## Lernziele (Schülersprache)
 
-| Nr. | Lernziel | Kurzname |
+| Nr. | Lernziel | Kurzname (Etikett auf der Startseite, höchstens 4 Wörter) |
 |---|---|---|
 | LZ1 | Ich kann … | |
 | LZ2 | Ich kann … | |

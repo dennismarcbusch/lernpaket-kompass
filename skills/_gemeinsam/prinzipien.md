@@ -136,15 +136,16 @@ Mayers Regeln (Kohärenz, Signalisierung, räumliche und zeitliche Nähe, Segmen
 ## P8 · Ziele sichtbar, Nachweis passt (Muss)
 
 **So geht’s**
-- Lernziele in Schülersprache: „Ich kann …“
+- Lernziele in Schülersprache: „Ich kann …“, dazu ein Etikett mit höchstens vier Wörtern
+- Auf der Startseite als Etiketten im Lernpfad, an jeder Station als Satz
 - Jedes Ziel hat eine Aufgabe im Nachweis und mindestens zwei Fragen
 - Am Ende Auswertung je Lernziel mit Lernempfehlung
 
-Lernziel-Nachweis-Tabelle schon in Phase 2, bevor das Drehbuch entsteht. Ziele beim Einstieg mit Selbsteinschätzung verbinden, damit sie gelesen werden.
+Lernziel-Nachweis-Tabelle schon in Phase 2, bevor das Drehbuch entsteht. Ziele dort mit Tätigkeit verbinden, wo sie gebraucht werden: Satz und Vorab-Frage am Stationsanfang, Einschätzung nach dem Kurz-Check. Eine Liste aller Ziele mit Skalen auf der Startseite wird überflogen und überlastet den Einstieg.
 
 **Warum:** Bloß angezeigte Ziele werden kaum gelesen – sie wirken erst, wenn Lernende sie nutzen. Passen Ziele, Übungen und Nachweis zusammen, üben Schüler das, was zählt.
 
-**Prüffrage:** Stehen die Lernziele in Schülersprache am Anfang, hat jedes Ziel mindestens zwei Fragen oder Prüfpunkte im Nachweis, und gibt es eine Auswertung je Ziel?
+**Prüffrage:** Stehen die Lernziele als Etikett auf dem Lernpfad und als Satz an jeder Station, hat jedes Ziel mindestens zwei Fragen oder Prüfpunkte im Nachweis, und gibt es eine Auswertung je Ziel?
 
 **Belege:** Jiang & Elen 2011 (nach Kerres 2024): Lernziele beeinflussen das Lernen nur, wenn Lernende aufgefordert werden, sich mit ihnen zu befassen. Hattie: klare Ziele und Erfolgskriterien. Constructive Alignment: Ziele, Lernaktivitäten und Prüfung passen zusammen.
 
@@ -181,17 +182,18 @@ Wiederholung über das Paket verteilen und Aufgabentypen mischen. Fühlt sich f�
 ## P11 · Selbststeuerung anleiten (Muss)
 
 **So geht’s**
-- Selbsteinschätzung je Lernziel am Anfang und am Ende
-- Fortschrittsanzeige und Empfehlung „Was als Nächstes?“
+- Einschätzung je Lernziel nach dem Kurz-Check (ein Klick: unsicher, einigermaßen, sicher) und im Abschluss
+- Rückmeldung, wenn Einschätzung und Ergebnis auseinanderliegen
+- Lernpfad auf der Startseite, Fortschrittsanzeige und Empfehlung „Was als Nächstes?“
 - Reflexionsfrage mit Musterantwort zum Vergleichen
 
-Planen (Ziele einschätzen), Überwachen (Fortschritt, Kurz-Checks), Reflektieren (Vergleich vorher/nachher, Reflexionsfrage mit Musterantwort). Weil alle Pakete SeGeL-tauglich sind, ist das Pflicht.
+Planen (Lernpfad mit Dauer und Zielen, Abkürzung für Lernende mit Vorwissen), Überwachen (Fortschritt, Kurz-Checks, Einschätzung nach dem Kurz-Check), Reflektieren (Einschätzung im Vergleich mit dem Nachweis, Reflexionsfrage mit Musterantwort). Weil alle Pakete SeGeL-tauglich sind, ist das Pflicht. Nicht auf der Startseite einschätzen lassen: Wer die Begriffe noch nicht kennt, rät.
 
 **Warum:** Selbststeuerung heißt: planen, sich beobachten, nachsteuern. Das lässt sich trainieren – bloße Wahlfreiheit bringt nichts.
 
-**Prüffrage:** Gibt es Selbsteinschätzung je Lernziel vorher und nachher, eine Fortschrittsanzeige, Reflexionsfragen mit Musterantwort und eine Empfehlung „Was als Nächstes?“
+**Prüffrage:** Gibt es eine Einschätzung je Lernziel nach dem Kurz-Check und im Abschluss (im Vergleich mit dem Ergebnis), einen Lernpfad mit Fortschritt, Reflexionsfragen mit Musterantwort und eine Empfehlung „Was als Nächstes?“
 
-**Belege:** Training selbstregulierten Lernens g = 0,71 in der Sekundarstufe (Dignath & Büttner 2008), Werkzeuge zur Selbstüberwachung d = 0,42 (Dignath & van Ewijk 2023). Lernerkontrolle allein g = 0,05 (Karich et al. 2014). Kerres: Erfolg selbstgesteuerten Lernens hängt davon ab, ob Lernende ihren Lernprozess überwachen können.
+**Belege:** Training selbstregulierten Lernens g = 0,71 in der Sekundarstufe (Dignath & Büttner 2008), Werkzeuge zur Selbstüberwachung d = 0,42 (Dignath & van Ewijk 2023). Lernerkontrolle allein g = 0,05 (Karich et al. 2014). Kerres: Erfolg selbstgesteuerten Lernens hängt davon ab, ob Lernende ihren Lernprozess überwachen können. Einschätzungen mit Abstand und nach einem Abrufversuch sind deutlich treffsicherer als sofortige (Rhodes & Tauber 2011); Anfänger überschätzen sich vorab oft (Kruger & Dunning 1999).
 
 ## P12 · Lernstoff als Spielregel: erst die Spielidee (Muss)
 

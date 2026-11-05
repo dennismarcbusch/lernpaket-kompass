@@ -1,10 +1,11 @@
 /* =====================================================================
    Lernpaket-Engine (Lernpaket-Kompass) – setzt den Leitfaden technisch um.
    Diese Datei wird NICHT pro Paket verändert. Inhalte stehen in js/inhalt.js.
-   Aufbau: Start (Lernziele, Selbsteinschätzung, Vorwissens-Check) → ① Entdecken
-   (Stationen mit Lösungsbeispiel und Kurz-Check) → ② Üben (3 gestufte Tipps,
+   Aufbau: Start (Szene, Lernpfad mit Ziel-Etiketten, ein Knopf; Abkürzung
+   „Ich kenne mich schon aus“) → ① Entdecken (Station: Ziel, Vorab-Frage, Szene
+   mit Lösungsbeispiel, Kurz-Check mit Einschätzung) → ② Üben (3 gestufte Tipps,
    Reflexion) → ③ Nachweis (Teil A Handlungsaufgabe, Teil B Fragenpool, 80 %) →
-   ④ Abschluss (Auswertung je Lernziel, Selbsteinschätzung nachher, Merkblatt).
+   ④ Abschluss (Auswertung je Lernziel, Einschätzung im Vergleich, Merkblatt).
    Optional: Tafelbild für einen freiwilligen Input (js/tafel.js, PAKET.tafel).
    Version 2: Jede Station ist eine Bühne zum Anfassen (Interaktion in der Mitte,
    Erklärungen in der Notiz daneben, Lösungsbeispiel als Vorführung „Zeig's mir“),
@@ -94,7 +95,8 @@
 
   /* ---------- Speicher (suspend_data, max. 4096 Zeichen) ---------- */
   var KEY = 'lernpaket-' + (P.id || 'ohne-id');
-  var S = { se: {}, sn: {}, st: {}, ue: {}, best: null, lz: {}, n: 0, skip: [], sp: {} };
+  // ej/en: Einschätzung je Lernziel nach dem Kurz-Check bzw. im Abschluss (1–3); vb: Vorab-Fragen (1 richtig, 0 falsch, -1 übersprungen)
+  var S = { ej: {}, en: {}, vb: {}, st: {}, ue: {}, best: null, lz: {}, n: 0, skip: [], sp: {} };
   (function laden() {
     var o = {};
     try { var s = SC.aktiv ? SC.get('cmi.suspend_data') : localStorage.getItem(KEY); o = s ? JSON.parse(s) : {}; } catch (_) { o = {}; }
@@ -115,7 +117,21 @@
     if (!/^\d+\.\d+(\.\d+)?$/.test(String(P.version || ''))) fehler.push('PAKET.version fehlt oder hat nicht die Form 1.0 (wird klein in der Kopfzeile und auf den Ausdrucken angezeigt).');
     if (BESTEHEN !== 80) hinweise.push('Bestehensgrenze ist ' + BESTEHEN + ' %, der Leitfaden sieht 80 % vor.');
     if (LZ.length < 3 || LZ.length > 8) hinweise.push('Leitfaden: drei bis acht Lernziele (jetzt ' + LZ.length + ').');
-    LZ.forEach(function (z) { id(z.id, 'Lernziel'); if (!/^Ich kann/.test(z.text || '')) hinweise.push(z.id + ': Lernziel in Schülersprache beginnen („Ich kann …“).'); });
+    LZ.forEach(function (z) {
+      id(z.id, 'Lernziel');
+      if (!/^Ich kann/.test(z.text || '')) hinweise.push(z.id + ': Lernziel in Schülersprache beginnen („Ich kann …“).');
+      if (!z.kurz) hinweise.push(z.id + ': Etikett (kurz) fehlt – es steht auf der Startseite im Lernpfad.');
+      else if (woerter(z.kurz) > 4) hinweise.push(z.id + ': Etikett „' + z.kurz + '“ ist zu lang (höchstens 4 Wörter).');
+    });
+    // Startseite: nur Überblick (Leitfaden C2, Teil 0)
+    var lw = woerter((SPIEL && SPIEL.intro) || P.leitsituation);
+    if (!lw) hinweise.push('Leitsituation fehlt (zwei, drei Sätze für die Startseite).');
+    else if (lw > 45) hinweise.push('Startseite: Leitsituation hat ' + lw + ' Wörter, Ziel höchstens etwa 40.');
+    if ((P.glossar || []).some(function (g) { return g.vorab === true; })) hinweise.push('Glossar: vorab: true stellt Begriffe an Station 1 vor. Besser vorab: "<Stations-id>" – dort, wo der Begriff gebraucht wird.');
+    (P.glossar || []).forEach(function (g) { if (typeof g.vorab === 'string' && !STATIONEN.some(function (s) { return s.id === g.vorab; })) fehler.push('Glossar „' + g.begriff + '“: Station ' + g.vorab + ' gibt es nicht.'); });
+    var vb = alleVorab();
+    if (!vb.length) hinweise.push('Keine Vorab-Fragen (Station: vorab) – ohne sie gibt es keine Abkürzung für Lernende mit Vorwissen.');
+    vb.forEach(function (q) { if (leichtZuRaten(FR[q])) hinweise.push(q + ': Vorab-Frage ist leicht zu erraten (Einfachauswahl oder Hotspot). Besser Zahl, Text, Zuordnen oder Mehrfachauswahl, sonst trifft die Empfehlung zum Überspringen Glückspilze.'); });
     (P.fragen || []).forEach(function (f) {
       id(f.id, 'Frage');
       if (!FR[f.id] || !lzIds()[f.lz]) fehler.push(f.id + ': Lernziel "' + f.lz + '" gibt es nicht.');
@@ -144,8 +160,9 @@
       if (tw > 90) hinweise.push(s.id + ': Textbudget überschritten (' + tw + ' Wörter in Auftrag, Leitfrage und Kurz erklärt; Ziel höchstens 90). Mehr in die Szene, weniger in den Text.');
       if (s.beispiel && s.beispiel.schritte && s.interaktion) hinweise.push(s.id + ': Lösungsbeispiel als Text (beispiel) – besser als Vorführung in der Szene (demo in der Interaktion).');
       if (s.interaktion && !s.selbsterklaerung && !(s.beispiel && s.beispiel.selbsterklaerung)) hinweise.push(s.id + ': keine Frage zum Selbsterklären (selbsterklaerung: {schritt, frage}) für die Vorführung.');
+      [].concat(s.vorab || []).forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Vorab-Frage ' + q + ' gibt es nicht.'); });
       var c = (s.check || []);
-      c.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); });
+      c.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); if ([].concat(s.vorab || []).indexOf(q) >= 0) hinweise.push(s.id + ': Frage ' + q + ' ist Vorab-Frage und Kurz-Check zugleich.'); });
       if (c.length < 3 || c.length > 5) hinweise.push(s.id + ': Kurz-Check mit 3–5 Fragen (jetzt ' + c.length + ').');
     });
     UEBUNGEN.forEach(function (u, i) {
@@ -188,6 +205,22 @@
     return { fehler: fehler, hinweise: hinweise };
   }
   function lzIds() { var o = {}; LZ.forEach(function (z) { o[z.id] = 1; }); return o; }
+  // Vorab-Fragen einer Station: s.vorab (id oder Liste); ältere Pakete: PAKET.vorwissen, nach Lernziel zugeordnet
+  function vorabFragen(s) {
+    if (s.vorab === false) return [];
+    if (s.vorab) return [].concat(s.vorab).filter(function (q) { return FR[q]; });
+    return (P.vorwissen || []).filter(function (q) { return FR[q] && (s.lz || []).indexOf(FR[q].lz) >= 0; });
+  }
+  function alleVorab() { var o = []; STATIONEN.forEach(function (s) { vorabFragen(s).forEach(function (q) { if (o.indexOf(q) < 0) o.push(q); }); }); return o; }
+  function leichtZuRaten(f) {
+    if (!f) return false;
+    if (f.typ === 'hotspot') return true;
+    return f.typ === 'mc' && !f.mehrfach && (f.optionen || []).filter(function (o) { return o.richtig; }).length === 1;
+  }
+  // Überspringbar ist eine Station, deren Vorab-Fragen alle richtig beantwortet wurden
+  function skipNeu() {
+    S.skip = STATIONEN.filter(function (s) { var q = vorabFragen(s); return q.length && q.every(function (id) { return S.vb[id] === 1; }); }).map(function (s) { return s.id; });
+  }
 
   /* ---------- Fragen-Baustein ---------- */
   // modus 'lernen': Prüfen-Knopf, Feedback direkt an der Antwort, Nochmal, Lösung zeigen.
@@ -422,25 +455,42 @@
     haupt.innerHTML = '';
     var pr = pruefeInhalt();
     if (pr.fehler.length) haupt.appendChild(msg('<b>Hinweis für Autor:innen – der Inhalt hat Fehler:</b><br>' + pr.fehler.map(esc).join('<br>'), 'bad'));
-    ({ start: vStart, entdecken: WELTSPIEL ? vSpiel : vStation, ueben: vUebung, nachweis: vNachweis, abschluss: vAbschluss }[ANSICHT.teil])();
+    ({ start: vStart, abkuerzung: vAbkuerzung, entdecken: WELTSPIEL ? vSpiel : vStation, ueben: vUebung, nachweis: vNachweis, abschluss: vAbschluss }[ANSICHT.teil])();
   }
 
   /* ---------- Start ---------- */
-  var startHinweisGezeigt = false;
+  // Einschätzung in drei Stufen (Leitfaden P11): kurz, einmal antippen, nach dem ersten Kontakt mit dem Stoff
+  var STUFEN = ['unsicher', 'einigermaßen', 'sicher'];
+  function stufeText(v) { return v >= 1 && v <= 3 ? STUFEN[v - 1] : '–'; }
   function skala(werte, key, lzid, onChange) {
-    var stufen = ['1 noch gar nicht', '2', '3', '4', '5 sicher'];
-    var g = el('div', { class: 'skala', role: 'radiogroup', 'aria-label': 'Selbsteinschätzung ' + lzid });
-    stufen.forEach(function (s, i) {
+    var g = el('div', { class: 'skala', role: 'radiogroup', 'aria-label': 'Wie sicher bist du bei ' + (lz(lzid).kurz || lzid) + '?' });
+    STUFEN.forEach(function (s, i) {
       var inp = el('input', { type: 'radio', name: key + lzid, value: i + 1 });
       if (werte[lzid] === i + 1) inp.checked = true;
-      inp.addEventListener('change', function () { werte[lzid] = i + 1; speichern(); if (onChange) onChange(); });
+      inp.addEventListener('change', function () { werte[lzid] = i + 1; speichern(); if (onChange) onChange(i + 1); });
       g.appendChild(el('label', {}, [inp, el('span', { text: s })]));
     });
     return g;
   }
+  // nach dem Kurz-Check: Einschätzung je Lernziel der Station, mit Rückmeldung zur Treffsicherheit
+  function einschaetzung(lzs, n, gesamt) {
+    if (!(lzs || []).length) return null;
+    var box = el('div', { class: 'einschaetzung' });
+    var rm = el('div', { 'aria-live': 'polite' });
+    lzs.forEach(function (id) {
+      box.appendChild(el('div', { class: 'lzzeile se' }, [el('div', { html: 'Wie sicher bist du jetzt bei <b>' + esc(lz(id).kurz || id) + '</b>?' }), skala(S.ej, 'ej', id, function (v) {
+        rm.innerHTML = '';
+        if (gesamt && v === 3 && n < gesamt) rm.appendChild(msg('Du fühlst dich sicher, hattest aber ' + (gesamt - n) + ' von ' + gesamt + ' Fragen falsch. Lies dir die Erklärungen dazu noch einmal durch.', 'warn'));
+        else if (gesamt && v === 1 && n === gesamt) rm.appendChild(msg('Alles richtig – du kannst mehr, als du denkst.', 'ok'));
+        else rm.appendChild(msg('Notiert. Im Abschluss vergleichst du deine Einschätzung mit dem Nachweis.', ''));
+      })]));
+    });
+    box.appendChild(rm);
+    return box;
+  }
   function weltkarte() {
-    var n = STATIONEN.length + 1, w = 640, h = 230, pts = [];
-    for (var i = 0; i < n; i++) pts.push([n === 1 ? w / 2 : 100 + i * (w - 200) / (n - 1), 120 + Math.sin(i * 1.7) * 58]);
+    var n = STATIONEN.length + 1, w = 640, h = 200, pts = [];
+    for (var i = 0; i < n; i++) pts.push([n === 1 ? w / 2 : 100 + i * (w - 200) / (n - 1), 105 + Math.sin(i * 1.7) * 45]);
     var d = 'M' + pts.map(function (p) { return p[0].toFixed(0) + ' ' + p[1].toFixed(0); }).join(' L');
     var svg = '<svg viewBox="0 0 ' + w + ' ' + h + '" role="group" aria-label="Karte der Missionen"><path d="' + d + '" fill="none" stroke="var(--line)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" stroke-dasharray="2 18"/>';
     pts.forEach(function (p, i) {
@@ -449,7 +499,7 @@
       svg += '<g class="ort-knoten" data-i="' + i + '" tabindex="0" role="button" aria-label="' + esc(name) + (fertig ? ' (geschafft)' : '') + '">' +
         '<circle class="ring" cx="' + p[0] + '" cy="' + p[1] + '" r="24" fill="' + (fertig ? 'var(--ok)' : s ? 'var(--card)' : 'var(--deko)') + '" stroke="' + (fertig ? 'var(--ok)' : 'var(--accent)') + '" stroke-width="3"/>' +
         '<text x="' + p[0] + '" y="' + (p[1] + 7) + '" text-anchor="middle" font-size="20" font-weight="800" fill="' + (fertig ? '#fff' : 'var(--ink)') + '">' + (fertig ? '✓' : s ? (s.mission && s.mission.symbol) || (i + 1) : '🏁') + '</text>' +
-        '<text x="' + p[0] + '" y="' + (p[1] + (p[1] > 120 ? -34 : 46)) + '" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">' + esc(name.length > 22 ? name.slice(0, 21) + '…' : name) + '</text></g>';
+        '<text x="' + p[0] + '" y="' + (p[1] + (p[1] > 105 ? -34 : 46)) + '" text-anchor="middle" font-size="14" font-weight="700" fill="var(--ink)">' + esc(name.length > 22 ? name.slice(0, 21) + '…' : name) + '</text></g>';
     });
     var box = el('div', { class: 'weltkarte', html: (KIT ? KIT.kulisse(WELT.kulisse || THEMEN[WELT.thema] || 'serverraum') : '') + svg + '</svg>' });
     box.querySelectorAll('.ort-knoten').forEach(function (g) {
@@ -459,71 +509,112 @@
     });
     return box;
   }
+  // Der nächste sinnvolle Schritt – für den einen Knopf auf der Startseite
+  function naechsterSchritt() {
+    var begonnen = anzahl(S.st) || anzahl(S.ue) || S.n;
+    var vor = begonnen ? 'Weiter: ' : 'Los geht’s: ';
+    if (WELTSPIEL) { if (STATIONEN.some(function (s) { return !S.st[s.id]; })) return { t: 'entdecken', i: 0, label: begonnen ? 'Weiterspielen →' : 'Los geht’s →' }; }
+    else for (var i = 0; i < STATIONEN.length; i++) if (!S.st[STATIONEN[i].id] && S.skip.indexOf(STATIONEN[i].id) < 0) return { t: 'entdecken', i: i, label: vor + 'Station ' + (i + 1) + ' →' };
+    for (var k = 0; k < UEBUNGEN.length; k++) if (!S.ue[UEBUNGEN[k].id]) return { t: 'ueben', i: k, label: vor + 'Übung ' + (k + 1) + ' →' };
+    if (S.best === null || S.best < BESTEHEN) return { t: 'nachweis', i: 0, label: vor + '③ Nachweis →' };
+    return { t: 'abschluss', i: 0, label: 'Zum ④ Abschluss →' };
+  }
+  // Lernpfad: die vier Teile auf einen Blick, Stationen als Punkte, Lernziele als Etiketten (Advance Organizer)
+  function lernpfad() {
+    var box = el('section', { class: 'card lernpfad', 'aria-label': 'Dein Lernweg' });
+    var reihe = el('ol', { class: 'lp-teile' });
+    function teil(id, nr, name, sub, fertig, extra) {
+      var li = el('li', { class: 'lp-teil' + (fertig ? ' fertig' : '') });
+      li.appendChild(el('button', { type: 'button', class: 'lp-kopf', onclick: function () { zeige(id, 0); } }, [el('span', { class: 'lp-nr', 'aria-hidden': 'true', text: fertig ? '✓' : nr }), el('span', { text: name })]));
+      if (extra) li.appendChild(extra);
+      li.appendChild(el('div', { class: 'lp-sub', html: sub }));
+      reihe.appendChild(li);
+    }
+    var stF = STATIONEN.filter(function (s) { return S.st[s.id]; }).length;
+    var punkte = el('div', { class: 'lp-punkte' });
+    STATIONEN.forEach(function (s, i) {
+      var skip = S.skip.indexOf(s.id) >= 0 && !S.st[s.id];
+      punkte.appendChild(el('button', { type: 'button', class: 'lp-punkt' + (S.st[s.id] ? ' fertig' : '') + (skip ? ' skip' : ''), title: s.titel + (skip ? ' – darfst du überspringen' : ''),
+        'aria-label': (WELTSPIEL ? 'Level ' : 'Station ') + (i + 1) + ': ' + s.titel + (S.st[s.id] ? ' (erledigt)' : skip ? ' (darfst du überspringen)' : ''),
+        text: S.st[s.id] ? '✓' : skip ? '»' : String(i + 1), onclick: function () { zeige('entdecken', WELTSPIEL ? 0 : i); } }));
+    });
+    var wort = WELTSPIEL ? 'Level' : (STATIONEN.length === 1 ? 'Station' : 'Stationen');
+    // im Spielrahmen stehen die Stationen schon auf der Missionskarte
+    teil('entdecken', '1', WELTSPIEL ? (WELTSPIEL.tab || 'Spielen') : 'Entdecken', stF + ' von ' + STATIONEN.length + ' ' + wort, STATIONEN.length && stF === STATIONEN.length, SPIEL ? null : punkte);
+    var ueF = UEBUNGEN.filter(function (u) { return S.ue[u.id]; }).length;
+    if (UEBUNGEN.length) teil('ueben', '2', 'Üben', ueF + ' von ' + UEBUNGEN.length + ' Aufgaben', ueF === UEBUNGEN.length);
+    teil('nachweis', '3', 'Nachweis', S.best === null ? 'ab ' + BESTEHEN + ' % bestanden' : 'bestes Ergebnis ' + S.best + ' %', S.best !== null && S.best >= BESTEHEN);
+    teil('abschluss', '4', 'Abschluss', 'Merkblatt zum Mitnehmen', false);
+    box.appendChild(reihe);
+    // Lernziele als kurze Etiketten; der ganze Satz erscheint beim Antippen
+    if (LZ.length) {
+      var ziele = el('div', { class: 'lp-ziele' }, [el('span', { class: 'lp-ziele-titel', text: 'Deine Ziele' })]);
+      var satz = el('p', { class: 'lp-zielsatz', 'aria-live': 'polite' });
+      LZ.forEach(function (z) {
+        var erreicht = S.n && (S.lz[z.id] || 0) >= 80;
+        var begonnen = STATIONEN.some(function (s) { return (s.lz || []).indexOf(z.id) >= 0 && S.st[s.id]; });
+        var stand = erreicht ? 'im Nachweis erreicht' : begonnen ? 'angefangen' : 'noch offen';
+        var b = el('button', { type: 'button', class: 'ziel-chip' + (erreicht ? ' ok' : begonnen ? ' halb' : ''), 'aria-expanded': 'false', title: stand,
+          html: '<span class="zs" aria-hidden="true"></span>' + esc(z.kurz || z.id) + '<span class="sr"> (' + stand + ')</span>' });
+        b.addEventListener('click', function () {
+          var auf = b.getAttribute('aria-expanded') !== 'true';
+          ziele.querySelectorAll('.ziel-chip').forEach(function (x) { x.setAttribute('aria-expanded', 'false'); });
+          b.setAttribute('aria-expanded', auf ? 'true' : 'false');
+          satz.innerHTML = auf ? z.text : '';
+        });
+        ziele.appendChild(b);
+      });
+      box.appendChild(ziele);
+      box.appendChild(satz);
+    }
+    return box;
+  }
   function vStart() {
     if (SPIEL) {
       var sp = el('div', { class: 'card karte-mission' });
       sp.appendChild(el('div', {}, [el('div', { class: 'ort klein', text: 'Deine Mission' }), el('h2', { text: SPIEL.titel || P.titel }), figur(SPIEL.intro || P.leitsituation || ''), SPIEL.ziel ? el('p', { html: '<b>Ziel:</b> ' + SPIEL.ziel }) : null]));
       sp.appendChild(weltkarte());
       haupt.appendChild(sp);
-    }
-    if (!SPIEL && P.leitsituation && KIT) {
+    } else if (P.leitsituation && KIT) {
       var fg = figurDaten();
       var hero = el('div', { class: 'hero' });
       hero.innerHTML = KIT.kulisse(WELT.kulisse || THEMEN[WELT.thema] || 'serverraum');
       hero.appendChild(el('div', { class: 'hero-inhalt' }, [el('div', { class: 'hero-figur', 'aria-hidden': 'true', html: figurBild(null, 'froh') }), el('div', { class: 'hero-text' }, [el('div', { class: 'name', text: (fg.name || '') + (fg.rolle ? ' · ' + fg.rolle : '') }), el('h2', { text: P.titel || '' }), el('div', { html: P.leitsituation })])]));
       haupt.appendChild(hero);
+    } else if (P.leitsituation) {
+      haupt.appendChild(el('div', { class: 'card' }, figur(P.leitsituation)));
     }
+    haupt.appendChild(lernpfad());
+    // unaufdringliche Zusatzwege: Input mit Tafelbild, Abkürzung für Lernende mit Vorwissen
+    var extra = el('div', { class: 'start-extra' });
+    if (P.tafel && window.TAFEL && window.TAFEL.startKarte) extra.appendChild(window.TAFEL.startKarte());
+    if (alleVorab().length) extra.appendChild(el('button', { type: 'button', class: 'link', id: 'abkuerzung', text: 'Ich kenne mich schon aus →', onclick: function () { zeige('abkuerzung'); } }));
+    if (extra.children.length) haupt.appendChild(extra);
+    var nx = naechsterSchritt();
+    leiste((P.dauer ? 'Dauer: ' + esc(P.dauer) + ' · ' : '') + 'Dein Stand bleibt gespeichert.', nx.label, function () { zeige(nx.t, nx.i); });
+  }
+  // Abkürzung: alle Vorab-Fragen auf einmal; was sitzt, wird auf dem Lernpfad als überspringbar markiert
+  function vAbkuerzung() {
+    var ids = alleVorab();
     var c = el('div', { class: 'card' });
-    c.appendChild(el('h2', { text: 'So läuft es ab' }));
-    if (P.leitsituation && !SPIEL && !KIT) c.appendChild(figur(P.leitsituation));
-    c.appendChild(el('ul', {}, [
-      el('li', { html: '<b>① Entdecken:</b> ' + STATIONEN.length + (STATIONEN.length === 1 ? ' Station' : ' Stationen') + ' zum Ausprobieren, mit Vorführung und Kurz-Check <span class="badge zaehlt-nicht">zählt nicht</span>' }),
-      UEBUNGEN.length ? el('li', { html: '<b>② Üben:</b> ' + UEBUNGEN.length + (UEBUNGEN.length === 1 ? ' Aufgabe' : ' Aufgaben') + ' mit Tipps <span class="badge zaehlt-nicht">zählt nicht</span>' }) : null,
-      el('li', { html: '<b>③ Nachweis:</b> ohne Hilfe, bestanden ab ' + BESTEHEN + ' %, beliebig oft wiederholbar, das beste Ergebnis zählt' }),
-      el('li', { html: '<b>④ Abschluss:</b> Auswertung je Lernziel und Merkblatt zum Mitnehmen' })
-    ]));
-    if (P.dauer) c.appendChild(el('p', { class: 'klein', text: 'Dauer: ' + P.dauer + '. Du kannst jederzeit aufhören, dein Stand bleibt erhalten.' }));
+    c.appendChild(el('h2', { text: 'Was kannst du schon?' }));
+    c.appendChild(el('p', { class: 'klein', html: 'Beantworte die Fragen ohne Hilfe. Was du sicher kannst, darfst du danach überspringen. Alle Stationen bleiben erreichbar, der Nachweis ist für alle gleich. <span class="badge zaehlt-nicht">zählt nicht</span>' }));
+    var qs = ids.map(function (id, k) { var q = frage(FR[id], 'pruefung', { nr: k + 1 }); c.appendChild(q.el); return q; });
+    var erg = el('div', { 'aria-live': 'polite' });
+    c.appendChild(erg);
     haupt.appendChild(c);
-    if (P.tafel && window.TAFEL && window.TAFEL.startKarte) haupt.appendChild(window.TAFEL.startKarte());  // optionaler Input mit Tafelbild
-    var vorab = (P.glossar || []).filter(function (g) { return g.vorab; });
-    if (vorab.length) {
-      var gb = el('div', { class: 'card' }, [el('h2', { text: 'Wichtige Begriffe vorab' }), el('p', { class: 'klein', text: 'Diese Wörter kommen gleich vor. Alle Begriffe findest du später unter jeder Station im Glossar.' })]);
-      gb.appendChild(el('dl', { class: 'glossar' }, vorab.reduce(function (a, g) { return a.concat([el('dt', { html: g.begriff }), el('dd', { html: g.erklaerung })]); }, [])));
-      haupt.appendChild(gb);
+    function auswerten() {
+      qs.forEach(function (q) { var r = q.bewerten(); q.feedbackNachher(); S.vb[q.f.id] = r.score >= 1 ? 1 : 0; });
+      skipNeu(); speichern(); kopf();
+      var namen = S.skip.map(function (id) { return esc(STATIONEN.filter(function (x) { return x.id === id; })[0].titel); });
+      erg.innerHTML = '';
+      erg.appendChild(msg(namen.length ? (WELTSPIEL ? '<b>Stark!</b> Diese Level fallen dir bestimmt leicht: ' : '<b>Stark!</b> Diese Stationen darfst du überspringen: ') + namen.join(', ') + '. Sie sind auf deinem Lernweg markiert.' : 'Hier ist noch einiges neu für dich. Arbeite die Stationen der Reihe nach durch – dafür sind sie da.', namen.length ? 'ok' : ''));
+      var nx = naechsterSchritt();
+      leiste('Ausgewertet.', nx.label, function () { zeige(nx.t, nx.i); });
+      erg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-
-    var z = el('div', { class: 'card' });
-    z.appendChild(el('h2', { text: 'Deine Lernziele' }));
-    z.appendChild(el('p', { text: 'Lies jedes Ziel und schätze ehrlich ein, wie sicher du schon bist. Am Ende vergleichst du mit deinem Ergebnis.' }));
-    LZ.forEach(function (l) {
-      z.appendChild(el('div', { class: 'lzzeile se' }, [el('div', { html: '<b>' + esc(l.id) + '</b> ' + l.text }), skala(S.se, 'se', l.id, function () { kopf(); })]));
-    });
-    haupt.appendChild(z);
-
-    if (P.vorwissen && P.vorwissen.length) {
-      var v = el('details', { class: 'card' });
-      v.appendChild(el('summary', { text: 'Kennst du dich schon aus? Freiwilliger Vorwissens-Check' }));
-      v.appendChild(el('p', { class: 'klein', text: 'Wer hier sicher ist, bekommt eine Empfehlung, welche Stationen er überspringen kann. Alle Stationen bleiben erreichbar.' }));
-      var qs = P.vorwissen.map(function (id, k) { var q = frage(FR[id], 'pruefung', { nr: k + 1 }); v.appendChild(q.el); testHaken.push({ art: 'frage', obj: q }); return q; });
-      var erg = el('div');
-      v.appendChild(el('button', { type: 'button', text: 'Vorwissens-Check auswerten', onclick: function () {
-        var proLz = {};
-        qs.forEach(function (q) { var r = q.bewerten(); q.feedbackNachher(); var k = q.f.lz; proLz[k] = proLz[k] || { n: 0, ok: 0 }; proLz[k].n++; if (r.score >= 1) proLz[k].ok++; });
-        var sicher = Object.keys(proLz).filter(function (k) { return proLz[k].ok === proLz[k].n; });
-        S.skip = STATIONEN.filter(function (s) { return (s.lz || []).length && s.lz.every(function (x) { return sicher.indexOf(x) >= 0; }); }).map(function (s) { return s.id; });
-        speichern();
-        erg.innerHTML = '';
-        erg.appendChild(msg(S.skip.length ? '<b>Empfehlung:</b> Du kannst diese Stationen überspringen oder nur überfliegen: ' + S.skip.map(function (id) { var s = STATIONEN.filter(function (x) { return x.id === id; })[0]; return esc(s.titel); }).join(', ') + '. Der Nachweis ist für alle gleich.' : 'Arbeite die Stationen der Reihe nach durch – sie bringen dir noch etwas.', 'ok'));
-      } }));
-      v.appendChild(erg);
-      haupt.appendChild(v);
-    }
-    var ziel = STATIONEN.length ? 'Los geht’s: Station 1 →' : 'Los geht’s →';
-    leiste('Schätze dich zu jedem Lernziel ein, dann geht es los.', ziel, function () {
-      var fehlt = LZ.filter(function (l) { return !S.se[l.id]; }).length;
-      if (fehlt && !startHinweisGezeigt) { startHinweisGezeigt = true; z.appendChild(msg('Du hast ' + fehlt + ' Lernziel(e) noch nicht eingeschätzt. Das dauert nur einen Moment und hilft dir am Ende beim Vergleich. Du kannst aber auch direkt weiter.', 'warn')); z.scrollIntoView({ behavior: 'smooth', block: 'end' }); return; }
-      zeige('entdecken', 0);
-    });
+    testHaken.push({ art: 'abkuerzung', obj: { auswerten: auswerten, loesen: function () { qs.forEach(function (q) { q.loesungEinsetzen(); }); } } });
+    leiste(ids.length + (ids.length === 1 ? ' Frage' : ' Fragen'), 'Auswerten →', auswerten);
   }
 
   /* ---------- Bausteine zum Mitdenken und Nachschlagen ---------- */
@@ -695,6 +786,7 @@
       fertige.forEach(function (s) {
         var d = el('details', { class: 'check' }, [el('summary', { text: s.titel + ' · ' + (s.check || []).length + ' Fragen' + (s.mitdenken ? ' + Mitdenken' : '') })]);
         (s.check || []).forEach(function (id, k) { var q = frage(FR[id], 'lernen', { nr: k + 1 }); d.appendChild(q.el); testHaken.push({ art: 'frage', obj: q }); });
+        var ej = einschaetzung(s.lz, 0, 0); if (ej) d.appendChild(ej);
         if (s.mitdenken) d.appendChild(mitdenken(s.mitdenken));
         zb.appendChild(d);
       });
@@ -704,78 +796,143 @@
     leisteSpiel();
   }
 
+  // Vorab-Frage vor der Szene (Pretesting): erst vermuten, dann ausprobieren; wer sie sicher kann, darf überspringen
+  function vorabKarte(ids, i, weiter) {
+    var k = el('div', { class: 'vorab-karte' });
+    k.appendChild(el('div', { class: 'vorab-kopf', html: '<b>Kurz vorab: Was vermutest du?</b> <span class="badge zaehlt-nicht">zählt nicht</span>' }));
+    k.appendChild(el('p', { class: 'klein', text: 'Erst vermuten, dann ausprobieren. Auch eine falsche Vermutung hilft dir beim Lernen.' }));
+    var qs = ids.map(function (id, n) { var q = frage(FR[id], 'pruefung', { nr: ids.length > 1 ? n + 1 : null }); k.appendChild(q.el); return q; });
+    var meld = el('div', { 'aria-live': 'polite' });
+    var bP = el('button', { type: 'button', class: 'vorab-pruefen', text: 'Vermutung prüfen' });
+    var bW = el('button', { type: 'button', class: 'link', text: 'Weiß ich nicht – zur Szene' });
+    k.appendChild(el('div', { class: 'steuerung' }, [bP, bW]));
+    k.appendChild(meld);
+    function notiz(text) { k.innerHTML = ''; k.className = 'vorab-notiz'; k.appendChild(el('span', { html: text })); }
+    bP.addEventListener('click', function () {
+      if (!qs.every(function (q) { return q.beantwortet(); })) { meld.innerHTML = ''; meld.appendChild(msg('Schreib oder wähle erst eine Vermutung – oder geh direkt zur Szene.', 'warn')); return; }
+      var ok = 0;
+      qs.forEach(function (q) { var r = q.bewerten(); S.vb[q.f.id] = r.score >= 1 ? 1 : 0; if (r.score >= 1) ok++; });
+      skipNeu(); speichern();
+      if (ok === qs.length) {
+        var nx = naechsteStation(i);
+        k.innerHTML = '';
+        k.appendChild(msg('<b>Stimmt!</b> Du kennst dich hier offenbar schon aus und darfst diese Station überspringen.', 'ok'));
+        k.appendChild(el('div', { class: 'steuerung' }, [
+          el('button', { type: 'button', text: 'Station überspringen', onclick: function () { zeige(nx.t, nx.i); } }),
+          el('button', { type: 'button', class: 'link', text: 'Trotzdem ausprobieren', onclick: function () { notiz('✔ Du kennst dich schon aus – nutze die Station zum Festigen.'); weiter(); } })
+        ]));
+      } else { notiz('💭 Merk dir deine Vermutung. In der Szene findest du heraus, ob sie stimmt.'); weiter(); }
+    });
+    bW.addEventListener('click', function () { ids.forEach(function (id) { if (S.vb[id] === undefined) S.vb[id] = -1; }); speichern(); k.remove(); weiter(); });
+    testHaken.push({ art: 'vorab', obj: { zurSzene: function () { bW.click(); }, loesen: function () { qs.forEach(function (q) { q.loesungEinsetzen(); }); bP.click(); } } });
+    return k;
+  }
+  // Neue Begriffe der Station als Chips zum Antippen (Vortraining direkt vor der Szene)
+  function neueBegriffe(s, i) {
+    var g = (P.glossar || []).filter(function (x) { return x.vorab === s.id || (x.vorab === true && i === 0); });
+    if (!g.length) return null;
+    var reihe = el('div', { class: 'neu-begriffe' });
+    var erkl = el('div', { class: 'neu-erkl', 'aria-live': 'polite' });
+    g.forEach(function (x) {
+      var b = el('button', { type: 'button', class: 'begriff-chip', 'aria-expanded': 'false', html: x.begriff });
+      b.addEventListener('click', function () {
+        var auf = b.getAttribute('aria-expanded') !== 'true';
+        reihe.querySelectorAll('.begriff-chip').forEach(function (y) { y.setAttribute('aria-expanded', 'false'); });
+        b.setAttribute('aria-expanded', auf ? 'true' : 'false');
+        erkl.innerHTML = auf ? '<b>' + x.begriff + ':</b> ' + x.erklaerung : '';
+      });
+      reihe.appendChild(b);
+    });
+    return el('div', { class: 'feld neu-box' }, [el('div', { class: 'feldtitel', text: 'Neu hier' }), reihe, erkl]);
+  }
   function vStation() {
     if (!STATIONEN.length) { haupt.appendChild(msg('Keine Stationen vorhanden.', 'warn')); return; }
     var i = Math.min(ANSICHT.i, STATIONEN.length - 1), s = STATIONEN[i];
     haupt.appendChild(pfad(STATIONEN, i, 'entdecken', S.st, SPIEL ? (SPIEL.titel || 'Missionen') : 'Stationen'));
     var m = el('div', { class: 'card station' });
     var steuer = el('div', { class: 'steuerung' });
-    m.appendChild(el('div', { class: 'st-kopf' }, [el('div', {}, [el('div', { class: 'ort', text: (s.mission && s.mission.ort ? s.mission.ort + ' · ' : '') + 'Station ' + (i + 1) + ' von ' + STATIONEN.length + ((s.lz || []).length ? ' · ' + s.lz.join(', ') : '') }), el('h2', { text: s.titel })]), steuer]));
-    var mis = mission(s.auftrag || '', s.leitfrage, s.figur);
-    m.appendChild(mis.el);
-    var fertigMeldung = el('div', { 'aria-live': 'polite' });
+    var ziele = (s.lz || []).map(lz).filter(function (z) { return z.text && z.text !== z.id; });
+    m.appendChild(el('div', { class: 'st-kopf' }, [el('div', {}, [
+      el('div', { class: 'ort', text: (s.mission && s.mission.ort ? s.mission.ort + ' · ' : '') + 'Station ' + (i + 1) + ' von ' + STATIONEN.length }),
+      el('h2', { text: s.titel }),
+      ziele.length ? el('div', { class: 'st-ziel', html: '<span aria-hidden="true">🎯</span> <span class="sr">Ziel: </span>' + ziele.map(function (z) { return z.text; }).join(' · ') }) : null
+    ]), steuer]));
+    var koerper = el('div', { class: 'station-koerper' });
     var nx = naechsteStation(i);
-    var status = { interaktion: !s.interaktion, check: !(s.check || []).length };
-    var checkBox = null;
-    function pruefeFertig() {
-      if (status.interaktion && checkBox && !checkBox.open) { checkBox.open = true; }
-      if (status.interaktion && status.check && !S.st[s.id]) {
-        S.st[s.id] = 1; speichern(); kopf();
-        fertigMeldung.innerHTML = '';
-        fertigMeldung.appendChild(msg('🎉 <b>Geschafft!</b> ' + (s.mission && s.mission.ende ? s.mission.ende + ' ' : '') + nx.label.replace(' →', '') + '.', 'ok'));
-        var b = document.getElementById('weiter'); if (b) b.focus();
+    function baue() {
+      var nb = neueBegriffe(s, i);
+      var mis = mission(s.auftrag || '', s.leitfrage, s.figur);
+      koerper.appendChild(mis.el);
+      var fertigMeldung = el('div', { 'aria-live': 'polite' });
+      var status = { interaktion: !s.interaktion, check: !(s.check || []).length };
+      var checkBox = null;
+      function pruefeFertig() {
+        if (status.interaktion && checkBox && !checkBox.open) { checkBox.open = true; }
+        if (status.interaktion && status.check && !S.st[s.id]) {
+          S.st[s.id] = 1; speichern(); kopf();
+          fertigMeldung.innerHTML = '';
+          fertigMeldung.appendChild(msg('🎉 <b>Geschafft!</b> ' + (s.mission && s.mission.ende ? s.mission.ende + ' ' : '') + nx.label.replace(' →', '') + '.', 'ok'));
+          var wb = document.getElementById('weiter'); if (wb) wb.focus();
+        }
       }
-    }
-    if (s.interaktion) {
-      var b = buehne(s, 'station', mis, function () { status.interaktion = true; pruefeFertig(); });
-      m.appendChild(b.el);
-      var obj = b.start();
-      if (s.inhalt) b.feld('Kurz erklärt', s.inhalt);
-      if (s.bild) b.feld('Bild', s.bild);
-      if (s.steckbrief) b.feld('Steckbrief', s.steckbrief, false);
-      if (s.vertiefung) b.feld('Genauer erklärt', s.vertiefung, false);
-      var lb = legacyBeispiel(s); if (lb) b.notiz.appendChild(lb);
-      if (s.beruf) b.feld('Wozu brauchst du das?', s.beruf, false);
-      if (Array.isArray(obj.demo) && obj.demo.length) {
-        var ds = demoSteuerung(b, s.selbsterklaerung || (s.beispiel && s.beispiel.selbsterklaerung), mis);
-        steuer.appendChild(ds.knopf);
-        testHaken.push({ art: 'demo', obj: ds });
+      if (s.interaktion) {
+        var b = buehne(s, 'station', mis, function () { status.interaktion = true; pruefeFertig(); });
+        koerper.appendChild(b.el);
+        var obj = b.start();
+        if (nb) { b.notiz.appendChild(nb); b.ordne(); }  // neue Begriffe neben der Szene (Vortraining, räumliche Nähe)
+        if (s.inhalt) b.feld('Kurz erklärt', s.inhalt);
+        if (s.bild) b.feld('Bild', s.bild);
+        if (s.steckbrief) b.feld('Steckbrief', s.steckbrief, false);
+        if (s.vertiefung) b.feld('Genauer erklärt', s.vertiefung, false);
+        var lb = legacyBeispiel(s); if (lb) b.notiz.appendChild(lb);
+        if (s.beruf) b.feld('Wozu brauchst du das?', s.beruf, false);
+        if (Array.isArray(obj.demo) && obj.demo.length) {
+          var ds = demoSteuerung(b, s.selbsterklaerung || (s.beispiel && s.beispiel.selbsterklaerung), mis);
+          steuer.appendChild(ds.knopf);
+          testHaken.push({ art: 'demo', obj: ds });
+        }
+        testHaken.push({ art: 'interaktion', obj: obj });
+      } else {
+        if (nb) koerper.appendChild(nb);
+        if (s.bild) koerper.appendChild(el('div', { class: 'bild', html: s.bild }));
+        if (s.inhalt) koerper.appendChild(el('div', { html: s.inhalt }));
+        var lb2 = legacyBeispiel(s); if (lb2) { lb2.open = S.skip.indexOf(s.id) < 0; koerper.appendChild(lb2); }
+        if (s.steckbrief) koerper.appendChild(el('details', {}, [el('summary', { text: 'Steckbrief' }), el('div', { html: s.steckbrief })]));
+        if (s.beruf) koerper.appendChild(msg('<b>Wozu brauchst du das?</b> ' + s.beruf, ''));
       }
-      testHaken.push({ art: 'interaktion', obj: obj });
-    } else {
-      if (s.bild) m.appendChild(el('div', { class: 'bild', html: s.bild }));
-      if (s.inhalt) m.appendChild(el('div', { html: s.inhalt }));
-      var lb2 = legacyBeispiel(s); if (lb2) { lb2.open = S.skip.indexOf(s.id) < 0; m.appendChild(lb2); }
-      if (s.steckbrief) m.appendChild(el('details', {}, [el('summary', { text: 'Steckbrief' }), el('div', { html: s.steckbrief })]));
-      if (s.beruf) m.appendChild(msg('<b>Wozu brauchst du das?</b> ' + s.beruf, ''));
+      var nach = el('div', { class: 'nach' });
+      if ((s.check || []).length) {
+        checkBox = el('details', { class: 'check' });
+        checkBox.open = !s.interaktion || !!S.st[s.id];
+        checkBox.appendChild(el('summary', { html: 'Kurz-Check · ' + s.check.length + ' Fragen <span class="badge zaehlt-nicht">zählt nicht</span>' + (s.interaktion ? ' <span class="klein">– öffnet sich, wenn du die Szene geschafft hast</span>' : '') }));
+        checkBox.appendChild(el('p', { class: 'klein', text: 'Beantworte die Fragen aus dem Gedächtnis. Beliebig oft wiederholbar.' }));
+        var geprueft = {}, richtig = {};
+        var sum = el('div', { 'aria-live': 'polite' });
+        s.check.forEach(function (id, k) {
+          var q = frage(FR[id], 'lernen', { nr: k + 1, beiPruefung: function (res) {
+            geprueft[id] = 1; if (res.score >= 1) richtig[id] = 1;
+            if (anzahl(geprueft) === s.check.length) {
+              sum.innerHTML = '';
+              var n = anzahl(richtig);
+              sum.appendChild(msg('Kurz-Check: <b>' + n + ' von ' + s.check.length + '</b> auf Anhieb richtig. ' + (n === s.check.length ? 'Sehr gut, du kannst weiter.' : 'Schau dir die Szene und die Erklärungen zu den falschen Antworten noch einmal an.'), n === s.check.length ? 'ok' : 'warn'));
+              var ej = einschaetzung(s.lz, n, s.check.length); if (ej) sum.appendChild(ej);
+              status.check = true; pruefeFertig();
+            }
+          } });
+          checkBox.appendChild(q.el); testHaken.push({ art: 'frage', obj: q });
+        });
+        checkBox.appendChild(sum);
+        nach.appendChild(checkBox);
+      }
+      if (s.mitdenken) nach.appendChild(mitdenken(s.mitdenken));
+      nach.appendChild(fertigMeldung);
+      if (glossar()) nach.appendChild(glossar());
+      koerper.appendChild(nach);
     }
-    var nach = el('div', { class: 'nach' });
-    if ((s.check || []).length) {
-      checkBox = el('details', { class: 'check' });
-      checkBox.open = !s.interaktion || !!S.st[s.id];
-      checkBox.appendChild(el('summary', { html: 'Kurz-Check · ' + s.check.length + ' Fragen <span class="badge zaehlt-nicht">zählt nicht</span>' + (s.interaktion ? ' <span class="klein">– öffnet sich, wenn du die Szene geschafft hast</span>' : '') }));
-      checkBox.appendChild(el('p', { class: 'klein', text: 'Beantworte die Fragen aus dem Gedächtnis. Beliebig oft wiederholbar.' }));
-      var geprueft = {}, richtig = {};
-      var sum = el('div', { 'aria-live': 'polite' });
-      s.check.forEach(function (id, k) {
-        var q = frage(FR[id], 'lernen', { nr: k + 1, beiPruefung: function (res) {
-          geprueft[id] = 1; if (res.score >= 1) richtig[id] = 1;
-          if (anzahl(geprueft) === s.check.length) {
-            sum.innerHTML = '';
-            var n = anzahl(richtig);
-            sum.appendChild(msg('Kurz-Check: <b>' + n + ' von ' + s.check.length + '</b> auf Anhieb richtig. ' + (n === s.check.length ? 'Sehr gut, du kannst weiter.' : 'Schau dir die Szene und die Erklärungen zu den falschen Antworten noch einmal an.'), n === s.check.length ? 'ok' : 'warn'));
-            status.check = true; pruefeFertig();
-          }
-        } });
-        checkBox.appendChild(q.el); testHaken.push({ art: 'frage', obj: q });
-      });
-      checkBox.appendChild(sum);
-      nach.appendChild(checkBox);
-    }
-    if (s.mitdenken) nach.appendChild(mitdenken(s.mitdenken));
-    nach.appendChild(fertigMeldung);
-    if (glossar()) nach.appendChild(glossar());
-    m.appendChild(nach);
+    var offen = vorabFragen(s).filter(function (id) { return S.vb[id] === undefined; });
+    if (offen.length && !S.st[s.id]) m.appendChild(vorabKarte(offen, i, baue));
+    else baue();
+    m.appendChild(koerper);
     haupt.appendChild(m);
     leiste((s.mission && s.mission.ort ? s.mission.ort + ' · ' : '') + 'Station ' + (i + 1) + ' von ' + STATIONEN.length, nx.label, function () { zeige(nx.t, nx.i); });
   }
@@ -975,9 +1132,9 @@
 
     var se = el('div', { class: 'card' });
     se.appendChild(el('h2', { text: 'Wie sicher bist du jetzt?' }));
-    se.appendChild(el('p', { class: 'klein', text: 'Vergleiche mit deiner Einschätzung vom Anfang und mit dem Ergebnis. Wo liegst du daneben?' }));
+    se.appendChild(el('p', { class: 'klein', text: 'Vergleiche mit deiner Einschätzung nach der Station und mit dem Ergebnis im Nachweis. Wo lagst du daneben?' }));
     LZ.forEach(function (z) {
-      se.appendChild(el('div', { class: 'lzzeile se' }, [el('div', { html: '<b>' + esc(z.id) + '</b> ' + z.text + '<div class="klein">Am Anfang: ' + (S.se[z.id] || '–') + ' von 5 · Ergebnis: ' + (S.lz[z.id] || 0) + ' %</div>' }), skala(S.sn, 'sn', z.id)]));
+      se.appendChild(el('div', { class: 'lzzeile se' }, [el('div', { html: '<b>' + esc(z.id) + '</b> ' + z.text + '<div class="klein">Nach der Station: ' + stufeText(S.ej[z.id]) + ' · Nachweis: ' + (S.lz[z.id] || 0) + ' %</div>' }), skala(S.en, 'en', z.id)]));
     });
     haupt.appendChild(se);
 
@@ -1047,8 +1204,8 @@
   function ergebnisHtml(name) {
     var h = '<h1>Ergebnis: ' + esc(P.titel || '') + '</h1><p>Name: <b>' + esc(name || '________________') + '</b> · Datum: ' + new Date().toLocaleDateString('de-DE') + '</p>';
     h += '<p>Bestes Ergebnis im Kompetenznachweis: <b>' + S.best + ' %</b> (' + (S.best >= BESTEHEN ? 'bestanden' : 'nicht bestanden') + ', Grenze ' + BESTEHEN + ' %) · Versuche: ' + S.n + '</p>';
-    h += '<table class="tab"><tr><th>Lernziel</th><th>Letzter Versuch</th><th>Selbsteinschätzung vorher → nachher</th></tr>';
-    LZ.forEach(function (z) { h += '<tr><td><b>' + esc(z.id) + '</b> ' + z.text + '</td><td>' + (S.lz[z.id] || 0) + ' %</td><td>' + (S.se[z.id] || '–') + ' → ' + (S.sn[z.id] || '–') + ' (von 5)</td></tr>'; });
+    h += '<table class="tab"><tr><th>Lernziel</th><th>Letzter Versuch</th><th>Einschätzung nach der Station → am Ende</th></tr>';
+    LZ.forEach(function (z) { h += '<tr><td><b>' + esc(z.id) + '</b> ' + z.text + '</td><td>' + (S.lz[z.id] || 0) + ' %</td><td>' + stufeText(S.ej[z.id]) + ' → ' + stufeText(S.en[z.id]) + '</td></tr>'; });
     return h + '</table><p class="klein druckfuss">' + esc(druckVermerk()) + '</p>';
   }
   function druckVermerk() {
@@ -1057,9 +1214,11 @@
 
   /* ---------- Schnittstelle für automatische Tests ---------- */
   window.LERNPAKET = {
-    version: '2.0',
+    version: '2.1',
     pruefeInhalt: pruefeInhalt,
     woerter: woerter,
+    vorabFragen: vorabFragen,
+    alleVorab: alleVorab,
     zustand: function () { return JSON.parse(JSON.stringify(S)); },
     ansicht: function () { return ANSICHT; },
     zeige: zeige,

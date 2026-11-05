@@ -1,6 +1,6 @@
 # Lernpaket-Kompass – Leitfaden für interaktive Lernpakete
 
-Entwurf · Stand 29.10.2026 · Dennis Busch
+Entwurf · Stand 05.11.2026 · Dennis Busch
 
 ## Zweck und Kurzfassung
 
@@ -97,7 +97,10 @@ Neben den großen Ansätzen gibt es eine Reihe gut untersuchter Einzelbefunde au
 | Angeleitetes Entdecken (mit Leitfragen, Hilfen, Rückmeldung) | Andere Unterrichtsformen | *d* = 0,30 (besser) | ebd. | Entdecken ja, aber mit Auftrag und Rückmeldung |
 | Lernende wählen Tempo, Reihenfolge, Inhalte frei | Programm gibt den Weg vor | *g* = 0,05 (praktisch kein Unterschied) | [Karich, Burns & Maki 2014](https://corwinvisiblelearningsolutions.sagepub.com/support/solutions/articles/7000090422-i-am-curious-about-the-poor-student-achievement-outcomes-associated-with-student-control-over-learnin) | Wahlfreiheit allein ist kein Qualitätsmerkmal |
 | Lernende werden angeleitet, ihr Lernen zu planen, zu überwachen und zu reflektieren | Ohne Anleitung | *g* = 0,71 (Sekundarstufe), 0,38 (Hochschule) | Dignath & Büttner 2008; [Theobald 2021](https://www.uni-trier.de/securedl/sdl-eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpYXQiOjE3NTM2NTI4MTUsImV4cCI6MTc1Mzc0MjgxNSwidXNlciI6MCwiZ3JvdXBzIjpbMCwtMSw5ODgsOTk1XSwiZmlsZSI6ImZpbGVhZG1pbi9mYjEvcHJvZi9QU1kvU1VLL1RoZW9iYWxkXzIwMjEtMS5wZGYiLCJwYWdlIjo5NTE0OH0.rrGtHfoBsZdG8aoyxIzuKf5p-jYdLs1yv1ttKjS62ag/Theobald_2021-1.pdf) | Planen, Überprüfen und Nachdenken aktiv anleiten |
-| Hilfen zur Selbstkontrolle (Lerntagebuch, Selbsteinschätzung) | Ohne | *d* = 0,42 | [Dignath & van Ewijk 2023](https://bibliographie.ub.uni-mainz.de/catalog/publication-170139) | Selbsteinschätzung vor und nach Kapiteln, Fortschrittsanzeige |
+| Hilfen zur Selbstkontrolle (Lerntagebuch, Selbsteinschätzung) | Ohne | *d* = 0,42 | [Dignath & van Ewijk 2023](https://bibliographie.ub.uni-mainz.de/catalog/publication-170139) | Einschätzung nach jedem Kurz-Check und am Ende, im Vergleich mit dem Ergebnis; Fortschrittsanzeige |
+| Fragen vor dem Lernen beantworten, auch ohne die Antwort zu kennen (Vorab-Fragen, Pretesting) | Lernen ohne Vorab-Fragen | meist besseres Behalten, wenn die richtige Antwort danach gelernt wird; Größe schwankt je nach Vorgehen | Pan & Carpenter 2023 (Übersicht) | Eine Vorab-Frage zu Beginn jeder Station; Szene und Kurz-Check klären danach die Antwort |
+| Das eigene Können erst einschätzen, nachdem man sich mit dem Stoff befasst hat (verzögerte Einschätzung) | Einschätzung sofort oder vor dem Lernen | deutlich treffsicherere Einschätzungen; Anfänger schätzen sich vorab oft falsch ein | Rhodes & Tauber 2011; Kruger & Dunning 1999 | Einschätzung nach dem Kurz-Check statt auf der Startseite |
+| Überblick über Aufbau und Zusammenhänge vor dem Lernen (Advance Organizer) | Lernen ohne Überblick | klein, aber überwiegend positiv | Ausubel 1960; Luiten, Ames & Ackerson 1980 | Startseite als grafischer Lernpfad statt Textblöcke |
 | Rückmeldung (Feedback) | Keine Rückmeldung | *d* = 0,48, stark abhängig vom Inhalt; Lob, Strafe und Belohnung wirken kaum | [Wisniewski et al. 2020](https://opus.bibliothek.uni-augsburg.de/opus4/files/71009/fpsyg-10-03087.pdf) | Rückmeldung erklärt den Fehler und zeigt den nächsten Schritt |
 | Spielelemente (Gamification) | Ohne Spielelemente | *g* = 0,49 auf Wissen, 0,36 auf Motivation, 0,25 auf Verhalten; eine Rahmengeschichte und Zusammenarbeit verstärken | [Sailer & Homner 2020](https://resources.rework.com/libraries/edtech-growth/gamification-in-learning) | Story ja, Punkte und Abzeichen nur sparsam |
 | Umgedrehter Unterricht (Flipped Classroom: zu Hause erarbeiten, im Unterricht anwenden) | Herkömmlicher Unterricht | *g* ≈ 0,37 (Hochschule); in IT-Fächern eher geringer | [Zusammenfassung mehrerer Übersichten](https://dro.deakin.edu.au/articles/journal_contribution/On_the_use_of_flipped_classroom_across_various_disciplines_Insights_from_a_second-order_meta-analysis/20658822); [Strelan et al.](https://able.adelaide.edu.au/education/events/list/2019/06/research-seminar-flipped-classrooms-do-they-really-work) | Pakete eignen sich gut zur Vorbereitung auf die Unterrichtsstunde |
@@ -126,10 +129,10 @@ Vierzehn Prinzipien reichen. Zehn davon sind gut belegt und mit vertretbarem Auf
 | P5 | Abfragen statt nochmal lesen | gut | gering | Kurz-Check (3–5 Fragen) je Kapitel, ohne Note | Muss |
 | P6 | Rückmeldung, die erklärt | mittel | mittel | Begründung zu jeder Antwort, Hinweis auf typische Fehler | Muss |
 | P7 | Bildschirme nach Mayer gestalten; Wichtiges und nächster Schritt sofort erkennbar | gut (für Einsteiger) | gering bis mittel | Regeln in Teil C3 | Muss |
-| P8 | Ziele und Erfolgskriterien sichtbar machen; Ziele, Übungen und Prüfung passen zusammen | mittel | gering | Lernziele beim Einstieg, Auswertung je Lernziel am Ende | Muss |
+| P8 | Ziele und Erfolgskriterien sichtbar machen; Ziele, Übungen und Prüfung passen zusammen | mittel | gering | Lernziele als Etiketten auf dem Lernpfad der Startseite und als Satz an jeder Station; Auswertung je Lernziel am Ende | Muss |
 | P9 | Hintergrundwissen und Bedienhinweise trennen | mittel | mittel | Hintergrund in Steckbriefen; Bedienhilfe genau dort, wo sie gebraucht wird | Soll |
 | P10 | Wiederholen verteilen, Aufgaben mischen | gut | mittel | Wiederholungsfragen aus früheren Kapiteln; gemischte Aufgaben im Nachweis | Soll |
-| P11 | Selbstständiges Lernen anleiten statt voraussetzen | mittel bis gut | mittel | Selbsteinschätzung, Fortschrittsanzeige, Reflexionsfrage mit Musterantwort | Muss |
+| P11 | Selbstständiges Lernen anleiten statt voraussetzen | mittel bis gut | mittel | Einschätzung je Lernziel nach dem Kurz-Check, Fortschrittsanzeige, Reflexionsfrage mit Musterantwort | Muss |
 | P12 | Lernstoff als Spielregel: erst die Spielidee | mittel | gering bis hoch | Kreative Phase „Erfinden“ mit drei Spielideen zur Wahl; der Lernstoff ist die Spielregel; Plattform-Probe; Folgen statt Punkte, keine Ranglisten | Muss |
 | P13 | Ergebnisse sichern: Merkblatt selbst ergänzen | mittel | gering bis mittel | Halb vorgefülltes Merkblatt je Lernziel nach dem Nachweis: aus dem Gedächtnis ergänzen, mit dem Muster vergleichen, als PDF mit Selbsttest-Fragen herunterladen | Soll |
 | P14 | Handeln am Gegenstand: Jede Station ist eine Szene zum Anfassen | gut (Simulationen), mittel (Lernspiele) | mittel (mit Baukasten), hoch bei eigenen Geräten | Szene groß in der Mitte: simulierter Rechner, Dokument, Gerät oder Gespräch; Vorführung „Zeig’s mir“; Text kurz daneben; eigene Welt je Paket | Muss |
@@ -181,11 +184,15 @@ Jedes Paket folgt demselben Grundmuster aus fünf Teilen. Es ist aus den PING-Pa
 
 | Teil | Zweck | Warum so (siehe Teil A) | Mindeststandard |
 | --- | --- | --- | --- |
-| 0 Einstieg | Orientierung und Motivation | Lernen beginnt mit einer echten Aufgabe und knüpft an Vorwissen an; Ziele sind sichtbar | Leitsituation in wenigen Sätzen; Lernziele in Schülersprache, mit kurzer Selbsteinschätzung je Ziel (bloß angezeigte Ziele werden kaum gelesen); kurzer, unbewerteter Vorwissens-Check mit Empfehlung, was übersprungen werden kann; Hinweis auf Dauer und Ablauf |
-| ① Entdecken (Tutorial) | Neues verstehen | Vormachen vor Nachmachen; Handeln in realistischen Situationen; Bildschirme nach Mayer | Stationen als Szene zum Anfassen (P14) mit je einem Auftrag; Lösungsbeispiel als Vorführung in der Szene vor der eigenen Aufgabe; Kurz-Check (3–5 Fragen) am Kapitelende; jede Station endet mit einem Bezug zur echten Praxis |
+| 0 Einstieg | Orientierung und Motivation | Erst Orientierung: ein Überblick, der in Sekunden erfasst ist (grafischer Advance Organizer); was Mitdenken verlangt, steht dort, wo es wirkt (an der Station) | Startseite als Überblick: Szene mit Leitsituation (höchstens etwa 40 Wörter), Lernpfad mit den vier Teilen und den Lernzielen als kurze Etiketten (höchstens vier Wörter, ganzer Satz beim Antippen), Dauer, genau ein Knopf; keine Eingaben, ohne Scrollen auf Laptop und Tablet. Unaufdringlich daneben: Abkürzung „Ich kenne mich schon aus“ und gegebenenfalls der Hinweis auf den Input |
+| ① Entdecken (Tutorial) | Neues verstehen | Vormachen vor Nachmachen; Handeln in realistischen Situationen; Bildschirme nach Mayer | Stationen als Szene zum Anfassen (P14) mit je einem Auftrag; am Anfang das Lernziel als Satz und eine Vorab-Frage, neue Begriffe neben der Szene; Lösungsbeispiel als Vorführung in der Szene vor der eigenen Aufgabe; Kurz-Check (3–5 Fragen) am Kapitelende, danach Einschätzung je Lernziel mit einem Klick; jede Station endet mit einem Bezug zur echten Praxis |
 | ② Üben | Können aufbauen | Anwenden in wechselnden Situationen, von leicht nach schwer, mit abnehmender Hilfe | Eine Übung je Lernziel oder Kapitel, wechselnde Situationen; drei gestufte Tipps (Denkanstoß, Teillösung, Lösung); Feedback mit Begründung; Reflexionsfrage mit Musterantwort |
 | ③ Kompetenznachweis | Können zeigen | Eine ganze Aufgabe ohne Hilfe lösen; Abfragen festigt das Gelernte | Teil A: Handlungsaufgabe in neuer Situation, ohne Tipps; Teil B: Fragen aus einem Pool, mindestens zwei je Lernziel, gemischte Fragetypen; Bestehensgrenze einheitlich 80 %; beliebig oft wiederholbar, bestes Ergebnis zählt (der Nachweis ist keine Prüfung im rechtlichen Sinne) |
 | 4 Abschluss | Integration, Sicherung und Transfer | Gelerntes einordnen und aus dem Gedächtnis sichern; über das eigene Lernen nachdenken | Auswertung je Lernziel mit Lernempfehlung; Merkblatt zum Ergänzen und Herunterladen (P13, siehe unten); Ergebnis als PDF druckbar; Rückverweis auf passende Stationen |
+
+**Startseite: Überblick statt Arbeitsblatt.** Die Startseite hat eine Aufgabe: Lernende sehen in wenigen Sekunden, worum es geht, was vor ihnen liegt und wo sie stehen. Frühere Fassungen der Vorlage stellten dort Leitsituation, Ablauf, Glossar, alle Lernziele mit Selbsteinschätzung und den Vorwissens-Check untereinander; in den Beispielpaketen zum Handelsregister waren das über 400 Wörter und 40 Eingabefelder vor dem ersten Klick. Das widerspricht P7 (ein nächster Schritt, Fünf-Sekunden-Test) und schwächt die Bausteine selbst.
+
+Wer Ziele einschätzen soll, deren Begriffe er noch nicht kennt, rät; treffsicher wird die Einschätzung erst nach einem ersten Abrufversuch (Rhodes & Tauber 2011). Vorab-Fragen wirken am besten direkt vor dem Inhalt, der die Antwort klärt (Pan & Carpenter 2023), Vortraining direkt vor dem Ablauf, in dem die Begriffe vorkommen. Deshalb zeigt die Startseite nur Szene, Lernpfad und einen Knopf; Lernziel als Satz, Vorab-Frage, neue Begriffe und Einschätzung stehen an der Station. Das passt zur Arbeitsteilung mit der Lernplattform: Ausführliche Texte kann die Kursseite zeigen, das Paket liefert die kompakte, anschauliche Übersicht.
 
 **Fragetypen.** Bewährt haben sich fünf Typen: Multiple Choice, Bildfrage, Hotspot (Stelle im Bild anklicken), Zuordnen und Zahleneingabe. Falschantworten werden aus den gesammelten typischen Fehlern gebildet, nicht erfunden. Jede Frage trägt das Lernziel, zu dem sie gehört.
 
@@ -232,7 +239,7 @@ Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern st
 - Im Entdecken- und Übungsteil erscheint das Feedback direkt an der Antwort oder Stelle, um die es geht, nicht gesammelt an anderer Stelle.
 - Auf dem Zielgerät prüfen, besonders auf dem Tablet, wo weniger Platz ist.
 - Inhalte in kleine Schritte teilen, die Lernende selbst weiterklicken (Segmentierung).
-- Fachbegriffe vorab kurz einführen, bevor sie in einem komplexen Ablauf auftauchen (Vortraining).
+- Fachbegriffe vorab kurz einführen, bevor sie in einem komplexen Ablauf auftauchen (Vortraining): an der Station, an der sie zuerst gebraucht werden, als Begriffe zum Antippen neben der Szene, nicht gesammelt auf der Startseite.
 - Denselben Text nicht gleichzeitig vorlesen und anzeigen (Redundanz).
 - Locker und direkt ansprechen („Du“ bzw. „Sie“ je nach Zielgruppe), nicht im Lehrbuchton (Personalisierung).
 - Einheitliche Bedienung und einheitlicher Aufbau über alle Pakete; jedes Paket hat seine eigene Welt (Farben, Kulisse, Figuren) mit einem einzigen Akzent für Handlungsaufforderungen.
@@ -259,6 +266,7 @@ Signale braucht nicht nur der Lernstoff, sondern auch die Bedienung. Wer suchen 
 - Anklickbares sieht anklickbar aus; Dekoratives nicht.
 - Kein wichtiger Knopf liegt unbemerkt außerhalb des sichtbaren Bereichs, auch nicht auf dem Tablet.
 - Prüfen mit dem Fünf-Sekunden-Test: Jemand sieht einen Bildschirm kurz an und sagt, was als Nächstes zu tun ist. Klappt das nicht, fehlt ein Signal.
+- Die Startseite ist ein Überblick, kein Arbeitsblatt: Szene mit Leitsituation (höchstens etwa 40 Wörter), Lernpfad mit den Lernzielen als Etiketten, genau ein Knopf, keine Eingaben, ohne Scrollen auf Laptop (1366 × 768) und Tablet. Das Prüfskript misst das.
 
 **Aufgaben und Übungen**
 
@@ -284,8 +292,8 @@ Tipps werden aktiv angefordert und zählen im Üben nicht gegen die Lernenden; i
 
 Was Einsteigern hilft, kann Fortgeschrittene bremsen: Ausführliche Erklärungen, Lösungsbeispiele und kleinschrittige Anleitungen kosten sie Zeit und Aufmerksamkeit, ohne etwas Neues zu bringen, und können das Lernen sogar verschlechtern (Expertise-Umkehr-Effekt, Kalyuga 2007). Ein Paket sollte deshalb Hilfe anbieten, aber nicht aufzwingen.
 
-- Der Vorwissens-Check im Einstieg hat Folgen: Wer gut abschneidet, bekommt eine Empfehlung, welche Stationen er überspringen oder nur überfliegen kann.
-- Am Kapitelanfang gibt es einen freiwilligen Kurz-Check: Wer ihn besteht, darf das Kapitel überspringen.
+- Jede Station beginnt mit einer Vorab-Frage („Was vermutest du?“, zählt nicht). Wer richtig liegt, darf die Station überspringen; wer falsch liegt, lernt danach gezielter, weil die Szene die Antwort klärt (Pretesting, Teil A2).
+- Die Abkürzung „Ich kenne mich schon aus“ auf der Startseite stellt alle Vorab-Fragen auf einem eigenen Bildschirm; was sitzt, wird auf dem Lernpfad als überspringbar markiert. Vorab-Fragen sind schwer zu erraten (Zahl, Text, Zuordnen oder Mehrfachauswahl), sonst trifft die Empfehlung Glückspilze.
 - Ausführliche Erklärungen und Lösungsbeispiele sind aufklappbar, nicht Pflichtlektüre; die Kurzfassung steht sichtbar.
 - Tipps gibt es nur auf Anforderung (siehe oben).
 - Übersprungene Stationen bleiben jederzeit erreichbar; der Kompetenznachweis ist für alle gleich.
@@ -296,7 +304,7 @@ Die Gestaltungsregeln sind Faustregeln. Für manche Lernende gelten sie nur eing
 
 - Gesprochenes ist nie die einzige Quelle: Wo Ton eingesetzt wird, gibt es den Text zum Zuschalten (Untertitel oder Transkript). Lernende mit Hörbeeinträchtigung brauchen ihn, und ohne Kopfhörer geht es im Klassenzimmer oft nicht anders.
 - Für Lernende, die noch Deutsch lernen, dürfen Untertitel auch zusätzlich zum Ton laufen, obwohl das Redundanzprinzip davon abrät; das Verstehen der Sprache wiegt hier schwerer.
-- Fachbegriffe in einem Glossar sammeln, das jederzeit erreichbar ist; die wichtigsten am Anfang kurz vorstellen (Vortraining).
+- Fachbegriffe in einem Glossar sammeln, das jederzeit erreichbar ist; die wichtigsten an der Station vorstellen, an der sie zuerst gebraucht werden (Vortraining).
 - Kurze Sätze, geläufige Wörter, eine Information pro Satz. Fachbegriffe bleiben, werden aber erklärt.
 - Information nie nur über Ton oder nur über Farbe vermitteln.
 
@@ -326,10 +334,10 @@ Kerres (2024) bestätigt das aus der Forschung zum digitalen Lernen: Wer allein 
 | --- | --- | --- |
 | Rolle des Pakets | Trägt die gesamte Lerneinheit von Einstieg bis Nachweis | Baustein für eine Phase: Erarbeitung, Übung, Simulation oder Vorbereitung (Flipped) |
 | Zeitstruktur | Kein 45/90-Minuten-Raster; Fortschritt wird gespeichert, Wiedereinstieg jederzeit | Abschnitte von etwa 20–30 Minuten, die in eine Stunde passen; Stationen einzeln aufrufbar |
-| Einstieg | Im Paket: Leitsituation, Lernziele, Vorwissens-Check, Hinweis zum Vorgehen; optional ein freiwilliger Input mit Tafelbild (C2) | Durch die Lehrkraft, z. B. mit dem Tafelbild des Pakets; das Paket kann den Einstieg kurz halten |
+| Einstieg | Im Paket: Startseite mit Leitsituation und Lernpfad, Abkürzung für Lernende mit Vorwissen; optional ein freiwilliger Input mit Tafelbild (C2) | Durch die Lehrkraft, z. B. mit dem Tafelbild des Pakets; das Paket kann den Einstieg kurz halten |
 | Steuerung | Empfohlener Pfad mit Freiheit beim Tempo; Springen möglich, aber mit Hinweis, was vorausgesetzt wird | Lehrkraft gibt Abschnitte frei bzw. vor |
 | Hilfe | Drei gestufte Tipps, Lösungsbeispiele, Glossar und Steckbriefe immer erreichbar; Hinweis, wann man die Lehrkraft fragen sollte | Tipps im Paket; vertiefende Hilfe durch Lehrkraft und Mitschüler |
-| Selbstregulation | Verbindlich: Lernziele mit Selbsteinschätzung vorher/nachher, Fortschrittsanzeige, Reflexionsfragen mit Musterantwort, Lernempfehlung nach dem Nachweis | Optional; Reflexion und Sicherung im Plenum |
+| Selbstregulation | Verbindlich: Lernziel an jeder Station, Einschätzung nach dem Kurz-Check und am Ende im Vergleich mit dem Ergebnis, Fortschrittsanzeige, Reflexionsfragen mit Musterantwort, Lernempfehlung nach dem Nachweis | Optional; Reflexion und Sicherung im Plenum |
 | Nachweis | Im Paket, mit Bestehensgrenze und Wertung in der Lernplattform; mehrere Versuche, bestes Ergebnis zählt | Oft formativ (ohne Wertung) oder ganz ausgelagert in eine Lernzielkontrolle der Lehrkraft |
 | Rolle der Lehrkraft | Lernbegleitung: Auswertung der Daten, gezielte Gespräche mit Lernenden, die hängen | Unterrichtsleitung: Einführung, Moderation, Sicherung der Ergebnisse |
 | Daten für die Lehrkraft | Wichtig: Ergebnisse je Lernziel und je Frage, Bearbeitungsstand | Hilfreich, aber nicht zwingend |
@@ -381,7 +389,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 **Didaktik (Muss)**
 
 - [ ] Es gibt eine authentische Leitsituation, die sich durch das ganze Paket zieht. (P1)
-- [ ] Lernziele sind überprüfbar formuliert und beim Einstieg sichtbar. (P8)
+- [ ] Lernziele sind überprüfbar formuliert, stehen als Etikett auf dem Lernpfad und als Satz an jeder Station. (P8)
 - [ ] Jedes Lernziel wird im Nachweis mit mindestens zwei Fragen oder Prüfpunkten erfasst. (P8)
 - [ ] Die Hilfe nimmt von Entdecken über Üben bis Nachweis ab. (P2)
 - [ ] Vor jedem neuen Aufgabentyp gibt es ein Lösungsbeispiel, das Könner überspringen können. (P3)
@@ -389,7 +397,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Jedes Kapitel endet mit einem unbewerteten Kurz-Check. (P5)
 - [ ] Jede Antwort bekommt ein Feedback mit Begründung; typische Fehler haben eigenes Feedback. (P6)
 - [ ] Jede Übung hat drei gestufte Tipps. (P2)
-- [ ] Selbsteinschätzung vorher und nachher, Fortschrittsanzeige. (P11)
+- [ ] Einschätzung je Lernziel nach dem Kurz-Check und am Ende, im Vergleich mit dem Ergebnis; Fortschrittsanzeige. (P11)
 - [ ] Es gab drei Spielideen zur Wahl. Im Paket ist der Lernstoff die Spielregel (wer ihn nicht beherrscht, scheitert im Spiel, nicht in einem Quiz danach), und es besteht die Plattform-Probe: Test, H5P oder Lückentext der Lernplattform könnten es nicht genauso. (P12)
 - [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist ohne Scrollen sichtbar, realistisch und reagiert auf Fehler. Das Lösungsbeispiel wird darin vorgeführt, der Text daneben bleibt im Budget. (P14)
 
@@ -404,10 +412,11 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 
 * [ ] Wichtiges ist hervorgehoben; Farben und Markierungen haben im ganzen Paket dieselbe Bedeutung. (P7)
 * [ ] Auf jedem Bildschirm ist ohne Suchen erkennbar, was zu tun ist und wo es weitergeht; Fünf-Sekunden-Test bestanden, auch auf dem Tablet. (P7)
+* [ ] Die Startseite gibt in Sekunden einen Überblick: Szene, Lernpfad mit Ziel-Etiketten, ein Knopf; ohne Scrollen, höchstens etwa 40 Wörter Fließtext, keine Eingaben. (P7)
 
 - [ ] Alles, was für eine Aufgabe nötig ist, ist gleichzeitig sichtbar, ohne Scrollen, Umschalten oder Pop-up; Tipps und Feedback verdecken nichts und stehen nah an der Stelle, auf die sie sich beziehen. (P7)
 
-* [ ] Lernende mit Vorwissen kommen zügig durch: Vorwissens-Check mit Empfehlung, überspringbare Kapitel und Beispiele, aufklappbare Erklärungen. (P3)
+* [ ] Lernende mit Vorwissen kommen zügig durch: Vorab-Frage an jeder Station, Abkürzung „Ich kenne mich schon aus“, überspringbare Stationen und Beispiele, aufklappbare Erklärungen. (P3)
 
 **Fachlich (Muss)**
 
@@ -431,7 +440,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Am Ende gibt es ein halb vorgefülltes Merkblatt zum Ergänzen und Herunterladen, freigeschaltet erst nach dem Nachweis, mit Selbsttest-Fragen zum späteren Wiederholen. (P13)
 - [ ] Lösungsbeispiele enthalten eine Frage zum Selbsterklären; nach Stationen oder Übungen gibt es Aufträge zum Skizzieren, Zusammenfassen oder Erklären. (P3)
 - [ ] Falls es einen Input gibt: Tafelbild ohne erklärenden Text, jede Szene mit ihrer Station verknüpft, nichts, was im Paket fehlt; Erklärungen für Schüler zuschaltbar; Tafelbild speichert nichts; Ablaufplan liegt bei.
-- [ ] Glossar mit allen Fachbegriffen, jederzeit erreichbar; die wichtigsten Begriffe werden am Anfang vorgestellt; kurze Sätze, geläufige Wörter (auch für Lernende, die Deutsch lernen).
+- [ ] Glossar mit allen Fachbegriffen, jederzeit erreichbar; die wichtigsten Begriffe werden an der Station vorgestellt, an der sie zuerst gebraucht werden; kurze Sätze, geläufige Wörter (auch für Lernende, die Deutsch lernen).
 
 ## Teil C7: Der Leitfaden als Skill-Set
 
@@ -478,6 +487,7 @@ Gemeinsame Grundlage aller Skills ist eine Referenzdatei mit den vierzehn Prinzi
 - [ ] Bestehensgrenze der vorhandenen PING-Pakete von 70 % bzw. 60 % auf 80 % umstellen (Prüfen, ob die Fragen dazu passen).
 - [ ] Lernpaket-Kompass 2 (29.10.2026): Szene als Pflichtkern jeder Station (P14), Baukasten für Szenen, eigene Welt je Paket, optionaler Spielrahmen; Pilot: Station 1 von „Das Handelsregister“.
 - [ ] Lernpaket-Kompass 3 (29.10.2026): Phase „Erfinden“ mit drei Spielideen und Plattform-Probe, P12 „Lernstoff als Spielregel“ wird Muss, Spielmodus in der Vorlage; Piloten zum Handelsregister: „Stempel drauf!“ (Schalter-Simulator) und „Firmendex“ (Sammelspiel). Erprobung mit Schülern steht aus.
+- [ ] Lernpaket-Kompass 3.1 (05.11.2026): Startseite als Überblick (Szene, Lernpfad mit Ziel-Etiketten, ein Knopf), Lernziel, Vorab-Frage und neue Begriffe an der Station, Einschätzung nach dem Kurz-Check, Abkürzung „Ich kenne mich schon aus“; das Prüfskript prüft die Startseite. Erprobung mit Schülern steht aus.
 - [ ] Baukasten nach den ersten Paketen anderer Fächer erweitern (z. B. Tabellenkalkulation, Zeitstrahl, Karte) und Erfahrungen mit dem Spielrahmen sammeln.
 
 ## Literatur
@@ -486,6 +496,7 @@ Links führen zum Volltext oder zu einer Zusammenfassung, die für diesen Entwur
 
 - Adesope, O. O., Trevisan, D. A. & Sundararajan, N. (2017). [Rethinking the use of tests: A meta-analysis of practice testing](https://education.wsu.edu/documents/2018/01/rethinking-use-tests.pdf/). *Review of Educational Research, 87*(3), 659–701.
 - Alfieri, L., Brooks, P. J., Aldrich, N. J. & Tenenbaum, H. R. (2011). [Does discovery-based instruction enhance learning?](https://www.fisme.science.uu.nl/publicaties/literatuur/2011_alfieri_discovery_learning.pdf) *Journal of Educational Psychology, 103*(1), 1–18.
+- Ausubel, D. P. (1960). The use of advance organizers in the learning and retention of meaningful verbal material. *Journal of Educational Psychology, 51*(5).
 - Barbieri, C. A., Miller-Cotto, D., Clerjuste, S. N. & Chawla, K. (2023). [A meta-analysis of the worked examples effect on mathematics performance](https://oaks.kent.edu/hcri/meta-analysis-worked-examples-effect-mathematics-performance). *Educational Psychology Review, 35*.
 - Bisra, K., Liu, Q., Nesbit, J. C., Salimi, F. & Winne, P. H. (2018). Inducing self-explanation: A meta-analysis. Educational Psychology Review, 30(3), 703–725.
 - Brod, G. (2021). Generative learning: Which strategies for what age? Educational Psychology Review, 33, 1295–1318. ([Volltext](https://www.pedocs.de/volltexte/2021/23704/pdf/EPR_2021_4_Brod_Generative_Learning_A.pdf))
@@ -513,10 +524,14 @@ Links führen zum Volltext oder zu einer Zusammenfassung, die für diesen Entwur
 - Kerres, M. (2024). [*Mediendidaktik: Lernen in der digitalen Welt*](https://www.degruyterbrill.com/document/doi/10.1515/9783111201078/html) (6. Aufl.). De Gruyter Oldenbourg. Genutzt v. a. Kap. 4 (Wirksamkeit digitalen Lernens), 6.6 (Gestaltung), 8.3 und 8.6 (Instruktionsdesign, Vorgehen), 9.2 (Bildungsproblem), 10.2–10.5 (Steuerung, 3-2-1-Modell, adaptive Systeme, Kriterien für die Methode), 11.6 (Spielelemente), 12.6 (Struktur, Lernaufgaben) und 14 (Planungsleitfaden).
 - Kerres, M., Buntins, K., Buchner, J., Drachsler, H. & Zawacki-Richter, O. (o. J., Preprint). [Lernpfade in adaptiven und künstlich-intelligenten Lernprogrammen](https://learninglab.uni-due.de/sites/default/files/KI-Bildung-Sammelband-V1.4_1.pdf). In C. de Witt u. a. (Hrsg.), *Künstliche Intelligenz in der Bildung*. Springer VS.
 - Kiewra, K. A. (o. J.). Note this: How to improve student note taking. University of Nebraska–Lincoln. Darin u. a. Kiewra & Benton (1987) und Kiewra et al. (1995). ([Übersicht](https://cehs.unl.edu/images/cehs/soar/articles/Note%20This.%20How%20to%20Improve%20Student%20Note%20Taking.pdf))
+- Kruger, J. & Dunning, D. (1999). Unskilled and unaware of it: How difficulties in recognizing one's own incompetence lead to inflated self-assessments. *Journal of Personality and Social Psychology, 77*(6), 1121–1134.
+- Luiten, J., Ames, W. & Ackerson, G. (1980). A meta-analysis of the effects of advance organizers on learning and retention. *American Educational Research Journal, 17*(2), 211–218.
 - Mayer, R. E. (2017). Using multimedia for e-learning. *Journal of Computer Assisted Learning, 33*(5), 403–423. ([Abstract mit Effektstärken](https://www.synapsesocial.com/es/papers/69dbbbdacebd566818835a69))
 - Mayer, R. E. (2021). *Multimedia learning* (3. Aufl.). Cambridge University Press. ([Mayer: The future of multimedia learning](https://edtechbooks.org/docx/10349))
 - Merrill, M. D. (2002). [First principles of instruction](https://classroom.eumetsat.int/mod/resource/view.php?id=14612). *ETR&D, 50*(3), 43–59.
+- Pan, S. C. & Carpenter, S. K. (2023). [Prequestioning and pretesting effects: A review of empirical research, theoretical perspectives, and implications for educational practice](https://doi.org/10.1007/s10648-023-09814-5). *Educational Psychology Review, 35*, Art. 97.
 - Pashler, H., McDaniel, M., Rohrer, D. & Bjork, R. (2008). Learning styles: Concepts and evidence. *Psychological Science in the Public Interest, 9*(3), 105–119.
+- Rhodes, M. G. & Tauber, S. K. (2011). [The influence of delaying judgments of learning on metacognitive accuracy: A meta-analytic review](https://doi.org/10.1037/a0021705). *Psychological Bulletin, 137*(1), 131–148.
 - Ropovik, I., Adamkovic, M. & Greger, D. (2021). [Neglect of publication bias compromises meta-analyses of educational research](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC8174709/). *PLOS ONE, 16*(6).
 - Sailer, M. & Homner, L. (2020). [The gamification of learning: A meta-analysis](https://opus.bibliothek.uni-augsburg.de/opus4/frontdoor/index/index/docId/109056). *Educational Psychology Review, 32*(1), 77–112.
 - Sarfo, F. K. & Elen, J. (2007). Developing technical expertise in secondary technical schools: The effect of 4C/ID learning environments. *Learning Environments Research, 10*, 207–221.

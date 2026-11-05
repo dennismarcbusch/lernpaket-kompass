@@ -9,7 +9,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 **Didaktik (Muss)**
 
 - [ ] Es gibt eine authentische Leitsituation, die sich durch das ganze Paket zieht. (P1)
-- [ ] Lernziele sind überprüfbar formuliert und beim Einstieg sichtbar. (P8)
+- [ ] Lernziele sind überprüfbar formuliert, stehen als Etikett auf dem Lernpfad und als Satz an jeder Station. (P8)
 - [ ] Jedes Lernziel wird im Nachweis mit mindestens zwei Fragen oder Prüfpunkten erfasst. (P8)
 - [ ] Die Hilfe nimmt von Entdecken über Üben bis Nachweis ab. (P2)
 - [ ] Vor jedem neuen Aufgabentyp gibt es ein Lösungsbeispiel, das Könner überspringen können. (P3)
@@ -17,7 +17,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Jedes Kapitel endet mit einem unbewerteten Kurz-Check. (P5)
 - [ ] Jede Antwort bekommt ein Feedback mit Begründung; typische Fehler haben eigenes Feedback. (P6)
 - [ ] Jede Übung hat drei gestufte Tipps. (P2)
-- [ ] Selbsteinschätzung vorher und nachher, Fortschrittsanzeige. (P11)
+- [ ] Einschätzung je Lernziel nach dem Kurz-Check und am Ende, im Vergleich mit dem Ergebnis; Fortschrittsanzeige. (P11)
 - [ ] Es gab drei Spielideen zur Wahl. Im Paket ist der Lernstoff die Spielregel (wer ihn nicht beherrscht, scheitert im Spiel, nicht in einem Quiz danach), und es besteht die Plattform-Probe: Test, H5P oder Lückentext der Lernplattform könnten es nicht genauso. (P12)
 - [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist ohne Scrollen sichtbar, realistisch und reagiert auf Fehler. Das Lösungsbeispiel wird darin vorgeführt, der Text daneben bleibt im Budget. (P14)
 
@@ -32,10 +32,11 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 
 * [ ] Wichtiges ist hervorgehoben; Farben und Markierungen haben im ganzen Paket dieselbe Bedeutung. (P7)
 * [ ] Auf jedem Bildschirm ist ohne Suchen erkennbar, was zu tun ist und wo es weitergeht; Fünf-Sekunden-Test bestanden, auch auf dem Tablet. (P7)
+* [ ] Die Startseite gibt in Sekunden einen Überblick: Szene, Lernpfad mit Ziel-Etiketten, ein Knopf; ohne Scrollen, höchstens etwa 40 Wörter Fließtext, keine Eingaben. (P7)
 
 - [ ] Alles, was für eine Aufgabe nötig ist, ist gleichzeitig sichtbar, ohne Scrollen, Umschalten oder Pop-up; Tipps und Feedback verdecken nichts und stehen nah an der Stelle, auf die sie sich beziehen. (P7)
 
-* [ ] Lernende mit Vorwissen kommen zügig durch: Vorwissens-Check mit Empfehlung, überspringbare Kapitel und Beispiele, aufklappbare Erklärungen. (P3)
+* [ ] Lernende mit Vorwissen kommen zügig durch: Vorab-Frage an jeder Station, Abkürzung „Ich kenne mich schon aus“, überspringbare Stationen und Beispiele, aufklappbare Erklärungen. (P3)
 
 **Fachlich (Muss)**
 
@@ -59,4 +60,4 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Am Ende gibt es ein halb vorgefülltes Merkblatt zum Ergänzen und Herunterladen, freigeschaltet erst nach dem Nachweis, mit Selbsttest-Fragen zum späteren Wiederholen. (P13)
 - [ ] Lösungsbeispiele enthalten eine Frage zum Selbsterklären; nach Stationen oder Übungen gibt es Aufträge zum Skizzieren, Zusammenfassen oder Erklären. (P3)
 - [ ] Falls es einen Input gibt: Tafelbild ohne erklärenden Text, jede Szene mit ihrer Station verknüpft, nichts, was im Paket fehlt; Erklärungen für Schüler zuschaltbar; Tafelbild speichert nichts; Ablaufplan liegt bei.
-- [ ] Glossar mit allen Fachbegriffen, jederzeit erreichbar; die wichtigsten Begriffe werden am Anfang vorgestellt; kurze Sätze, geläufige Wörter (auch für Lernende, die Deutsch lernen).
+- [ ] Glossar mit allen Fachbegriffen, jederzeit erreichbar; die wichtigsten Begriffe werden an der Station vorgestellt, an der sie zuerst gebraucht werden; kurze Sätze, geläufige Wörter (auch für Lernende, die Deutsch lernen).

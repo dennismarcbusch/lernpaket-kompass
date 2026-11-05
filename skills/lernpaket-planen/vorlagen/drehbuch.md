@@ -4,22 +4,23 @@
 
 - Betrieb / Situation: …
 - Figur(en): Name, Rolle, Ton (z. B. freundlich-direkt, „du“), Aussehen (Hautton, Haare, Frisur, Kleidung, Brille …)
-- Einstiegstext der Figur (2–4 Sätze): …
+- Einstiegstext der Figur (2–3 Sätze, höchstens etwa 40 Wörter – der einzige Fließtext auf der Startseite): …
 - **Welt:** Thema (wirtschaft · technik · sprache · natur · gesundheit · gestaltung), Kulisse (buero · lager · werkstatt · serverraum · laden · stadt · natur · klasse), Symbol
 - **Arbeitsmittel aus dem Beruf**, die als Szene nachgebaut werden (Dokumente, Programme, Geräte, Gespräche): …
 - **Spielidee** (aus `spielidee.md`): Spielmodus „…“ (Stationen = Level) / Spielrahmen „…“ mit Ziel und Zähler, je Station ein Ort / Simulation ohne Spiel (Begründung)
 
-## Einstieg
+## Einstieg (Startseite)
 
-- Ablauf und Dauer (wird automatisch angezeigt)
-- Lernziele mit Selbsteinschätzung (automatisch)
-- Vorwissens-Check: je Lernziel eine Frage → Empfehlung, welche Stationen übersprungen werden können
+- Szene mit Leitsituation (oben), Lernpfad mit den vier Teilen, Dauer und einem Knopf (automatisch)
+- Lernziele als Etiketten (Kurzname aus der Lernziel-Nachweis-Tabelle, höchstens vier Wörter)
+- Abkürzung „Ich kenne mich schon aus“: sammelt die Vorab-Fragen der Stationen (automatisch)
+- Keine Lernziel-Liste, keine Einschätzung, keine Fragen, kein Glossar auf der Startseite
 
 ## Glossar
 
-| Begriff | Erklärung (kurz, einfache Sprache) | vorab vorstellen? |
+| Begriff | Erklärung (kurz, einfache Sprache) | neu an Station |
 |---|---|---|
-| | | ☐ |
+| | | S… |
 
 ## ① Entdecken – Level (nur im Spielmodus)
 
@@ -39,6 +40,7 @@
   - Woran erkennt das Paket den Erfolg? …
   - Was passiert bei typischen Fehlern? (realistische Reaktion + Satz zur Fehlvorstellung) …
   - Bausteine: computer · browser · mail · formular · dokument · dialog · szene · sortieren · reihenfolge · regler · eigenes Gerät
+- **Vorab-Frage** (vor der Szene, „Was vermutest du?“, schwer zu erraten: Zahl, Text, Zuordnen oder Mehrfachauswahl): … Lösung: …
 - **Auftrag aus der Leitsituation (1–2 Sätze, Sprechblase):** …
 - **Leitfrage:** …
 - **Vorführung „Zeig’s mir“ (anderer Fall, 2–4 Schritte in der Szene):** 1. … (Warum: …) 2. … (Warum: …) 3. …
@@ -69,7 +71,7 @@
 
 ## ④ Abschluss
 
-- Auswertung je Lernziel mit Empfehlung (automatisch)
+- Auswertung je Lernziel mit Empfehlung und Einschätzung im Vergleich (automatisch)
 - **Merkblatt** je Lernziel: zwei Lückensätze mit Lösung, typischer Fehler, kurzes Beispiel, ggf. Schritt-Schema
 - **Selbsttest** (Rückseite des Merkblatts): fünf Fragen aus allen Lernzielen
 

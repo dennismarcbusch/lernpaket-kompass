@@ -13,6 +13,9 @@ Aufruf:
    einem nachgebauten SCORM-1.2-Player, löst bei Paketen aus der Vorlage alle Stationen,
    Übungen und den Nachweis mit der Musterlösung, prüft Datenübergabe, Wiedereinstieg,
    Konsolenfehler, Darstellung auf schmalen Bildschirmen und genau einen Weiter-Knopf.
+   Startseite als Überblick: ohne Scrollen (1366×768, 768×1024), höchstens etwa 40 Wörter
+   Fließtext, keine Eingaben. Vorab-Fragen vor der Szene, Einschätzung nach dem Kurz-Check,
+   Abkürzung „Ich kenne mich schon aus“ markiert die richtigen Stationen als überspringbar.
    Hat das Paket ein Tafelbild (PAKET.tafel), werden alle Szenen und Werkzeuge
    durchgeschaltet und geprüft, dass das Tafelbild nichts an die Lernplattform schreibt.
 Ausgabe: Bericht als Text (Ampel je Punkt) und optional als JSON.
@@ -179,6 +182,7 @@ def browser(root, href, bilder):
             _schmal(ctx, url, bilder, None)
         else:
             _vorlage(pg, bilder)
+            _startseite(ctx, url, bilder)
             _schmal(ctx, url, bilder, True)
             _tafel(ctx, url, bilder)
         echte = [f for f in fehler if 'favicon' not in f]
@@ -215,10 +219,19 @@ def _vorlage(pg, bilder):
         if (t.art === 'frage') { t.obj.loesungEinsetzen(); const b = t.obj.el.querySelector('button.pruefen'); if (b && !b.hidden) b.click(); }
       }); })()"""
     ohne_demo, ohne_buehne, viel_text, buehne_tief = [], [], [], []
+    vorab_fehlt, ohne_einsch = [], []
     for i, sid in enumerate(info['st']):
         pg.evaluate(f"LERNPAKET.zeige('entdecken', {i})")
         pg.wait_for_timeout(100)
         ansichten.append((f'Station {sid}', _primaer(pg)))
+        # Vorab-Frage steht vor der Szene; für die weiteren Messungen „Weiß ich nicht – zur Szene“
+        vk = pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'vorab').length")
+        if pg.evaluate(f"!!PAKET.stationen[{i}].vorab") and not pg.evaluate("!!PAKET.spielwelt") and not vk:
+            vorab_fehlt.append(sid)
+        if bilder and i == 0 and vk:
+            pg.screenshot(path=os.path.join(bilder, '1-station-vorab.png'), full_page=False)
+        pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'vorab').forEach(t => t.obj.zurSzene())")
+        pg.wait_for_timeout(80)
         m = pg.evaluate("""(() => {
             const teile = LERNPAKET.aktuelleTeile();
             const spiel = !!document.querySelector('.spielbuehne');
@@ -246,10 +259,30 @@ def _vorlage(pg, bilder):
         if bilder and i == 0:
             pg.screenshot(path=os.path.join(bilder, '1-station.png'), full_page=True)
         pg.evaluate(loese)
+        pg.wait_for_timeout(80)
+        if pg.evaluate(f"(PAKET.stationen[{i}].check || []).length > 0 && (PAKET.stationen[{i}].lz || []).length > 0 && !PAKET.spielwelt"):
+            e = pg.evaluate("(() => { const s = document.querySelector('.einschaetzung .skala label:nth-child(2)'); if (!s) return false; s.click(); return true; })()")
+            if not e:
+                ohne_einsch.append(sid)
     punkt(not ohne_buehne, 'Interaktivität', 'Jede Station hat eine Szene zum Anfassen.' if not ohne_buehne else 'Stationen ohne Szene zum Anfassen: ' + ', '.join(ohne_buehne))
     punkt(not ohne_demo, 'Interaktivität', 'Jede Szene hat eine Vorführung („Zeig’s mir“).' if not ohne_demo else 'Szene ohne Vorführung (demo): ' + ', '.join(ohne_demo), gelb=True)
     punkt(not buehne_tief, 'Interaktivität', 'Die Szene steht ohne Scrollen im Blick und ist groß genug.' if not buehne_tief else 'Szene zu weit unten oder zu klein: ' + ', '.join(buehne_tief), gelb=True)
     punkt(not viel_text, 'Interaktivität', 'Textbudget eingehalten (sichtbarer Text neben der Szene).' if not viel_text else 'Viel sichtbarer Text neben der Szene: ' + ', '.join(viel_text) + ' – Ziel höchstens 160 Wörter.', gelb=True)
+    punkt(not vorab_fehlt, 'Selbststeuerung', 'Vorab-Fragen erscheinen vor der Szene.' if not vorab_fehlt else 'Vorab-Frage gesetzt, aber nicht angezeigt: ' + ', '.join(vorab_fehlt))
+    punkt(not ohne_einsch, 'Selbststeuerung', 'Nach jedem Kurz-Check gibt es die Einschätzung je Lernziel (ein Klick).' if not ohne_einsch else 'Keine Einschätzung nach dem Kurz-Check: ' + ', '.join(ohne_einsch), gelb=True)
+    z = pg.evaluate('LERNPAKET.zustand()')
+    if 'ej' in z and info['st'] and not ohne_einsch and not pg.evaluate('!!PAKET.spielwelt'):
+        punkt(bool(z['ej']), 'Selbststeuerung', 'Einschätzung wird gespeichert (für den Vergleich im Abschluss).' if z['ej'] else 'Einschätzung wird nicht gespeichert.')
+    # Abkürzung „Ich kenne mich schon aus“: alle Vorab-Fragen richtig → Stationen überspringbar
+    if pg.evaluate("LERNPAKET.alleVorab ? LERNPAKET.alleVorab().length : 0"):
+        pg.evaluate("LERNPAKET.zeige('abkuerzung')")
+        pg.wait_for_timeout(80)
+        ansichten.append(('Abkürzung', _primaer(pg)))
+        pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'abkuerzung').forEach(t => { t.obj.loesen(); t.obj.auswerten(); })")
+        pg.wait_for_timeout(80)
+        soll = pg.evaluate("PAKET.stationen.filter(s => LERNPAKET.vorabFragen(s).length).map(s => s.id)")
+        ist = pg.evaluate('LERNPAKET.zustand().skip')
+        punkt(sorted(ist) == sorted(soll), 'Selbststeuerung', f'Abkürzung „Ich kenne mich schon aus“: mit allen Vorab-Fragen richtig sind {len(ist)} von {len(soll)} Stationen überspringbar.' if sorted(ist) == sorted(soll) else f'Abkürzung markiert {ist} statt {soll}.')
     z = pg.evaluate('LERNPAKET.zustand()')
     offen = [s for s in info['st'] if not z['st'].get(s)]
     punkt(not offen, 'Lösbarkeit', 'Alle Stationen sind mit der Musterlösung lösbar.' if not offen else 'Mit der Musterlösung nicht abschließbar: ' + ', '.join(offen))
@@ -307,6 +340,35 @@ def _vorlage(pg, bilder):
     punkt(z2['n'] == 2 and len(z2['st']) == len(info['st']), 'Technik', 'Wiedereinstieg: Fortschritt ist nach dem Neuladen wieder da.')
     mehrfach = [f'{n} ({k})' for n, k in ansichten if k != 1]
     punkt(not mehrfach, 'Bedienung', 'Jede Ansicht hat genau einen hervorgehobenen Weiter-Knopf.' if not mehrfach else 'Nicht genau ein Weiter-Knopf: ' + ', '.join(mehrfach))
+
+
+def _startseite(ctx, url, bilder):
+    """Startseite = Überblick: ohne Scrollen, wenig Fließtext, keine Eingaben (Leitfaden C2, Teil 0)."""
+    zu_lang, eingaben, woerter = [], 0, 0
+    for w, h, name in [(1366, 768, 'Laptop'), (768, 1024, 'Tablet')]:
+        pg = ctx.new_page()
+        pg.set_viewport_size({'width': w, 'height': h})
+        pg.goto(url)
+        pg.wait_for_timeout(400)
+        m = pg.evaluate("""(() => {
+            const H = document.getElementById('haupt'), L = document.getElementById('leiste');
+            const k = [...H.children].filter(x => x.offsetParent !== null);
+            const unten = k.length ? Math.max(...k.map(x => x.getBoundingClientRect().bottom)) : 0;
+            const lr = L ? L.getBoundingClientRect() : {top: innerHeight, bottom: 0};
+            const c = H.cloneNode(true);
+            c.querySelectorAll('svg, button, .lernpfad, .weltkarte, .sr, .name, h2').forEach(x => x.remove());
+            return {unten: Math.round(unten), oben: Math.round(lr.top), ende: Math.round(lr.bottom), vh: innerHeight,
+                    eingaben: H.querySelectorAll('input, textarea, select').length, woerter: LERNPAKET.woerter(c.innerHTML)};
+          })()""")
+        if m['unten'] > m['oben'] + 2 or m['ende'] > m['vh']:
+            zu_lang.append(f"{name} {w}×{h}: Inhalt bis {m['unten']} px, Leiste ab {m['oben']} px")
+        eingaben, woerter = max(eingaben, m['eingaben']), max(woerter, m['woerter'])
+        if bilder:
+            pg.screenshot(path=os.path.join(bilder, f'0-start-{w}x{h}.png'), full_page=False)
+        pg.close()
+    punkt(not zu_lang, 'Startseite', 'Startseite passt ohne Scrollen auf Laptop (1366×768) und Tablet (768×1024).' if not zu_lang else 'Startseite braucht Scrollen: ' + '; '.join(zu_lang), gelb=True)
+    punkt(woerter <= 45, 'Startseite', f'Wenig Fließtext auf der Startseite ({woerter} Wörter, Ziel höchstens etwa 40).' if woerter <= 45 else f'Zu viel Fließtext auf der Startseite: {woerter} Wörter (Ziel höchstens etwa 40). Leitsituation kürzen, Rest in Stationen.', gelb=True)
+    punkt(not eingaben, 'Startseite', 'Keine Eingaben auf der Startseite (Einschätzung und Vorab-Fragen stehen an den Stationen).' if not eingaben else f'{eingaben} Eingabefelder auf der Startseite – Einschätzung und Vorwissens-Fragen gehören an die Stationen.', gelb=True)
 
 
 def _schmal(ctx, url, bilder, vorlage):

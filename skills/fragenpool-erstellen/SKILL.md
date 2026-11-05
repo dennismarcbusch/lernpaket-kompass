@@ -5,7 +5,7 @@ description: Erstellt Fragen für Lernpakete nach dem Lernpaket-Kompass – je L
 
 # Fragenpool erstellen
 
-Du schreibst die Fragen eines Lernpakets: Kurz-Checks, Fragenpool für den Nachweis, Übungs-, Vorwissens- und Selbsttest-Fragen. Gute Fragen sind der Teil des Pakets, der am meisten Wirkung hat (Abrufen festigt Wissen, P5; erklärendes Feedback, P6), und zugleich der, bei dem fachliche Fehler am meisten schaden. Deshalb prüft die Lehrkraft jede Frage.
+Du schreibst die Fragen eines Lernpakets: Kurz-Checks, Fragenpool für den Nachweis, Übungs-, Vorab- und Selbsttest-Fragen. Gute Fragen sind der Teil des Pakets, der am meisten Wirkung hat (Abrufen festigt Wissen, P5; erklärendes Feedback, P6), und zugleich der, bei dem fachliche Fehler am meisten schaden. Deshalb prüft die Lehrkraft jede Frage.
 
 **Lies vor dem Start:** `referenz/fragenformat.md` (Format und Mengen), in `referenz/prinzipien.md` die Prinzipien P5, P6, P8 und P10.
 
@@ -24,7 +24,7 @@ Du schreibst die Fragen eines Lernpakets: Kurz-Checks, Fragenpool für den Nachw
 | Kurz-Check (`check`) | 3–5 je Station, mindestens eine je Lernziel der Station; ab Station 3 eine Frage zu früheren Stationen |
 | Nachweis (`nachweis`) | mindestens 4 je Lernziel im Pool (pro Versuch werden 2 je Lernziel gezogen) |
 | Übung (`uebung`) | eine je Übung, wenn die Übung keine eigene Interaktion hat |
-| Vorwissen (`vorwissen`) | eine je Lernziel |
+| Vorab-Frage (`vorab`) | eine je Station, vor der Szene: schwer zu erraten (Zahl, Text, Zuordnen oder Mehrfachauswahl, keine Einfachauswahl und kein Hotspot), nicht zugleich im Kurz-Check, möglichst nicht im Nachweis; Fragetext neutral, ohne „Was vermutest du?“ |
 | Selbsttest | 5 aus allen Lernzielen, für die Rückseite des Merkblatts (dürfen Nachweis-Fragen sein) |
 
 Eine Frage darf mehrere Einsätze haben, aber Kurz-Check und Nachweis sollten sich nur wenig überschneiden.

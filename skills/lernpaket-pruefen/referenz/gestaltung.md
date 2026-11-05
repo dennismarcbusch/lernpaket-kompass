@@ -30,7 +30,7 @@ Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern st
 - Im Entdecken- und Übungsteil erscheint das Feedback direkt an der Antwort oder Stelle, um die es geht, nicht gesammelt an anderer Stelle.
 - Auf dem Zielgerät prüfen, besonders auf dem Tablet, wo weniger Platz ist.
 - Inhalte in kleine Schritte teilen, die Lernende selbst weiterklicken (Segmentierung).
-- Fachbegriffe vorab kurz einführen, bevor sie in einem komplexen Ablauf auftauchen (Vortraining).
+- Fachbegriffe vorab kurz einführen, bevor sie in einem komplexen Ablauf auftauchen (Vortraining): an der Station, an der sie zuerst gebraucht werden, als Begriffe zum Antippen neben der Szene, nicht gesammelt auf der Startseite.
 - Denselben Text nicht gleichzeitig vorlesen und anzeigen (Redundanz).
 - Locker und direkt ansprechen („Du“ bzw. „Sie“ je nach Zielgruppe), nicht im Lehrbuchton (Personalisierung).
 - Einheitliche Bedienung und einheitlicher Aufbau über alle Pakete; jedes Paket hat seine eigene Welt (Farben, Kulisse, Figuren) mit einem einzigen Akzent für Handlungsaufforderungen.
@@ -57,6 +57,7 @@ Signale braucht nicht nur der Lernstoff, sondern auch die Bedienung. Wer suchen 
 - Anklickbares sieht anklickbar aus; Dekoratives nicht.
 - Kein wichtiger Knopf liegt unbemerkt außerhalb des sichtbaren Bereichs, auch nicht auf dem Tablet.
 - Prüfen mit dem Fünf-Sekunden-Test: Jemand sieht einen Bildschirm kurz an und sagt, was als Nächstes zu tun ist. Klappt das nicht, fehlt ein Signal.
+- Die Startseite ist ein Überblick, kein Arbeitsblatt: Szene mit Leitsituation (höchstens etwa 40 Wörter), Lernpfad mit den Lernzielen als Etiketten, genau ein Knopf, keine Eingaben, ohne Scrollen auf Laptop (1366 × 768) und Tablet. Das Prüfskript misst das.
 
 **Aufgaben und Übungen**
 
@@ -82,8 +83,8 @@ Tipps werden aktiv angefordert und zählen im Üben nicht gegen die Lernenden; i
 
 Was Einsteigern hilft, kann Fortgeschrittene bremsen: Ausführliche Erklärungen, Lösungsbeispiele und kleinschrittige Anleitungen kosten sie Zeit und Aufmerksamkeit, ohne etwas Neues zu bringen, und können das Lernen sogar verschlechtern (Expertise-Umkehr-Effekt, Kalyuga 2007). Ein Paket sollte deshalb Hilfe anbieten, aber nicht aufzwingen.
 
-- Der Vorwissens-Check im Einstieg hat Folgen: Wer gut abschneidet, bekommt eine Empfehlung, welche Stationen er überspringen oder nur überfliegen kann.
-- Am Kapitelanfang gibt es einen freiwilligen Kurz-Check: Wer ihn besteht, darf das Kapitel überspringen.
+- Jede Station beginnt mit einer Vorab-Frage („Was vermutest du?“, zählt nicht). Wer richtig liegt, darf die Station überspringen; wer falsch liegt, lernt danach gezielter, weil die Szene die Antwort klärt (Pretesting, Teil A2).
+- Die Abkürzung „Ich kenne mich schon aus“ auf der Startseite stellt alle Vorab-Fragen auf einem eigenen Bildschirm; was sitzt, wird auf dem Lernpfad als überspringbar markiert. Vorab-Fragen sind schwer zu erraten (Zahl, Text, Zuordnen oder Mehrfachauswahl), sonst trifft die Empfehlung Glückspilze.
 - Ausführliche Erklärungen und Lösungsbeispiele sind aufklappbar, nicht Pflichtlektüre; die Kurzfassung steht sichtbar.
 - Tipps gibt es nur auf Anforderung (siehe oben).
 - Übersprungene Stationen bleiben jederzeit erreichbar; der Kompetenznachweis ist für alle gleich.
@@ -94,7 +95,7 @@ Die Gestaltungsregeln sind Faustregeln. Für manche Lernende gelten sie nur eing
 
 - Gesprochenes ist nie die einzige Quelle: Wo Ton eingesetzt wird, gibt es den Text zum Zuschalten (Untertitel oder Transkript). Lernende mit Hörbeeinträchtigung brauchen ihn, und ohne Kopfhörer geht es im Klassenzimmer oft nicht anders.
 - Für Lernende, die noch Deutsch lernen, dürfen Untertitel auch zusätzlich zum Ton laufen, obwohl das Redundanzprinzip davon abrät; das Verstehen der Sprache wiegt hier schwerer.
-- Fachbegriffe in einem Glossar sammeln, das jederzeit erreichbar ist; die wichtigsten am Anfang kurz vorstellen (Vortraining).
+- Fachbegriffe in einem Glossar sammeln, das jederzeit erreichbar ist; die wichtigsten an der Station vorstellen, an der sie zuerst gebraucht werden (Vortraining).
 - Kurze Sätze, geläufige Wörter, eine Information pro Satz. Fachbegriffe bleiben, werden aber erklärt.
 - Information nie nur über Ton oder nur über Farbe vermitteln.
 
@@ -124,10 +125,10 @@ Kerres (2024) bestätigt das aus der Forschung zum digitalen Lernen: Wer allein 
 | --- | --- | --- |
 | Rolle des Pakets | Trägt die gesamte Lerneinheit von Einstieg bis Nachweis | Baustein für eine Phase: Erarbeitung, Übung, Simulation oder Vorbereitung (Flipped) |
 | Zeitstruktur | Kein 45/90-Minuten-Raster; Fortschritt wird gespeichert, Wiedereinstieg jederzeit | Abschnitte von etwa 20–30 Minuten, die in eine Stunde passen; Stationen einzeln aufrufbar |
-| Einstieg | Im Paket: Leitsituation, Lernziele, Vorwissens-Check, Hinweis zum Vorgehen; optional ein freiwilliger Input mit Tafelbild (C2) | Durch die Lehrkraft, z. B. mit dem Tafelbild des Pakets; das Paket kann den Einstieg kurz halten |
+| Einstieg | Im Paket: Startseite mit Leitsituation und Lernpfad, Abkürzung für Lernende mit Vorwissen; optional ein freiwilliger Input mit Tafelbild (C2) | Durch die Lehrkraft, z. B. mit dem Tafelbild des Pakets; das Paket kann den Einstieg kurz halten |
 | Steuerung | Empfohlener Pfad mit Freiheit beim Tempo; Springen möglich, aber mit Hinweis, was vorausgesetzt wird | Lehrkraft gibt Abschnitte frei bzw. vor |
 | Hilfe | Drei gestufte Tipps, Lösungsbeispiele, Glossar und Steckbriefe immer erreichbar; Hinweis, wann man die Lehrkraft fragen sollte | Tipps im Paket; vertiefende Hilfe durch Lehrkraft und Mitschüler |
-| Selbstregulation | Verbindlich: Lernziele mit Selbsteinschätzung vorher/nachher, Fortschrittsanzeige, Reflexionsfragen mit Musterantwort, Lernempfehlung nach dem Nachweis | Optional; Reflexion und Sicherung im Plenum |
+| Selbstregulation | Verbindlich: Lernziel an jeder Station, Einschätzung nach dem Kurz-Check und am Ende im Vergleich mit dem Ergebnis, Fortschrittsanzeige, Reflexionsfragen mit Musterantwort, Lernempfehlung nach dem Nachweis | Optional; Reflexion und Sicherung im Plenum |
 | Nachweis | Im Paket, mit Bestehensgrenze und Wertung in der Lernplattform; mehrere Versuche, bestes Ergebnis zählt | Oft formativ (ohne Wertung) oder ganz ausgelagert in eine Lernzielkontrolle der Lehrkraft |
 | Rolle der Lehrkraft | Lernbegleitung: Auswertung der Daten, gezielte Gespräche mit Lernenden, die hängen | Unterrichtsleitung: Einführung, Moderation, Sicherung der Ergebnisse |
 | Daten für die Lehrkraft | Wichtig: Ergebnisse je Lernziel und je Frage, Bearbeitungsstand | Hilfreich, aber nicht zwingend |

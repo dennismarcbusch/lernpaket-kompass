@@ -28,7 +28,7 @@ Kolleginnen und Kollegen laden nur einen Skill hoch: **`lernpaket-kompass`**. Er
 
 **Jede Station ist eine Szene zum Anfassen** (Prinzip P14): Die Schüler bedienen einen nachgebauten Rechner, prüfen ein Dokument, führen ein Gespräch, sortieren, stellen ein Gerät ein. Ein Baukasten liefert die Bausteine, jedes Paket bekommt eine eigene Welt (Farben, Kulisse, illustrierte Figuren), auf Wunsch mit Spielrahmen und Missionskarte. Das Lösungsbeispiel wird mit „Zeig’s mir“ in der Szene vorgeführt.
 
-Jedes Paket aus der Vorlage bringt außerdem Selbsteinschätzung, Kurz-Checks, gestufte Tipps, Kompetenznachweis (bestanden ab 80 %), Auswertung je Lernziel, Merkblatt und die SCORM-Anbindung schon mit. Paket-IDs haben die Form `<präfix>-<name>`; das Präfix steht für Projekt oder Fach (z. B. `ping-` für die IT-Pakete).
+Jedes Paket aus der Vorlage bringt außerdem eine Startseite als Überblick (Szene, Lernpfad mit Ziel-Etiketten, ein Knopf), Vorab-Fragen mit Abkürzung für Lernende mit Vorwissen, Einschätzung nach dem Kurz-Check, Kurz-Checks, gestufte Tipps, Kompetenznachweis (bestanden ab 80 %), Auswertung je Lernziel, Merkblatt und die SCORM-Anbindung schon mit. Paket-IDs haben die Form `<präfix>-<name>`; das Präfix steht für Projekt oder Fach (z. B. `ping-` für die IT-Pakete).
 
 ## Woher es kommt
 

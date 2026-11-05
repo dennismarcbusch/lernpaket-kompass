@@ -40,14 +40,15 @@ Lies `js/inhalt.js` (bzw. die Texte in `index.html`) und beantworte jede Prüffr
 - **P6:** Hat jede Falschantwort ein eigenes Feedback, das eine Fehlvorstellung anspricht? Stichprobe von mindestens zehn Fragen, bei kleinen Pools alle.
 - **P8:** Jedes Lernziel mit mindestens zwei Fragen oder Prüfpunkten im Nachweis; Lernziele in Schülersprache; nichts geprüft, was nicht geübt wurde.
 - **P2/P10:** Hilfe nimmt ab, Situationen wechseln, Wiederholungsfragen ab Station 3, gemischter Nachweis.
-- **P11/P13:** Selbsteinschätzung vorher/nachher, Fortschritt, Reflexion mit Musterantwort, Empfehlung; Merkblatt erst nach dem Nachweis.
+- **P7 Startseite:** Überblick in Sekunden – Szene, Lernpfad, ein Knopf; ohne Scrollen, höchstens etwa 40 Wörter Fließtext, keine Eingaben (das Prüfskript misst es).
+- **P11/P13:** Einschätzung nach dem Kurz-Check und im Abschluss (im Vergleich mit dem Ergebnis), Vorab-Frage je Station und Abkürzung für Lernende mit Vorwissen, Fortschritt, Reflexion mit Musterantwort, Empfehlung; Merkblatt erst nach dem Nachweis.
 - **Bestehensgrenze 80 %**, beliebig oft wiederholbar, bestes Ergebnis zählt.
 
 ### 4. Barrierefreiheit (Stichprobe)
 
 Mit Playwright: Lässt sich eine Station mit der Tabulatortaste und Enter bedienen? Haben Bilder bzw. SVGs eine Beschreibung (`aria-label`, `alt`)? Wird Information nur über Farbe oder nur über Ton vermittelt? Haben Ton und Video Untertitel oder ein Transkript? Bleibt die Darstellung bei 200 % Zoom nutzbar?
 
-Sprache und Deutsch als Zweitsprache: Gibt es ein Glossar, werden die wichtigsten Begriffe vorab vorgestellt, sind die Sätze kurz? Lange Schachtelsätze und unerklärte Fachwörter nennst du mit Fundstelle.
+Sprache und Deutsch als Zweitsprache: Gibt es ein Glossar, werden neue Begriffe an der Station vorgestellt, an der sie gebraucht werden, sind die Sätze kurz? Lange Schachtelsätze und unerklärte Fachwörter nennst du mit Fundstelle.
 
 ### 4a. Tafelbild (nur wenn das Paket eines hat)
 

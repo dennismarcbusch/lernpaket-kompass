@@ -29,7 +29,7 @@
                 typisch: [{antwort, feedback}].
      'hotspot'  svg: '<svg viewBox=…>…</svg>', bereiche: [{x,y,w,h | cx,cy,r,
                 label, richtig, feedback}] – genau ein Bereich ist richtig.
-   Jede Frage: id, lz, einsatz (['check'|'nachweis'|'uebung'|'vorwissen']),
+   Jede Frage: id, lz, einsatz (['check'|'nachweis'|'uebung'|'vorab']),
    frage, erklaerung (warum die richtige Antwort richtig ist), optional bild.
 
    Optional: tafel – Tafelbild für einen freiwilligen Input (siehe unten).
@@ -125,13 +125,14 @@ window.PAKET = {
   id: 'beispiel-bits-und-bytes',          // = Identifier im imsmanifest.xml
   titel: 'Bits & Bytes',
   untertitel: 'Binärzahlen lesen und schreiben',
-  version: '2.0',
+  version: '2.1',
   bestehen: 80,                         // Prozent, wie masteryscore im Manifest
   dauer: 'etwa 90 Minuten',
   welt: { thema: 'technik', kulisse: 'serverraum' },
   figur: { name: 'Mira Hofmann', rolle: 'Ausbilderin bei Korbwerk IT-Service',
     aussehen: { haut: 1, haare: 'rot', frisur: 'zopf', kleidung: '#4338ca', brille: true } },
-  leitsituation: 'Willkommen bei <b>Korbwerk IT-Service</b>! Diese Woche richtest du mit mir Netzwerke bei Kunden ein. Viele Geräte zeigen Adressen und Masken als Binärzahlen an – zum Beispiel <code>11000000</code> statt 192. Damit du nicht ratlos vor dem Router stehst, lernst du heute, Binärzahlen sicher zu lesen und zu schreiben.',
+  // Leitsituation: höchstens etwa 40 Wörter – sie ist der einzige Fließtext auf der Startseite
+  leitsituation: 'Willkommen bei <b>Korbwerk IT-Service</b>! Router zeigen Adressen oft als Binärzahlen an – zum Beispiel <code>11000000</code> statt 192. Heute lernst du, solche Zahlen sicher zu lesen und zu schreiben.',
 
   lernziele: [
     { id: 'LZ1', kurz: 'Binär → dezimal', text: 'Ich kann eine 8-Bit-Binärzahl in eine Dezimalzahl umrechnen.' },
@@ -139,13 +140,11 @@ window.PAKET = {
     { id: 'LZ3', kurz: 'Anzahl Werte', text: 'Ich kann berechnen, wie viele verschiedene Werte sich mit n Bit darstellen lassen.' }
   ],
 
-  vorwissen: ['F3', 'F10', 'F15'],
-
-  // Glossar: alle Fachbegriffe; vorab: true = wird am Anfang vorgestellt (Vortraining)
+  // Glossar: alle Fachbegriffe; vorab: '<Stations-id>' = wird an dieser Station vor der Szene vorgestellt (Vortraining)
   glossar: [
-    { begriff: 'Bit', erklaerung: 'Kleinste Informationseinheit: 0 oder 1.', vorab: true },
-    { begriff: 'Byte', erklaerung: '8 Bit zusammen. Ein Byte kann 256 verschiedene Werte haben (0 bis 255).', vorab: true },
-    { begriff: 'Stellenwert', erklaerung: 'Wie viel eine Stelle in einer Zahl wert ist. Im Binärsystem: 1, 2, 4, 8, 16, 32, 64, 128 (von rechts).', vorab: true },
+    { begriff: 'Bit', erklaerung: 'Kleinste Informationseinheit: 0 oder 1.', vorab: 'S1' },
+    { begriff: 'Byte', erklaerung: '8 Bit zusammen. Ein Byte kann 256 verschiedene Werte haben (0 bis 255).', vorab: 'S1' },
+    { begriff: 'Stellenwert', erklaerung: 'Wie viel eine Stelle in einer Zahl wert ist. Im Binärsystem: 1, 2, 4, 8, 16, 32, 64, 128 (von rechts).', vorab: 'S1' },
     { begriff: 'Binärzahl', erklaerung: 'Zahl, die nur aus 0 und 1 besteht (Zweiersystem).' },
     { begriff: 'Dezimalzahl', erklaerung: 'Zahl im gewohnten Zehnersystem mit den Ziffern 0 bis 9.' },
     { begriff: 'Oktett', erklaerung: 'Ein Byte als Teil einer IPv4-Adresse. Eine IPv4-Adresse hat vier Oktette, z. B. 192.168.1.10.' }
@@ -153,7 +152,7 @@ window.PAKET = {
 
   stationen: [
     {
-      id: 'S1', titel: 'Stellenwerte: So zählt ein Byte', lz: ['LZ1'],
+      id: 'S1', titel: 'Stellenwerte: So zählt ein Byte', lz: ['LZ1'], vorab: 'V1',
       auftrag: 'Der Router der Bäckerei Sommer zeigt <code>11000000</code>. Stell die Schalter genauso ein: Welche Dezimalzahl ist das?',
       leitfrage: 'Welchen Wert hat jede der acht Stellen?',
       inhalt: '<p>Jede Stelle hat einen <b>Stellenwert</b>: rechts 1, nach links immer doppelt so viel. Eine 1 heißt: Dieser Wert zählt mit.</p>',
@@ -179,7 +178,7 @@ window.PAKET = {
       check: ['F2', 'F4', 'F1']
     },
     {
-      id: 'S2', titel: 'Dezimal → binär', lz: ['LZ2'],
+      id: 'S2', titel: 'Dezimal → binär', lz: ['LZ2'], vorab: 'V2',
       auftrag: 'Der Drucker der Schreinerei Maier bekommt im letzten Byte die <b>150</b>. Stell 150 an den Schaltern ein – diesmal ohne Summenanzeige.',
       leitfrage: 'Wie zerlegst du eine Zahl in Stellenwerte?',
       inhalt: '<p>Von links nach rechts: Passt der Stellenwert noch in den Rest, Schalter an und mit dem Rest weiter. Passt er nicht, bleibt der Schalter aus.</p>',
@@ -207,7 +206,7 @@ window.PAKET = {
       check: ['F7', 'F9', 'F6']
     },
     {
-      id: 'S3', titel: 'Wie viele Werte passen in n Bit?', lz: ['LZ3'],
+      id: 'S3', titel: 'Wie viele Werte passen in n Bit?', lz: ['LZ3'], vorab: 'V3',
       auftrag: 'Mira fragt: „Wie viele verschiedene Adressen passen eigentlich in 4 Bit?“ Füge Bits hinzu und beobachte, wie viele Muster entstehen.',
       leitfrage: 'Was passiert mit der Anzahl, wenn ein Bit dazukommt?',
       inhalt: '<p>Mit n Bit gibt es <b>2<sup>n</sup></b> Muster, von 0 bis 2<sup>n</sup> − 1.</p>',
@@ -368,6 +367,17 @@ window.PAKET = {
   selbsttest: ['F16', 'F17', 'F12', 'F5', 'F18'],
 
   fragen: [
+    /* ---------- Vorab-Fragen (je Station eine, schwer zu erraten; erst vermuten, dann ausprobieren) ---------- */
+    { id: 'V1', lz: 'LZ1', einsatz: ['vorab'], typ: 'zahl', frage: 'Welche Dezimalzahl ist <code>10000001</code>?', zahl: { wert: 129 },
+      typisch: [{ wert: 2, feedback: 'Du hast nur die Einsen gezählt. Jede Stelle hat aber einen eigenen Wert: ganz links 128, ganz rechts 1.' }, { wert: 10000001, feedback: 'Das ist die Ziffernfolge als Dezimalzahl gelesen. Im Binärsystem hat jede Stelle einen Stellenwert.' }],
+      erklaerung: 'Die Eins ganz links ist 128 wert, die ganz rechts 1: 128 + 1 = 129.' },
+    { id: 'V2', lz: 'LZ2', einsatz: ['vorab'], typ: 'text', frage: 'Wie lautet <b>12</b> als 8-Bit-Binärzahl?', akzeptiert: ['00001100', '0000 1100'],
+      typisch: [{ antwort: '1100', feedback: 'Der Wert stimmt, aber ein Byte hat immer 8 Stellen: vorne mit Nullen auffüllen.' }, { antwort: '00110000', feedback: 'Die Stellen sind vertauscht. Die kleinen Werte (8, 4, 2, 1) stehen rechts.' }],
+      erklaerung: '12 = 8 + 4. Die Stellen für 8 und 4 sind 1, alle anderen 0: 00001100.' },
+    { id: 'V3', lz: 'LZ3', einsatz: ['vorab'], typ: 'zahl', frage: 'Wie viele verschiedene Werte lassen sich mit <b>3 Bit</b> darstellen?', zahl: { wert: 8 },
+      typisch: [{ wert: 6, feedback: 'Mit jedem Bit verdoppelt sich die Anzahl, sie wächst nicht nur um 2.' }, { wert: 7, feedback: '7 ist der größte Wert (111). Dazu kommt noch die 0: also 8 Werte.' }, { wert: 3, feedback: '3 ist die Anzahl der Bits, nicht der möglichen Werte.' }],
+      erklaerung: 'Jedes Bit verdoppelt die Möglichkeiten: 2 · 2 · 2 = 8 (von 000 bis 111).' },
+
     /* ---------- LZ1 ---------- */
     { id: 'F1', lz: 'LZ1', einsatz: ['check', 'nachweis'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>00001011</code>?', zahl: { wert: 11 },
       typisch: [{ wert: 13, feedback: 'Du hast die Stellenwerte von links nach rechts vergeben. Die Stelle mit dem Wert 1 steht ganz rechts.' }, { wert: 1011, feedback: 'Das ist die Ziffernfolge als Dezimalzahl gelesen. Rechne mit den Stellenwerten 8, 4, 2, 1.' }],
@@ -375,7 +385,7 @@ window.PAKET = {
     { id: 'F2', lz: 'LZ1', einsatz: ['check'], typ: 'mc', frage: 'Welchen Stellenwert hat das Bit ganz links in einem Byte?',
       optionen: [{ text: '128', richtig: true }, { text: '256', feedback: '256 wäre die neunte Stelle. Ein Byte hat Stellenwerte von 1 bis 128.' }, { text: '8', feedback: '8 ist die Anzahl der Bits in einem Byte, nicht der Stellenwert.' }, { text: '1', feedback: 'Der Stellenwert 1 steht ganz rechts.' }],
       erklaerung: 'Von rechts: 1, 2, 4, 8, 16, 32, 64, 128 – die achte Stelle hat den Wert 2⁷ = 128.' },
-    { id: 'F3', lz: 'LZ1', einsatz: ['nachweis', 'vorwissen'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>11000000</code>?', zahl: { wert: 192 },
+    { id: 'F3', lz: 'LZ1', einsatz: ['nachweis'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>11000000</code>?', zahl: { wert: 192 },
       typisch: [{ wert: 3, feedback: 'Du hast von links mit 1 und 2 angefangen. Die beiden Einsen stehen bei 128 und 64.' }],
       erklaerung: '128 + 64 = 192.' },
     { id: 'F4', lz: 'LZ1', einsatz: ['check'], typ: 'hotspot', frage: 'Tippe auf das Bit mit dem Stellenwert <b>32</b>.',
@@ -409,7 +419,7 @@ window.PAKET = {
     { id: 'F9', lz: 'LZ2', einsatz: ['check'], typ: 'mc', frage: 'Du rechnest <b>37</b> um. Welchen Stellenwert ziehst du als Erstes ab?',
       optionen: [{ text: '32', richtig: true }, { text: '64', feedback: '64 ist größer als 37 und passt nicht hinein.' }, { text: '16', feedback: '16 passt zwar, aber 32 ist der größte Stellenwert, der passt.' }, { text: '37', feedback: '37 ist kein Stellenwert. Stellenwerte sind 1, 2, 4, 8, 16, 32, 64, 128.' }],
       erklaerung: 'Man beginnt immer mit dem größten passenden Stellenwert: 32 (Rest 5).' },
-    { id: 'F10', lz: 'LZ2', einsatz: ['nachweis', 'vorwissen'], typ: 'text', frage: 'Schreibe <b>255</b> als 8-Bit-Binärzahl.', akzeptiert: ['11111111', '1111 1111'],
+    { id: 'F10', lz: 'LZ2', einsatz: ['nachweis'], typ: 'text', frage: 'Schreibe <b>255</b> als 8-Bit-Binärzahl.', akzeptiert: ['11111111', '1111 1111'],
       typisch: [{ antwort: '100000000', feedback: 'Das sind neun Stellen und der Wert 256. 255 ist der größte Wert eines Bytes.' }],
       erklaerung: '255 = 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1: alle acht Bits sind 1.' },
     { id: 'F17', lz: 'LZ2', einsatz: ['nachweis'], typ: 'text', frage: 'Schreibe <b>64</b> als 8-Bit-Binärzahl.', akzeptiert: ['01000000', '0100 0000'],
@@ -429,7 +439,7 @@ window.PAKET = {
     { id: 'F14', lz: 'LZ3', einsatz: ['check'], typ: 'mc', frage: 'Was passiert mit der Anzahl der darstellbaren Werte, wenn ein Bit dazukommt?',
       optionen: [{ text: 'Sie verdoppelt sich.', richtig: true }, { text: 'Sie steigt um 1.', feedback: 'Das neue Bit kann bei jedem bisherigen Muster 0 oder 1 sein – das verdoppelt die Anzahl.' }, { text: 'Sie steigt um 2.', feedback: 'Bei einem Bit mehr gibt es alle bisherigen Muster einmal mit 0 und einmal mit 1 davor.' }, { text: 'Sie verzehnfacht sich.', feedback: 'Das gilt im Dezimalsystem mit zehn Ziffern. Ein Bit hat nur zwei Zustände.' }],
       erklaerung: 'Jedes zusätzliche Bit verdoppelt die Anzahl: 2ⁿ → 2ⁿ⁺¹.' },
-    { id: 'F15', lz: 'LZ3', einsatz: ['nachweis', 'vorwissen'], typ: 'zahl', frage: 'Ein Byte einer IPv4-Adresse hat 8 Bit. Welches ist der <b>größte</b> Wert, der darin stehen kann?', zahl: { wert: 255 },
+    { id: 'F15', lz: 'LZ3', einsatz: ['nachweis'], typ: 'zahl', frage: 'Ein Byte einer IPv4-Adresse hat 8 Bit. Welches ist der <b>größte</b> Wert, der darin stehen kann?', zahl: { wert: 255 },
       typisch: [{ wert: 256, feedback: '256 ist die Anzahl der Werte. Weil bei 0 begonnen wird, ist der größte Wert 255.' }],
       erklaerung: '2⁸ − 1 = 255.' },
     { id: 'F18', lz: 'LZ3', einsatz: ['nachweis'], typ: 'zuordnen', frage: 'Ordne zu: Wie viele verschiedene Werte gibt es mit …',

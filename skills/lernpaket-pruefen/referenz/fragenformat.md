@@ -19,7 +19,7 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 |---|---|---|
 | `id` | ja | eindeutig im Paket, z. B. `F7`. Wird als `N<Versuch>_F7` an die Lernplattform gemeldet und in der Auswertung genutzt. Nach dem ersten Einsatz nicht mehr umbenennen. |
 | `lz` | ja | Lernziel, z. B. `LZ2` |
-| `einsatz` | ja | Liste aus `check` (Kurz-Check), `nachweis` (Pool für Teil B), `uebung`, `vorwissen` |
+| `einsatz` | ja | Liste aus `check` (Kurz-Check), `nachweis` (Pool für Teil B), `uebung`, `vorab` (Vorab-Frage einer Station; früher `vorwissen`) |
 | `typ` | ja | `mc`, `zuordnen`, `zahl`, `text`, `hotspot` (siehe unten) |
 | `frage` | ja | Fragetext, HTML erlaubt |
 | `erklaerung` | ja | Warum die richtige Antwort richtig ist (Feedback, P6) |
@@ -47,11 +47,11 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 | `figuren` | optional weitere Personen: `{schluessel: {name, rolle, aussehen}}`; in Stationen über `figur: 'schluessel'` als Auftraggeber, in Szenen über `kit.szene(…).person('schluessel')` |
 | `spiel` | optional: Spielrahmen `{titel, intro, ziel, zaehler: {name, symbol}}`; dann je Station `mission: {ort, symbol, ende}` (Ort auf der Karte, Story-Satz nach dem Lösen) |
 | `spielwelt` | optional: **Spielmodus** `{titel, tab, start(box, api)}` – ein Spiel über alle Stationen (siehe „Spielmodus“ unten). Dann sind die Stationen Level: `{id, titel, lz, check (höchstens 3), mitdenken}` ohne eigene Szene. |
-| `leitsituation` | Einstiegstext der Figur (HTML) |
-| `lernziele` | `[{id: 'LZ1', kurz, text: 'Ich kann …'}]` – drei bis acht |
-| `vorwissen` | Liste von Fragen-IDs für den freiwilligen Vorwissens-Check (eine je Lernziel) |
-| `glossar` | `[{begriff, erklaerung, vorab}]` – alle Fachbegriffe; `vorab: true` stellt den Begriff schon auf der Startseite vor (Vortraining). Unter jeder Station und Übung aufklappbar. |
-| `stationen` | `[{id, titel, lz: [...], figur, mission, auftrag, leitfrage, inhalt, interaktion (Pflicht), selbsterklaerung: {schritt, frage}, steckbrief, vertiefung, mitdenken: {auftrag, muster}, beruf, check: [Fragen-IDs]}]`. `inhalt` steht als „Kurz erklärt“ in der Notiz neben der Szene (höchstens etwa 40 Wörter). Ohne Szene nur mit `ohneInteraktion: 'Begründung'`; dann wird `beispiel: {titel, aufgabe, schritte: [{tun, warum}]}` als Text gezeigt. |
+| `leitsituation` | Einstiegstext der Figur (HTML), höchstens etwa 40 Wörter: der einzige Fließtext auf der Startseite |
+| `lernziele` | `[{id: 'LZ1', kurz, text: 'Ich kann …'}]` – drei bis acht. `kurz` (Pflicht, höchstens vier Wörter) steht als Etikett im Lernpfad der Startseite, `text` an jeder Station und im Abschluss |
+| `vorwissen` | veraltet: Liste von Fragen-IDs. Wird nach Lernziel den Stationen zugeordnet, wenn diese kein `vorab` haben. Neu: `vorab` an der Station |
+| `glossar` | `[{begriff, erklaerung, vorab}]` – alle Fachbegriffe, unter jeder Station und Übung aufklappbar. `vorab: 'S1'` stellt den Begriff an dieser Station als „Neu hier“ neben der Szene vor (Vortraining); `vorab: true` bedeutet Station 1 |
+| `stationen` | `[{id, titel, lz: [...], figur, mission, auftrag, leitfrage, inhalt, interaktion (Pflicht), selbsterklaerung: {schritt, frage}, steckbrief, vertiefung, mitdenken: {auftrag, muster}, beruf, check: [Fragen-IDs], vorab: Fragen-ID}]`. `vorab` ist die Vorab-Frage am Stationsanfang („Was vermutest du?“, zählt nicht): schwer zu erraten (Zahl, Text, Zuordnen, Mehrfachauswahl), nicht zugleich im Kurz-Check, möglichst nicht im Nachweis. Richtig beantwortet, darf die Station übersprungen werden; alle Vorab-Fragen zusammen bilden die Abkürzung „Ich kenne mich schon aus“. `vorab: false` schaltet die Zuordnung aus `vorwissen` ab. `inhalt` steht als „Kurz erklärt“ in der Notiz neben der Szene (höchstens etwa 40 Wörter). Ohne Szene nur mit `ohneInteraktion: 'Begründung'`; dann wird `beispiel: {titel, aufgabe, schritte: [{tun, warum}]}` als Text gezeigt. |
 | `uebungen` | `[{id, titel, lz, figur, auftrag, interaktion (wo möglich) oder frage (ID), tipps: [Denkanstoß, Teillösung, Lösung], mitdenken: {auftrag, muster}, reflexion: {frage, muster}, steckbrief}]` |
 | `nachweis` | `{dauer, gewichtA (Prozent, Standard 50), einleitung, teilA: {titel, figur, auftrag, inhalt, interaktion}, teilB: {proLZ: 2}}` |
 | `merkblatt` | `[{lz, titel, zeilen: [{text mit ___, loesung}], fehler, beispiel, schema}]` |
@@ -169,7 +169,7 @@ tafel: {
 
 | Feld | Pflicht | Bedeutung |
 |---|---|---|
-| `titel`, `dauer` | nein | Anzeige im Dialog und auf der Startseiten-Karte |
+| `titel`, `dauer` | nein | Anzeige im Dialog und in der Hinweiszeile auf der Startseite |
 | `szenen[].titel` | ja | kurzer Name (2–3 Wörter); erscheint nur mit eingeschalteten Erklärungen |
 | `szenen[].station` | ja | ID der Station, die das Thema vertieft – das Tafelbild zeigt nichts, was im Paket fehlt |
 | `szenen[].erklaerung` | ja | 2–4 kurze Sätze für Schüler, die das Tafelbild selbst öffnen |
