@@ -8,7 +8,7 @@ Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehe
 
 | Schritt | Du bringst ein | Du bekommst |
 |---|---|---|
-| 1 Planen | Thema, Klasse, typische Schülerfehler, Wahl einer Spielidee | Steckbrief, Spielidee, Lernziele, Drehbuch |
+| 1 Planen | Thema, Klasse, typische Schülerfehler, Wahl der Simulation | Steckbrief, Konzept, Lernziele, Drehbuch |
 | 2 Fragen | Prüfung der Fragen | Fragenpool mit Feedback |
 | 3 Bauen | Rückmeldung zum Prototyp | ZIP-Datei für die Lernplattform |
 | 4 Prüfen | Paket | Prüfbericht mit Ampel |
@@ -58,9 +58,9 @@ Du schreibst in normaler Sprache. Wenn du „Lernpaket-Kompass“ dazuschreibst,
 
 > Ich möchte ein Lernpaket planen: Dreisatz für die Berufsintegrationsklasse, etwa 90 Minuten. Nutze den Lernpaket-Kompass.
 
-Claude stellt dir in mehreren Runden Fragen: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Welche Situation aus Beruf oder Alltag passt? Mit welchen Dokumenten, Programmen oder Geräten arbeiten sie dort? Dann kommt die **kreative Phase**: Claude schlägt dir drei Spielideen vor, in denen der Lernstoff die Spielregel ist – zum Beispiel einen Schalter-Simulator, in dem die Schüler am Registergericht Anmeldungen stempeln, oder ein Sammelspiel, in dem sie Firmen mit dem richtigen Registerball fangen. Zu jeder Idee steht, warum die Lernplattform das allein nicht könnte. Du wählst oder kombinierst. Wird es kein Spiel, entstehen **Szenen**: In jeder Station bewegen die Schüler etwas, zum Beispiel ein Formular ausfüllen, ein Dokument prüfen oder ein Kundengespräch führen. **Nimm dir für die typischen Fehler Zeit** – daraus entstehen gute Falschantworten und gutes Feedback.
+Claude stellt dir in mehreren Runden Fragen: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Welche Situation aus Beruf oder Alltag passt? Mit welchen Dokumenten, Programmen oder Geräten arbeiten sie dort? Dann kommt die **kreative Phase**: Claude schlägt dir eine **Simulation** vor – einen Arbeitsgegenstand aus dem Beruf, der das ganze Paket trägt, zum Beispiel ein nachgebautes Registerportal, eine Buchungsmaske oder ein Gerät, das sich zerlegen lässt. Bei abstrakten Inhalten wird es eine interaktive Illustration. Zu jedem Vorschlag steht, warum die Lernplattform das allein nicht könnte. Ein Spiel schlägt Claude vor, wenn es zum Üben passt oder du es dir ausdrücklich wünschst; dann lernen die Schüler die Grundlagen im Spiel selbst, wie in SQL Island. In jeder Station bewegen die Schüler etwas, zum Beispiel ein Formular ausfüllen, ein Dokument prüfen oder ein Kundengespräch führen. **Nimm dir für die typischen Fehler Zeit** – daraus entstehen gute Falschantworten und gutes Feedback.
 
-Danach schlägt Claude Lernziele vor („Ich kann …“) und legt fest, wie das Können im Nachweis geprüft wird. Korrigiere, was nicht passt. Am Ende bekommst du Steckbrief, Spielidee, Lernziel-Nachweis-Tabelle und Drehbuch.
+Danach schlägt Claude Lernziele vor („Ich kann …“) und legt fest, wie das Können im Nachweis geprüft wird. Korrigiere, was nicht passt. Am Ende bekommst du Steckbrief, Konzept, Lernziel-Nachweis-Tabelle und Drehbuch.
 
 ### Schritt 2: Fragen
 

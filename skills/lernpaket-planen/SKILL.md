@@ -1,13 +1,13 @@
 ---
 name: lernpaket-planen
-description: Plant ein SCORM-Lernpaket nach dem Lernpaket-Kompass mit der Lehrkraft – Steckbrief, drei Spielideen zur Wahl, Lernziele mit Nachweis, Drehbuch. Für „Lernpaket planen“.
+description: Plant ein SCORM-Lernpaket nach dem Lernpaket-Kompass mit der Lehrkraft – Steckbrief, Simulation (Spiel nur begründet), Lernziele mit Nachweis, Drehbuch. Für „Lernpaket planen“.
 ---
 
 # Lernpaket planen (Phasen 1–4 des Leitfadens)
 
 Du begleitest eine Lehrkraft vom ersten Einfall bis zum fertigen Drehbuch eines Lernpakets. Die Lehrkraft bringt Fachwissen und Unterrichtserfahrung mit; Programmier- oder Medienpädagogik-Kenntnisse brauchst du nicht vorauszusetzen. Du sorgst dafür, dass der Plan die Prinzipien des Leitfadens erfüllt, ohne dass sie ihn kennen muss.
 
-**Lies vor dem Start:** `referenz/prinzipien.md` (14 Prinzipien mit Prüffragen), `referenz/szenen.md` (Spielideen, Spielmodus, Szenen-Katalog, Welt, Textbudget) und `referenz/prozess-und-struktur.md` (Phasen, Paketstruktur). Bei Fragen zu SeGeL oder Gestaltung: `referenz/gestaltung.md`.
+**Lies vor dem Start:** `referenz/prinzipien.md` (14 Prinzipien mit Prüffragen), `referenz/szenen.md` (Form wählen: Simulation, Illustration, Spiel; Spielmodus, Szenen-Katalog, Welt, Textbudget) und `referenz/prozess-und-struktur.md` (Phasen, Paketstruktur). Bei Fragen zu SeGeL oder Gestaltung: `referenz/gestaltung.md`.
 
 **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
 
@@ -36,16 +36,19 @@ Frage in zwei bis drei Runden ab, was noch fehlt:
 
 Fülle danach `vorlagen/steckbrief.md` aus und lass ihn bestätigen.
 
-### 2. Erfinden – die Spielidee (Ergebnis: Spielkonzept)
+### 2. Erfinden – Simulation zuerst (Ergebnis: Konzept)
 
-Diese kreative Phase gibt es **immer**, bevor Lernziele und Stationen feststehen (P12). Lernpakete sollen bieten, was die Lernplattform nicht kann: entdecken, ausprobieren, Folgen sehen. Trockener Stoff wird spannend, wenn man ihn braucht, um im Spiel weiterzukommen.
+Diese kreative Phase gibt es **immer**, bevor Lernziele und Stationen feststehen (P12). Lernpakete sollen bieten, was die Lernplattform nicht kann: entdecken, ausprobieren, Folgen sehen. Vorbild sind die PING-Pakete: Ein realistischer Arbeitsgegenstand trägt das ganze Paket, und der Lernstoff steckt in seinen Regeln. **Ein Spiel ist nicht der Normalfall.**
 
-1. **Drei verschiedene Ideen** nach `referenz/szenen.md` („Spielideen“): verschiedene Genres, mindestens eine ein echtes Spiel (Escape Room, Sammel- und Fangspiel, Schalter-Simulator, Detektivfall, Aufbauspiel …). Je Idee: Titel, Genre mit Vorbild, Rolle der Lernenden, Spielschleife in einem Satz, zwei Level, Tabelle **Lernstoff → Spielregel** (jeder Kerninhalt und jeder typische Fehler wird eine Regel oder Folge im Spiel), Folgen von Fehlern, Aufwand und die **Plattform-Probe** („Könnte die Lernplattform das auch? Nein, weil …“). Eine Idee, die die Probe nicht besteht, ersetzt du.
-2. **Kurz und anschaulich** präsentieren: je Idee fünf bis acht Zeilen, keine Fachdidaktik-Abhandlung. Ein Beispielzug pro Idee („Frau Grün mailt ihre Anmeldung – du stempelst ABGELEHNT“) macht sie greifbar.
-3. **Wählen lassen** (zum Anklicken): die drei Ideen, dazu „kombinieren“ als freie Antwort. Bei Unsicherheit bietest du an, zwei Ideen als Prototyp gegeneinander zu bauen.
-4. Fülle `vorlagen/spielidee.md` aus. Halte fest, wie umgesetzt wird: **Spielmodus** (`PAKET.spielwelt`, ein Spiel über alle Stationen, Stationen = Level), **Spielrahmen** mit Szenen (`PAKET.spiel`) oder – nur mit Begründung, die die Lehrkraft bestätigt – Simulation ohne Spiel.
+1. **Form bestimmen** nach `referenz/szenen.md` („Die Form wählen“), in dieser Reihenfolge: **A Simulation** (es gibt einen Gegenstand, mit dem Fachleute arbeiten) → **B Interaktive Illustration** (abstrakter Inhalt ohne Gegenstand) → **C** A oder B zum Vermitteln **plus Spiel zum Üben** (Regeln oder Zuordnungen, die viel Übung brauchen) → **D Lernspiel durchgehend** nur, wenn A und B nicht sinnvoll sind oder die Lehrkraft es ausdrücklich wünscht. Frage dafür gezielt nach: Mit welchem Programm, Gerät, Dokument oder Plan arbeiten Fachleute bei diesem Thema?
+2. **Beraten:** Erkläre der Lehrkraft kurz (zwei bis drei Sätze), welche Form du empfiehlst und warum – und warum die anderen hier weniger passen (z. B. „Ein Spiel müsste erst seine eigenen Regeln beibringen; das Terminal *ist* schon die Regel“). Die Lehrkraft entscheidet; wünscht sie ein Spiel, nimmst du das ernst und planst es nach dem SQL-Island-Prinzip.
+3. **Einen Vorschlag ausarbeiten**, dazu höchstens eine Alternative, wenn sie sinnvoll ist (z. B. A pur oder A mit Spiel zum Üben). Je Vorschlag: was die Lernenden sehen und bewegen, ein Beispielzug, die Tabelle **Lernstoff → Regel oder Reaktion des Gegenstands** (jeder Kerninhalt und jeder typische Fehler), wie der Gegenstand durch Entdecken, Üben und Nachweis trägt, Plattform-Probe und Aufwand. Kurz und anschaulich, fünf bis acht Zeilen je Vorschlag.
+4. **Mockup je Vorschlag:** Zeige zu jedem Vorschlag eine Skizze des wichtigsten Bildschirms (meist Station 1), damit die Lehrkraft sieht, was die Schüler vor sich haben: der Gegenstand groß in der Mitte in einem typischen Zustand (z. B. mit einer Fehlermeldung), daneben Auftrag bzw. Lektion und die Notiz, die Bedienelemente beschriftet. Alle Mockups im selben Ausschnitt und Format, damit man vergleichen kann. Kann deine Umgebung Grafiken im Chat anzeigen (SVG oder HTML, Visualisierung, Artefakt), nutze das; sonst eine Skizze aus Textzeichen. Ein Mockup ist eine schnelle Skizze, kein Prototyp – der kommt in der Phase Bauen.
+5. **Spiel nur bei C oder D.** Dann zusätzlich Genre, Spielschleife und – bei D Pflicht – das **SQL-Island-Prinzip**: Das Spiel vermittelt die Grundlagen selbst, ein neues Konzept je Schritt in der Story, der erste Zug wird vorgemacht, Nachschlagen jederzeit neben dem Spiel, sofortige Folge mit Erklärung. Wünscht die Lehrkraft ausdrücklich ein Spiel, schlägst du dafür bis zu drei Spielideen vor.
+6. **Wählen lassen** (zum Anklicken): dein Vorschlag zuerst, die Alternative, „lieber ein Spiel“ als freie Option.
+7. Fülle `vorlagen/konzept.md` aus. Halte die Umsetzung fest: Stationen mit Szenen am gemeinsamen Gegenstand (A, B), Szenen im Entdecken und Spiel in den Übungen (C) oder Spielmodus `PAKET.spielwelt` (D).
 
-Dazu gehören **Welt und Figuren**: Thema der Paketwelt (wirtschaft, technik, sprache, natur, gesundheit, gestaltung) mit Kulisse und die Figuren des Spiels (Ausbilderin, Direktorin, Rivale …), passend zur gewählten Idee.
+Dazu gehören **Welt und Figuren**: Thema der Paketwelt (wirtschaft, technik, sprache, natur, gesundheit, gestaltung) mit Kulisse und die Figuren (Ausbilderin, Kundin, Kollege …), passend zum Gegenstand.
 
 ### 3. Zielen – Lernziele und Nachweis zuerst (Ergebnis: Lernziel-Nachweis-Tabelle)
 
@@ -82,7 +85,7 @@ Gehe die **Prüffragen P1–P14** aus `referenz/prinzipien.md` durch und hänge 
 Vier Dateien (bzw. ein Dokument mit vier Teilen), die die Lehrkraft speichern kann:
 
 1. `steckbrief.md`
-2. `spielidee.md` mit der Entscheidung
+2. `konzept.md` mit der Entscheidung
 3. `lernziele-nachweis.md`
 4. `drehbuch.md` mit Prüftabelle (bei Input mit dem Abschnitt „Input und Tafelbild“)
 

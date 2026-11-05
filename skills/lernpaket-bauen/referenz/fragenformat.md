@@ -103,7 +103,7 @@ Regeln:
 
 ## Spielmodus (`PAKET.spielwelt`)
 
-Ergebnis der Phase „Erfinden“, wenn die Wahl auf ein richtiges Spiel fällt (P12). Die Engine zeigt unter „① <tab>“ eine große Spielbühne (`.spielbuehne`, mindestens 450 px hoch), darunter die Zwischenbilanz der geschafften Level und das Glossar.
+Nur für Form D (Lernspiel durchgehend, P12); ein Spiel nur zum Üben (Form C) ist dagegen die `interaktion` einer Übung. Die Engine zeigt unter „① <tab>“ eine große Spielbühne (`.spielbuehne`, mindestens 450 px hoch), darunter die Zwischenbilanz der geschafften Level und das Glossar.
 
 ```js
 spielwelt: { titel: 'Stempel drauf!', tab: 'Am Schalter', start: function (box, api) {
@@ -119,6 +119,8 @@ stationen: [ { id: 'S1', titel: 'Woche 1 · …', lz: ['LZ1', 'LZ2'], check: ['C
 
 - **Lernstoff als Spielregel:** Die Spielmechanik prüft das Lernziel (richtiger Ball, richtiger Stempel). Fehler haben eine Folge im Spiel und eine Erklärung; danach geht es weiter oder das Level startet neu.
 - **Lösungsbeispiel im Spiel:** Der erste Fall eines Levels wird geführt (Tutorial mit Hervorhebung), danach spielt man allein.
+- **Das Spiel vermittelt selbst (SQL-Island-Prinzip):** Jeder Schritt bringt genau ein neues Konzept als Teil der Geschichte, mit kurzem Hinweis in der Sprechblase; Regelbuch oder Übersicht liegt zum Nachschlagen neben dem Spiel.
+- **Spiel nur zum Üben (Form C):** kein Spielmodus, sondern die `interaktion` einer Übung (eine Übung je Runde oder eine Übung mit mehreren Runden, `api.erledigt()` am Ende); das Entdecken bleibt eine Simulation bzw. Illustration.
 - **Üben und Nachweis Teil A** nutzen dieselbe Mechanik als Funktion `interaktion(box, api)` mit neuen Fällen: in Übungen mit Rückmeldung und `api.erledigt()`, im Nachweis ohne Rückmeldung und Hilfen, `auswerten()` liefert Prüfpunkte je Lernziel.
 - Die Musterlösung `loesen()` muss ohne Animationen sofort durchlaufen (der Test wartet nicht).
 - Beispiele: `beispiele/spiel-stempel-drauf.js` (Schalter-Simulator) und `beispiele/spiel-firmendex.js` (Sammel- und Fangspiel mit Karte).

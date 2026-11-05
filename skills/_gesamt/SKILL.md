@@ -11,7 +11,7 @@ Dieser Skill fasst die fünf Einzel-Skills des Kompasses zusammen. Jede Phase ha
 
 | Phase | Anleitung | Ergebnis |
 |---|---|---|
-| 1 Planen | `phasen/1-planen.md` | Steckbrief, drei Spielideen zur Wahl, Lernziel-Nachweis-Tabelle, Drehbuch |
+| 1 Planen | `phasen/1-planen.md` | Steckbrief, Konzept (Simulation, Spiel nur begründet), Lernziel-Nachweis-Tabelle, Drehbuch |
 | 2 Fragen | `phasen/2-fragen.md` | Fragenpool mit Feedback und Prüftabelle |
 | 3 Bauen | `phasen/3-bauen.md` | SCORM-ZIP, erst Prototyp, dann Ausbau |
 | 4 Prüfen | `phasen/4-pruefen.md` | Prüfbericht mit Ampel |
@@ -50,7 +50,7 @@ Alle Pfade in den Phasen-Anleitungen beziehen sich auf den Ordner dieses Skills 
 ## Immer gilt
 
 - **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
-- **Spielidee zuerst:** Jedes Paket beginnt nach dem kurzen Interview mit einer kreativen Phase: drei Spielideen, in denen der Lernstoff die Spielregel ist, die Lehrkraft wählt (P12). Was die Lernplattform mit Test oder H5P genauso könnte, ist kein Lernpaket.
+- **Simulation zuerst:** Nach dem kurzen Interview folgt die Phase „Erfinden“ (P12): Ein realistischer Arbeitsgegenstand trägt das Paket (Simulation), bei abstrakten Inhalten eine interaktive Illustration. Ein Spiel nur zum Üben, wenn das Thema es hergibt, oder durchgehend, wenn keine Simulation sinnvoll ist oder die Lehrkraft es wünscht – dann vermittelt das Spiel die Grundlagen selbst (SQL-Island-Prinzip). Was die Lernplattform mit Test oder H5P genauso könnte, ist kein Lernpaket. Du berätst die Lehrkraft dazu und zeigst je Idee ein Mockup des wichtigsten Bildschirms.
 - **Szene statt Text:** Jede Station ist etwas zum Anfassen (P14) – ein realistischer Ort, ein Dokument, ein Gerät, ein simulierter Rechner oder ein Gespräch, kein Text mit Quiz darunter. Text bleibt knapp (`referenz/szenen.md`).
 - Einfache Sprache, Fachbegriffe kurz erklären. Die Lehrkraft entscheidet über Inhalte, Lernziele und Bewertung.
 - Keine Schülernamen oder anderen personenbezogenen Daten von Schülern, auch nicht in Beispielen.

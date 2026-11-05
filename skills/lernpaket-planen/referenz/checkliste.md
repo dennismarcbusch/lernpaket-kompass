@@ -18,7 +18,7 @@ Ein Paket ist einsatzbereit, wenn alle Muss-Punkte erfüllt sind; die Checkliste
 - [ ] Jede Antwort bekommt ein Feedback mit Begründung; typische Fehler haben eigenes Feedback. (P6)
 - [ ] Jede Übung hat drei gestufte Tipps. (P2)
 - [ ] Einschätzung je Lernziel nach dem Kurz-Check und am Ende, im Vergleich mit dem Ergebnis; Fortschrittsanzeige. (P11)
-- [ ] Es gab drei Spielideen zur Wahl. Im Paket ist der Lernstoff die Spielregel (wer ihn nicht beherrscht, scheitert im Spiel, nicht in einem Quiz danach), und es besteht die Plattform-Probe: Test, H5P oder Lückentext der Lernplattform könnten es nicht genauso. (P12)
+- [ ] Die Form ist begründet (Simulation vor interaktiver Illustration vor Spiel zum Üben vor durchgehendem Lernspiel). Der Lernstoff steckt in den Regeln des Gegenstands oder Spiels (wer ihn nicht beherrscht, kommt nicht weiter, nicht erst in einem Quiz danach); ein Spiel vermittelt die Grundlagen selbst. Das Paket besteht die Plattform-Probe: Test, H5P oder Lückentext der Lernplattform könnten es nicht genauso. (P12)
 - [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist ohne Scrollen sichtbar, realistisch und reagiert auf Fehler. Das Lösungsbeispiel wird darin vorgeführt, der Text daneben bleibt im Budget. (P14)
 
 **Gestaltung (Muss)**

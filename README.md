@@ -18,13 +18,13 @@ Kolleginnen und Kollegen laden nur einen Skill hoch: **`lernpaket-kompass`**. Er
 
 | Skill | Phase | Ergebnis |
 |---|---|---|
-| `lernpaket-planen` | Klären, Erfinden, Zielen, Entwerfen | Steckbrief, drei Spielideen zur Wahl, Lernziel-Nachweis-Tabelle, Drehbuch |
+| `lernpaket-planen` | Klären, Erfinden, Zielen, Entwerfen | Steckbrief, Konzept (Simulation, Spiel nur begründet), Lernziel-Nachweis-Tabelle, Drehbuch |
 | `fragenpool-erstellen` | Zielen, Entwerfen | Fragen mit erklärendem Feedback und Prüftabelle |
 | `lernpaket-bauen` | Bauen | SCORM-1.2-ZIP aus der Kompass-Vorlage (erst Prototyp, dann Ausbau) |
 | `lernpaket-pruefen` | Erproben | Prüfbericht mit Ampel (Checkliste, Prinzipien, Technik-Test) |
 | `lernpaket-auswerten` | Auswerten | Auswertung des Berichtsexports (ohne Namen) mit Änderungsvorschlägen |
 
-**Erst die Spielidee** (Prinzip P12): Nach einem kurzen Interview schlägt Claude drei Spielideen vor, in denen der Lernstoff die Spielregel ist – etwa einen Schalter-Simulator oder ein Sammelspiel. Was die Lernplattform mit Test oder H5P genauso könnte, ist kein Lernpaket. Die Lehrkraft wählt, die Vorlage hat dafür einen Spielmodus (ein Spiel über alle Stationen, Üben und Nachweis mit derselben Mechanik).
+**Simulation zuerst** (Prinzip P12): Nach einem kurzen Interview schlägt Claude einen realistischen Arbeitsgegenstand vor, der das ganze Paket trägt – wie das Terminal in „Shell Yeah!“, das PC-Gehäuse in „Plug & Pray“ oder der Lageplan in „Strukturierte Verkabelung“. Bei abstrakten Inhalten wird es eine interaktive Illustration. Ein Spiel gibt es zum Üben, wo das Thema es hergibt, oder durchgehend, wenn keine Simulation sinnvoll ist oder die Lehrkraft es wünscht; dann vermittelt das Spiel die Grundlagen selbst, wie SQL Island. Was die Lernplattform mit Test oder H5P genauso könnte, ist kein Lernpaket.
 
 **Jede Station ist eine Szene zum Anfassen** (Prinzip P14): Die Schüler bedienen einen nachgebauten Rechner, prüfen ein Dokument, führen ein Gespräch, sortieren, stellen ein Gerät ein. Ein Baukasten liefert die Bausteine, jedes Paket bekommt eine eigene Welt (Farben, Kulisse, illustrierte Figuren), auf Wunsch mit Spielrahmen und Missionskarte. Das Lösungsbeispiel wird mit „Zeig’s mir“ in der Szene vorgeführt.
 

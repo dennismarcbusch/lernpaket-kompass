@@ -17,7 +17,7 @@ Jedes Prinzip hat: **So geht’s** (konkret im Paket), **Warum** (Mechanismus), 
 | P9 | Hintergrund und Bedienhilfe trennen | Soll |
 | P10 | Wiederholen verteilen, Aufgaben mischen | Soll |
 | P11 | Selbststeuerung anleiten | Muss |
-| P12 | Lernstoff als Spielregel: erst die Spielidee | Muss |
+| P12 | Simulation zuerst, Spiel nur begründet | Muss |
 | P13 | Ergebnisse sichern: Merkblatt | Soll |
 | P14 | Handeln am Gegenstand: jede Station eine Szene | Muss |
 
@@ -195,21 +195,21 @@ Planen (Lernpfad mit Dauer und Zielen, Abkürzung für Lernende mit Vorwissen), 
 
 **Belege:** Training selbstregulierten Lernens g = 0,71 in der Sekundarstufe (Dignath & Büttner 2008), Werkzeuge zur Selbstüberwachung d = 0,42 (Dignath & van Ewijk 2023). Lernerkontrolle allein g = 0,05 (Karich et al. 2014). Kerres: Erfolg selbstgesteuerten Lernens hängt davon ab, ob Lernende ihren Lernprozess überwachen können. Einschätzungen mit Abstand und nach einem Abrufversuch sind deutlich treffsicherer als sofortige (Rhodes & Tauber 2011); Anfänger überschätzen sich vorab oft (Kruger & Dunning 1999).
 
-## P12 · Lernstoff als Spielregel: erst die Spielidee (Muss)
+## P12 · Simulation zuerst, Spiel nur begründet (Muss)
 
 **So geht’s**
-- Vor dem Planen der Stationen eine **kreative Phase** („Erfinden“): drei verschiedene Spielideen für das Thema, jede mit Genre, Spielschleife und Tabelle „Lernstoff → Spielregel“. Die Lehrkraft wählt oder kombiniert.
-- **Lernstoff als Spielregel:** Wer den Inhalt beherrscht, spielt besser. Die Rechtsform entscheidet, welcher Ball fängt; die Dienstanweisung entscheidet, welcher Stempel richtig ist. Kein Quiz als Tor zum nächsten Level, keine Punkte als Belohnung für Fragen.
-- **Plattform-Probe:** Könnte die Lernplattform das genauso (Test, H5P, Lückentext)? Dann ist es kein Kern eines Lernpakets. Das Paket bietet, was die Plattform nicht kann: entdecken, ausprobieren, Folgen sehen.
-- **Fehler haben Folgen in der Spielwelt** (der Firmling bricht aus, die Zeitung berichtet, ein Stern fehlt) und eine Erklärung dazu. Neustart eines Levels statt Strafe.
-- Fortschritt am Lernziel oder an der eigenen früheren Leistung messen; keine Ranglisten, keine Punkte ohne Zweck.
-- Umsetzung: Spielmodus `PAKET.spielwelt` (ein Spiel über alle Stationen, Stationen = Level) oder Spielrahmen `PAKET.spiel` (Missionskarte mit Szenen). Ergebnis bleibt manchmal eine realistische Simulation ohne Spiel – dann mit Begründung im Spielkonzept.
+- Vor dem Planen der Stationen eine **kreative Phase** („Erfinden“): Welche Form trägt das Paket? In dieser Reihenfolge: **A Simulation** eines realistischen Arbeitsgegenstands (Werkzeug, Gerät, Plan, Dokument, Portal) → **B interaktive Illustration** (bewegliches Modell für abstrakte Inhalte) → **C** A oder B zum Vermitteln **und ein Spiel zum Üben**, wo Regeln oder Zuordnungen viel Übung brauchen → **D Lernspiel durchgehend** nur, wenn A und B nicht sinnvoll sind oder die Lehrkraft es ausdrücklich wünscht.
+- **Der Lernstoff steckt in den Regeln des Gegenstands:** Die Grafikkarte lässt sich erst ausbauen, wenn das Stromkabel ab ist; `ping` geht erst, wenn die Route stimmt; ein Kabel über 90 m meldet der Plan. Wer den Stoff nicht kann, kommt nicht weiter – nicht erst in einem Quiz danach.
+- **Ein Gegenstand trägt das Paket:** derselbe Server, dasselbe Gehäuse, derselbe Plan durch Entdecken, Üben und Nachweis; im Nachweis ein neuer Fall.
+- **Wenn Spiel, dann lernt man im Spiel (SQL-Island-Prinzip):** ein neues Konzept je Schritt in der Story, der erste Zug vorgemacht, Nachschlagen neben dem Spiel, sofortige Folge mit Erklärung; der Lernstoff ist die Spielregel. Kein Spiel ohne eingebaute Anleitung.
+- **Plattform-Probe:** Könnte die Lernplattform das genauso (Test, H5P, Lückentext)? Dann ist es kein Kern eines Lernpakets.
+- Fehler haben realistische Folgen und eine Erklärung; Fortschritt am Lernziel messen; keine Ranglisten, keine Punkte ohne Zweck.
 
-**Warum:** Trockener Stoff wird spannend, wenn man ihn braucht, um etwas zu erreichen. Steckt der Lernstoff in der Spielregel, üben Lernende ihn bei jedem Zug; ein Spiel, das nur als Belohnung neben dem Stoff steht, lenkt ab. Ranglisten demotivieren Schwächere, und wer Punkte jagt, liest Lerninhalte nur flüchtig.
+**Warum:** Simulationen wirken auf komplexe Fertigkeiten stark und umso mehr, je realistischer sie sind; sie üben genau das, was später im Beruf gebraucht wird. Ein Spiel bringt eigene Regeln und eine eigene Welt mit, die zusätzlich gelernt werden müssen; ohne eingebaute Anleitung lernt man vor allem das Spiel. Seine Stärke liegt im wiederholten Anwenden einer Regel, die schon verstanden ist – deshalb passt es oft am besten zum Üben.
 
-**Prüffrage:** Gab es drei Spielideen zur Wahl? Ist im gewählten Konzept jedes Lernziel eine Spielregel, und besteht es die Plattform-Probe? Gibt es Folgen statt Punkte und keine Ranglisten?
+**Prüffrage:** Ist die Form begründet (A vor B vor C vor D)? Steckt der Lernstoff in den Regeln des Gegenstands bzw. des Spiels? Vermittelt ein Spiel die Grundlagen selbst? Besteht das Paket die Plattform-Probe? Gibt es Folgen statt Punkte und keine Ranglisten?
 
-**Belege:** Intrinsische Integration: Kinder lernten mit der Spielversion, in der der Mathestoff die Kampfmechanik war, mehr als mit einer Version, in der derselbe Stoff als Quiz zwischen den Spielphasen kam; frei wählend spielten sie sie etwa siebenmal so lange (Habgood & Ainsworth 2011). Lernspiele schlagen herkömmlichen Unterricht, d = 0,29 (Wouters et al. 2013); gut gestaltete Spiele bringen weitere g = 0,34 (Clark, Tanner-Smith & Killingsworth 2016). Gamification g = 0,49 auf Wissen; Rahmengeschichte und Kooperation verstärken (Sailer & Homner 2020). Kerres: Bestenlisten demotivieren; Lernende überfliegen Inhalte, um schnell ins Spiel zurückzukehren. Grenze: Spannende Details ohne Bezug zum Lernziel schaden, g = −0,33 (Sundararajan & Adesope 2020).
+**Belege:** Simulationsbasiertes Lernen g = 0,85 auf komplexe Fertigkeiten, realistischere Simulationen stärker (Chernikova et al. 2020). Lernspiele d = 0,29 gegenüber herkömmlichem Unterricht, stärker, wenn sie durch weitere Instruktion ergänzt werden (Wouters et al. 2013); Lernunterstützung im Spiel (Modellieren, Feedback, Reflexion u. a.) verbessert das Lernen, d = 0,34 (Wouters & van Oostendorp 2013). Mayer (2019): Belegt wirksam sind Spielmerkmale wie Vortraining, Coaching und Selbsterklären – also Anleitung, nicht das Spiel an sich. Intrinsische Integration: Lernstoff als Spielmechanik schlägt Lernstoff als Quiz zwischen Spielphasen (Habgood & Ainsworth 2011). SQL Island vermittelt SQL Schritt für Schritt in der Spielhandlung (Schildgen 2014). Grenze: Spannende Details ohne Bezug zum Lernziel schaden, g = −0,33 (Sundararajan & Adesope 2020).
 
 ## P13 · Ergebnisse sichern: Merkblatt (Soll)
 

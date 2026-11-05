@@ -4,7 +4,7 @@ Der Gesamt-Skill `lernpaket-kompass` und fünf Einzel-Skills für Claude, die de
 
 | Skill | Phase | Ergebnis |
 |---|---|---|
-| [`lernpaket-planen`](lernpaket-planen/SKILL.md) | 1–4 Klären, Erfinden, Zielen, Entwerfen | Steckbrief, drei Spielideen mit Entscheidung, Lernziel-Nachweis-Tabelle, Drehbuch |
+| [`lernpaket-planen`](lernpaket-planen/SKILL.md) | 1–4 Klären, Erfinden, Zielen, Entwerfen | Steckbrief, Konzept (Simulation, Spiel nur begründet), Lernziel-Nachweis-Tabelle, Drehbuch |
 | [`fragenpool-erstellen`](fragenpool-erstellen/SKILL.md) | 3–4 | Fragen im Vorlagenformat + Prüftabelle für die Lehrkraft |
 | [`lernpaket-bauen`](lernpaket-bauen/SKILL.md) | 5 Bauen | SCORM-1.2-ZIP aus der Kompass-Vorlage (erst Prototyp) |
 | [`lernpaket-pruefen`](lernpaket-pruefen/SKILL.md) | 6 Erproben | Prüfbericht mit Ampel (Checkliste C6, P1–P14, Technik- und Interaktivitätstest) |
@@ -16,7 +16,7 @@ Der Gesamt-Skill `lernpaket-kompass` und fünf Einzel-Skills für Claude, die de
 skills/
   _gemeinsam/              Quelle der gemeinsamen Referenz (wird in jeden Skill kopiert)
     prinzipien.md          14 Prinzipien mit So geht's, Warum, Prüffrage, Belegen
-    szenen.md              Spielideen (Genres, Plattform-Probe), Spielmodus, Szenen-Katalog, Paketwelt, Textbudget (von Hand gepflegt)
+    szenen.md              Form wählen (Simulation, Illustration, Spiel; SQL-Island-Prinzip, Plattform-Probe), Spielmodus, Szenen-Katalog, Paketwelt, Textbudget (von Hand gepflegt)
     prozess-und-struktur.md, gestaltung.md, technik.md, checkliste.md   aus Leitfaden C1–C6
     fragenformat.md        Format von js/inhalt.js (Fragen, Stationen, Szenen, Baukasten)
     scripts/pruefe_paket.py  automatischer Paket-Test (nachgebauter SCORM-Player, Playwright)

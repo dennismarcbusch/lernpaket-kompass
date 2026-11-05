@@ -1,31 +1,58 @@
-# Spielideen und Szenen: Was bewegen die Lernenden?
+# Simulation, Spiel und Szenen: Was bewegen die Lernenden?
 
-Ergänzung zu P12 (Lernstoff als Spielregel) und P14 (Handeln am Gegenstand). **Zuerst** kommt die Spielidee für das ganze Paket, dann je Station die Szene, zuletzt der Text.
+Ergänzung zu P12 (Simulation zuerst, Spiel nur begründet) und P14 (Handeln am Gegenstand). **Zuerst** kommt die Form für das ganze Paket, dann je Station die Szene, zuletzt der Text.
 
-## Spielideen (Phase „Erfinden“)
+## Die Form wählen (Phase „Erfinden“)
 
-Claude schlägt immer **drei verschiedene** Spielideen vor, mindestens eine davon ein echtes Spiel. Jede Idee hat: Titel, Genre mit Vorbild, Spielschleife in einem Satz („Ich … , dann … , bis …“), die Tabelle **Lernstoff → Spielregel** (jedes Lernziel und jeder typische Fehler wird eine Regel oder Folge im Spiel), was bei einem Fehler passiert, wie Level aufeinander aufbauen, und die **Plattform-Probe** („Könnte die Lernplattform das auch? Nein, weil …“). Die Lehrkraft wählt oder kombiniert. Vorlage: `vorlagen/spielidee.md`.
+Vorbild sind die PING-Pakete: Dort trägt **ein realistischer Arbeitsgegenstand** das ganze Paket – der Server im Terminal („Shell Yeah!“, „Get-Going!“), das PC-Gehäuse („Plug & Pray“), der Lageplan zweier Gebäude („Strukturierte Verkabelung“). Der Lernstoff steckt in den Regeln dieses Gegenstands: Die Grafikkarte lässt sich erst ausbauen, wenn das Stromkabel ab ist; `ping` geht erst, wenn die Route stimmt; ein Kabel über 90 m meldet der Plan als Fehler.
+
+Prüfe die Formen **in dieser Reihenfolge** und nimm die erste, die passt:
+
+| Form | Wann | Wie | Vorbilder |
+|---|---|---|---|
+| **A Simulation** (Standard) | Es gibt einen Gegenstand, mit dem Fachleute bei diesem Thema arbeiten: Werkzeug, Programm, Gerät, Plan, Dokument, Portal, Gespräch | Derselbe Gegenstand durch Entdecken, Üben und Nachweis (im Nachweis ein neuer Fall: anderer Kunde, anderer Server). Er reagiert wie in echt, auch auf Fehler. | Werkzeug mit Tutorial: Terminal, PowerShell, Tabellenkalkulation, Buchungsmaske · Gegenstand zerlegen und bauen: PC, Maschine, Schaltung · Planspiel: Verkabelung, Raum- oder Ablaufplanung, Kalkulation · Fallbearbeitung: Dokumente, Portal, Kundengespräch |
+| **B Interaktive Illustration** | Der Inhalt ist abstrakt und hat keinen Gegenstand, den man nachbauen könnte (Modelle, Schichten, Zahlensysteme, Prozesse im Inneren) | Ein bewegliches Modell: Lernende verändern eine Größe und sehen die Folge, schalten Schichten ein und aus, verfolgen einen Ablauf Schritt für Schritt | „Röntgenblick“ (Virtualisierung), Ausfall simulieren (Netzwerktopologien), Bits schalten (Vorlage „Bits & Bytes“) |
+| **C Erst vermitteln, dann im Spiel üben** | A oder B klärt die Grundlagen, aber es gibt Regeln, Zuordnungen oder Abläufe, die viel Übung brauchen, bis sie sitzen | Entdecken mit A oder B; im Üben ein Spiel mit **derselben Regel** in vielen kurzen Fällen; Nachweis wieder im Gegenstand (neuer Fall) | Erst im Registerportal recherchieren, dann im Sammelspiel Firmen der richtigen Abteilung zuordnen |
+| **D Lernspiel durchgehend** | Nur, wenn A und B nicht sinnvoll sind oder die Lehrkraft ausdrücklich ein Spiel wünscht | Das Spiel vermittelt selbst (SQL-Island-Prinzip, siehe unten); Üben und Nachweis mit derselben Mechanik in neuen Fällen | SQL Island; „Stempel drauf!“ |
+
+Je Form gilt die **Plattform-Probe:** Könnte die Lernplattform das genauso (Test, H5P, Lückentext)? Dann ist es kein Kern eines Lernpakets.
+
+### Vorschlag an die Lehrkraft
+
+Claude **berät**: kurze Empfehlung mit Begründung, warum diese Form hier passt und die anderen weniger. Dann schlägt Claude **eine** Umsetzung vor, die zur ersten passenden Form gehört, und – wenn es eine sinnvolle gibt – eine Alternative (z. B. A pur oder A mit Spiel zum Üben). Je Vorschlag: der Arbeitsgegenstand (was sieht man, was bewegt man), ein Beispielzug („Du tippst `ip route` – der Server antwortet: Netzwerk nicht erreichbar“), die Tabelle **Lernstoff → Regel oder Reaktion des Gegenstands** (jeder Kerninhalt und jeder typische Fehler), die Plattform-Probe, der Aufwand und ein **Mockup** des wichtigsten Bildschirms (Gegenstand in der Mitte in einem typischen Zustand, Auftrag und Notiz daneben, Bedienelemente beschriftet; alle Vorschläge im selben Ausschnitt). Spielideen schlägt Claude nur für C oder D vor. Vorlage: `vorlagen/konzept.md`.
+
+### Wenn ein Spiel: das SQL-Island-Prinzip
+
+Ein Spiel ohne eingebaute Anleitung lehrt vor allem das Spiel. Deshalb vermittelt ein Lernspiel die Grundlagen **im Spiel selbst**, wie SQL Island: Jeder Spielschritt bringt genau ein neues Konzept, und zwar als Teil der Geschichte („Ich suche einen friedlichen Schmied – probiere `beruf LIKE '%schmied'`“).
+
+- **Ein neues Konzept je Schritt**, in der Sprechblase der Figur, mit kurzem Hinweis auf die Schreibweise oder Regel.
+- **Der erste Einsatz wird vorgemacht** (das Spiel führt den Zug selbst aus oder zeigt ihn), danach ist man selbst dran (P3).
+- **Sofortige Folge im Spiel** und ein Satz, warum (P6); Neustart des Schritts statt Strafe.
+- **Nachschlagen jederzeit:** Regelbuch, Befehlsübersicht oder Tabellen neben dem Spiel, ohne das Spiel zu verlassen (P9).
+- **Der Lernstoff ist die Spielregel** (intrinsische Integration): Wer ihn nicht kann, kommt im Spiel nicht weiter – kein Quiz als Tor zum nächsten Level.
+- Story und Spielwelt tragen den Inhalt, statt ihn zu schmücken; kein Zeitdruck, keine Ranglisten.
+
+### Spiel-Genres (nur für C und D)
 
 | Genre | Vorbild | Spielschleife | Passt zu | Beispiel |
 |---|---|---|---|---|
-| Schalter-Simulator | „Papers, Please“ | Antrag kommt → mit Regelbuch prüfen → stempeln → Folgen sehen; jede Woche neue Regeln | Vorschriften, Formvorgaben, Prüfschemata | „Stempel drauf!“: am Registergericht Anmeldungen prüfen |
-| Sammel- und Fangspiel | Pokémon | Wesen finden → mit dem richtigen Werkzeug fangen → im Dex eintragen → weiterentwickeln | Einteilungen, Zuordnungen, Merkmale | „Firmendex“: Firmlinge mit HRA- oder HRB-Ball fangen |
-| Escape Room | Escape-Spiele | Rätsel im Raum → Hinweis kombinieren → Schloss öffnen | Abläufe, Rechenwege, Codes | Tresor öffnet sich mit der richtig berechneten Subnetzmaske |
 | Abenteuer mit Befehlen | SQL Island | Mit dem Lernstoff selbst handeln, um weiterzukommen | Sprachen, Befehle, Formeln | Mit SQL-Abfragen von der Insel entkommen |
+| Schalter-Simulator | „Papers, Please“ | Antrag kommt → mit Regelbuch prüfen → stempeln → Folgen sehen; jede Woche neue Regeln | Vorschriften, Formvorgaben, Prüfschemata | „Stempel drauf!“: am Registergericht Anmeldungen prüfen |
+| Sammel- und Fangspiel | Pokémon | Wesen finden → mit dem richtigen Werkzeug fangen → im Dex eintragen | Einteilungen, Zuordnungen, Merkmale (gut zum Üben, Form C) | „Firmendex“: Firmlinge mit HRA- oder HRB-Ball fangen |
+| Escape Room | Escape-Spiele | Rätsel im Raum → Hinweis kombinieren → Schloss öffnen | Abläufe, Rechenwege, Codes | Tresor öffnet sich mit der richtig berechneten Subnetzmaske |
 | Detektivfall | Krimi-Rätsel | Spuren sammeln → Verdacht prüfen → Fall lösen | Analyse, Fehlersuche, Quellenarbeit | Gefälschte Rechnungen anhand der Pflichtangaben entlarven |
 | Aufbau und Wirtschaft | Tycoon-Spiele | Entscheiden → Kennzahlen ändern sich → reagieren | Wirkungszusammenhänge, Kalkulation | Eigenen Laden führen, Preis und Absatz ausprobieren |
-| Rollenspiel-Gespräch | Visual Novel | Figur sagt etwas → Antwort wählen → Beziehung und Ausgang ändern sich | Kommunikation, Beratung, Konflikte | Reklamationsgespräch, das je nach Antwort kippt |
-| Baukasten und Puzzle | „Bridge Constructor“ | Teile setzen → testen → scheitert oder hält | Systeme, Schaltungen, Satzbau | Netzwerk bauen, bis alle Geräte erreichbar sind |
+| Rollenspiel-Gespräch | Visual Novel | Figur sagt etwas → Antwort wählen → Ausgang ändert sich | Kommunikation, Beratung, Konflikte | Reklamationsgespräch, das je nach Antwort kippt |
 
-Faustregeln: Die Regel des Spiels **ist** der Lernstoff (wer ihn nicht kann, verliert im Spiel, nicht in einem Quiz). Fehler haben Folgen in der Spielwelt und eine Erklärung. Jedes Level bringt neue Regeln (Woche 2 mit neuer Dienstanweisung, Level 2 mit Brutkasten). Kurz-Checks bleiben klein (höchstens drei Fragen je Level, „zählt nicht“). Kein Zeitdruck, keine Ranglisten.
+Umsetzung in der Vorlage: A und B als Stationen mit Szenen (der Gegenstand kann als gemeinsamer Zustand in `inhalt.js` über alle Stationen weiterleben); C mit Szenen im Entdecken und dem Spiel als Interaktion der Übungen (eine Übung je Spielrunde oder eine Übung mit mehreren Runden); D im Spielmodus `PAKET.spielwelt`.
 
 ## Spielmodus (PAKET.spielwelt)
 
-Für ein Spiel über alle Stationen: `PAKET.spielwelt = { titel, tab, start(box, api) }`. Die Engine stellt eine große Spielbühne unter „① Spielen“; die Stationen sind die Level (`id`, `titel`, `lz`, `check`, optional `mitdenken`). Das Spiel meldet `api.level(id)`, wenn ein Level geschafft ist; danach erscheinen dessen Kurz-Check und Mitdenken-Auftrag in der Zwischenbilanz. Üben und Nachweis Teil A nutzen dieselbe Spielmechanik in neuen Fällen (Nachweis ohne Rückmeldung und ohne Hilfen). Format: `fragenformat.md` („Spielmodus“), Beispiele: `beispiele/spiel-stempel-drauf.js` und `beispiele/spiel-firmendex.js`.
+Nur für Form D, ein Spiel über alle Stationen: `PAKET.spielwelt = { titel, tab, start(box, api) }`. Die Engine stellt eine große Spielbühne unter „① Spielen“; die Stationen sind die Level (`id`, `titel`, `lz`, `check`, optional `mitdenken`). Das Spiel meldet `api.level(id)`, wenn ein Level geschafft ist; danach erscheinen dessen Kurz-Check und Mitdenken-Auftrag in der Zwischenbilanz. Üben und Nachweis Teil A nutzen dieselbe Spielmechanik in neuen Fällen (Nachweis ohne Rückmeldung und ohne Hilfen). Format: `fragenformat.md` („Spielmodus“), Beispiele: `beispiele/spiel-stempel-drauf.js` und `beispiele/spiel-firmendex.js`.
 
 ## Szenen je Station
 
-Gibt es keinen Spielmodus, wird für jede Station **zuerst** die Szene festgelegt, dann der Text. Dieser Katalog hilft, auch in Fächern ohne Technik eine Szene zu finden. Die Bausteine (rechte Spalte) stehen in `js/baukasten.js` (`api.kit`), Format in `fragenformat.md` („Interaktionen“ und „Baukasten“).
+Gibt es keinen Spielmodus, wird für jede Station **zuerst** die Szene festgelegt, dann der Text. Bei Form A ist die Szene meist ein Ausschnitt oder Zustand desselben Arbeitsgegenstands. Dieser Katalog hilft, auch in Fächern ohne Technik eine Szene zu finden. Die Bausteine (rechte Spalte) stehen in `js/baukasten.js` (`api.kit`), Format in `fragenformat.md` („Interaktionen“ und „Baukasten“).
 
 ## Die vier Fragen zu jeder Szene
 

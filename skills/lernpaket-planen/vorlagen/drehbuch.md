@@ -7,7 +7,7 @@
 - Einstiegstext der Figur (2–3 Sätze, höchstens etwa 40 Wörter – der einzige Fließtext auf der Startseite): …
 - **Welt:** Thema (wirtschaft · technik · sprache · natur · gesundheit · gestaltung), Kulisse (buero · lager · werkstatt · serverraum · laden · stadt · natur · klasse), Symbol
 - **Arbeitsmittel aus dem Beruf**, die als Szene nachgebaut werden (Dokumente, Programme, Geräte, Gespräche): …
-- **Spielidee** (aus `spielidee.md`): Spielmodus „…“ (Stationen = Level) / Spielrahmen „…“ mit Ziel und Zähler, je Station ein Ort / Simulation ohne Spiel (Begründung)
+- **Form** (aus `konzept.md`): A Simulation mit dem Gegenstand „…“ / B interaktive Illustration „…“ / C wie A oder B, dazu Spiel „…“ in den Übungen / D Spielmodus „…“ (Stationen = Level, nur begründet); optional Spielrahmen mit Ziel und Zähler, je Station ein Ort
 
 ## Einstieg (Startseite)
 
