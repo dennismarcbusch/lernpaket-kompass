@@ -72,7 +72,7 @@ Du bekommst die Fragen zusätzlich als Tabelle. **Geh jede Frage durch**: Stimmt
 
 > Bau einen Prototyp mit Station 1.
 
-Claude baut eine erste Station als Szene (bei einem Spiel: Level 1, spielbar) in der Welt deines Pakets (eigene Farben, Kulisse, Figuren) und gibt dir eine ZIP-Datei. Mit „Zeig’s mir“ führt das Paket das Lösungsbeispiel in der Szene vor. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
+Claude baut eine erste Station als Szene (bei einer durchgehenden Simulation: Kapitel 1 mit allen Schritten am Gegenstand; bei einem Spiel: Level 1, spielbar) in der Welt deines Pakets (eigene Farben, Kulisse, Figuren) und gibt dir eine ZIP-Datei. Mit „Zeig’s mir“ führt das Paket das Lösungsbeispiel in der Szene vor. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
 
 Gib Rückmeldung wie einer Kollegin:
 

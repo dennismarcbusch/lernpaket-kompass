@@ -18,6 +18,9 @@ Aufruf:
    Abkürzung „Ich kenne mich schon aus“ markiert die richtigen Stationen als überspringbar.
    Hat das Paket ein Tafelbild (PAKET.tafel), werden alle Szenen und Werkzeuge
    durchgeschaltet und geprüft, dass das Tafelbild nichts an die Lernplattform schreibt.
+   Simulationsmodus (PAKET.simulation): jeder Schritt über die Knöpfe der Lektion lösbar,
+   kein Schritt schon vor dem Handeln erledigt, der Gegenstand bleibt zwischen Schritten
+   und Kapiteln erhalten, nach dem Neuladen wird er genau so wiederhergestellt.
 Ausgabe: Bericht als Text (Ampel je Punkt) und optional als JSON.
 """
 import argparse, functools, http.server, json, os, re, shutil, subprocess, sys, tempfile, threading, zipfile
@@ -182,6 +185,8 @@ def browser(root, href, bilder):
             _schmal(ctx, url, bilder, None)
         else:
             _vorlage(pg, bilder)
+            if pg.evaluate('!!(window.LERNPAKET && LERNPAKET.sim)'):
+                _simulation(ctx, url, bilder)
             _startseite(ctx, url, bilder)
             _schmal(ctx, url, bilder, True)
             _tafel(ctx, url, bilder)
@@ -340,6 +345,79 @@ def _vorlage(pg, bilder):
     punkt(z2['n'] == 2 and len(z2['st']) == len(info['st']), 'Technik', 'Wiedereinstieg: Fortschritt ist nach dem Neuladen wieder da.')
     mehrfach = [f'{n} ({k})' for n, k in ansichten if k != 1]
     punkt(not mehrfach, 'Bedienung', 'Jede Ansicht hat genau einen hervorgehobenen Weiter-Knopf.' if not mehrfach else 'Nicht genau ein Weiter-Knopf: ' + ', '.join(mehrfach))
+
+
+SIM_ABBILD = """(() => { const b = LERNPAKET.sim.box(); if (!b) return '';
+    const w = [...b.querySelectorAll('input,select,textarea')].map(e => (e.type === 'checkbox' || e.type === 'radio') ? String(e.checked) : e.value);
+    return w.join('|') + ' # ' + b.innerText.replace(/\\s+/g, ' ').trim(); })()"""
+
+
+def _sim_zur_lektion(pg, i):
+    pg.evaluate(f"LERNPAKET.zeige('entdecken', {i})")
+    pg.wait_for_timeout(100)
+    pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'vorab').forEach(t => t.obj.zurSzene())")
+    pg.wait_for_timeout(80)
+
+
+def _simulation(ctx, url, bilder):
+    """Simulationsmodus: Schritte über die Bedienknöpfe lösen, Gegenstand bleibt erhalten, Wiedereinstieg."""
+    pg = ctx.new_page()
+    fehler = []
+    pg.on('pageerror', lambda e: fehler.append(str(e)))
+    pg.goto(url)
+    pg.wait_for_timeout(500)
+    info = pg.evaluate("PAKET.stationen.map(s => ({id: s.id, n: (s.schritte || []).length}))")
+    ziel = (1, 1) if len(info) > 1 and info[1]['n'] > 1 else (len(info) - 1, 0)
+    vorher_fertig, nicht_loesbar, neu_gebaut = [], [], []
+    wieder = None
+    for i, st in enumerate(info):
+        _sim_zur_lektion(pg, i)
+        pg.evaluate("LERNPAKET.sim.box().dataset.simtest = '1'")
+        for k in range(st['n']):
+            name = f"{st['id']} Schritt {k + 1}"
+            if (i, k) == ziel and wieder is None:
+                vor = pg.evaluate(SIM_ABBILD)
+                pg.reload()
+                pg.wait_for_timeout(500)
+                _sim_zur_lektion(pg, i)
+                pos = pg.evaluate('LERNPAKET.sim.position()')
+                nach = pg.evaluate(SIM_ABBILD)
+                wieder = (vor == nach and pos == {'i': i, 'k': k}, name, pos)
+                if bilder:
+                    pg.screenshot(path=os.path.join(bilder, '1-simulation-wiedereinstieg.png'), full_page=False)
+                pg.evaluate("LERNPAKET.sim.box().dataset.simtest = '1'")
+            if pg.evaluate(f"LERNPAKET.sim.pruefe({i}, {k})"):
+                vorher_fertig.append(name)
+            knopf = pg.evaluate("""(() => { const k = [...document.querySelectorAll('.sim-schritt .steuerung button')]
+                .find(b => b.offsetParent !== null && (b.classList.contains('zeig') || b.textContent.trim() === 'Lösung zeigen'));
+                if (!k) return false; k.click(); return true; })()""")
+            pg.wait_for_timeout(120)
+            erledigt = pg.evaluate(f"!!LERNPAKET.zustand().sd[{json.dumps(st['id'] + '.' + str(k))}]")
+            if not (knopf and erledigt and pg.evaluate(f"LERNPAKET.sim.pruefe({i}, {k})")):
+                nicht_loesbar.append(name)
+            _klick_weiter(pg)
+            if pg.evaluate("!(LERNPAKET.sim.box() && LERNPAKET.sim.box().dataset.simtest)"):
+                neu_gebaut.append(name)
+                pg.evaluate("LERNPAKET.sim.box().dataset.simtest = '1'")
+        # Kurz-Check lösen, damit das Kapitel abgeschlossen ist
+        pg.evaluate("""LERNPAKET.aktuelleTeile().forEach(t => { if (t.art === 'frage') { t.obj.loesungEinsetzen(); const b = t.obj.el.querySelector('button.pruefen'); if (b && !b.hidden) b.click(); } })""")
+        pg.wait_for_timeout(80)
+        if i + 1 < len(info):
+            pg.evaluate(f"LERNPAKET.zeige('entdecken', {i + 1})")
+            pg.wait_for_timeout(100)
+            if pg.evaluate("!(LERNPAKET.sim.box() && LERNPAKET.sim.box().dataset.simtest)"):
+                neu_gebaut.append(f"Wechsel zu {info[i + 1]['id']}")
+    punkt(not nicht_loesbar, 'Simulation', 'Jeder Schritt ist über „Zeig’s mir“ oder „Lösung zeigen“ lösbar.' if not nicht_loesbar
+          else 'Schritt nicht lösbar (loesen erfüllt pruefe nicht): ' + ', '.join(nicht_loesbar[:6]))
+    punkt(not vorher_fertig, 'Simulation', 'Kein Schritt ist schon vor dem Handeln erledigt.' if not vorher_fertig
+          else 'Schon vor dem Handeln erledigt (pruefe zu weit gefasst oder Schritt doppelt): ' + ', '.join(vorher_fertig[:6]), gelb=True)
+    punkt(not neu_gebaut, 'Simulation', 'Der Gegenstand bleibt zwischen Schritten und Kapiteln erhalten.' if not neu_gebaut
+          else 'Gegenstand wird neu aufgebaut (Arbeit geht scheinbar verloren) bei: ' + ', '.join(neu_gebaut[:6]))
+    if wieder:
+        punkt(wieder[0], 'Simulation', f'Wiedereinstieg: Nach dem Neuladen steht der Gegenstand bei {wieder[1]} wieder genau so da.' if wieder[0]
+              else f'Wiedereinstieg bei {wieder[1]}: Gegenstand nach dem Neuladen anders als vorher (Position {wieder[2]}). loesen der früheren Schritte prüfen.')
+    punkt(not fehler, 'Simulation', 'Keine Fehler beim Durchspielen der Simulation.' if not fehler else 'Fehler: ' + ' | '.join(fehler[:4]))
+    pg.close()
 
 
 def _startseite(ctx, url, bilder):

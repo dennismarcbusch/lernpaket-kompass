@@ -46,6 +46,7 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 | `figur` | `{name, rolle, aussehen}` der Story-Figur. `aussehen`: `{haut: 0–5, haare: 'schwarz'·'dunkelbraun'·'braun'·'rot'·'blond'·'grau'·'weiss' oder Hex, frisur: 'kurz'·'lang'·'zopf'·'dutt'·'locken'·'glatze'·'kopftuch', tuch (Farbe), kleidung (Farbe), krawatte (Farbe), brille, bart, ausdruck}` |
 | `figuren` | optional weitere Personen: `{schluessel: {name, rolle, aussehen}}`; in Stationen über `figur: 'schluessel'` als Auftraggeber, in Szenen über `kit.szene(…).person('schluessel')` |
 | `spiel` | optional: Spielrahmen `{titel, intro, ziel, zaehler: {name, symbol}}`; dann je Station `mission: {ort, symbol, ende}` (Ort auf der Karte, Story-Satz nach dem Lösen) |
+| `simulation` | optional: **Simulationsmodus** `{titel, start(box, api)}` für Form A und B – ein Arbeitsgegenstand rechts, der über alle Kapitel erhalten bleibt, links die Lektion in Schritten (siehe „Simulationsmodus“ unten). Dann haben die Stationen `schritte` statt `interaktion`. |
 | `spielwelt` | optional: **Spielmodus** `{titel, tab, start(box, api)}` – ein Spiel über alle Stationen (siehe „Spielmodus“ unten). Dann sind die Stationen Level: `{id, titel, lz, check (höchstens 3), mitdenken}` ohne eigene Szene. |
 | `leitsituation` | Einstiegstext der Figur (HTML), höchstens etwa 40 Wörter: der einzige Fließtext auf der Startseite |
 | `lernziele` | `[{id: 'LZ1', kurz, text: 'Ich kann …'}]` – drei bis acht. `kurz` (Pflicht, höchstens vier Wörter) steht als Etikett im Lernpfad der Startseite, `text` an jeder Station und im Abschluss |
@@ -100,6 +101,39 @@ Regeln:
 - **Bedienung:** Antippen statt nur Ziehen (Tablet), per Tastatur bedienbar (`<button>`), Ziele mindestens 40 px. In der Szene keine Knöpfe mit der Klasse `primaer` – der eine hervorgehobene Knopf ist „Weiter“ unten.
 - **Technik:** Beschriftungen direkt im Bild, Farben über CSS-Variablen (`var(--accent)`, `var(--ok)` usw.), keine externen Dateien, keine `alert/confirm/prompt`.
 - **Nachweis Teil A:** Die Szene läuft ohne Notiz; `meldung` und `erklaere` sind dort stumm. Fehler wirken sich, wo möglich, realistisch aus; `sage` nur für neutrale Story-Sätze.
+
+## Simulationsmodus (`PAKET.simulation`)
+
+Für Form A und B (Simulation, interaktive Illustration, P12), wenn **ein** Arbeitsgegenstand das ganze Paket trägt: ein Registerportal, eine Konsole, ein Netzplan, ein Formular, eine Werkstatt. Vorbild sind Tutorials wie „Shell Yeah!“: links die Lektion, rechts der Gegenstand, der sich nie zurücksetzt. Die Stationen heißen für die Lernenden **Kapitel**, jedes Kapitel hat 2–6 **Schritte**. Im Entdecken steht links die Lektionskarte (Lernziel, „Neu hier“, Schrittpunkte, Auftrag der Figur, Kurz erklärt, Knöpfe), rechts die Bühne mit dem Gegenstand, auf großen Bildschirmen mitlaufend. Auf schmalen Bildschirmen folgt der Gegenstand direkt auf den Schritt; Kurz-Check und Mitdenken stehen darunter.
+
+```js
+simulation: { titel: 'Arbeitsplatz Einkauf · Registerportal und Prüfliste', start: function (box, api) {
+  // box: leeres Element für den Gegenstand. Nach JEDER Änderung api.geaendert() melden.
+  // api.kit, api.erklaere, api.meldung, api.sage wie in Szenen (stumm, während loesen nachgespielt wird)
+  return partnerCheck(box, ['hartmann', 'ostwind'], api.geaendert);  // Objekt mit Zustand und Befehlen
+} },
+stationen: [ { id: 'K1', titel: 'Gibt es Hartmann Elektro wirklich?', lz: ['LZ1'], vorab: 'VA', check: ['C1', 'C2', 'C3'],
+  schritte: [
+    { zeigen: true, auftrag: 'Such die Firma im Registerportal.', erklaerung: 'Das Portal ist öffentlich …',
+      frage: 'Warum darf jeder ins Register schauen?', warum: 'Wer Geschäfte macht, soll sich …',
+      pruefe: function (sim) { return sim.gefunden('hartmann'); },
+      loesen: function (sim) { sim.suchen('Hartmann'); } },
+    { auftrag: 'Öffne den aktuellen Abdruck.', tipp: 'Rechts in der Trefferliste.', loesungText: 'Im Treffer auf „Aktueller Abdruck“ tippen.',
+      pruefe: function (sim) { return sim.stand().offen === 'hartmann'; },
+      loesen: function (sim) { sim.oeffne('hartmann'); } }
+  ],
+  mitdenken: { auftrag, muster } } ]
+```
+
+- **Ein Schritt = eine Handlung am Gegenstand** mit genau einem neuen Gedanken (SQL-Island-Prinzip ohne Spiel). `auftrag` (Sprechblase, 1–2 Sätze), optional `erklaerung` (Kurz erklärt, höchstens etwa 40 Wörter), `tipp` und `loesungText` (Satz, der nach „Lösung zeigen“ erscheint).
+- **`pruefe(sim)`** erkennt den Erfolg am Zustand, nicht an einem bestimmten Klick: Jeder richtige Weg zählt (z. B. Suche mit „hartm“). Die Engine prüft nach jedem `api.geaendert()` und hakt den Schritt ab. Er darf vor dem Handeln nicht schon erfüllt sein.
+- **`loesen(sim)`** führt den Schritt vollständig aus (auch nötige Wege, etwa erst suchen, dann öffnen) und muss `pruefe` erfüllen. Es dient für „Lösung zeigen“, für den automatischen Test und für den **Wiedereinstieg**: Nach dem Neuladen baut die Engine den Gegenstand neu und spielt `loesen` aller früheren Schritte still nach. Gespeichert werden nur die erledigten Schritte, nicht der Gegenstand.
+- **`zeigen: true`** macht einen Schritt zur Vorführung („Zeig’s mir“): Die Figur macht ihn vor, `frage`/`warum` dienen als Frage zum Selbsterklären. Mindestens der erste Schritt eines Kapitels, in dem etwas Neues bedient wird.
+- **Zustand gehört dem Gegenstand:** Was die Lernenden tun, bleibt stehen, auch über Kapitel hinweg. „↺ Schritt neu“ baut den Gegenstand bis vor diesen Schritt neu auf.
+- **Kurz-Check** (3–5 Fragen) öffnet sich, wenn alle Schritte des Kapitels erledigt sind, danach die Einschätzung je Lernziel; die Vorab-Frage steht vor dem ersten Schritt.
+- **Üben und Nachweis Teil A** bauen denselben Gegenstand mit **neuen Fällen** als `interaktion(box, api)` (Übung: `api.erledigt()`, Tipps; Nachweis: `auswerten()` mit Prüfpunkten je Lernziel, keine Hilfen).
+- Eigener Stil des Gegenstands als `<style>` mit Präfix (z. B. `.pc-…`) in `inhalt.js`, damit die Vorlage unverändert bleibt.
+- Beispiel: `beispiele/simulation-handelsregister.js` („Partner-Check“: Registerportal und Prüfliste).
 
 ## Spielmodus (`PAKET.spielwelt`)
 

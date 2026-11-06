@@ -43,7 +43,7 @@ Alle Pfade in den Phasen-Anleitungen beziehen sich auf den Ordner dieses Skills 
 - `referenz/` – Prinzipien, Szenen-Katalog, Prozess und Paketstruktur, Gestaltung, Technik, Checkliste, Fragenformat (gemeinsam für alle Phasen)
 - `vorlagen/` – Steckbrief, Lernziel-Nachweis-Tabelle, Drehbuch (Planen)
 - `vorlage/` – die Kompass-Vorlage für das Paket mit Baukasten für Szenen (Bauen)
-- `beispiele/` – zwei Spiele zum Handelsregister („Stempel drauf!“, „Firmendex“) und eine Szenen-Station aus der Wirtschaft (Bauen)
+- `beispiele/` – eine Simulation zum Handelsregister („Partner-Check“, Simulationsmodus), zwei Spiele zum Handelsregister („Stempel drauf!“, „Firmendex“) und eine Szenen-Station aus der Wirtschaft (Bauen)
 - `vorlagen-lehrkraft/` – Ablaufplan für einen Input mit Tafelbild (Bauen)
 - `scripts/` – `paket.py` (Bauen), `pruefe_paket.py` (Bauen, Prüfen), `auswerten.py` (Auswerten)
 

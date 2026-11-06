@@ -44,7 +44,11 @@ Ein Spiel ohne eingebaute Anleitung lehrt vor allem das Spiel. Deshalb vermittel
 | Aufbau und Wirtschaft | Tycoon-Spiele | Entscheiden → Kennzahlen ändern sich → reagieren | Wirkungszusammenhänge, Kalkulation | Eigenen Laden führen, Preis und Absatz ausprobieren |
 | Rollenspiel-Gespräch | Visual Novel | Figur sagt etwas → Antwort wählen → Ausgang ändert sich | Kommunikation, Beratung, Konflikte | Reklamationsgespräch, das je nach Antwort kippt |
 
-Umsetzung in der Vorlage: A und B als Stationen mit Szenen (der Gegenstand kann als gemeinsamer Zustand in `inhalt.js` über alle Stationen weiterleben); C mit Szenen im Entdecken und dem Spiel als Interaktion der Übungen (eine Übung je Spielrunde oder eine Übung mit mehreren Runden); D im Spielmodus `PAKET.spielwelt`.
+Umsetzung in der Vorlage: A und B im **Simulationsmodus** `PAKET.simulation`, wenn ein Arbeitsgegenstand das ganze Paket trägt (Lektion links in Kapiteln und Schritten, Gegenstand rechts, bleibt erhalten), sonst als Stationen mit eigenen Szenen; C mit Szenen im Entdecken und dem Spiel als Interaktion der Übungen (eine Übung je Spielrunde oder eine Übung mit mehreren Runden); D im Spielmodus `PAKET.spielwelt`.
+
+## Simulationsmodus (PAKET.simulation)
+
+Für Form A und B mit einem durchgehenden Arbeitsgegenstand: `PAKET.simulation = { titel, start(box, api) }`. Die Stationen heißen Kapitel; jedes hat 2–6 Schritte mit `auftrag`, `pruefe(sim)` und `loesen(sim)`. Was die Lernenden tun, bleibt im Gegenstand stehen, auch über Kapitel hinweg; nach dem Neuladen spielt die Engine die erledigten Schritte nach. So entsteht ein Tutorial wie bei „Shell Yeah!“ oder „Get-Going!“, aber für jedes Fach: ein Portal, ein Formular, eine Kalkulation, eine Werkstatt. Wann lieber eigene Szenen je Station: wenn die Stationen verschiedene Gegenstände brauchen. Format: `fragenformat.md` („Simulationsmodus“), Beispiel: `beispiele/simulation-handelsregister.js`.
 
 ## Spielmodus (PAKET.spielwelt)
 
@@ -52,7 +56,7 @@ Nur für Form D, ein Spiel über alle Stationen: `PAKET.spielwelt = { titel, tab
 
 ## Szenen je Station
 
-Gibt es keinen Spielmodus, wird für jede Station **zuerst** die Szene festgelegt, dann der Text. Bei Form A ist die Szene meist ein Ausschnitt oder Zustand desselben Arbeitsgegenstands. Dieser Katalog hilft, auch in Fächern ohne Technik eine Szene zu finden. Die Bausteine (rechte Spalte) stehen in `js/baukasten.js` (`api.kit`), Format in `fragenformat.md` („Interaktionen“ und „Baukasten“).
+Gibt es weder Simulations- noch Spielmodus, wird für jede Station **zuerst** die Szene festgelegt, dann der Text. Bei Form A ist die Szene meist ein Ausschnitt oder Zustand desselben Arbeitsgegenstands. Dieser Katalog hilft, auch in Fächern ohne Technik eine Szene zu finden. Die Bausteine (rechte Spalte) stehen in `js/baukasten.js` (`api.kit`), Format in `fragenformat.md` („Interaktionen“ und „Baukasten“).
 
 ## Die vier Fragen zu jeder Szene
 

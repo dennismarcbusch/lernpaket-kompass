@@ -16,7 +16,7 @@ Der Gesamt-Skill `lernpaket-kompass` und fünf Einzel-Skills für Claude, die de
 skills/
   _gemeinsam/              Quelle der gemeinsamen Referenz (wird in jeden Skill kopiert)
     prinzipien.md          14 Prinzipien mit So geht's, Warum, Prüffrage, Belegen
-    szenen.md              Form wählen (Simulation, Illustration, Spiel; SQL-Island-Prinzip, Plattform-Probe), Spielmodus, Szenen-Katalog, Paketwelt, Textbudget (von Hand gepflegt)
+    szenen.md              Form wählen (Simulation, Illustration, Spiel; SQL-Island-Prinzip, Plattform-Probe), Simulations- und Spielmodus, Szenen-Katalog, Paketwelt, Textbudget (von Hand gepflegt)
     prozess-und-struktur.md, gestaltung.md, technik.md, checkliste.md   aus Leitfaden C1–C6
     fragenformat.md        Format von js/inhalt.js (Fragen, Stationen, Szenen, Baukasten)
     scripts/pruefe_paket.py  automatischer Paket-Test (nachgebauter SCORM-Player, Playwright)
@@ -24,10 +24,11 @@ skills/
   _gesamt/SKILL.md         Einstieg des Gesamt-Skills (Phasenwahl, Führung durch die Phasen, Ordnerübersicht)
   gesamt_bauen.py          setzt dist/build/lernpaket-kompass/ zusammen: SKILL.md, phasen/1-planen.md … (SKILL.md der
                            Einzel-Skills ohne Kopf, Skill-Namen als Phasen), referenz/, vorlagen/, vorlage/, scripts/
-  lernpaket-bauen/vorlage/ Kompass-Vorlage 2: index.html, js/engine.js (Bühne, Welt, Spielrahmen, Spielmodus), js/baukasten.js (Szenen-
+  lernpaket-bauen/vorlage/ Kompass-Vorlage 2: index.html, js/engine.js (Bühne, Welt, Spielrahmen, Simulations- und Spielmodus), js/baukasten.js (Szenen-
                            Bausteine), js/inhalt.js (Beispiel „Bits & Bytes“), css/ (stil, baukasten, Schriften mit Lizenz),
                            imsmanifest.xml, optionales Tafelbild: js/tafel.js, css/tafel.css
-  lernpaket-bauen/beispiele/ zwei Spiele zum Handelsregister im Spielmodus (spiel-stempel-drauf.js, spiel-firmendex.js) und eine
+  lernpaket-bauen/beispiele/ Simulation „Partner-Check“ im Simulationsmodus (simulation-handelsregister.js),
+                           zwei Spiele zum Handelsregister im Spielmodus (spiel-stempel-drauf.js, spiel-firmendex.js) und eine
                            Szenen-Station aus der Wirtschaft (Rechner, Portal, Dokument, Gespräch, Spielrahmen)
   lernpaket-bauen/vorlagen-lehrkraft/  Ablaufplan für einen Input mit Tafelbild (nicht im Paket)
   baue-skills.sh           verteilt die Referenz und baut dist/skill_<name>.zip und dist/skill_lernpaket-kompass.zip

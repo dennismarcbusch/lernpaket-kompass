@@ -271,3 +271,23 @@ button.link:hover{border:none;filter:brightness(.85)}
 .neu-erkl:empty{display:none}
 .einschaetzung{margin-top:6px}
 .einschaetzung .lzzeile{border-bottom:none}
+
+/* ---------- Simulationsmodus: Lektion links, Gegenstand rechts (wie „Shell Yeah!“) ---------- */
+.sim-raster{display:grid;grid-template-columns:minmax(300px,.8fr) minmax(0,1.5fr);grid-template-rows:auto 1fr;gap:14px;align-items:start}
+.sim-lektion{grid-column:1;grid-row:1;min-width:0}.sim-nach{grid-column:1;grid-row:2}
+.sim-rechts{grid-column:2;grid-row:1 / span 2;position:sticky;top:8px;min-width:0}
+.sim-buehne{min-height:420px;padding:10px;display:flex;flex-direction:column;gap:8px}
+.sim-titel{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted)}
+.sim-gegenstand{flex:1;display:flex;flex-direction:column;min-height:0}
+.sim-punkte{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 8px}
+.sim-punkt{width:30px;height:30px;min-height:30px;padding:0;border-radius:50%;font-size:.8rem;font-weight:700;background:var(--card);border:2px solid var(--line)}
+.sim-punkt.fertig{background:var(--ok);border-color:var(--ok);color:#fff}
+.sim-punkt.aktiv{box-shadow:0 0 0 2px var(--ink) inset;border-color:var(--ink)}
+.sim-schritt{display:flex;flex-direction:column;gap:8px}
+.sim-schritt .mission{margin:0}
+.sim-schritt .feld{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:10px 12px}
+.sim-schritt .feld.live{border-color:var(--accent);background:var(--accent-soft)}
+.sim-schritt .steuerung{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+@media (max-width:1000px){.sim-raster{grid-template-columns:1fr;grid-template-rows:none}.sim-lektion,.sim-rechts,.sim-nach{grid-column:auto;grid-row:auto}.sim-rechts{position:static}.sim-buehne{min-height:340px}}
+.sim-schritt .feldtitel,.sim-lektion .feldtitel{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-bottom:4px}
+.sim-schritt .mission .mission-bild{width:56px}

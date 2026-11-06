@@ -7,7 +7,7 @@
 - Einstiegstext der Figur (2–3 Sätze, höchstens etwa 40 Wörter – der einzige Fließtext auf der Startseite): …
 - **Welt:** Thema (wirtschaft · technik · sprache · natur · gesundheit · gestaltung), Kulisse (buero · lager · werkstatt · serverraum · laden · stadt · natur · klasse), Symbol
 - **Arbeitsmittel aus dem Beruf**, die als Szene nachgebaut werden (Dokumente, Programme, Geräte, Gespräche): …
-- **Form** (aus `konzept.md`): A Simulation mit dem Gegenstand „…“ / B interaktive Illustration „…“ / C wie A oder B, dazu Spiel „…“ in den Übungen / D Spielmodus „…“ (Stationen = Level, nur begründet); optional Spielrahmen mit Ziel und Zähler, je Station ein Ort
+- **Form** (aus `konzept.md`): A Simulation mit dem Gegenstand „…“ / B interaktive Illustration „…“ (beide im Simulationsmodus, wenn ein Gegenstand alle Kapitel trägt) / C wie A oder B, dazu Spiel „…“ in den Übungen / D Spielmodus „…“ (Stationen = Level, nur begründet); optional Spielrahmen mit Ziel und Zähler, je Station ein Ort
 
 ## Einstieg (Startseite)
 
@@ -22,6 +22,22 @@
 |---|---|---|
 | | | S… |
 
+## ① Entdecken – Kapitel (nur im Simulationsmodus)
+
+- **Gegenstand** (bleibt über alle Kapitel erhalten): … Was zeigt er, was kann man darin tun (Befehle)? Woran sieht man den Zustand?
+- **Fälle im Gegenstand** fürs Entdecken: … · für Übungen (neu): … · für Nachweis Teil A (neu): …
+
+### Kapitel 1: <Titel> (LZ…)
+- **Vorab-Frage** (vor dem ersten Schritt, schwer zu erraten): … Lösung: …
+- **Schritte** (2–6, je eine Handlung mit einem neuen Gedanken):
+
+| Nr. | Auftrag (Sprechblase, 1–2 Sätze) | Erfolg, wenn … (Zustand) | Kurz erklärt / Tipp | vorgemacht? Frage zum Selbsterklären |
+|---|---|---|---|---|
+| 1 | | | | ja: „Warum …?“ |
+
+- **Kurz-Check (3–5 Fragen, zählt nicht):** …
+- **Mitdenken:** … Muster: …
+
 ## ① Entdecken – Level (nur im Spielmodus)
 
 ### Level 1: <Titel> (LZ…)
@@ -31,7 +47,7 @@
 - **Geschafft, wenn:** … (z. B. höchstens zwei Fehler, sonst Level neu)
 - **Zwischenbilanz:** höchstens drei Kurz-Check-Fragen (IDs), ein Mitdenken-Auftrag mit Muster
 
-## ① Entdecken – Stationen (ohne Spielmodus)
+## ① Entdecken – Stationen (ohne Simulations- und Spielmodus)
 
 ### Station 1: <Titel> (LZ…) · Ort auf der Karte: … (nur mit Spielrahmen)
 - **Szene (Kern der Station):**

@@ -11,8 +11,12 @@
    Erklärungen in der Notiz daneben, Lösungsbeispiel als Vorführung „Zeig's mir“),
    eigene Welt je Paket (PAKET.welt), optionaler Spielrahmen (PAKET.spiel).
    Bausteine für Szenen: js/baukasten.js (window.KIT).
-   Spielmodus (PAKET.spielwelt): Das ganze Entdecken ist ein Spiel über die volle
-   Breite (Escape Game, Simulation, Fangspiel …); die Stationen sind seine Level.
+   Simulationsmodus (PAKET.simulation, Form A): Ein Arbeitsgegenstand (Portal,
+   Konsole, Formular …) steht rechts und bleibt über alle Kapitel erhalten; links
+   die Lektion mit Schritten (stationen[].schritte: auftrag, pruefe, loesen).
+   Beim Wiedereinstieg werden erledigte Schritte mit loesen nachgespielt.
+   Spielmodus (PAKET.spielwelt, nur Form D): Das ganze Entdecken ist ein Spiel
+   über die volle Breite; die Stationen sind seine Level.
    ===================================================================== */
 (function () {
   'use strict';
@@ -56,6 +60,9 @@
   var KIT = window.KIT || null;
   var SPIEL = P.spiel || null;
   var WELTSPIEL = P.spielwelt || null;  // Spielmodus: ein Spiel statt einzelner Szenen
+  var SIM = (!WELTSPIEL && P.simulation) ? P.simulation : null;  // Simulationsmodus: ein Arbeitsgegenstand über alle Stationen
+  // Wort für eine Station in Texten für Lernende (im Simulationsmodus heißen Stationen Kapitel)
+  var EH = SIM ? { e: 'Kapitel', m: 'Kapitel', diese: 'dieses Kapitel', die: 'das Kapitel' } : { e: 'Station', m: 'Stationen', diese: 'diese Station', die: 'die Station' };
 
   /* ---------- Welt: Farben, Kulisse, Symbol (PAKET.welt) ---------- */
   var WELT = P.welt || {};
@@ -96,7 +103,7 @@
   /* ---------- Speicher (suspend_data, max. 4096 Zeichen) ---------- */
   var KEY = 'lernpaket-' + (P.id || 'ohne-id');
   // ej/en: Einschätzung je Lernziel nach dem Kurz-Check bzw. im Abschluss (1–3); vb: Vorab-Fragen (1 richtig, 0 falsch, -1 übersprungen)
-  var S = { ej: {}, en: {}, vb: {}, st: {}, ue: {}, best: null, lz: {}, n: 0, skip: [], sp: {} };
+  var S = { ej: {}, en: {}, vb: {}, sd: {}, st: {}, ue: {}, best: null, lz: {}, n: 0, skip: [], sp: {} };
   (function laden() {
     var o = {};
     try { var s = SC.aktiv ? SC.get('cmi.suspend_data') : localStorage.getItem(KEY); o = s ? JSON.parse(s) : {}; } catch (_) { o = {}; }
@@ -147,12 +154,32 @@
       else fehler.push(f.id + ': unbekannter Fragetyp "' + f.typ + '".');
     });
     if (WELTSPIEL && typeof WELTSPIEL.start !== 'function') fehler.push('PAKET.spielwelt.start(box, api) fehlt.');
+    if (P.simulation && WELTSPIEL) hinweise.push('PAKET.simulation und PAKET.spielwelt zugleich gesetzt – der Spielmodus hat Vorrang.');
+    if (SIM && typeof SIM.start !== 'function') fehler.push('PAKET.simulation.start(box, api) fehlt.');
     if (WELTSPIEL && STATIONEN.some(function (s) { return (s.check || []).length > 3; })) hinweise.push('Spielmodus: Zwischenbilanz je Level mit höchstens 3 Fragen halten, damit das Spiel nicht zum Test wird.');
     if (!P.welt || !THEMEN[P.welt.thema]) hinweise.push('PAKET.welt.thema fehlt oder ist unbekannt (' + Object.keys(THEMEN).join(', ') + ') – jedes Paket bekommt eine eigene Welt.');
     if (!KIT) fehler.push('js/baukasten.js ist nicht (vor engine.js) eingebunden.');
     STATIONEN.forEach(function (s, i) {
       id(s.id, 'Station ' + (i + 1));
       if (WELTSPIEL) { if (!s.titel) hinweise.push(s.id + ': Level ohne Titel.'); var cc = (s.check || []); cc.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); }); return; }
+      if (SIM) {
+        var sc = s.schritte || [];
+        if (!sc.length) fehler.push(s.id + ': Simulationsmodus – das Kapitel braucht schritte: [{auftrag, pruefe(sim), loesen(sim)}].');
+        sc.forEach(function (x, k) {
+          var w = s.id + ' Schritt ' + (k + 1);
+          if (!x.auftrag) hinweise.push(w + ': Auftrag fehlt.');
+          if (typeof x.pruefe !== 'function') fehler.push(w + ': pruefe(sim) fehlt (woran erkennt das Paket, dass der Schritt erledigt ist?).');
+          if (typeof x.loesen !== 'function') fehler.push(w + ': loesen(sim) fehlt (Musterlösung; wird auch zum Nachspielen beim Wiedereinstieg gebraucht).');
+          var sw = woerter(x.auftrag) + woerter(x.erklaerung);
+          if (sw > 70) hinweise.push(w + ': ' + sw + ' Wörter in Auftrag und Kurz erklärt (Ziel höchstens etwa 60). Mehr in den Gegenstand, weniger in den Text.');
+        });
+        if (sc.length && !sc.some(function (x) { return x.zeigen; })) hinweise.push(s.id + ': kein Schritt mit Vorführung (zeigen: true) – der erste neue Handgriff wird vorgemacht (P3).');
+        if (sc.length > 12) hinweise.push(s.id + ': ' + sc.length + ' Schritte – lieber in zwei Kapitel teilen.');
+        var cs = (s.check || []);
+        cs.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); });
+        if (cs.length < 3 || cs.length > 5) hinweise.push(s.id + ': Kurz-Check mit 3–5 Fragen (jetzt ' + cs.length + ').');
+        return;
+      }
       if (!s.auftrag) hinweise.push(s.id + ': Auftrag aus der Leitsituation fehlt.');
       if (!s.interaktion && !s.ohneInteraktion) fehler.push(s.id + ': keine Szene zum Anfassen (interaktion). Jede Station braucht etwas, das die Lernenden bewegen (Leitfaden P14). Nur in begründeten Ausnahmen ohneInteraktion: "Begründung" setzen.');
       if (!s.interaktion && s.ohneInteraktion) hinweise.push(s.id + ': Station ohne Szene – Begründung: ' + s.ohneInteraktion);
@@ -446,7 +473,7 @@
       sage: function (t, aus) { reaktion.innerHTML = t ? '<span class="leitfrage">' + (fg.name ? '<b>' + esc(fg.name.split(' ')[0]) + ':</b> ' : '') + t + '</span>' : ''; if (aus) bild.innerHTML = figurBild(key, aus); }
     };
   }
-  function naechsteStation(i) { return i + 1 < STATIONEN.length ? { t: 'entdecken', i: i + 1, label: 'Weiter zu Station ' + (i + 2) + ': ' + esc(STATIONEN[i + 1].titel) + ' →' } : { t: 'ueben', i: 0, label: 'Weiter zu ② Üben →' }; }
+  function naechsteStation(i) { return i + 1 < STATIONEN.length ? { t: 'entdecken', i: i + 1, label: 'Weiter zu ' + EH.e + ' ' + (i + 2) + ': ' + esc(STATIONEN[i + 1].titel) + ' →' } : { t: 'ueben', i: 0, label: 'Weiter zu ② Üben →' }; }
   function naechsteUebung(i) { return i + 1 < UEBUNGEN.length ? { t: 'ueben', i: i + 1, label: 'Weiter zu Übung ' + (i + 2) + ' →' } : { t: 'nachweis', i: 0, label: 'Weiter zu ③ Nachweis →' }; }
 
   function render() {
@@ -455,7 +482,7 @@
     haupt.innerHTML = '';
     var pr = pruefeInhalt();
     if (pr.fehler.length) haupt.appendChild(msg('<b>Hinweis für Autor:innen – der Inhalt hat Fehler:</b><br>' + pr.fehler.map(esc).join('<br>'), 'bad'));
-    ({ start: vStart, abkuerzung: vAbkuerzung, entdecken: WELTSPIEL ? vSpiel : vStation, ueben: vUebung, nachweis: vNachweis, abschluss: vAbschluss }[ANSICHT.teil])();
+    ({ start: vStart, abkuerzung: vAbkuerzung, entdecken: WELTSPIEL ? vSpiel : SIM ? vSimulation : vStation, ueben: vUebung, nachweis: vNachweis, abschluss: vAbschluss }[ANSICHT.teil])();
   }
 
   /* ---------- Start ---------- */
@@ -514,7 +541,7 @@
     var begonnen = anzahl(S.st) || anzahl(S.ue) || S.n;
     var vor = begonnen ? 'Weiter: ' : 'Los geht’s: ';
     if (WELTSPIEL) { if (STATIONEN.some(function (s) { return !S.st[s.id]; })) return { t: 'entdecken', i: 0, label: begonnen ? 'Weiterspielen →' : 'Los geht’s →' }; }
-    else for (var i = 0; i < STATIONEN.length; i++) if (!S.st[STATIONEN[i].id] && S.skip.indexOf(STATIONEN[i].id) < 0) return { t: 'entdecken', i: i, label: vor + 'Station ' + (i + 1) + ' →' };
+    else for (var i = 0; i < STATIONEN.length; i++) if (!S.st[STATIONEN[i].id] && S.skip.indexOf(STATIONEN[i].id) < 0) return { t: 'entdecken', i: i, label: vor + EH.e + ' ' + (i + 1) + ' →' };
     for (var k = 0; k < UEBUNGEN.length; k++) if (!S.ue[UEBUNGEN[k].id]) return { t: 'ueben', i: k, label: vor + 'Übung ' + (k + 1) + ' →' };
     if (S.best === null || S.best < BESTEHEN) return { t: 'nachweis', i: 0, label: vor + '③ Nachweis →' };
     return { t: 'abschluss', i: 0, label: 'Zum ④ Abschluss →' };
@@ -535,10 +562,10 @@
     STATIONEN.forEach(function (s, i) {
       var skip = S.skip.indexOf(s.id) >= 0 && !S.st[s.id];
       punkte.appendChild(el('button', { type: 'button', class: 'lp-punkt' + (S.st[s.id] ? ' fertig' : '') + (skip ? ' skip' : ''), title: s.titel + (skip ? ' – darfst du überspringen' : ''),
-        'aria-label': (WELTSPIEL ? 'Level ' : 'Station ') + (i + 1) + ': ' + s.titel + (S.st[s.id] ? ' (erledigt)' : skip ? ' (darfst du überspringen)' : ''),
+        'aria-label': (WELTSPIEL ? 'Level ' : EH.e + ' ') + (i + 1) + ': ' + s.titel + (S.st[s.id] ? ' (erledigt)' : skip ? ' (darfst du überspringen)' : ''),
         text: S.st[s.id] ? '✓' : skip ? '»' : String(i + 1), onclick: function () { zeige('entdecken', WELTSPIEL ? 0 : i); } }));
     });
-    var wort = WELTSPIEL ? 'Level' : (STATIONEN.length === 1 ? 'Station' : 'Stationen');
+    var wort = WELTSPIEL ? 'Level' : (STATIONEN.length === 1 ? EH.e : EH.m);
     // im Spielrahmen stehen die Stationen schon auf der Missionskarte
     teil('entdecken', '1', WELTSPIEL ? (WELTSPIEL.tab || 'Spielen') : 'Entdecken', stF + ' von ' + STATIONEN.length + ' ' + wort, STATIONEN.length && stF === STATIONEN.length, SPIEL ? null : punkte);
     var ueF = UEBUNGEN.filter(function (u) { return S.ue[u.id]; }).length;
@@ -598,7 +625,7 @@
     var ids = alleVorab();
     var c = el('div', { class: 'card' });
     c.appendChild(el('h2', { text: 'Was kannst du schon?' }));
-    c.appendChild(el('p', { class: 'klein', html: 'Beantworte die Fragen ohne Hilfe. Was du sicher kannst, darfst du danach überspringen. Alle Stationen bleiben erreichbar, der Nachweis ist für alle gleich. <span class="badge zaehlt-nicht">zählt nicht</span>' }));
+    c.appendChild(el('p', { class: 'klein', html: 'Beantworte die Fragen ohne Hilfe. Was du sicher kannst, darfst du danach überspringen. Alle ' + EH.m + ' bleiben erreichbar, der Nachweis ist für alle gleich. <span class="badge zaehlt-nicht">zählt nicht</span>' }));
     var qs = ids.map(function (id, k) { var q = frage(FR[id], 'pruefung', { nr: k + 1 }); c.appendChild(q.el); return q; });
     var erg = el('div', { 'aria-live': 'polite' });
     c.appendChild(erg);
@@ -608,7 +635,7 @@
       skipNeu(); speichern(); kopf();
       var namen = S.skip.map(function (id) { return esc(STATIONEN.filter(function (x) { return x.id === id; })[0].titel); });
       erg.innerHTML = '';
-      erg.appendChild(msg(namen.length ? (WELTSPIEL ? '<b>Stark!</b> Diese Level fallen dir bestimmt leicht: ' : '<b>Stark!</b> Diese Stationen darfst du überspringen: ') + namen.join(', ') + '. Sie sind auf deinem Lernweg markiert.' : 'Hier ist noch einiges neu für dich. Arbeite die Stationen der Reihe nach durch – dafür sind sie da.', namen.length ? 'ok' : ''));
+      erg.appendChild(msg(namen.length ? (WELTSPIEL ? '<b>Stark!</b> Diese Level fallen dir bestimmt leicht: ' : '<b>Stark!</b> Diese ' + EH.m + ' darfst du überspringen: ') + namen.join(', ') + '. Sie sind auf deinem Lernweg markiert.' : 'Hier ist noch einiges neu für dich. Arbeite ' + 'die ' + EH.m + ' der Reihe nach durch – dafür sind sie da.', namen.length ? 'ok' : ''));
       var nx = naechsterSchritt();
       leiste('Ausgewertet.', nx.label, function () { zeige(nx.t, nx.i); });
       erg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
@@ -816,10 +843,10 @@
       if (ok === qs.length) {
         var nx = naechsteStation(i);
         k.innerHTML = '';
-        k.appendChild(msg('<b>Stimmt!</b> Du kennst dich hier offenbar schon aus und darfst diese Station überspringen.', 'ok'));
+        k.appendChild(msg('<b>Stimmt!</b> Du kennst dich hier offenbar schon aus und darfst ' + EH.diese + ' überspringen.', 'ok'));
         k.appendChild(el('div', { class: 'steuerung' }, [
-          el('button', { type: 'button', text: 'Station überspringen', onclick: function () { zeige(nx.t, nx.i); } }),
-          el('button', { type: 'button', class: 'link', text: 'Trotzdem ausprobieren', onclick: function () { notiz('✔ Du kennst dich schon aus – nutze die Station zum Festigen.'); weiter(); } })
+          el('button', { type: 'button', text: EH.e + ' überspringen', onclick: function () { zeige(nx.t, nx.i); } }),
+          el('button', { type: 'button', class: 'link', text: 'Trotzdem ausprobieren', onclick: function () { notiz('✔ Du kennst dich schon aus – nutze ' + EH.die + ' zum Festigen.'); weiter(); } })
         ]));
       } else { notiz('💭 Merk dir deine Vermutung. In der Szene findest du heraus, ob sie stimmt.'); weiter(); }
     });
@@ -844,6 +871,210 @@
       reihe.appendChild(b);
     });
     return el('div', { class: 'feld neu-box' }, [el('div', { class: 'feldtitel', text: 'Neu hier' }), reihe, erkl]);
+  }
+  /* ---------- ① Entdecken im Simulationsmodus (PAKET.simulation) ---------- */
+  // Ein Arbeitsgegenstand (Terminal, Portal, Gerät, Plan) bleibt über alle Stationen erhalten:
+  // links die Lektion, rechts der Gegenstand. Stationen sind Kapitel mit Schritten
+  // {auftrag, erklaerung, tipp, pruefe(sim), loesen(sim), zeigen, warum}. Gespeichert werden nur
+  // erledigte Schritte (S.sd); den Zustand des Gegenstands erzeugt die Engine beim Wiedereinstieg
+  // und beim Springen neu, indem sie die Musterlösungen aller vorherigen Schritte nachspielt.
+  var SIMBOX = null, SIMOBJ = null, SIMPOS = null, SIMSTILL = false, SIMHOOK = null, SIMK = {};
+  function schritteVon(s) { return s.schritte || []; }
+  function schrittFertig(s, k) { return !!S.sd[s.id + '.' + k]; }
+  function simApi() {
+    function weiter(name) { return function (a, b) { if (!SIMSTILL && SIMHOOK && SIMHOOK[name]) SIMHOOK[name](a, b); }; }
+    return { kit: KIT, geaendert: weiter('geaendert'), erklaere: weiter('erklaere'), meldung: weiter('meldung'), sage: weiter('sage'), still: function () { return SIMSTILL; } };
+  }
+  // Gegenstand neu aufbauen und alle Schritte vor (i, k) mit der Musterlösung nachspielen
+  function simAufbauen(i, k) {
+    SIMBOX = el('div', { class: 'sim-gegenstand' });
+    SIMSTILL = true;
+    try {
+      SIMOBJ = SIM.start(SIMBOX, simApi()) || {};
+      for (var a = 0; a <= i && a < STATIONEN.length; a++) {
+        var ss = schritteVon(STATIONEN[a]);
+        for (var b = 0; b < (a === i ? k : ss.length); b++) { try { ss[b].loesen(SIMOBJ); } catch (e) { console.error(e); } }
+      }
+    } catch (e) { console.error(e); SIMBOX.appendChild(msg('Die Simulation konnte nicht starten: ' + esc(e.message), 'bad')); SIMOBJ = {}; }
+    SIMSTILL = false;
+    SIMPOS = { i: i, k: k };
+  }
+  // Gegenstand auf den Stand vor Schritt k der Station i bringen; im normalen Ablauf bleibt er einfach erhalten
+  function simBereit(i, k) {
+    if (SIMOBJ && SIMPOS) {
+      if (SIMPOS.i === i && SIMPOS.k === k) return;
+      var len = schritteVon(STATIONEN[SIMPOS.i]).length;
+      var fertig = SIMPOS.k >= len || schrittFertig(STATIONEN[SIMPOS.i], SIMPOS.k);
+      var nx = SIMPOS.k >= len ? { i: SIMPOS.i + 1, k: 0 } : { i: SIMPOS.i, k: SIMPOS.k + 1 };
+      if (fertig && nx.i === i && nx.k === k) { SIMPOS = { i: i, k: k }; return; }
+    }
+    simAufbauen(i, k);
+  }
+  function vSimulation() {
+    if (!STATIONEN.length) { haupt.appendChild(msg('Keine Stationen vorhanden.', 'warn')); return; }
+    var i = Math.min(ANSICHT.i, STATIONEN.length - 1), s = STATIONEN[i], ss = schritteVon(s);
+    var nx = naechsteStation(i);
+    haupt.appendChild(pfad(STATIONEN, i, 'entdecken', S.st, SPIEL ? (SPIEL.titel || 'Missionen') : 'Kapitel'));
+    var raster = el('div', { class: 'sim-raster' });
+    var lek = el('div', { class: 'card station sim-lektion' });
+    var rechts = el('div', { class: 'sim-rechts' });
+    // Kurz-Check und Mitdenken in eigener Karte: auf schmalen Bildschirmen steht der Gegenstand direkt unter dem Schritt
+    var nachKarte = el('div', { class: 'card sim-nach', hidden: true });
+    raster.appendChild(lek); raster.appendChild(rechts); raster.appendChild(nachKarte);
+    haupt.appendChild(raster);
+    var ziele = (s.lz || []).map(lz).filter(function (z) { return z.text && z.text !== z.id; });
+    lek.appendChild(el('div', { class: 'st-kopf' }, [el('div', {}, [
+      el('div', { class: 'ort', text: (s.mission && s.mission.ort ? s.mission.ort + ' · ' : '') + 'Kapitel ' + (i + 1) + ' von ' + STATIONEN.length }),
+      el('h2', { text: s.titel }),
+      ziele.length ? el('div', { class: 'st-ziel', html: '<span aria-hidden="true">🎯</span> <span class="sr">Ziel: </span>' + ziele.map(function (z) { return z.text; }).join(' · ') }) : null
+    ])]));
+    var koerper = el('div', { class: 'station-koerper' });
+    lek.appendChild(koerper);
+    // Startposition: erster offener Schritt (alle erledigt: hinter dem letzten)
+    var k0 = SIMK[s.id];
+    if (k0 === undefined) { k0 = 0; while (k0 < ss.length && schrittFertig(s, k0)) k0++; }
+    simBereit(i, k0);
+    rechts.appendChild(el('div', { class: 'buehne sim-buehne', role: 'region', 'aria-label': SIM.titel || 'Simulation' }, [SIM.titel ? el('div', { class: 'sim-titel', text: SIM.titel }) : null, SIMBOX]));
+    var fertigMeldung = el('div', { 'aria-live': 'polite' });
+    var status = { schritte: ss.every(function (x, k) { return schrittFertig(s, k); }), check: !(s.check || []).length };
+    var checkBox = null, punkte = null, karte = null, k = k0;
+    function pruefeFertig() {
+      if (status.schritte && checkBox && !checkBox.open) checkBox.open = true;
+      if (status.schritte && status.check && !S.st[s.id]) {
+        S.st[s.id] = 1; speichern(); kopf();
+        fertigMeldung.innerHTML = '';
+        fertigMeldung.appendChild(msg('🎉 <b>Kapitel geschafft!</b> ' + (s.mission && s.mission.ende ? s.mission.ende + ' ' : '') + nx.label.replace(' →', '') + '.', 'ok'));
+      }
+    }
+    function markiere(kk) {
+      if (schrittFertig(s, kk)) return;
+      S.sd[s.id + '.' + kk] = 1; speichern();
+      status.schritte = ss.every(function (x, j) { return schrittFertig(s, j); });
+      pruefeFertig();
+    }
+    function punkteZeichnen() {
+      punkte.innerHTML = '';
+      ss.forEach(function (x, j) {
+        punkte.appendChild(el('button', { type: 'button', class: 'sim-punkt' + (schrittFertig(s, j) ? ' fertig' : '') + (j === k ? ' aktiv' : ''), 'aria-label': 'Schritt ' + (j + 1) + (schrittFertig(s, j) ? ' (erledigt)' : ''), 'aria-current': j === k ? 'step' : null, text: schrittFertig(s, j) ? '✓' : String(j + 1), onclick: function () { geheZu(j); } }));
+      });
+    }
+    function leisteSetzen() {
+      if (k < ss.length - 1) leiste('Kapitel ' + (i + 1) + ' · Schritt ' + (k + 1) + ' von ' + ss.length, 'Nächster Schritt →', function () { geheZu(k + 1); });
+      else if (k === ss.length - 1 && (s.check || []).length) leiste('Kapitel ' + (i + 1) + ' · letzter Schritt', 'Weiter zum Kurz-Check →', function () { geheZu(ss.length); if (checkBox) { checkBox.open = true; checkBox.scrollIntoView({ behavior: 'smooth', block: 'start' }); } });
+      else leiste('Kapitel ' + (i + 1) + ' von ' + STATIONEN.length, nx.label, function () { zeige(nx.t, nx.i); });
+    }
+    function geheZu(j) {
+      k = Math.max(0, Math.min(j, ss.length)); SIMK[s.id] = k;
+      simBereit(i, k);
+      var b = rechts.querySelector('.sim-buehne'); if (b && SIMBOX.parentNode !== b) b.appendChild(SIMBOX);
+      schrittKarte();
+      punkteZeichnen(); leisteSetzen();
+    }
+    function schrittKarte() {
+      karte.innerHTML = '';
+      SIMHOOK = null;
+      if (k >= ss.length) {
+        karte.appendChild(msg('✔ Alle Schritte dieses Kapitels erledigt.' + ((s.check || []).length ? ' Jetzt der Kurz-Check unten.' : ''), 'ok'));
+        return;
+      }
+      var x = ss[k];
+      var mis = mission(x.auftrag || '', null, x.figur || s.figur, 'Schritt ' + (k + 1) + ' von ' + ss.length);
+      karte.appendChild(mis.el);
+      if (x.erklaerung) karte.appendChild(el('div', { class: 'feld' }, [el('div', { class: 'feldtitel', text: 'Kurz erklärt' }), el('div', { html: x.erklaerung })]));
+      var live = el('div', { class: 'feld live', 'aria-live': 'polite', hidden: true });
+      var meld = el('div', { 'aria-live': 'polite' });
+      karte.appendChild(live);
+      var steuer = el('div', { class: 'steuerung' });
+      karte.appendChild(steuer);
+      karte.appendChild(meld);
+      function erledigtAnzeigen(text) {
+        meld.innerHTML = '';
+        meld.appendChild(msg('✅ ' + (text || x.erledigt || 'Erledigt.') + (k < ss.length - 1 ? ' Weiter mit Schritt ' + (k + 2) + '.' : ''), 'ok'));
+        punkteZeichnen();
+      }
+      function pruefen() {
+        var ok = false;
+        try { ok = !!x.pruefe(SIMOBJ); } catch (e) { console.error(e); }
+        if (ok && !schrittFertig(s, k)) { markiere(k); erledigtAnzeigen(); var wb = document.getElementById('weiter'); if (wb) wb.focus({ preventScroll: true }); }
+        return ok;
+      }
+      SIMHOOK = {
+        geaendert: pruefen,
+        erklaere: function (html) { live.hidden = !html; live.innerHTML = html ? '<div class="feldtitel">Was gerade passiert</div>' + html : ''; },
+        meldung: function (t, art) { meld.innerHTML = ''; if (t) meld.appendChild(msg(t, art)); },
+        sage: function (t, aus) { mis.sage(t, aus); }
+      };
+      if (schrittFertig(s, k)) erledigtAnzeigen('Diesen Schritt hast du schon erledigt.');
+      // Vorführung: der Schritt wird im Gegenstand gezeigt (Lösungsbeispiel, P3)
+      if (x.zeigen) {
+        steuer.appendChild(el('button', { type: 'button', class: 'zeig', text: 'Zeig’s mir', onclick: function (e) {
+          try { x.loesen(SIMOBJ); } catch (er) { console.error(er); }
+          var w = el('div', { class: 'feld demoschritt' }, [el('div', { class: 'feldtitel', text: 'Vorgeführt' })]);
+          if (x.frage && x.warum) w.appendChild(selbsterklaeren(x.frage, x.warum)); else if (x.warum) w.appendChild(el('div', { class: 'warum', html: 'Warum: ' + x.warum }));
+          karte.insertBefore(w, meld);
+          e.target.hidden = true;
+          if (!pruefen()) { markiere(k); erledigtAnzeigen('Vorgeführt.'); }
+        } }));
+      }
+      // Tipp, dann Lösung (die Lösung wird im Gegenstand ausgeführt)
+      var tl = el('div', { 'aria-live': 'polite' });
+      if (x.tipp) steuer.appendChild(el('button', { type: 'button', text: '💡 Tipp', onclick: function (e) { tl.innerHTML = ''; tl.appendChild(msg('<b>Tipp:</b> ' + x.tipp, 'warn')); e.target.hidden = true; } }));
+      if (!x.zeigen) steuer.appendChild(el('button', { type: 'button', text: 'Lösung zeigen', onclick: function () { try { x.loesen(SIMOBJ); } catch (er) { console.error(er); } if (!pruefen()) { markiere(k); erledigtAnzeigen(); } if (x.loesungText) { tl.innerHTML = ''; tl.appendChild(msg('<b>Lösung:</b> ' + x.loesungText, '')); } } }));
+      steuer.appendChild(el('button', { type: 'button', class: 'link', text: '↺ Schritt neu', title: 'Gegenstand auf den Anfang dieses Schritts zurücksetzen', onclick: function () { SIMPOS = null; geheZu(k); } }));
+      karte.appendChild(tl);
+      pruefen();
+    }
+    function baue() {
+      var nb = neueBegriffe(s, i); if (nb) koerper.appendChild(nb);
+      punkte = el('div', { class: 'sim-punkte', role: 'group', 'aria-label': 'Schritte' });
+      karte = el('div', { class: 'sim-schritt' });
+      koerper.appendChild(punkte); koerper.appendChild(karte);
+      var nach = el('div', { class: 'nach' });
+      if ((s.check || []).length) {
+        checkBox = kurzCheck(s, status.schritte || !!S.st[s.id], 'öffnet sich, wenn alle Schritte erledigt sind', function () { status.check = true; pruefeFertig(); });
+        nach.appendChild(checkBox);
+      }
+      if (s.mitdenken) nach.appendChild(mitdenken(s.mitdenken));
+      if (s.steckbrief) nach.appendChild(el('details', {}, [el('summary', { text: 'Steckbrief' }), el('div', { html: s.steckbrief })]));
+      nach.appendChild(fertigMeldung);
+      if (glossar()) nach.appendChild(glossar());
+      nachKarte.appendChild(nach); nachKarte.hidden = false;
+      geheZu(k);
+      // Haken für automatische Tests: Vorführung und alle offenen Schritte mit der Musterlösung lösen
+      testHaken.push({ art: 'demo', obj: { alle: function () {} } });
+      testHaken.push({ art: 'interaktion', obj: { loesen: function () {
+        for (var j = k; j < ss.length; j++) { geheZu(j); try { ss[j].loesen(SIMOBJ); } catch (e) { console.error(e); } if (!schrittFertig(s, j)) { var ok = false; try { ok = !!ss[j].pruefe(SIMOBJ); } catch (e) {} if (ok) markiere(j); } }
+        geheZu(ss.length);
+      } } });
+    }
+    var offen = vorabFragen(s).filter(function (id) { return S.vb[id] === undefined; });
+    if (offen.length && !S.st[s.id]) { koerper.appendChild(vorabKarte(offen, i, baue)); leiste('Kapitel ' + (i + 1) + ' von ' + STATIONEN.length, nx.label, function () { zeige(nx.t, nx.i); }); }
+    else baue();
+  }
+
+  // Kurz-Check einer Station (zählt nicht), am Ende Einschätzung je Lernziel; beiFertig, wenn alle Fragen geprüft sind
+  function kurzCheck(s, offen, hinweis, beiFertig) {
+    var box = el('details', { class: 'check' });
+    box.open = offen;
+    box.appendChild(el('summary', { html: 'Kurz-Check · ' + s.check.length + ' Fragen <span class="badge zaehlt-nicht">zählt nicht</span>' + (hinweis ? ' <span class="klein">– ' + hinweis + '</span>' : '') }));
+    box.appendChild(el('p', { class: 'klein', text: 'Beantworte die Fragen aus dem Gedächtnis. Beliebig oft wiederholbar.' }));
+    var geprueft = {}, richtig = {};
+    var sum = el('div', { 'aria-live': 'polite' });
+    s.check.forEach(function (id, k) {
+      var q = frage(FR[id], 'lernen', { nr: k + 1, beiPruefung: function (res) {
+        geprueft[id] = 1; if (res.score >= 1) richtig[id] = 1;
+        if (anzahl(geprueft) === s.check.length) {
+          sum.innerHTML = '';
+          var n = anzahl(richtig);
+          sum.appendChild(msg('Kurz-Check: <b>' + n + ' von ' + s.check.length + '</b> auf Anhieb richtig. ' + (n === s.check.length ? 'Sehr gut, du kannst weiter.' : 'Schau dir die Erklärungen zu den falschen Antworten noch einmal an.'), n === s.check.length ? 'ok' : 'warn'));
+          var ej = einschaetzung(s.lz, n, s.check.length); if (ej) sum.appendChild(ej);
+          if (beiFertig) beiFertig();
+        }
+      } });
+      box.appendChild(q.el); testHaken.push({ art: 'frage', obj: q });
+    });
+    box.appendChild(sum);
+    return box;
   }
   function vStation() {
     if (!STATIONEN.length) { haupt.appendChild(msg('Keine Stationen vorhanden.', 'warn')); return; }
@@ -902,26 +1133,7 @@
       }
       var nach = el('div', { class: 'nach' });
       if ((s.check || []).length) {
-        checkBox = el('details', { class: 'check' });
-        checkBox.open = !s.interaktion || !!S.st[s.id];
-        checkBox.appendChild(el('summary', { html: 'Kurz-Check · ' + s.check.length + ' Fragen <span class="badge zaehlt-nicht">zählt nicht</span>' + (s.interaktion ? ' <span class="klein">– öffnet sich, wenn du die Szene geschafft hast</span>' : '') }));
-        checkBox.appendChild(el('p', { class: 'klein', text: 'Beantworte die Fragen aus dem Gedächtnis. Beliebig oft wiederholbar.' }));
-        var geprueft = {}, richtig = {};
-        var sum = el('div', { 'aria-live': 'polite' });
-        s.check.forEach(function (id, k) {
-          var q = frage(FR[id], 'lernen', { nr: k + 1, beiPruefung: function (res) {
-            geprueft[id] = 1; if (res.score >= 1) richtig[id] = 1;
-            if (anzahl(geprueft) === s.check.length) {
-              sum.innerHTML = '';
-              var n = anzahl(richtig);
-              sum.appendChild(msg('Kurz-Check: <b>' + n + ' von ' + s.check.length + '</b> auf Anhieb richtig. ' + (n === s.check.length ? 'Sehr gut, du kannst weiter.' : 'Schau dir die Szene und die Erklärungen zu den falschen Antworten noch einmal an.'), n === s.check.length ? 'ok' : 'warn'));
-              var ej = einschaetzung(s.lz, n, s.check.length); if (ej) sum.appendChild(ej);
-              status.check = true; pruefeFertig();
-            }
-          } });
-          checkBox.appendChild(q.el); testHaken.push({ art: 'frage', obj: q });
-        });
-        checkBox.appendChild(sum);
+        checkBox = kurzCheck(s, !s.interaktion || !!S.st[s.id], s.interaktion ? 'öffnet sich, wenn du die Szene geschafft hast' : '', function () { status.check = true; pruefeFertig(); });
         nach.appendChild(checkBox);
       }
       if (s.mitdenken) nach.appendChild(mitdenken(s.mitdenken));
@@ -1119,8 +1331,8 @@
       c.appendChild(el('div', { class: 'lzzeile' }, [el('div', { html: '<b>' + esc(z.id) + '</b> ' + z.text }), el('div', { class: 'balken ' + (p >= 80 ? 'ok' : p >= 50 ? 'mittel' : ''), role: 'img', 'aria-label': p + ' Prozent' }, el('span', { style: 'width:' + p + '%' })), el('div', { text: p + ' % · ' + st })]));
     });
     if (empfehlung.length) {
-      var em = el('div', { class: 'msg warn' }, [el('b', { text: 'Was als Nächstes? ' }), 'Wiederhole diese Stationen und versuche den Nachweis dann noch einmal: ']);
-      empfehlung.forEach(function (i) { em.appendChild(el('button', { type: 'button', text: 'Station ' + (i + 1) + ': ' + STATIONEN[i].titel, onclick: function () { zeige('entdecken', i); } })); em.appendChild(document.createTextNode(' ')); });
+      var em = el('div', { class: 'msg warn' }, [el('b', { text: 'Was als Nächstes? ' }), 'Wiederhole diese ' + EH.m + ' und versuche den Nachweis dann noch einmal: ']);
+      empfehlung.forEach(function (i) { em.appendChild(el('button', { type: 'button', text: EH.e + ' ' + (i + 1) + ': ' + STATIONEN[i].titel, onclick: function () { zeige('entdecken', i); } })); em.appendChild(document.createTextNode(' ')); });
       c.appendChild(em);
     }
     if (letzterVersuch) {
@@ -1132,9 +1344,9 @@
 
     var se = el('div', { class: 'card' });
     se.appendChild(el('h2', { text: 'Wie sicher bist du jetzt?' }));
-    se.appendChild(el('p', { class: 'klein', text: 'Vergleiche mit deiner Einschätzung nach der Station und mit dem Ergebnis im Nachweis. Wo lagst du daneben?' }));
+    se.appendChild(el('p', { class: 'klein', text: 'Vergleiche mit deiner Einschätzung nach ' + (SIM ? 'dem Kapitel' : 'der Station') + ' und mit dem Ergebnis im Nachweis. Wo lagst du daneben?' }));
     LZ.forEach(function (z) {
-      se.appendChild(el('div', { class: 'lzzeile se' }, [el('div', { html: '<b>' + esc(z.id) + '</b> ' + z.text + '<div class="klein">Nach der Station: ' + stufeText(S.ej[z.id]) + ' · Nachweis: ' + (S.lz[z.id] || 0) + ' %</div>' }), skala(S.en, 'en', z.id)]));
+      se.appendChild(el('div', { class: 'lzzeile se' }, [el('div', { html: '<b>' + esc(z.id) + '</b> ' + z.text + '<div class="klein">Nach ' + (SIM ? 'dem Kapitel' : 'der Station') + ': ' + stufeText(S.ej[z.id]) + ' · Nachweis: ' + (S.lz[z.id] || 0) + ' %</div>' }), skala(S.en, 'en', z.id)]));
     });
     haupt.appendChild(se);
 
@@ -1173,7 +1385,7 @@
     dr.appendChild(el('div', {}, [nm, ' ', el('button', { type: 'button', text: '🖨 Ergebnis als PDF', onclick: function () { druckFenster('Ergebnis ' + (P.titel || ''), ergebnisHtml(nm.value)); } })]));
     haupt.appendChild(dr);
 
-    if (!bestanden) leiste('Mit den empfohlenen Stationen klappt es beim nächsten Mal.', empfehlung.length ? 'Zu Station ' + (empfehlung[0] + 1) + ' →' : 'Nachweis erneut starten →', function () { if (empfehlung.length) zeige('entdecken', empfehlung[0]); else zeige('nachweis'); });
+    if (!bestanden) leiste('Mit den empfohlenen ' + EH.m + ' klappt es beim nächsten Mal.', empfehlung.length ? 'Zu ' + EH.e + ' ' + (empfehlung[0] + 1) + ' →' : 'Nachweis erneut starten →', function () { if (empfehlung.length) zeige('entdecken', empfehlung[0]); else zeige('nachweis'); });
     else leiste('Bestanden! Sichere jetzt dein Wissen auf dem Merkblatt.', 'Zum Merkblatt ↓', function () { mb.scrollIntoView({ behavior: 'smooth' }); var t = mb.querySelector('textarea'); if (t) t.focus({ preventScroll: true }); });
   }
   function merkblattHtml(felder) {
@@ -1204,7 +1416,7 @@
   function ergebnisHtml(name) {
     var h = '<h1>Ergebnis: ' + esc(P.titel || '') + '</h1><p>Name: <b>' + esc(name || '________________') + '</b> · Datum: ' + new Date().toLocaleDateString('de-DE') + '</p>';
     h += '<p>Bestes Ergebnis im Kompetenznachweis: <b>' + S.best + ' %</b> (' + (S.best >= BESTEHEN ? 'bestanden' : 'nicht bestanden') + ', Grenze ' + BESTEHEN + ' %) · Versuche: ' + S.n + '</p>';
-    h += '<table class="tab"><tr><th>Lernziel</th><th>Letzter Versuch</th><th>Einschätzung nach der Station → am Ende</th></tr>';
+    h += '<table class="tab"><tr><th>Lernziel</th><th>Letzter Versuch</th><th>Einschätzung nach ' + (SIM ? 'dem Kapitel' : 'der Station') + ' → am Ende</th></tr>';
     LZ.forEach(function (z) { h += '<tr><td><b>' + esc(z.id) + '</b> ' + z.text + '</td><td>' + (S.lz[z.id] || 0) + ' %</td><td>' + stufeText(S.ej[z.id]) + ' → ' + stufeText(S.en[z.id]) + '</td></tr>'; });
     return h + '</table><p class="klein druckfuss">' + esc(druckVermerk()) + '</p>';
   }
@@ -1223,6 +1435,12 @@
     ansicht: function () { return ANSICHT; },
     zeige: zeige,
     aktuelleTeile: function () { return testHaken; },
+    // Simulationsmodus, für automatische Tests: Position, Gegenstand, Prüfung eines Schritts
+    sim: SIM ? {
+      position: function () { return SIMPOS ? { i: SIMPOS.i, k: SIMPOS.k } : null; },
+      box: function () { return SIMBOX; },
+      pruefe: function (i, k) { try { return !!schritteVon(STATIONEN[i])[k].pruefe(SIMOBJ); } catch (e) { return false; } }
+    } : null,
     scormAktiv: SC.aktiv
   };
 

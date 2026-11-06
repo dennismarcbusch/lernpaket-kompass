@@ -43,4 +43,4 @@ Ergebnis der Phase „Erfinden“ (P12). Die Form wird in dieser Reihenfolge gep
 
 - Gewählt: [Vorschlag, Form]
 - Begründung der Lehrkraft: …
-- Umsetzung: Stationen mit Szenen am gemeinsamen Gegenstand (A, B) · Szenen im Entdecken und Spiel als Übung (C) · Spielmodus `PAKET.spielwelt` (D)
+- Umsetzung: Simulationsmodus `PAKET.simulation` mit einem Gegenstand über alle Kapitel (A, B) · Stationen mit eigenen Szenen (A, B mit wechselnden Gegenständen) · Szenen im Entdecken und Spiel als Übung (C) · Spielmodus `PAKET.spielwelt` (D)
