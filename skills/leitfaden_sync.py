@@ -4,11 +4,13 @@
   python3 skills/leitfaden_sync.py [--export <markdown-export.md|json>]
 
 --export  Markdown-Export des Leitfaden-Dokuments (Claude Docs). Die Datei wird bereinigt
-          (eingebettete Grafiken als Textzeile, Links relativ) und nach
-          docs/leitfaden-lernpakete.md geschrieben.
+          (eingebettete Grafiken als Textzeile, Links relativ, Kopfzeile mit der
+          Kompass-Version aus der Datei VERSION) und nach docs/leitfaden-lernpakete.md
+          geschrieben. Achtung: Der Export ersetzt die Datei ganz. Was nur im Markdown
+          geändert wurde und nicht im Dokument steht, geht dabei verloren.
 Danach werden aus docs/leitfaden-lernpakete.md die Referenzdateien in skills/_gemeinsam/
 neu erzeugt (prozess-und-struktur.md, gestaltung.md, technik.md, checkliste.md).
-prinzipien.md und fragenformat.md werden von Hand gepflegt. Zum Schluss skills/baue-skills.sh.
+prinzipien.md, belege.md, szenen.md und fragenformat.md werden von Hand gepflegt. Zum Schluss skills/baue-skills.sh.
 """
 import argparse, base64, datetime, json, os, re
 
@@ -18,8 +20,8 @@ MD = os.path.join(REPO, 'docs', 'leitfaden-lernpakete.md')
 G = os.path.join(HIER, '_gemeinsam')
 QUELLE = 'Quelle: Lernpaket-Kompass – Leitfaden für interaktive Lernpakete, docs/leitfaden-lernpakete.md im Repository lernpaket-kompass.\n\n'
 ERSATZ = {
-    r'&#91;embedded content: Mayer \(2017\)[^\]]*\\\]': '*(Diagramm mit den Effektstärken der zwölf Mayer-Prinzipien nach Mayer 2017 und der Re-Analyse von Cromley et al.: nur in der Dokumentfassung. Im Mittel g ≈ 0,37.)*',
-    r'&#91;embedded content: Entwicklungsprozess[^\]]*\\\]': '*(Ablaufdiagramm: Klären → Erfinden → Zielen → Entwerfen → Prototyp bauen → Erproben → Einsetzen und auswerten, mit Rücksprüngen nach Erprobung und Auswertung; nur in der Dokumentfassung.)*',
+    r'&#91;embedded content: Mayer \(2017\)[^\]]*\\\]': '*(Diagramm mit den Effektstärken der zwölf Mayer-Prinzipien nach Mayer 2017 und der Nachrechnung von Cromley & Chen: nur in der Dokumentfassung. Im Mittel g ≈ 0,37.)*',
+    r'&#91;embedded content: Entwicklungsprozess[^\]]*\\\]': '*(Ablaufdiagramm: Klären → Zielen → Erfinden → Prototyp bauen → Entwerfen und ausbauen → Erproben → Einsetzen und auswerten, mit Rücksprüngen nach Erprobung und Auswertung; nur in der Dokumentfassung.)*',
 }
 
 
@@ -29,7 +31,8 @@ def export_uebernehmen(pfad):
         md = base64.b64decode(json.loads(roh)['data']['bytes_b64']).decode('utf-8')
     except (json.JSONDecodeError, KeyError, TypeError):
         md = roh
-    md = re.sub(r'^(Entwurf) · [A-Z][a-z]{2} \d+, (\d{4}) · @(.+)$', lambda m: f'{m.group(1)} · Stand {datetime.date.today():%d.%m.%Y} · {m.group(3)}', md, count=1, flags=re.M)
+    version = open(os.path.join(REPO, 'VERSION'), encoding='utf-8').read().strip()
+    md = re.sub(r'^(Entwurf)(?: · Kompass [\d.]+)? · [A-Z][a-z]{2} \d+, (\d{4}) · @(.+)$', lambda m: f'{m.group(1)} · Kompass {version} · Stand {datetime.date.today():%d.%m.%Y} · {m.group(3)}', md, count=1, flags=re.M)
     for a, b in ERSATZ.items():
         md = re.sub(a, b, md)
     md = md.replace('Durchgezogene Pfeile zeigen den Regelablauf, gestrichelte die Rücksprünge nach Erprobung und Auswertung.\n\n', '')
