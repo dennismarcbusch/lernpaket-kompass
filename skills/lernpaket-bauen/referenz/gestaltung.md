@@ -6,22 +6,22 @@ Quelle: Lernpaket-Kompass – Leitfaden für interaktive Lernpakete, docs/leitfa
 
 Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern steht der Fachbegriff, unter dem man bei Bedarf mehr dazu findet.
 
-**Simulation und Szene zuerst, eigene Welt (P12, P14)**
+**Simulation und Szene zuerst, eigene Welt (P12)**
 
 - Jede Station ist eine Szene, in der die Lernenden etwas bewegen: ein Dokument prüfen, ein Formular ausfüllen, im nachgebauten Portal recherchieren, ein Gespräch führen, sortieren, ein Gerät einstellen. Erst die Szene planen, dann den Text.
-- Die Szene steht groß in der Mitte und ohne Scrollen im Blick. Der Auftrag steht als Sprechblase der Figur (1–2 Sätze), „Kurz erklärt“ in einer schmalen Notiz daneben (höchstens etwa 40 Wörter); zusammen höchstens etwa 90 Wörter je Station.
+- Die Szene steht groß in der Mitte und ist auf einem Schullaptop (1366 × 768) ganz zu sehen, ohne Scrollen; das Prüfskript misst Ober- und Unterkante. Der Auftrag steht als Sprechblase der Figur (1–2 Sätze), „Kurz erklärt“ in einer schmalen Notiz daneben (höchstens etwa 40 Wörter); zusammen höchstens etwa 90 Wörter je Station. Im Simulationsmodus gilt je Schritt: höchstens etwa 60 Wörter.
 - Erklärungen erscheinen dann, wenn sie gebraucht werden: als Reaktion auf das, was die Lernenden gerade tun.
 - Das Lösungsbeispiel wird in der Szene vorgeführt („Zeig’s mir“), an einem anderen Fall; danach sind die Lernenden dran.
-- Realistisch, aber erfunden: Dokumente, Portale und Geräte sehen aus wie im Beruf, mit erfundenen Firmen und Daten. Echte Webseiten werden als Übungsversion nachgebaut, nicht kopiert.
+- Echt in der Funktion, sparsam im Aussehen: Dokumente, Portale und Geräte verhalten sich wie im Beruf (Felder, Abläufe, Folgen), mit erfundenen Firmen und Daten. Gezeigt wird, was zur Aufgabe gehört, und das Wichtige ist gut zu erkennen (Teil A2). Echte Webseiten werden als Übungsversion nachgebaut, nicht kopiert.
 - Fehler wirken sich in der Szene aus wie in echt (die Kundin fragt nach, der Server antwortet nicht), dazu ein Satz zur Fehlvorstellung.
-- Gleiche Bedienung, eigene Welt: Aufbau und Bedienung sind in allen Paketen gleich; jedes Paket hat eigene Farben, eine Kulisse und illustrierte Figuren passend zum Fach. Figuren vielfältig besetzen, keine realen Personen nachbilden.
-- Das Konzept aus der Phase „Erfinden“ gibt den Rahmen vor: Bei einer Simulation mit einem durchgehenden Arbeitsgegenstand steht dieser im Simulationsmodus neben der Lektion und bleibt über alle Kapitel erhalten; die Lektion führt in kleinen Schritten, die sich am Gegenstand selbst abhaken, wie in den Tutorials „Shell Yeah!“ und „Get-Going!“. Üben und Nachweis nutzen denselben Gegenstand mit neuen Fällen. Erklärung und Gegenstand stehen so nebeneinander statt nacheinander, und was die Lernenden aufgebaut haben, geht beim Kapitelwechsel nicht verloren. Wechselt der Gegenstand, ist jede Station eine eigene Szene; bei einer interaktiven Illustration ein Ausschnitt desselben Modells. Ein Spiel zum Üben steckt in den Übungen und nutzt die Regel, die im Entdecken geklärt wurde. Ein durchgehendes Lernspiel (Spielmodus, Stationen sind Level) vermittelt die Grundlagen selbst: ein neues Konzept je Schritt in der Story, der erste Zug vorgemacht, Nachschlagen neben dem Spiel. Immer steckt der Lernstoff in den Regeln, Fehler haben Folgen, es gibt keinen Zeitdruck und keine Ranglisten; ein Spielrahmen (Mission mit Karte) ist optional. Story und Kulisse ohne Bezug zum Lernziel sind verführerische Details (Teil A2).
+- Gleiche Bedienung, eigene Welt: Aufbau und Bedienung sind in allen Paketen gleich; jedes Paket hat eigene Farben, eine Kulisse und illustrierte Figuren passend zum Fach. Kulisse und Figuren stehen im Kopf, auf der Startseite und beim Auftrag (Sprechblase); im Arbeitsbereich der Szene steht nur, was zur Aufgabe gehört. Figuren vielfältig besetzen, keine realen Personen nachbilden.
+- Das Konzept aus der Phase „Erfinden“ gibt den Rahmen vor: Bei einer Simulation mit einem durchgehenden Arbeitsgegenstand steht dieser im Simulationsmodus neben der Lektion und bleibt über alle Kapitel erhalten; die Lektion führt in kleinen Schritten, die sich am Gegenstand selbst abhaken, wie in den Tutorials „Shell Yeah!“ und „Get-Going!“. Üben und Selbstüberprüfung nutzen denselben Gegenstand mit neuen Fällen. Erklärung und Gegenstand stehen so nebeneinander statt nacheinander, und was die Lernenden aufgebaut haben, geht beim Kapitelwechsel nicht verloren. Wechselt der Gegenstand, ist jede Station eine eigene Szene; bei einer interaktiven Illustration ein Ausschnitt desselben Modells. Ein Spiel zum Üben steckt in den Übungen und nutzt die Regel, die im Entdecken geklärt wurde. Ein durchgehendes Lernspiel (Spielmodus, Stationen sind Level) vermittelt die Grundlagen selbst: ein neues Konzept je Schritt in der Story, der erste Zug vorgemacht, Nachschlagen neben dem Spiel. Immer steckt der Lernstoff in den Regeln, Fehler haben Folgen, es gibt keinen Zeitdruck und keine Ranglisten; ein Spielrahmen (Mission mit Karte) ist optional. Im Arbeitsbereich sind Story und Kulisse ohne Bezug zum Lernziel verführerische Details (Teil A2).
 - Ein Szenen-Katalog mit Beispielen für alle Fächer liegt im Skill-Set (`szenen.md`).
 
 **Bildschirm und Darstellung (nach Mayer)**
 
 - Wort und Bild zusammen statt Text allein: Zu jeder Erklärung gehört eine passende Grafik, Skizze oder Animation, die zum Inhalt passt, nicht zu einem angeblichen Lerntyp (Multimedia).
-- Alles weglassen, was nicht dem Lernziel dient: keine Deko-Bilder, keine Hintergrundmusik, keine „interessanten Nebenfakten“ (Kohärenz). Solche interessanten, aber unwichtigen Details heißen in der Forschung „verführerische Details“: Sie ziehen Aufmerksamkeit vom Wesentlichen ab. Ein witziges Bild passt in den Einstieg, nicht mitten in die Erklärung.
+- Alles weglassen, was nicht dem Lernziel dient: keine Deko-Bilder, keine Hintergrundmusik, keine „interessanten Nebenfakten“ neben der Aufgabe (Kohärenz). Solche interessanten, aber unwichtigen Details heißen in der Forschung „verführerische Details“: Sie ziehen Aufmerksamkeit vom Wesentlichen ab. Die eigene Welt des Pakets ist damit nicht gemeint, solange sie Rahmen bleibt (Kopf, Startseite, Auftraggeberin): Freundliche Gestaltung schadet nicht und hilft eher leicht (Brom et al. 2018).
 - Das Wichtige hervorheben: Schlüsselbegriffe fett, im Bild ein Pfeil oder Rahmen genau auf die Stelle, um die es geht, Zwischenüberschriften statt langer Textblöcke. Farben und Markierungen sparsam einsetzen und im ganzen Paket immer mit derselben Bedeutung (Signalisierung).
 - Beschriftung direkt ans Bild, nicht in eine Legende darunter; Erklärung und zugehörige Grafik gleichzeitig sichtbar (räumliche und zeitliche Nähe; in der Lernpsychologie spricht man vom „Split-Attention-Effekt“, der geteilten Aufmerksamkeit).
 - Alles, was für eine Aufgabe nötig ist, gleichzeitig sichtbar halten: Auftrag, Bild oder Terminal und Eingabe stehen auf einem Bildschirm, ohne Scrollen oder Umschalten.
@@ -33,7 +33,7 @@ Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern st
 - Fachbegriffe vorab kurz einführen, bevor sie in einem komplexen Ablauf auftauchen (Vortraining): an der Station, an der sie zuerst gebraucht werden, als Begriffe zum Antippen neben der Szene, nicht gesammelt auf der Startseite.
 - Denselben Text nicht gleichzeitig vorlesen und anzeigen (Redundanz).
 - Locker und direkt ansprechen („Du“ bzw. „Sie“ je nach Zielgruppe), nicht im Lehrbuchton (Personalisierung).
-- Einheitliche Bedienung und einheitlicher Aufbau über alle Pakete; jedes Paket hat seine eigene Welt (Farben, Kulisse, Figuren) mit einem einzigen Akzent für Handlungsaufforderungen.
+- Einheitliche Bedienung und einheitlicher Aufbau über alle Pakete; jedes Paket hat seine eigene Welt (Farben, Kulisse, Figuren) mit einer einzigen Akzentfarbe für den nächsten sinnvollen Schritt.
 
 Ergänzend nach Kerres (2024, Kap. 6.6):
 
@@ -48,11 +48,11 @@ Ergänzend nach Kerres (2024, Kap. 6.6):
 
 Signale braucht nicht nur der Lernstoff, sondern auch die Bedienung. Wer suchen muss, wo es weitergeht, verbraucht Aufmerksamkeit, die dem Lernen fehlt. Mayers Signalisierungsprinzip bezieht sich auf Inhalte; für die Bedienung stützen sich die folgenden Regeln auf Kerres' Forderung nach einfacher Navigation und auf Grundregeln guter Software-Bedienung.
 
-- Jeder Bildschirm hat genau einen hervorgehobenen nächsten Schritt, immer an derselben Stelle (z. B. unten rechts) und immer im selben Aussehen.
-- Die Akzentfarbe ist für Handlungsaufforderungen reserviert, nicht für Deko oder Überschriften.
+- Je Bildschirm ist höchstens ein Knopf hervorgehoben: der nächste sinnvolle Schritt. Solange eine Aufgabe offen ist, ist das die Aufgabe selbst (für Neulinge die Vorführung „Zeig’s mir“), nicht „Weiter“. Der Weiter-Knopf steht immer unten rechts, bekommt die Akzentfarbe aber erst, wenn die Aufgabe erledigt ist; vorher sähe er aus wie die Aufforderung, sie zu überspringen. Nur die Startseite hat immer genau einen hervorgehobenen Knopf.
+- Die Akzentfarbe ist für diesen einen Schritt reserviert, nicht für Deko oder Überschriften.
 - Was gerade zu tun ist, steht als kurzer Auftrag oben auf dem Bildschirm, nicht versteckt im Fließtext.
 - Ist eine Aufgabe erledigt, zeigt das Paket das sofort sichtbar und benennt den nächsten Schritt („Geschafft! Weiter zu Station 4: Arbeitsspeicher einsetzen“).
-- Eine Fortschrittsanzeige zeigt, wo man steht (Teil, Station 3 von 7) und was schon erledigt ist.
+- Eine Fortschrittsanzeige zeigt, wo man steht und was schon erledigt ist. Sie steht in der Kopfzeile bei den Teilen („① Entdecken 2/3“) und als Punkte im Kopf der Station, nicht in eigenen Zeilen: Kopf, Teile und Fortschritt brauchen zusammen eine Zeile, damit auf 1366 × 768 gut 600 Pixel Höhe für die Aufgabe bleiben.
 - Noch nicht verfügbare Schritte bleiben sichtbar, sind aber erkennbar ausgegraut, mit kurzem Grund.
 - Anklickbares sieht anklickbar aus; Dekoratives nicht.
 - Kein wichtiger Knopf liegt unbemerkt außerhalb des sichtbaren Bereichs, auch nicht auf dem Tablet.
@@ -62,7 +62,7 @@ Signale braucht nicht nur der Lernstoff, sondern auch die Bedienung. Wer suchen 
 **Aufgaben und Übungen**
 
 - Jede Aufgabe beginnt mit einem Auftrag aus der Leitsituation („Mira bittet dich …“), nicht mit „Aufgabe 3“.
-- Erst Lösungsbeispiel, dann ähnliche Aufgabe, dann veränderte Aufgabe (Lösungsbeispiele, Ausblenden der Hilfe).
+- Erst Lösungsbeispiel, dann ähnliche Aufgabe, dann veränderte Aufgabe (Lösungsbeispiele, Ausblenden der Hilfe). Für Handgriffe und Verfahren gilt das immer. Wo ein Zusammenhang verstanden werden soll, dürfen Lernende die Szene auch zuerst erkunden: Die Vorab-Frage gibt dem Erkunden ein Ziel, und die Vorführung bleibt einen Klick entfernt (Teil A2, „erst selbst versuchen“).
 - Lernende zum Mitdenken auffordern, nicht nur zum Lesen: Im Lösungsbeispiel steht an einem entscheidenden Schritt eine Frage zum Selbsterklären („Warum ist dieser Schritt nötig?“) – erst selbst überlegen, dann die Begründung aufklappen. Nach Stationen und Übungen regelmäßig ein kurzer Auftrag zum Skizzieren, Zusammenfassen in eigenen Worten oder Erklären für andere (generative Lernaktivitäten).
 - Situationen variieren (andere Kunden, andere Geräte, andere Daten), damit Wissen übertragbar wird (4C/ID).
 - Geprüft wird das Ergebnis, nicht ein bestimmter Lösungsweg; alternative richtige Wege werden akzeptiert.
@@ -77,17 +77,17 @@ Signale braucht nicht nur der Lernstoff, sondern auch die Bedienung. Wer suchen 
 2. Teillösung oder Hinweis auf die passende Stelle im Entdecken-Teil.
 3. Vollständige Lösung mit kurzer Begründung.
 
-Tipps werden aktiv angefordert und zählen im Üben nicht gegen die Lernenden; im Nachweis gibt es keine.
+Tipps werden aktiv angefordert und zählen im Üben nicht gegen die Lernenden; in der Selbstüberprüfung gibt es keine.
 
 **Für Lernende mit Vorwissen**
 
 Was Einsteigern hilft, kann Fortgeschrittene bremsen: Ausführliche Erklärungen, Lösungsbeispiele und kleinschrittige Anleitungen kosten sie Zeit und Aufmerksamkeit, ohne etwas Neues zu bringen, und können das Lernen sogar verschlechtern (Expertise-Umkehr-Effekt, Kalyuga 2007). Ein Paket sollte deshalb Hilfe anbieten, aber nicht aufzwingen.
 
-- Jede Station beginnt mit einer Vorab-Frage („Was vermutest du?“, zählt nicht). Wer richtig liegt, darf die Station überspringen; wer falsch liegt, lernt danach gezielter, weil die Szene die Antwort klärt (Pretesting, Teil A2).
+- Jede Station beginnt mit einer Vorab-Frage („Was vermutest du?“, zählt nicht). Wer richtig liegt, darf die Station überspringen; wer falsch liegt, lernt danach gezielter. Die Vorab-Frage ist zugleich die Leitfrage der Station: Sie bleibt über der Szene stehen, und der Kurz-Check löst sie als Erstes auf. Das ist wichtig, denn Vorab-Fragen helfen vor allem bei genau dem, wonach gefragt wurde, und nur, wenn die richtige Antwort danach auch gelernt wird (Pretesting, Teil A2). Sie zielt deshalb auf den Kern der Station; eine zusätzliche Leitfrage gibt es nicht.
 - Die Abkürzung „Ich kenne mich schon aus“ auf der Startseite stellt alle Vorab-Fragen auf einem eigenen Bildschirm; was sitzt, wird auf dem Lernpfad als überspringbar markiert. Vorab-Fragen sind schwer zu erraten (Zahl, Text, Zuordnen oder Mehrfachauswahl), sonst trifft die Empfehlung Glückspilze.
 - Ausführliche Erklärungen und Lösungsbeispiele sind aufklappbar, nicht Pflichtlektüre; die Kurzfassung steht sichtbar.
 - Tipps gibt es nur auf Anforderung (siehe oben).
-- Übersprungene Stationen bleiben jederzeit erreichbar; der Kompetenznachweis ist für alle gleich.
+- Übersprungene Stationen bleiben jederzeit erreichbar; die Selbstüberprüfung ist für alle gleich.
 
 **Ton, Inklusion und Deutsch als Zweitsprache**
 
@@ -104,32 +104,32 @@ Die Gestaltungsregeln sind Faustregeln. Für manche Lernende gelten sie nur eing
 - Zu jeder Antwort: richtig oder falsch, *warum*, und bei Fehlern, was als Nächstes hilft.
 - Falsche Antworten, die auf einer typischen Fehlvorstellung beruhen, bekommen ein eigenes Feedback, das diese Fehlvorstellung anspricht.
 - Kein reines Lob („Super!“) ohne Information; kein Punktestand als einziges Feedback.
-- Im Nachweis wirkt sich ein Fehler, wo möglich, realistisch aus (z. B. der PC startet nicht), statt sofort erklärt zu werden; die Erklärung folgt in der Auswertung.
+- In der Selbstüberprüfung wirkt sich ein Fehler, wo möglich, realistisch aus (z. B. der PC startet nicht), statt sofort erklärt zu werden; die Erklärung folgt in der Auswertung.
 
 **Story und Spielelemente**
 
 - Eine Rahmengeschichte mit wiederkehrenden Figuren ist erwünscht; sie trägt Motivation und Lebensweltbezug.
-- Punkte, Abzeichen oder Zeitdruck nur, wenn sie eine Funktion für das Lernen haben.
+- Punkte und Abzeichen nur, wenn sie eine Funktion für das Lernen haben. Kein Zeitdruck: Eine laufende Uhr belastet gerade die Schwächeren und passt nicht zu Aufgaben, die nicht zählen.
 
 * Keine Ranglisten: Fortschritt an einem sachlichen Ziel messen („7 von 9 Lernzielen erreicht“) oder an der eigenen früheren Leistung, nicht am Vergleich mit Mitschülern. Der Vergleich demotiviert schwächere Lernende und widerspricht dem Datenschutz, wenn Ergebnisse für andere sichtbar werden (Kerres 2024).
 
 ## Teil C4: SeGeL-Unterricht und klassischer Unterricht mit digitalen Medien
 
-Die Unterscheidung ist nötig, weil im SeGeL-Unterricht das Paket die Aufgaben der Lehrkraft teilweise übernehmen muss: Orientierung, Strukturierung, Rückmeldung und Anleitung zur Selbststeuerung. Im klassischen Unterricht übernimmt die Lehrkraft diese Rollen selbst, und das Paket ist ein Baustein. Die Gestaltungsprinzipien P1–P8 gelten in beiden Fällen gleich.
+Die Unterscheidung ist nötig, weil im SeGeL-Unterricht das Paket die Aufgaben der Lehrkraft teilweise übernehmen muss: Orientierung, Strukturierung, Rückmeldung und Anleitung zur Selbststeuerung. Im klassischen Unterricht übernimmt die Lehrkraft diese Rollen selbst, und das Paket ist ein Baustein. Der Kern der Prinzipien (P3–P8, P12) gilt in beiden Fällen gleich.
 
-Die Begründung liefert die Forschung zur Selbststeuerung: Mehr Wahlfreiheit allein verbessert das Lernen nicht (*g* = 0,05), angeleitetes selbstreguliertes Lernen dagegen deutlich (*g* = 0,71 in der Sekundarstufe), ebenso Werkzeuge zur Selbstüberwachung (*d* = 0,42). Ein SeGeL-Paket muss Selbststeuerung also *unterstützen*, nicht nur *erlauben*.
+Die Begründung liefert die Forschung zur Selbststeuerung: Mehr Wahlfreiheit allein verbessert das Lernen nicht (*g* = 0,05), angeleitetes selbstreguliertes Lernen dagegen deutlich (rund 0,7 für mehrwöchige Trainingsprogramme an Schulen), ebenso Werkzeuge zur Selbstüberwachung wie Lerntagebücher (*d* = 0,42). Ein SeGeL-Paket muss Selbststeuerung also *unterstützen*, nicht nur *erlauben*. Belegt ist das für Trainings und Lerntagebücher, nicht für einzelne Klicks in einem Paket; die Bausteine der Vorlage sind eine begründete Übertragung und kein Ersatz für die Lernbegleitung.
 
 Kerres (2024) bestätigt das aus der Forschung zum digitalen Lernen: Wer allein am Computer lernt, kommt schneller voran, bricht aber auch häufiger ab, und Phasen mit Lehrkraft verbessern die Ergebnisse. Die Lernbegleitung durch die Lehrkraft bleibt deshalb auch im SeGeL-Unterricht ein fester Bestandteil.
 
 | Merkmal | SeGeL (selbstgesteuert) | Klassisch (lehrkraftgeleitet) |
 | --- | --- | --- |
-| Rolle des Pakets | Trägt die gesamte Lerneinheit von Einstieg bis Nachweis | Baustein für eine Phase: Erarbeitung, Übung, Simulation oder Vorbereitung (Flipped) |
+| Rolle des Pakets | Trägt die Lerneinheit vom Einstieg bis zur Selbstüberprüfung | Baustein für eine Phase: Erarbeitung, Übung, Simulation oder Vorbereitung (Flipped) |
 | Zeitstruktur | Kein 45/90-Minuten-Raster; Fortschritt wird gespeichert, Wiedereinstieg jederzeit | Abschnitte von etwa 20–30 Minuten, die in eine Stunde passen; Stationen einzeln aufrufbar |
-| Einstieg | Im Paket: Startseite mit Leitsituation und Lernpfad, Abkürzung für Lernende mit Vorwissen; optional ein freiwilliger Input mit Tafelbild (C2) | Durch die Lehrkraft, z. B. mit dem Tafelbild des Pakets; das Paket kann den Einstieg kurz halten |
+| Einstieg | Im Paket: Startseite mit Leitsituation und Lernpfad, Abkürzung für Lernende mit Vorwissen. Dazu der Input der Lehrkraft auf Folien, im Mittelteil wahlweise mit dem Tafelbild des Pakets (C2) | Durch die Lehrkraft, im Mittelteil z. B. mit dem Tafelbild des Pakets; das Paket kann den Einstieg kurz halten |
 | Steuerung | Empfohlener Pfad mit Freiheit beim Tempo; Springen möglich, aber mit Hinweis, was vorausgesetzt wird | Lehrkraft gibt Abschnitte frei bzw. vor |
 | Hilfe | Drei gestufte Tipps, Lösungsbeispiele, Glossar und Steckbriefe immer erreichbar; Hinweis, wann man die Lehrkraft fragen sollte | Tipps im Paket; vertiefende Hilfe durch Lehrkraft und Mitschüler |
-| Selbstregulation | Verbindlich: Lernziel an jeder Station, Einschätzung nach dem Kurz-Check und am Ende im Vergleich mit dem Ergebnis, Fortschrittsanzeige, Reflexionsfragen mit Musterantwort, Lernempfehlung nach dem Nachweis | Optional; Reflexion und Sicherung im Plenum |
-| Nachweis | Im Paket, mit Bestehensgrenze und Wertung in der Lernplattform; mehrere Versuche, bestes Ergebnis zählt | Oft formativ (ohne Wertung) oder ganz ausgelagert in eine Lernzielkontrolle der Lehrkraft |
+| Selbstregulation | Liefert die Vorlage: Lernziel an jeder Station, Einschätzung einmal je Lernziel nach dem Kurz-Check, im Abschluss neben dem Ergebnis, Fortschrittsanzeige, Lernempfehlung nach der Selbstüberprüfung. Dazu Reflexionsfragen mit Musterantwort (Soll) | Optional; Reflexion und Sicherung im Plenum |
+| Selbstüberprüfung und Kompetenznachweis | Selbstüberprüfung im Paket: zählt nicht, beliebig oft. Der Kompetenznachweis liegt außerhalb des Pakets, beaufsichtigt in der Lernplattform, bestanden oder nicht | Selbstüberprüfung als Übung oder Hausaufgabe; die Lernzielkontrolle macht die Lehrkraft |
 | Rolle der Lehrkraft | Lernbegleitung: Auswertung der Daten, gezielte Gespräche mit Lernenden, die hängen | Unterrichtsleitung: Einführung, Moderation, Sicherung der Ergebnisse |
 | Daten für die Lehrkraft | Wichtig: Ergebnisse je Lernziel und je Frage, Bearbeitungsstand | Hilfreich, aber nicht zwingend |
 | Lebensweltbezug (K+5) | Trägt die Motivation über längere Zeit: echte Aufgaben, Bezug zu eigenen Geräten und Medien | Kann von der Lehrkraft im Unterrichtsgespräch hergestellt werden |

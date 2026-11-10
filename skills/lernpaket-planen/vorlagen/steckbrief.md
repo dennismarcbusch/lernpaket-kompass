@@ -11,10 +11,12 @@
 | **Geräte** | PC / Tablet / beides |
 | **Zeitrahmen** | z. B. etwa 90 Minuten, in Einheiten von 30–45 Minuten |
 | **Leitsituation (Idee)** | Betrieb bzw. Alltagssituation, Kundenauftrag, Story-Figur |
-| **Typische Fehler und Fehlvorstellungen** | 1. … 2. … 3. … (mindestens drei) |
+| **Typische Fehler und Fehlvorstellungen** | 1. … 2. … 3. … (drei für den Anfang; vollständig fürs Drehbuch) |
 | **Arbeitsmittel aus dem Beruf** | Dokumente, Programme, Geräte, Gespräche, die als Szene nachgebaut werden |
 | **Welt** | Thema (wirtschaft · technik · sprache · natur · gesundheit · gestaltung), Kulisse, Symbol |
-| **Kerninhalte** | Regeln, Begriffe, Einteilungen, Abläufe, die am Ende sitzen müssen (Material für die Regeln der Simulation) |
-| **Form** | wird in der Phase „Erfinden“ gewählt (`konzept.md`): A Simulation · B interaktive Illustration · C Spiel zum Üben · D Lernspiel (nur begründet) |
+| **Kerninhalte** | Regeln, Begriffe, Einteilungen, Abläufe, die am Ende sitzen müssen (Material für die Lernziele und die Regeln des Gegenstands) |
+| **Form** | wird nach den Lernzielen in der Phase „Erfinden“ gewählt (`konzept.md`): A Simulation · B interaktive Illustration · C Spiel zum Üben · D Lernspiel (nur begründet) |
 | **Paket-ID** | `<präfix>-<name>` (Kleinbuchstaben, Bindestriche; Präfix für Projekt oder Fach, z. B. `ping-`, `bwl-`) |
 | **Lizenz** | z. B. CC BY-SA 4.0 |
+
+Was hier als Standard oder Annahme eingetragen ist, bitte ändern, wenn es nicht passt: …

@@ -1,13 +1,13 @@
 ---
 name: lernpaket-auswerten
-description: Wertet den Berichtsexport der Lernplattform zu einem Lernpaket aus (ohne Namen) – schwere und zu leichte Fragen, Lernziele, Bestehensquote – und leitet Änderungen nach dem Lernpaket-Kompass ab.
+description: Wertet den Berichtsexport der Lernplattform zu einem Lernpaket aus (ohne Namen) – schwere und zu leichte Fragen, Lernziele, Selbstüberprüfung – und leitet Änderungen nach dem Lernpaket-Kompass ab.
 ---
 
-# Lernpaket auswerten (Phase 6 des Leitfadens)
+# Lernpaket auswerten (Phase 7 des Leitfadens)
 
-Nach dem Einsatz eines Pakets liest du den Berichtsexport aus der ByCS-Lernplattform und zeigst der Lehrkraft, wo das Paket funktioniert und wo nicht. Daraus leitest du konkrete Änderungen ab. Das ist der letzte Schritt im Kreislauf „Design dein Design“: Pakete werden mit echten Daten besser.
+Nach dem Einsatz eines Pakets liest du den Berichtsexport aus der ByCS-Lernplattform und zeigst der Lehrkraft, wo das Paket funktioniert und wo nicht. Daraus leitest du konkrete Änderungen ab. Pakete werden mit echten Daten besser; aus solchen Befunden entstehen auch neue Regeln für den Leitfaden.
 
-**Lies vor dem Start:** `referenz/prinzipien.md` (für die Begründung der Vorschläge), `referenz/fragenformat.md` (Fragen-IDs).
+**Lies vor dem Start:** `referenz/prinzipien.md` (Kurzfassung, für die Begründung der Vorschläge). Nur bei Bedarf: `referenz/fragenformat.md` (Fragen-IDs), `referenz/belege.md`.
 
 **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
 
@@ -32,9 +32,9 @@ In der Aktivität „Lernpaket“ unter **Berichte** gibt es Berichte für Bewer
    python3 <skill>/scripts/auswerten.py <export.csv|xlsx> [weitere] --inhalt <paket>/js/inhalt.js --anonym bereinigt.csv --bericht zahlen.md
    ```
 
-   Das Skript erkennt Fragen-IDs der Kompass-Vorlage (`N<Versuch>_<Frage-ID>`), Lernziel-Werte (`LZ1` …) und Bewertungen anhand des Inhalts. Erkennt es nichts, sieh dir die bereinigte Datei selbst an und werte mit eigenem Code aus.
+   Das Skript erkennt Fragen-IDs der Kompass-Vorlage (`S<Versuch>_<Frage-ID>`, bei älteren Paketen `N<Versuch>_…`), Lernziel-Werte (`LZ1` …) und Ergebnisse anhand des Inhalts. Es bewertet Fragen nach dem **ersten Versuch**: Wiederholungen ziehen teils dieselben Fragen und heben die Quote. Erkennt es nichts, sieh dir die bereinigte Datei selbst an und werte mit eigenem Code aus.
 
-2. **Vorsicht bei kleinen Zahlen:** Unter etwa 15 Versuchen nur Tendenzen nennen („deutet darauf hin“). Fragen mit weniger als fünf Antworten nicht bewerten.
+2. **Vorsicht bei kleinen Zahlen:** Unter etwa 15 Erstversuchen nur Tendenzen nennen („deutet darauf hin“). Fragen mit weniger als fünf Antworten nicht bewerten. Die Selbstüberprüfung zählt nicht; wer sie nur anklickt, verfälscht die Zahlen – sehr kurze Versuche mit 0 % nennst du als Vorbehalt.
 
 3. **Deuten – je Befund eine konkrete Änderung:**
 
@@ -44,11 +44,14 @@ In der Aktivität „Lernpaket“ unter **Berichte** gibt es Berichte für Bewer
    | Eine Falschantwort wird sehr oft gewählt | verbreitete Fehlvorstellung | Feedback dazu schärfen, Fehlvorstellung im Lösungsbeispiel und auf dem Merkblatt ansprechen |
    | Frage über 95 % | zu leicht, Ratehilfe in den Optionen | Ablenker aus echten Fehlern, Anwendung statt Wiedererkennen (P6, P8) |
    | Lernziel deutlich schwächer als die anderen | Station oder Übung dazu fehlt oder ist zu kurz | zusätzliche Übung in neuer Situation, Wiederholungsfrage in späteren Kurz-Checks (P2, P10) |
-   | Bestehensquote sehr niedrig | Nachweis prüft Ungeübtes oder ist schwerer als die Übungen | Abgleich Lernziel – Übung – Nachweis (P8); die Grenze von 80 % bleibt |
-   | Bestehensquote nahe 100 % bei wenigen Versuchen | Nachweis zu leicht oder Pool zu klein | Pool vergrößern, Teil A anspruchsvoller |
+   | Wenige erreichen die Marke (80 %) | Selbstüberprüfung prüft Ungeübtes oder ist schwerer als die Übungen | Abgleich Lernziel – Übung – Selbstüberprüfung (P8); die Marke bleibt |
+   | Fast alle erreichen die Marke im ersten Versuch | Selbstüberprüfung zu leicht oder Pool zu klein | Pool vergrößern, Teil A anspruchsvoller |
+   | Einschätzung und Ergebnis liegen oft auseinander (soweit die Lehrkraft das aus dem Unterricht berichtet) | Kurz-Check zu leicht oder zu wenige Fragen | Kurz-Check näher an die Selbstüberprüfung rücken (P5) |
 
 4. **Bericht** `auswertung-<name>.md`: Datengrundlage (ohne Personen), wichtigste Befunde (höchstens fünf), Tabelle der Fragen und Lernziele aus dem Skript, Änderungsvorschläge mit Prinzip und Aufwand (klein/mittel/groß), offene Fragen an die Lehrkraft („Passt das zu deinem Eindruck aus dem Unterricht?“).
 
 Die Lehrkraft entscheidet, welche Änderungen umgesetzt werden.
 
 **Nächster Schritt:** Änderungen mit `lernpaket-bauen` umsetzen (Version erhöhen, geänderte Fragen bekommen neue IDs), mit `lernpaket-pruefen` prüfen.
+
+Stand: Lernpaket-Kompass 4.0

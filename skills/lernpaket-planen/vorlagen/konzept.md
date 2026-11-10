@@ -1,6 +1,6 @@
 # Konzept: [Titel des Pakets]
 
-Ergebnis der Phase „Erfinden“ (P12). Die Form wird in dieser Reihenfolge geprüft; die erste passende gilt. Ein Spiel nur bei Form C oder D.
+Ergebnis der Phase „Erfinden“ (P12), nachdem die Lernziele stehen. Die Form wird in dieser Reihenfolge geprüft; die erste passende gilt. Ein Spiel nur bei Form C oder D.
 
 **Empfehlung von Claude** (zwei bis drei Sätze, warum diese Form und warum nicht die anderen): …
 
@@ -13,11 +13,11 @@ Ergebnis der Phase „Erfinden“ (P12). Die Form wird in dieser Reihenfolge gep
 
 ## Vorschlag 1: [Name des Gegenstands bzw. des Spiels]
 
-- **Was sehen die Lernenden?** [Werkzeug, Gerät, Plan, Dokument, Modell – so, wie es im Beruf aussieht]
+- **Was sehen die Lernenden?** [Werkzeug, Gerät, Plan, Dokument, Modell – in der Funktion wie im Beruf, im Aussehen auf das Nötige reduziert]
 - **Was bewegen sie?** [tippen, zerlegen, verlegen, einstellen, ausfüllen, umschalten …]
-- **Mockup:** [Skizze des wichtigsten Bildschirms im Chat bzw. als Datei: Gegenstand in typischem Zustand, Auftrag, Notiz, Bedienelemente]
+- **Mockup:** [Skizze des wichtigsten Bildschirms im Chat bzw. als Datei: Gegenstand in typischem Zustand, Auftrag, Notiz, Bedienelemente; der Gegenstand passt in gut 600 px Höhe]
 - **Beispielzug:** [„Du tippst `ip route` – der Server antwortet: Netzwerk nicht erreichbar.“]
-- **Durch das Paket:** Entdecken [geführte Schritte am Gegenstand] · Üben [neue Fälle / bei C: Spiel] · Nachweis [neuer Fall, ohne Hilfe]
+- **Durch das Paket:** Entdecken [geführte Schritte am Gegenstand] · Üben [neue Fälle / bei C: Spiel] · Selbstüberprüfung [neuer Fall, ohne Hilfe] · Tafelbild [was sich davon groß zeigen lässt]
 
 | Lernziel / typischer Fehler | Regel oder Reaktion des Gegenstands (bzw. Spielregel) |
 |---|---|
@@ -44,3 +44,14 @@ Ergebnis der Phase „Erfinden“ (P12). Die Form wird in dieser Reihenfolge gep
 - Gewählt: [Vorschlag, Form]
 - Begründung der Lehrkraft: …
 - Umsetzung: Simulationsmodus `PAKET.simulation` mit einem Gegenstand über alle Kapitel (A, B) · Stationen mit eigenen Szenen (A, B mit wechselnden Gegenständen) · Szenen im Entdecken und Spiel als Übung (C) · Spielmodus `PAKET.spielwelt` (D)
+- Welt und Figuren: [Thema, Kulisse, Auftraggeberin]
+
+## Kurzplan für Station 1 (für den Prototyp)
+
+Mehr braucht der Prototyp nicht; das Drehbuch für alle Stationen entsteht danach.
+
+- **Auftrag** (1–2 Sätze aus der Leitsituation): …
+- **Was tun die Lernenden, woran erkennt das Paket den Erfolg?** …
+- **Vorführung** an einem anderen Fall (2–4 Schritte, je mit Begründung): …
+- **Vorab-Frage** (zugleich Leitfrage, schwer zu erraten): …
+- **Zwei Fragen für den Kurz-Check**, mit typischem Fehler als Falschantwort: …

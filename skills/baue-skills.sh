@@ -2,9 +2,11 @@
 # Baut das Skill-Set: verteilt die gemeinsame Referenz in alle Skills und packt
 # jeden Skill als ZIP zum Hochladen in Claude: dist/skill_<name>.zip
 # Dazu der Gesamt-Skill dist/skill_lernpaket-kompass.zip (alle fünf Phasen in einem Skill).
+# Vorher wird der Stand geprüft (pruefe_stand.py): eine Versionsnummer überall, keine überholten Begriffe.
 # Aufruf (im Repo-Wurzelverzeichnis oder hier):  skills/baue-skills.sh
 set -euo pipefail
 cd "$(dirname "$0")"
+python3 pruefe_stand.py
 SKILLS=(lernpaket-planen fragenpool-erstellen lernpaket-bauen lernpaket-pruefen lernpaket-auswerten)
 MIT_PRUEFSKRIPT=(lernpaket-bauen lernpaket-pruefen)
 DIST="$(cd .. && pwd)/dist"

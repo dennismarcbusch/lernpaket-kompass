@@ -4,20 +4,27 @@
 Aufruf:
     python3 pruefe_paket.py <ordner-oder-zip> [--bericht bericht.json] [--bilder ordner] [--ohne-browser]
 
-1. Statische Prüfung (immer): Manifest im Wurzelverzeichnis, SCORM 1.2, masteryscore 80,
-   Identifier im Format "<präfix>-<name>", alle Dateien vorhanden und im Manifest, keine externen
-   Server, Größe, JavaScript-Syntax (wenn node installiert ist).
-   Interaktivität: jede Station mit Szene zum Anfassen, Vorführung, Szene ohne Scrollen
-   sichtbar, Textbudget neben der Szene.
+1. Statische Prüfung (immer): Manifest im Wurzelverzeichnis, SCORM 1.2, kein masteryscore
+   (die Selbstüberprüfung zählt nicht), Identifier im Format "<präfix>-<name>", alle Dateien
+   vorhanden und im Manifest, keine externen Server, Größe, JavaScript-Syntax (wenn node
+   installiert ist).
 2. Browser-Prüfung (wenn Python-Playwright mit Chromium installiert ist): lädt das Paket in
-   einem nachgebauten SCORM-1.2-Player, löst bei Paketen aus der Vorlage alle Stationen,
-   Übungen und den Nachweis mit der Musterlösung, prüft Datenübergabe, Wiedereinstieg,
-   Konsolenfehler, Darstellung auf schmalen Bildschirmen und genau einen Weiter-Knopf.
+   einem nachgebauten SCORM-1.2-Player auf 1366 × 768 (Bezugsgröße: Schullaptop), löst bei
+   Paketen aus der Vorlage alle Stationen, Übungen und die Selbstüberprüfung mit der
+   Musterlösung, prüft Datenübergabe (Ergebnis als Information, Status „completed“, nie
+   bestanden/nicht bestanden), Wiedereinstieg, Konsolenfehler und die Darstellung auf
+   schmalen Bildschirmen.
+   Interaktivität: jede Station mit Szene zum Anfassen, Vorführung, Textbudget neben der
+   Szene; die Szene ist auf 1366 × 768 ganz zu sehen (gemessen wird auch die Unterkante
+   gegen die Fußleiste).
+   Bedienung: je Ansicht höchstens ein hervorgehobener Knopf; „Weiter“ ist erst
+   hervorgehoben, wenn die Aufgabe erledigt ist.
    Startseite als Überblick: ohne Scrollen (1366×768, 768×1024), höchstens etwa 40 Wörter
-   Fließtext, keine Eingaben. Vorab-Fragen vor der Szene, Einschätzung nach dem Kurz-Check,
-   Abkürzung „Ich kenne mich schon aus“ markiert die richtigen Stationen als überspringbar.
-   Hat das Paket ein Tafelbild (PAKET.tafel), werden alle Szenen und Werkzeuge
-   durchgeschaltet und geprüft, dass das Tafelbild nichts an die Lernplattform schreibt.
+   Fließtext, keine Eingaben, genau ein hervorgehobener Knopf. Vorab-Fragen vor der Szene,
+   Einschätzung einmal je Lernziel nach dem Kurz-Check, Abkürzung „Ich kenne mich schon
+   aus“ markiert die richtigen Stationen als überspringbar.
+   Tafelbild (PAKET.tafel): alle Szenen und Werkzeuge werden durchgeschaltet; es schreibt
+   nichts an die Lernplattform.
    Simulationsmodus (PAKET.simulation): jeder Schritt über die Knöpfe der Lektion lösbar,
    kein Schritt schon vor dem Handeln erledigt, der Gegenstand bleibt zwischen Schritten
    und Kapiteln erhalten, nach dem Neuladen wird er genau so wiederhergestellt.
@@ -62,7 +69,10 @@ def statisch(root):
     punkt(id_ok, 'Format', f'Manifest-Identifier "{ident}" ' + ('hat das Format <präfix>-<name>.' if id_ok else 'sollte "<präfix>-<name>" lauten (Kleinbuchstaben, Ziffern, Bindestriche).'), gelb=True)
     ms = r.find('.//a:masteryscore', ns)
     msv = ms.text.strip() if ms is not None and ms.text else None
-    punkt(msv == '80', 'Datenübergabe', f'masteryscore im Manifest: {msv or "fehlt"} (Soll: 80).')
+    # Mit masteryscore setzt die Lernplattform selbst „bestanden“/„nicht bestanden“ – die Selbstüberprüfung zählt aber nicht.
+    kompass = os.path.isfile(os.path.join(root, 'js', 'engine.js'))
+    punkt(msv is None, 'Datenübergabe', 'Kein masteryscore im Manifest (die Selbstüberprüfung zählt nicht).' if msv is None
+          else f'masteryscore {msv} im Manifest: Damit setzt die Lernplattform selbst bestanden oder nicht bestanden. Entfernen (paket.py zip erledigt das).', gelb=not kompass)
     res = r.find('.//c:resource', ns)
     href = res.get('href') if res is not None else None
     punkt(bool(href) and os.path.isfile(os.path.join(root, href or '')), 'Format', f'Startdatei: {href or "fehlt"}.')
@@ -87,7 +97,7 @@ def statisch(root):
                 extern.append(f'{v}: {m.group(0)[:70]}')
     punkt(not extern, 'Datenschutz', 'Keine Verweise auf externe Server.' if not extern else 'Externe Verweise gefunden: ' + '; '.join(extern[:5]))
     alles = ''.join(open(os.path.join(root, v), encoding='utf-8', errors='ignore').read() for v in vorhanden if v.endswith(('.html', '.js')))
-    for feld, text in [('LMSInitialize', 'SCORM-Initialisierung'), ('cmi.core.score.raw', 'Punktzahl'), ('cmi.core.lesson_status', 'Bestanden/Nicht bestanden'), ('cmi.suspend_data', 'Fortschritt (Wiedereinstieg)'), ('cmi.core.student_name', 'Name aus der Lernplattform')]:
+    for feld, text in [('LMSInitialize', 'SCORM-Initialisierung'), ('cmi.core.score.raw', 'Punktzahl'), ('cmi.core.lesson_status', 'Status (abgeschlossen)'), ('cmi.suspend_data', 'Fortschritt (Wiedereinstieg)'), ('cmi.core.student_name', 'Name aus der Lernplattform')]:
         punkt(feld in alles, 'Datenübergabe', f'{text} ({feld}) ' + ('wird verwendet.' if feld in alles else 'fehlt im Code.'), gelb=feld == 'cmi.core.student_name')
     punkt('cmi.objectives' in alles, 'Datenübergabe', 'Ergebnisse je Lernziel (cmi.objectives) ' + ('werden übertragen.' if 'cmi.objectives' in alles else 'werden nicht übertragen (optional).'), gelb=True)
     punkt('cmi.interactions' in alles, 'Datenübergabe', 'Ergebnisse je Frage (cmi.interactions) ' + ('werden übertragen.' if 'cmi.interactions' in alles else 'werden nicht übertragen (optional, aber nötig für die Auswertung je Frage).'), gelb=True)
@@ -166,11 +176,11 @@ def browser(root, href, bilder):
         except Exception as e:
             punkt(False, 'Test', f'Browser-Prüfung übersprungen: Chromium startet nicht ({str(e).splitlines()[0]}).', gelb=True)
             return
-        ctx = b.new_context(viewport={'width': 1366, 'height': 900})
+        ctx = b.new_context(viewport={'width': 1366, 'height': 768})  # Bezugsgröße: Schullaptop
         ctx.add_init_script(MOCK)
         pg = ctx.new_page()
         pg.on('pageerror', lambda e: fehler.append(str(e)))
-        pg.on('console', lambda m: fehler.append(m.text) if m.type == 'error' else None)
+        pg.on('console', lambda m: fehler.append(_konsole(m)) if m.type == 'error' else None)
         pg.goto(url)
         pg.wait_for_timeout(600)
         calls = pg.evaluate('window.__scorm.calls.map(c => c[0])')
@@ -196,6 +206,15 @@ def browser(root, href, bilder):
     srv.shutdown()
 
 
+def _konsole(m):
+    """Konsolenmeldung mit Adresse der Quelle (ein fehlendes favicon.ico meldet der Browser ohne Dateinamen im Text)."""
+    try:
+        ort = (m.location or {}).get('url', '')
+    except Exception:
+        ort = ''
+    return m.text + (f' [{ort}]' if ort else '')
+
+
 def _primaer(pg):
     return pg.evaluate("[...document.querySelectorAll('button.primaer')].filter(b => b.offsetParent !== null).length")
 
@@ -210,47 +229,61 @@ def _vorlage(pg, bilder):
     punkt(not pi['fehler'], 'Inhalt', 'Inhaltsprüfung der Vorlage: keine Fehler.' if not pi['fehler'] else 'Inhaltsfehler: ' + '; '.join(pi['fehler'][:8]))
     for h in pi['hinweise'][:12]:
         punkt(False, 'Inhalt', 'Hinweis: ' + h, gelb=True)
+    kv = str(pg.evaluate('LERNPAKET.version') or '')
+    neu = bool(re.match(r'\d+', kv)) and int(re.match(r'\d+', kv).group(0)) >= 4
+    if not neu:
+        punkt(False, 'Technik', f'Das Paket nutzt eine ältere Vorlage (Engine {kv or "ohne Version"}). Dieses Skript prüft nach Kompass 4: '
+              'engine.js, tafel.js, stil.css, tafel.css und index.html aus der aktuellen Vorlage übernehmen.', gelb=True)
+    su = 'pruefen' if neu else 'nachweis'
     ver = pg.evaluate("(() => { const v = document.getElementById('version'); if (!v) return null; const r = v.getBoundingClientRect(); return {text: v.textContent.trim(), sichtbar: r.width > 0 && r.height > 0 && r.top >= 0 && r.bottom <= innerHeight}; })()")
     punkt(bool(ver and ver['text'] and ver['sichtbar']), 'Bedienung',
           f'Versionsnummer „{ver["text"]}“ steht sichtbar in der Kopfzeile.' if ver and ver['text'] and ver['sichtbar'] else 'Keine sichtbare Versionsnummer in der Kopfzeile (PAKET.version setzen).')
-    info = pg.evaluate('({st: PAKET.stationen.map(s => s.id), ue: (PAKET.uebungen||[]).map(u => u.id), a: !!(PAKET.nachweis && PAKET.nachweis.teilA)})')
+    info = pg.evaluate('({st: PAKET.stationen.map(s => s.id), ue: (PAKET.uebungen||[]).map(u => u.id), a: !!((PAKET.selbstueberpruefung || PAKET.nachweis || {}).teilA), spiel: !!PAKET.spielwelt})')
     ansichten = []
     if bilder:
         pg.screenshot(path=os.path.join(bilder, '0-start.png'), full_page=True)
-    ansichten.append(('Start', _primaer(pg)))
+    start_knoepfe = _primaer(pg)
+    ansichten.append(('Start', start_knoepfe))
     loese = """(() => { LERNPAKET.aktuelleTeile().forEach(t => {
         if (t.art === 'demo' && t.obj && t.obj.alle) t.obj.alle();
         if (t.art === 'interaktion' && t.obj && t.obj.loesen) t.obj.loesen();
         if (t.art === 'frage') { t.obj.loesungEinsetzen(); const b = t.obj.el.querySelector('button.pruefen'); if (b && !b.hidden) b.click(); }
       }); })()"""
+    weiter_vorn = "(() => { const b = document.getElementById('weiter'); return !!(b && b.classList.contains('primaer')); })()"
     ohne_demo, ohne_buehne, viel_text, buehne_tief = [], [], [], []
-    vorab_fehlt, ohne_einsch = [], []
+    angeschnitten, verdeckt = [], []
+    vorab_fehlt, ohne_einsch, einsch_zuviel = [], [], []
+    weiter_frueh, weiter_fehlt = [], []
     for i, sid in enumerate(info['st']):
         pg.evaluate(f"LERNPAKET.zeige('entdecken', {i})")
         pg.wait_for_timeout(100)
         ansichten.append((f'Station {sid}', _primaer(pg)))
         # Vorab-Frage steht vor der Szene; für die weiteren Messungen „Weiß ich nicht – zur Szene“
         vk = pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'vorab').length")
-        if pg.evaluate(f"!!PAKET.stationen[{i}].vorab") and not pg.evaluate("!!PAKET.spielwelt") and not vk:
+        if pg.evaluate(f"!!PAKET.stationen[{i}].vorab") and not info['spiel'] and not vk:
             vorab_fehlt.append(sid)
         if bilder and i == 0 and vk:
             pg.screenshot(path=os.path.join(bilder, '1-station-vorab.png'), full_page=False)
         pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'vorab').forEach(t => t.obj.zurSzene())")
         pg.wait_for_timeout(80)
+        pg.evaluate('window.scrollTo(0, 0)')
         m = pg.evaluate("""(() => {
             const teile = LERNPAKET.aktuelleTeile();
             const spiel = !!document.querySelector('.spielbuehne');
             const b = document.querySelector('.spielbuehne') || document.querySelector('.buehne');
             const r = b ? b.getBoundingClientRect() : null;
-            // sichtbarer Text außerhalb der Bühne, ohne zugeklappte Bereiche und Kurz-Check
+            const L = document.getElementById('leiste');
+            const frei = L ? Math.min(L.getBoundingClientRect().top, innerHeight) : innerHeight;   // bis hierhin ist die Szene sichtbar
+            // sichtbarer Text außerhalb der Bühne, ohne zugeklappte Bereiche, Kurz-Check und Navigation
             const st = document.querySelector('.station');
             let w = 0;
             if (st) {
               const c = st.cloneNode(true);
-              c.querySelectorAll('.buehne, details:not([open]), details.check, .steuerung, .live').forEach(x => x.remove());
+              c.querySelectorAll('.buehne, details:not([open]), details.check, .steuerung, .live, .pfad, .sim-punkte').forEach(x => x.remove());
               w = LERNPAKET.woerter(c.innerHTML);
             }
-            return {spiel: spiel, demo: spiel || teile.some(t => t.art === 'demo'), buehne: !!b, oben: r ? Math.round(r.top) : null, hoehe: r ? Math.round(r.height) : 0, woerter: w, vh: innerHeight};
+            return {spiel: spiel, demo: spiel || teile.some(t => t.art === 'demo'), buehne: !!b, oben: r ? Math.round(r.top) : null, unten: r ? Math.round(r.bottom) : null,
+                    hoehe: r ? Math.round(r.height) : 0, frei: Math.round(frei), woerter: w, vh: innerHeight};
           })()""")
         if not m['buehne']:
             ohne_buehne.append(sid)
@@ -259,25 +292,47 @@ def _vorlage(pg, bilder):
                 ohne_demo.append(sid)
             if m['oben'] is None or m['oben'] > m['vh'] * 0.6 or m['hoehe'] < (450 if m['spiel'] else 260):
                 buehne_tief.append(f"{sid} (oben {m['oben']} px, {m['hoehe']} px hoch)")
+            elif m['unten'] > m['frei'] + 2:
+                sichtbar = max(0, m['frei'] - m['oben']) / max(1, m['hoehe'])
+                text = f"{sid} ({m['unten'] - m['frei']} px unter der Fußleiste, {round(sichtbar * 100)} % sichtbar)"
+                (verdeckt if sichtbar < 0.75 and not m['spiel'] else angeschnitten).append(text)
         if m['woerter'] > 160:
             viel_text.append(f"{sid} ({m['woerter']} Wörter)")
+        ansichten.append((f'Station {sid}, Szene offen', _primaer(pg)))
+        if neu and not info['spiel'] and pg.evaluate(weiter_vorn):
+            weiter_frueh.append(sid)
         if bilder and i == 0:
-            pg.screenshot(path=os.path.join(bilder, '1-station.png'), full_page=True)
+            pg.screenshot(path=os.path.join(bilder, '1-station.png'), full_page=False)
         pg.evaluate(loese)
         pg.wait_for_timeout(80)
-        if pg.evaluate(f"(PAKET.stationen[{i}].check || []).length > 0 && (PAKET.stationen[{i}].lz || []).length > 0 && !PAKET.spielwelt"):
-            e = pg.evaluate("(() => { const s = document.querySelector('.einschaetzung .skala label:nth-child(2)'); if (!s) return false; s.click(); return true; })()")
-            if not e:
+        ansichten.append((f'Station {sid}, gelöst', _primaer(pg)))
+        if neu and not info['spiel'] and not pg.evaluate(weiter_vorn):
+            weiter_fehlt.append(sid)
+        if not info['spiel'] and pg.evaluate(f"(PAKET.stationen[{i}].check || []).length > 0"):
+            # Einschätzung einmal je Lernziel: an der letzten Station, die das Lernziel behandelt
+            soll = pg.evaluate(f"LERNPAKET.einschaetzenBei ? LERNPAKET.einschaetzenBei({i}).length : (PAKET.stationen[{i}].lz || []).length")
+            ist = pg.evaluate("(() => { const s = [...document.querySelectorAll('.einschaetzung .skala')]; s.forEach(x => { const l = x.querySelector('label:nth-child(2)'); if (l) l.click(); }); return s.length; })()")
+            if ist < soll:
                 ohne_einsch.append(sid)
+            elif ist > soll:
+                einsch_zuviel.append(sid)
     punkt(not ohne_buehne, 'Interaktivität', 'Jede Station hat eine Szene zum Anfassen.' if not ohne_buehne else 'Stationen ohne Szene zum Anfassen: ' + ', '.join(ohne_buehne))
     punkt(not ohne_demo, 'Interaktivität', 'Jede Szene hat eine Vorführung („Zeig’s mir“).' if not ohne_demo else 'Szene ohne Vorführung (demo): ' + ', '.join(ohne_demo), gelb=True)
-    punkt(not buehne_tief, 'Interaktivität', 'Die Szene steht ohne Scrollen im Blick und ist groß genug.' if not buehne_tief else 'Szene zu weit unten oder zu klein: ' + ', '.join(buehne_tief), gelb=True)
+    punkt(not buehne_tief, 'Interaktivität', 'Die Szene beginnt in der oberen Bildschirmhälfte und ist groß genug.' if not buehne_tief else 'Szene zu weit unten oder zu klein: ' + ', '.join(buehne_tief), gelb=True)
+    if verdeckt:
+        punkt(False, 'Interaktivität', 'Szene auf 1366 × 768 zu weniger als drei Vierteln sichtbar: ' + ', '.join(verdeckt) + ' – Text über der Szene kürzen oder die Szene flacher bauen.')
+    punkt(not angeschnitten and not verdeckt, 'Interaktivität', 'Die Szene ist auf 1366 × 768 ganz zu sehen (Unterkante über der Fußleiste).' if not angeschnitten and not verdeckt
+          else ('Szene auf 1366 × 768 unten angeschnitten: ' + ', '.join(angeschnitten) if angeschnitten else 'Szene auf 1366 × 768 nicht ganz zu sehen (siehe oben).'), gelb=True)
     punkt(not viel_text, 'Interaktivität', 'Textbudget eingehalten (sichtbarer Text neben der Szene).' if not viel_text else 'Viel sichtbarer Text neben der Szene: ' + ', '.join(viel_text) + ' – Ziel höchstens 160 Wörter.', gelb=True)
     punkt(not vorab_fehlt, 'Selbststeuerung', 'Vorab-Fragen erscheinen vor der Szene.' if not vorab_fehlt else 'Vorab-Frage gesetzt, aber nicht angezeigt: ' + ', '.join(vorab_fehlt))
-    punkt(not ohne_einsch, 'Selbststeuerung', 'Nach jedem Kurz-Check gibt es die Einschätzung je Lernziel (ein Klick).' if not ohne_einsch else 'Keine Einschätzung nach dem Kurz-Check: ' + ', '.join(ohne_einsch), gelb=True)
+    punkt(not ohne_einsch and not einsch_zuviel, 'Selbststeuerung', 'Die Einschätzung kommt einmal je Lernziel, nach dem Kurz-Check (ein Klick).' if not ohne_einsch and not einsch_zuviel
+          else ('Keine Einschätzung nach dem Kurz-Check: ' + ', '.join(ohne_einsch) if ohne_einsch else 'Einschätzung mehrfach je Lernziel abgefragt: ' + ', '.join(einsch_zuviel)), gelb=True)
     z = pg.evaluate('LERNPAKET.zustand()')
-    if 'ej' in z and info['st'] and not ohne_einsch and not pg.evaluate('!!PAKET.spielwelt'):
+    if 'ej' in z and info['st'] and not ohne_einsch and not info['spiel'] and pg.evaluate("PAKET.stationen.some(s => (s.check || []).length && (s.lz || []).length)"):
         punkt(bool(z['ej']), 'Selbststeuerung', 'Einschätzung wird gespeichert (für den Vergleich im Abschluss).' if z['ej'] else 'Einschätzung wird nicht gespeichert.')
+    if neu and not info['spiel']:
+        punkt(not weiter_frueh and not weiter_fehlt, 'Bedienung', '„Weiter“ ist erst hervorgehoben, wenn die Station erledigt ist.' if not weiter_frueh and not weiter_fehlt
+              else ('„Weiter“ ist schon vor der Aufgabe hervorgehoben: ' + ', '.join(weiter_frueh) if weiter_frueh else '„Weiter“ ist nach dem Lösen nicht hervorgehoben: ' + ', '.join(weiter_fehlt)))
     # Abkürzung „Ich kenne mich schon aus“: alle Vorab-Fragen richtig → Stationen überspringbar
     if pg.evaluate("LERNPAKET.alleVorab ? LERNPAKET.alleVorab().length : 0"):
         pg.evaluate("LERNPAKET.zeige('abkuerzung')")
@@ -291,36 +346,55 @@ def _vorlage(pg, bilder):
     z = pg.evaluate('LERNPAKET.zustand()')
     offen = [s for s in info['st'] if not z['st'].get(s)]
     punkt(not offen, 'Lösbarkeit', 'Alle Stationen sind mit der Musterlösung lösbar.' if not offen else 'Mit der Musterlösung nicht abschließbar: ' + ', '.join(offen))
+    ue_frueh = []
     for i, uid in enumerate(info['ue']):
         pg.evaluate(f"LERNPAKET.zeige('ueben', {i})")
         pg.wait_for_timeout(100)
         ansichten.append((f'Übung {uid}', _primaer(pg)))
+        if neu and pg.evaluate(weiter_vorn):
+            ue_frueh.append(uid)
         if bilder and i == 0:
-            pg.screenshot(path=os.path.join(bilder, '2-uebung.png'), full_page=True)
+            pg.screenshot(path=os.path.join(bilder, '2-uebung.png'), full_page=False)
         pg.evaluate(loese)
+        pg.wait_for_timeout(60)
+        ansichten.append((f'Übung {uid}, gelöst', _primaer(pg)))
     z = pg.evaluate('LERNPAKET.zustand()')
     offen = [u for u in info['ue'] if not z['ue'].get(u)]
     punkt(not offen, 'Lösbarkeit', 'Alle Übungen sind mit der Musterlösung lösbar.' if not offen else 'Mit der Musterlösung nicht lösbar: ' + ', '.join(offen))
-    # Nachweis mit Musterlösung
-    pg.evaluate("LERNPAKET.zeige('nachweis')")
-    ansichten.append(('Nachweis', _primaer(pg)))
+    if neu and info['ue']:
+        punkt(not ue_frueh, 'Bedienung', '„Weiter“ ist erst hervorgehoben, wenn die Übung gelöst ist.' if not ue_frueh else '„Weiter“ ist schon vor dem Lösen hervorgehoben: ' + ', '.join(ue_frueh))
+    # Selbstüberprüfung mit Musterlösung (zählt nicht)
+    pg.evaluate(f"LERNPAKET.zeige('{su}')")
+    ansichten.append(('Selbstüberprüfung', _primaer(pg)))
+    if bilder:
+        pg.screenshot(path=os.path.join(bilder, '3-selbstueberpruefung.png'), full_page=False)
     _klick_weiter(pg)
     if info['a']:
         if bilder:
-            pg.screenshot(path=os.path.join(bilder, '3-nachweis-a.png'), full_page=True)
+            pg.screenshot(path=os.path.join(bilder, '3-selbstueberpruefung-a.png'), full_page=True)
         pg.evaluate(loese)
         _klick_weiter(pg)
     pg.evaluate("LERNPAKET.aktuelleTeile().forEach(t => t.art === 'frage' && t.obj.loesungEinsetzen())")
     if bilder:
-        pg.screenshot(path=os.path.join(bilder, '4-nachweis-b.png'), full_page=True)
+        pg.screenshot(path=os.path.join(bilder, '4-selbstueberpruefung-b.png'), full_page=True)
     _klick_weiter(pg)
     z = pg.evaluate('LERNPAKET.zustand()')
-    punkt(z['best'] == 100, 'Lösbarkeit', f'Nachweis mit Musterlösung: {z["best"]} % (Soll: 100 %).')
+    punkt(z['best'] == 100, 'Lösbarkeit', f'Selbstüberprüfung mit Musterlösung: {z["best"]} % (Soll: 100 %).')
     v = pg.evaluate('window.__scorm.v')
-    punkt(v.get('cmi.core.lesson_status') == 'passed' and v.get('cmi.core.score.raw') == '100', 'Datenübergabe', f'Lernplattform erhält score.raw={v.get("cmi.core.score.raw")} und lesson_status={v.get("cmi.core.lesson_status")}.')
+    status = v.get('cmi.core.lesson_status')
+    punkt(status == 'completed' and v.get('cmi.core.score.raw') == '100', 'Datenübergabe',
+          f'Lernplattform erhält score.raw={v.get("cmi.core.score.raw")} (als Information) und lesson_status={status}' + (' – die Selbstüberprüfung zählt nicht.' if status == 'completed' else ' (Soll: completed – die Selbstüberprüfung zählt nicht).'))
+    gewertet = pg.evaluate("window.__scorm.calls.filter(c => c[0] === 'LMSSetValue' && /(lesson_status|objectives\\.\\d+\\.status)$/.test(c[1][0]) && /^(passed|failed)/.test(c[1][1])).map(c => c[1][0] + '=' + c[1][1])")
+    punkt(not gewertet, 'Datenübergabe', 'Das Paket meldet nie bestanden oder nicht bestanden (das entscheidet erst der Kompetenznachweis außerhalb des Pakets).' if not gewertet
+          else 'Das Paket meldet bestanden/nicht bestanden: ' + ', '.join(sorted(set(gewertet))[:4]))
     nobj = len([k for k in v if re.match(r'cmi\.objectives\.\d+\.id$', k)])
-    nint = len([k for k in v if re.match(r'cmi\.interactions\.\d+\.id$', k)])
+    kennungen = [v[k] for k in v if re.match(r'cmi\.interactions\.\d+\.id$', k)]
+    nint = len(kennungen)
     punkt(nobj > 0 and nint > 0, 'Datenübergabe', f'Übertragen: {nobj} Lernziele (objectives), {nint} Fragen und Prüfpunkte (interactions).')
+    if kennungen:
+        form = all(re.match(r'[SN]\d+_', x) for x in kennungen)
+        punkt(form, 'Datenübergabe', 'Kennungen der Antworten haben die Form S<Versuch>_<Frage-ID> (so kann auswerten.py Erstversuche trennen).' if form
+              else 'Kennungen der Antworten ohne Versuchsnummer: ' + ', '.join(kennungen[:3]), gelb=True)
     abgelehnt = pg.evaluate("window.__scorm.calls.filter(c => c[0] === 'LMSSetValue' && c[2] === 'false').map(c => c[1][0])")
     punkt(not abgelehnt, 'Datenübergabe', 'Alle SCORM-Werte wurden angenommen.' if not abgelehnt else 'Vom Player abgelehnt: ' + ', '.join(sorted(set(abgelehnt))[:6]))
     sd = len(v.get('cmi.suspend_data', ''))
@@ -328,8 +402,13 @@ def _vorlage(pg, bilder):
     if bilder:
         pg.screenshot(path=os.path.join(bilder, '5-abschluss.png'), full_page=True)
     ansichten.append(('Abschluss', _primaer(pg)))
+    if neu:
+        ab = pg.evaluate("({skalen: document.querySelectorAll('#haupt .skala').length, abgleich: document.querySelectorAll('#haupt .abgleich').length, ej: Object.keys(LERNPAKET.zustand().ej || {}).length})")
+        gut = ab['skalen'] == 0 and (ab['abgleich'] > 0 or ab['ej'] == 0)
+        punkt(gut, 'Selbststeuerung', 'Im Abschluss steht die eigene Einschätzung neben dem Ergebnis; es wird nichts ein zweites Mal abgefragt.' if gut
+              else ('Im Abschluss wird die Einschätzung noch einmal abgefragt.' if ab['skalen'] else 'Im Abschluss fehlt der Vergleich von Einschätzung und Ergebnis.'), gelb=True)
     # zweiter Versuch ohne Antworten: bestes Ergebnis muss bleiben
-    pg.evaluate("LERNPAKET.zeige('nachweis')")
+    pg.evaluate(f"LERNPAKET.zeige('{su}')")
     _klick_weiter(pg)
     if info['a']:
         _klick_weiter(pg)
@@ -337,14 +416,15 @@ def _vorlage(pg, bilder):
     _klick_weiter(pg)
     z = pg.evaluate('LERNPAKET.zustand()')
     v = pg.evaluate('window.__scorm.v')
-    punkt(z['n'] == 2 and z['best'] == 100 and v.get('cmi.core.lesson_status') == 'passed', 'Datenübergabe', 'Zweiter, schlechterer Versuch: bestes Ergebnis bleibt erhalten.')
+    punkt(z['n'] == 2 and z['best'] == 100 and v.get('cmi.core.score.raw') == '100' and v.get('cmi.core.lesson_status') == status, 'Datenübergabe', 'Zweiter, schlechterer Versuch: bestes Ergebnis bleibt erhalten.')
     # Wiedereinstieg
     pg.reload()
     pg.wait_for_timeout(500)
     z2 = pg.evaluate('LERNPAKET.zustand()')
     punkt(z2['n'] == 2 and len(z2['st']) == len(info['st']), 'Technik', 'Wiedereinstieg: Fortschritt ist nach dem Neuladen wieder da.')
-    mehrfach = [f'{n} ({k})' for n, k in ansichten if k != 1]
-    punkt(not mehrfach, 'Bedienung', 'Jede Ansicht hat genau einen hervorgehobenen Weiter-Knopf.' if not mehrfach else 'Nicht genau ein Weiter-Knopf: ' + ', '.join(mehrfach))
+    mehrfach = [f'{n} ({k})' for n, k in ansichten if k > 1]
+    punkt(not mehrfach, 'Bedienung', 'Je Ansicht ist höchstens ein Knopf hervorgehoben (der nächste sinnvolle Schritt).' if not mehrfach else 'Mehr als ein hervorgehobener Knopf: ' + ', '.join(mehrfach))
+    punkt(start_knoepfe == 1, 'Startseite', 'Die Startseite hat genau einen hervorgehobenen Knopf.' if start_knoepfe == 1 else f'Die Startseite hat {start_knoepfe} hervorgehobene Knöpfe (Soll: genau einen).')
 
 
 SIM_ABBILD = """(() => { const b = LERNPAKET.sim.box(); if (!b) return '';
@@ -368,7 +448,8 @@ def _simulation(ctx, url, bilder):
     pg.wait_for_timeout(500)
     info = pg.evaluate("PAKET.stationen.map(s => ({id: s.id, n: (s.schritte || []).length}))")
     ziel = (1, 1) if len(info) > 1 and info[1]['n'] > 1 else (len(info) - 1, 0)
-    vorher_fertig, nicht_loesbar, neu_gebaut = [], [], []
+    vorher_fertig, nicht_loesbar, neu_gebaut, zu_frueh, mehrere = [], [], [], [], []
+    neu = pg.evaluate("parseInt(LERNPAKET.version, 10) >= 4")
     wieder = None
     for i, st in enumerate(info):
         _sim_zur_lektion(pg, i)
@@ -388,11 +469,17 @@ def _simulation(ctx, url, bilder):
                 pg.evaluate("LERNPAKET.sim.box().dataset.simtest = '1'")
             if pg.evaluate(f"LERNPAKET.sim.pruefe({i}, {k})"):
                 vorher_fertig.append(name)
+            elif neu and pg.evaluate("(() => { const b = document.getElementById('weiter'); return !!(b && b.classList.contains('primaer')); })()"):
+                zu_frueh.append(name)
+            if _primaer(pg) > 1:
+                mehrere.append(name)
             knopf = pg.evaluate("""(() => { const k = [...document.querySelectorAll('.sim-schritt .steuerung button')]
                 .find(b => b.offsetParent !== null && (b.classList.contains('zeig') || b.textContent.trim() === 'Lösung zeigen'));
                 if (!k) return false; k.click(); return true; })()""")
             pg.wait_for_timeout(120)
             erledigt = pg.evaluate(f"!!LERNPAKET.zustand().sd[{json.dumps(st['id'] + '.' + str(k))}]")
+            if _primaer(pg) > 1:
+                mehrere.append(name + ' (gelöst)')
             if not (knopf and erledigt and pg.evaluate(f"LERNPAKET.sim.pruefe({i}, {k})")):
                 nicht_loesbar.append(name)
             _klick_weiter(pg)
@@ -413,6 +500,9 @@ def _simulation(ctx, url, bilder):
           else 'Schon vor dem Handeln erledigt (pruefe zu weit gefasst oder Schritt doppelt): ' + ', '.join(vorher_fertig[:6]), gelb=True)
     punkt(not neu_gebaut, 'Simulation', 'Der Gegenstand bleibt zwischen Schritten und Kapiteln erhalten.' if not neu_gebaut
           else 'Gegenstand wird neu aufgebaut (Arbeit geht scheinbar verloren) bei: ' + ', '.join(neu_gebaut[:6]))
+    if neu:
+        punkt(not zu_frueh and not mehrere, 'Simulation', '„Nächster Schritt“ ist erst hervorgehoben, wenn der Schritt erledigt ist; je Schritt höchstens ein hervorgehobener Knopf.' if not zu_frueh and not mehrere
+              else ('Schon vor dem Handeln hervorgehoben: ' + ', '.join(zu_frueh[:6]) if zu_frueh else 'Mehr als ein hervorgehobener Knopf: ' + ', '.join(mehrere[:6])))
     if wieder:
         punkt(wieder[0], 'Simulation', f'Wiedereinstieg: Nach dem Neuladen steht der Gegenstand bei {wieder[1]} wieder genau so da.' if wieder[0]
               else f'Wiedereinstieg bei {wieder[1]}: Gegenstand nach dem Neuladen anders als vorher (Position {wieder[2]}). loesen der früheren Schritte prüfen.')
@@ -455,7 +545,7 @@ def _schmal(ctx, url, bilder, vorlage):
         pg.set_viewport_size({'width': w, 'height': h})
         pg.goto(url)
         pg.wait_for_timeout(400)
-        teile = ['start', 'entdecken', 'ueben', 'nachweis', 'abschluss'] if vorlage else ['start']
+        teile = ['start', 'entdecken', 'ueben', 'nachweis', 'abschluss'] if vorlage else ['start']  # 'nachweis': älterer Name, die Engine leitet auf die Selbstüberprüfung um
         zu_breit = []
         for t in teile:
             if vorlage:
@@ -479,7 +569,7 @@ def _tafel(ctx, url, bilder):
     pg.set_viewport_size({'width': 1600, 'height': 900})  # Beamer
     fehler = []
     pg.on('pageerror', lambda e: fehler.append(str(e)))
-    pg.on('console', lambda m: fehler.append(m.text) if m.type == 'error' else None)
+    pg.on('console', lambda m: fehler.append(_konsole(m)) if m.type == 'error' else None)
     pg.goto(url)
     pg.wait_for_timeout(500)
     if not pg.evaluate('!!(window.PAKET && PAKET.tafel)'):
@@ -491,8 +581,10 @@ def _tafel(ctx, url, bilder):
         return
     schreib = "window.__scorm.calls.filter(c => c[0] === 'LMSSetValue').length"
     vor = pg.evaluate(schreib)
-    zugang = pg.locator('.kopf .tafel-knopf').count() == 1 and pg.locator('#haupt .tafel-hinweis').count() == 1
-    punkt(zugang, 'Tafelbild', 'Zugänge vorhanden: Knopf „Tafelbild“ in der Kopfzeile und Hinweis auf der Startseite.' if zugang else 'Knopf in der Kopfzeile oder Hinweis auf der Startseite fehlt.')
+    zugang = pg.locator('.kopf .tafel-knopf').count() == 1 and pg.locator('.kopf .tafel-knopf').is_visible()
+    punkt(zugang, 'Tafelbild', 'Zugang vorhanden: Knopf „Tafelbild“ in der Kopfzeile.' if zugang else 'Knopf „Tafelbild“ in der Kopfzeile fehlt.')
+    frei = pg.locator('#haupt .tafel-hinweis').count() == 0
+    punkt(frei, 'Startseite', 'Die Startseite bleibt ohne eigenen Hinweis aufs Tafelbild (es gehört zum Input der Lehrkraft).' if frei else 'Hinweis aufs Tafelbild auf der Startseite – seit Kompass 4 entfällt er (aktuelle tafel.js und engine.js übernehmen).', gelb=True)
     pg.evaluate('TAFEL.oeffnen({})')
     pg.wait_for_timeout(200)
     n = pg.evaluate('TAFEL.zustand().anzahl')
@@ -512,8 +604,8 @@ def _tafel(ctx, url, bilder):
         if pg.evaluate('document.documentElement.scrollWidth') > 1601:
             breit.append(str(i + 1))
     punkt(not leer, 'Tafelbild', f'{n} Szenen; alle zeichnen etwas, alle Werkzeuge einmal ausgelöst.' if not leer else 'Szenen ohne Inhalt: ' + ', '.join(leer))
-    if n > 8:
-        punkt(False, 'Tafelbild', f'{n} Szenen – für etwa 20 Minuten sind höchstens 6–8 sinnvoll.', gelb=True)
+    if n > 4:
+        punkt(False, 'Tafelbild', f'{n} Szenen – das Tafelbild ersetzt nur den Mittelteil des Inputs (Erklären und Beispiel): zwei bis vier Szenen genügen.', gelb=True)
     pg.evaluate('TAFEL.szene(0)')
     pg.locator('.tafel').focus()
     pg.keyboard.press('ArrowRight')

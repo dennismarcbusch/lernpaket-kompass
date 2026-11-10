@@ -5,7 +5,8 @@
 
 Erzeugt <zielordner>/lernpaket-kompass/ mit
   SKILL.md                 aus skills/_gesamt/SKILL.md (von Hand gepflegt)
-  phasen/1-planen.md …     die SKILL.md der Einzel-Skills ohne YAML-Kopf, Skill-Namen als Phasen
+  phasen/1-planen.md …     die SKILL.md der Einzel-Skills ohne YAML-Kopf, Skill-Namen als Phasen;
+                           der Absatz „Rückfragen zum Anklicken“ steht nur einmal in der SKILL.md des Gesamt-Skills
   referenz/                gemeinsame Referenz aus skills/_gemeinsam/
   vorlagen/, vorlage/, vorlagen-lehrkraft/, scripts/, beispiele/   Dateien der Einzel-Skills (ohne Überschneidungen)
 Wird von skills/baue-skills.sh aufgerufen; das Ergebnis wird nicht eingecheckt.
@@ -27,6 +28,9 @@ ORDNER = ['vorlagen', 'vorlage', 'vorlagen-lehrkraft', 'scripts', 'beispiele']  
 def phase_text(skill):
     t = open(os.path.join(HIER, skill, 'SKILL.md'), encoding='utf-8').read()
     t = re.sub(r'\A---\n.*?\n---\n+', '', t, flags=re.S)
+    t, n = re.subn(r'\*\*Rückfragen zum Anklicken:\*\*[^\n]*\n\n', '', t)  # steht im Gesamt-Skill unter „Immer gilt“
+    if n != 1:
+        sys.exit(f'FEHLER: Absatz „Rückfragen zum Anklicken“ in {skill}/SKILL.md nicht genau einmal gefunden')
     t = re.sub(r'`<skill>` steht für den Ordner, in dem diese SKILL\.md liegt\.',
                '`<skill>` steht für den Ordner des Skills lernpaket-kompass (dort liegt die SKILL.md; `scripts/`, `vorlage/` usw. liegen direkt darin).', t)
     t = t.replace('zuerst `lernpaket-planen` bzw. `fragenpool-erstellen` zu nutzen', 'zuerst die Phasen „Planen“ bzw. „Fragen“ zu durchlaufen')

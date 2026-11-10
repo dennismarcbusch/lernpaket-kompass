@@ -4,19 +4,24 @@ Diese Anleitung richtet sich an Kolleginnen und Kollegen, die ein Lernpaket für
 
 ## Worum es geht
 
-Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 14 Prinzipien, eine feste Paketstruktur und eine Checkliste. Der Skill **`lernpaket-kompass`** ist eine Arbeitsanweisung für die KI Claude, die genau diesen Leitfaden umsetzt und dich in fünf Schritten durch dein Lernpaket führt. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt die richtigen Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
+Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 13 Prinzipien, von denen sieben Pflicht sind, eine feste Paketstruktur und eine Checkliste. Der Skill **`lernpaket-kompass`** ist eine Arbeitsanweisung für die KI Claude, die genau diesen Leitfaden umsetzt und dich Schritt für Schritt durch dein Lernpaket führt. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt wenige Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
+
+Gebaut wird früh: Schon nach dem Konzept bekommst du eine erste Station zum Ausprobieren. Erst wenn die überzeugt, entsteht der Rest.
 
 | Schritt | Du bringst ein | Du bekommst |
 |---|---|---|
-| 1 Planen | Thema, Klasse, typische Schülerfehler, Wahl der Simulation | Steckbrief, Konzept, Lernziele, Drehbuch |
-| 2 Fragen | Prüfung der Fragen | Fragenpool mit Feedback |
-| 3 Bauen | Rückmeldung zum Prototyp | ZIP-Datei für die Lernplattform |
-| 4 Prüfen | Paket | Prüfbericht mit Ampel |
-| 5 Auswerten | Bericht aus der Lernplattform (ohne Namen) | Auswertung und Änderungsvorschläge |
+| 1 Planen | Thema, Klasse, drei typische Schülerfehler, Wahl der Simulation | Steckbrief, Lernziele, Konzept |
+| 2 Prototyp | Rückmeldung nach dem Ausprobieren | eine Station mit zwei Fragen |
+| 3 Drehbuch und Fragen | weitere typische Fehler, Prüfung der Fragen | Drehbuch, Fragenpool mit Feedback |
+| 4 Ausbau | – | ZIP-Datei für die Lernplattform, mit Tafelbild |
+| 5 Prüfen und erproben | Review, Kurztest mit drei bis fünf Schülern | Prüfbericht mit Ampel |
+| 6 Auswerten | Bericht aus der Lernplattform (ohne Namen) | Auswertung und Änderungsvorschläge |
 
 Am Ende jedes Schritts schlägt Claude den nächsten vor; ein „Ja, weiter“ genügt. Du kannst aber auch mitten einsteigen, z. B. nur ein vorhandenes Paket prüfen lassen.
 
-**Wichtig:** Die KI kann fachliche Fehler machen. Jede Musterlösung und jede Frage prüfst du selbst. Schülerdaten gibst du nur ohne Namen weiter. Lernziele und Bewertung entscheidest du.
+**Wichtig:** Die KI kann fachliche Fehler machen. Jede Musterlösung und jede Frage prüfst du selbst. Schülerdaten gibst du nur ohne Namen weiter. Die Lernziele entscheidest du.
+
+**Selbstüberprüfung statt Nachweis:** Jedes Paket endet mit einer Selbstüberprüfung. Sie zählt nicht, die Schüler können sie beliebig oft wiederholen, und ab 80 % sagt das Paket „das Thema sitzt“. Ob jemand ein Thema nachweislich beherrscht, entscheidet erst der Kompetenznachweis außerhalb des Pakets, z. B. beaufsichtigt in der Lernplattform.
 
 ## Einrichten (einmalig, etwa 10 Minuten)
 
@@ -58,62 +63,64 @@ Du schreibst in normaler Sprache. Wenn du „Lernpaket-Kompass“ dazuschreibst,
 
 > Ich möchte ein Lernpaket planen: Dreisatz für die Berufsintegrationsklasse, etwa 90 Minuten. Nutze den Lernpaket-Kompass.
 
-Claude stellt dir in mehreren Runden Fragen: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Welche Situation aus Beruf oder Alltag passt? Mit welchen Dokumenten, Programmen oder Geräten arbeiten sie dort? Dann kommt die **kreative Phase**: Claude schlägt dir eine **Simulation** vor – einen Arbeitsgegenstand aus dem Beruf, der das ganze Paket trägt, zum Beispiel ein nachgebautes Registerportal, eine Buchungsmaske oder ein Gerät, das sich zerlegen lässt. Bei abstrakten Inhalten wird es eine interaktive Illustration. Zu jedem Vorschlag steht, warum die Lernplattform das allein nicht könnte. Ein Spiel schlägt Claude vor, wenn es zum Üben passt oder du es dir ausdrücklich wünschst; dann lernen die Schüler die Grundlagen im Spiel selbst, wie in SQL Island. In jeder Station bewegen die Schüler etwas, zum Beispiel ein Formular ausfüllen, ein Dokument prüfen oder ein Kundengespräch führen. **Nimm dir für die typischen Fehler Zeit** – daraus entstehen gute Falschantworten und gutes Feedback.
+Claude stellt dir wenige Fragen, höchstens zwei Runden: Was können die Schüler bisher nicht? Welche Fehler machen sie typischerweise? Mit welchen Dokumenten, Programmen oder Geräten arbeiten Fachleute bei diesem Thema? Für alles andere setzt Claude den üblichen Standard ein und zeigt ihn dir im Steckbrief; ändere, was nicht passt.
 
-Danach schlägt Claude Lernziele vor („Ich kann …“) und legt fest, wie das Können im Nachweis geprüft wird. Korrigiere, was nicht passt. Am Ende bekommst du Steckbrief, Konzept, Lernziel-Nachweis-Tabelle und Drehbuch.
+Dann schlägt Claude **Lernziele** vor („Ich kann …“) und hält fest, woran man das Können am Ende erkennt. Korrigiere, was nicht passt.
 
-### Schritt 2: Fragen
+Erst danach kommt die **kreative Phase**: Claude schlägt dir eine **Simulation** vor – einen Arbeitsgegenstand aus dem Beruf, der das ganze Paket trägt, zum Beispiel ein nachgebautes Registerportal, eine Buchungsmaske oder ein Gerät, das sich zerlegen lässt. Bei abstrakten Inhalten wird es eine interaktive Illustration. Zu jedem Vorschlag siehst du eine Skizze des Bildschirms und warum die Lernplattform das allein nicht könnte. Ein Spiel schlägt Claude vor, wenn es zum Üben passt oder du es dir ausdrücklich wünschst; dann lernen die Schüler die Grundlagen im Spiel selbst, wie in SQL Island.
 
-> Ja, weiter: Erstelle jetzt den Fragenpool zu den Lernzielen aus dem Drehbuch.
+Am Ende hast du Steckbrief, Lernziel-Tabelle und Konzept.
 
-Du bekommst die Fragen zusätzlich als Tabelle. **Geh jede Frage durch**: Stimmt die richtige Antwort? Sind die Falschantworten typische Fehler deiner Schüler? Ist das Feedback verständlich? Schreib Änderungen einfach hin („Frage F7: Option c ist zu leicht zu erkennen“).
+### Schritt 2: Prototyp
 
-### Schritt 3: Prototyp und Ausbau
+> Bau den Prototyp.
 
-> Bau einen Prototyp mit Station 1.
-
-Claude baut eine erste Station als Szene (bei einer durchgehenden Simulation: Kapitel 1 mit allen Schritten am Gegenstand; bei einem Spiel: Level 1, spielbar) in der Welt deines Pakets (eigene Farben, Kulisse, Figuren) und gibt dir eine ZIP-Datei. Mit „Zeig’s mir“ führt das Paket das Lösungsbeispiel in der Szene vor. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
+Claude baut eine erste Station als Szene (bei einer durchgehenden Simulation: Kapitel 1 mit allen Schritten am Gegenstand; bei einem Spiel: Level 1, spielbar) in der Welt deines Pakets und gibt dir eine ZIP-Datei. Mit „Zeig’s mir“ führt das Paket das Lösungsbeispiel in der Szene vor. **So probierst du sie aus:** ZIP herunterladen, entpacken (Rechtsklick → „Alle extrahieren“), im entpackten Ordner `index.html` doppelklicken. Das Paket öffnet sich im Browser. Ein roter Kasten „Hinweis für Autor:innen“ zeigt im Prototyp, was noch fehlt; das ist normal.
 
 Gib Rückmeldung wie einer Kollegin:
 
 > Der Text in Station 1 ist zu lang. Das Beispiel sollte mit Euro statt Kilogramm rechnen. Auf dem Tablet ist der Knopf zu klein.
 
-Wenn der Prototyp passt:
+Trägt die Idee nicht, sag es jetzt: Ein neues Konzept kostet an dieser Stelle eine Stunde, später Tage.
+
+### Schritt 3: Drehbuch und Fragen
+
+> Der Prototyp passt. Schreib jetzt das Drehbuch.
+
+Jetzt fragt Claude nach allen typischen Fehlern deiner Schüler. **Nimm dir dafür Zeit** – daraus entstehen gute Falschantworten und gutes Feedback. Du bekommst das Drehbuch für alle Stationen, danach den Fragenpool, zusätzlich als Tabelle. **Geh jede Frage durch**: Stimmt die richtige Antwort? Sind die Falschantworten typische Fehler deiner Schüler? Ist das Feedback verständlich? Schreib Änderungen einfach hin („Frage F7: Option c ist zu leicht zu erkennen“).
+
+### Schritt 4: Ausbau
 
 > Bau jetzt das ganze Paket.
 
-Claude testet das Paket automatisch (alle Aufgaben mit der Musterlösung lösbar, Datenübergabe, Tablet-Ansicht) und gibt dir das fertige ZIP.
+Claude testet das Paket automatisch (alle Aufgaben mit der Musterlösung lösbar, Szene ganz im Bild, Datenübergabe, Tablet-Ansicht) und gibt dir das fertige ZIP.
 
-### Optional: Input mit Tafelbild
+### Tafelbild für deinen Input
 
-Lässt sich dein Thema gut gemeinsam vorführen (eine Simulation, ein Ablauf, ein Vergleich), kannst du zum Paket einen **freiwilligen Input** von etwa 20 Minuten anbieten. Sag das schon beim Planen:
+Zu jedem Paket gehören zwei bis vier **Tafelbild-Szenen**: dieselben Bilder wie im Paket, aber groß, ohne erklärenden Text und Schritt für Schritt. Sie sind ein Baustein für deinen Input. Der läuft auf deinen Folien; das Tafelbild kann den **Mittelteil** ersetzen, also Erklären und Beispiel. Einstieg, Üben und Sicherung bleiben auf den Folien. Ob du an dieser Stelle die Folie oder das Tafelbild nimmst, entscheidest du.
 
-> Ich möchte zum Paket auch einen freiwilligen Input mit Tafelbild anbieten.
+**So startest du das Tafelbild:** in den Folien einen Link auf `index.html#tafel` im entpackten Paketordner setzen (oder im Paket oben auf **Tafelbild** klicken und mit **E** die Erklärungen ausblenden). **F** schaltet auf Vollbild, die Pfeiltasten oder ein Presenter wechseln die Szenen, **Esc** führt zurück. Die Schüler finden dasselbe Tafelbild im Paket, dort mit Erklärungen. Es speichert nichts.
 
-Claude plant dann im Drehbuch ein paar Szenen und baut sie nach den Stationen als **Tafelbild** ins Paket: groß, ohne erklärenden Text, Schritt für Schritt. Du erklärst mündlich. Dazu bekommst du einen **Ablaufplan** mit Impulsfragen und erwarteten Schülerantworten.
+Einen eigenen Ablaufplan gibt es nicht mehr: Der Ablauf deines Inputs steht in den Notizen deiner Folien. Dafür bekommst du von Claude die Datei `tafelbild-notizen.md` mit allem, was du dort für den Mittelteil eintragen kannst: ab wo das Tafelbild übernimmt, Klicks und Tasten je Szene, eine Vorhersage-Frage an die Klasse, die erwartete Fehlvorstellung, die Kernaussage und der Rückweg zur Folie.
 
-**So startest du den Input:** Den entpackten Paketordner öffnen und in der Adresszeile des Browsers hinter `index.html` den Zusatz `#tafel` anhängen (oder im Paket oben auf **Tafelbild** klicken und mit **E** die Erklärungen ausblenden). **F** schaltet auf Vollbild, die Pfeiltasten oder ein Presenter wechseln die Szenen. Die Schüler finden dasselbe Tafelbild im Paket, dort mit Erklärungen. Das Tafelbild speichert nichts und zählt nicht für die Bewertung.
-
-Nicht jedes Paket braucht einen Input – ohne Tafelbild funktioniert alles wie gewohnt.
-
-### Schritt 4: Prüfen
+### Schritt 5: Prüfen und erproben
 
 > Prüfe das Paket.
 
 Du bekommst einen Prüfbericht mit Ampel und den drei wichtigsten Änderungen. Danach:
 
 1. Eine zweite Lehrkraft schaut das Paket mit dem Prüfbericht an (Review).
-2. Drei bis fünf Schüler probieren es aus. Beobachte, wo sie hängen bleiben.
+2. **Drei bis fünf Schüler probieren es aus** – das gehört zu jedem Paket. Der Beobachtungsbogen (`erprobung.md`) hilft: Wo bleiben sie hängen, was überspringen sie, was suchen sie? Ohne Namen notieren.
 3. Änderungen gibst du wieder an Claude („Ändere Station 2 so, dass …“).
 
-### Schritt 5: In die ByCS-Lernplattform hochladen
+### In die ByCS-Lernplattform hochladen
 
 1. Im Kurs die Bearbeitung einschalten, **Aktivität hinzufügen → Lernpaket** wählen.
 2. Die ZIP-Datei hochladen (nicht entpacken).
-3. Empfohlene Einstellungen: Bewertungsmethode **„Höchste Bewertung“**, Anzahl der Versuche **unbegrenzt**, Anzeige **in neuem Fenster** (oder mindestens 1000 Pixel breit).
-4. Einmal mit einem Schülertestkonto durchspielen: Kommt die Punktzahl in der Bewertungsübersicht an?
+3. Empfohlene Einstellungen: Anzahl der Versuche **unbegrenzt**, Bewertungsmethode **„Höchste Bewertung“**, Anzeige **in neuem Fenster** (oder mindestens 1000 Pixel breit). Nutzt du den Aktivitätsabschluss, binde ihn an den Status **„Abgeschlossen“**, nicht an „Bestanden“: Das Paket meldet nie bestanden oder nicht bestanden.
+4. Einmal mit einem Schülertestkonto durchspielen: Kommen Punktzahl und „abgeschlossen“ an?
 
-Bestanden ist ein Paket ab 80 %. Der Nachweis ist keine Prüfung im rechtlichen Sinne; die Schüler können ihn beliebig oft wiederholen, das beste Ergebnis zählt.
+Die Punktzahl der Selbstüberprüfung ist als Information gedacht, für die Schüler und für dich. Sie ist keine Note.
 
 ### Schritt 6: Nach dem Einsatz auswerten
 
@@ -122,14 +129,14 @@ Bestanden ist ein Paket ab 80 %. Der Nachweis ist keine Prüfung im rechtlichen 
 
 > Werte diesen Export mit dem Lernpaket-Kompass aus. Das Paket ist im Projekt.
 
-Du siehst, welche Fragen zu schwer oder zu leicht sind, bei welchem Lernziel die Klasse hängt und welche Falschantwort besonders oft gewählt wurde. Über die Änderungen entscheidest du; Claude setzt sie im Schritt Bauen um.
+Du siehst, welche Fragen im ersten Versuch zu schwer oder zu leicht sind, bei welchem Lernziel die Klasse hängt und welche Falschantwort besonders oft gewählt wurde. Über die Änderungen entscheidest du; Claude setzt sie im Schritt Bauen um.
 
 ## Was in deiner Verantwortung bleibt
 
 - **Fachliche Richtigkeit** aller Inhalte, Musterlösungen und Fragen.
 - **Datenschutz:** keine Schülernamen an die KI; Exporte ohne Namen.
-- **Entscheidungen** über Lernziele, Bewertung und Einsatz im Unterricht.
-- **Review und Schülertest** vor dem ersten Einsatz.
+- **Entscheidungen** über Lernziele und Einsatz im Unterricht.
+- **Review und Kurztest mit drei bis fünf Schülern** vor dem ersten Einsatz.
 
 ## Häufige Probleme
 
@@ -138,12 +145,14 @@ Du siehst, welche Fragen zu schwer oder zu leicht sind, bei welchem Lernziel die
 | Claude nutzt den Skill nicht | „Lernpaket-Kompass“ in die Nachricht schreiben. Prüfen, ob er unter *Customize → Skills* eingeschaltet ist. |
 | Hochladen des Skills klappt nicht | Die ZIP-Datei unverändert hochladen (nicht entpacken, nicht umbenennen). Bei Team-Konten kann das Hochladen gesperrt sein – die Verwaltung fragen. |
 | Roter Kasten „Hinweis für Autor:innen“ im Paket | Im Prototyp normal. Im fertigen Paket Claude bitten: „Behebe die Hinweise im roten Kasten.“ |
-| Claude schreibt, der Browser-Test fehle | Das Paket einmal selbst vollständig durchspielen, inklusive Nachweis. |
+| Claude schreibt, der Browser-Test fehle | Das Paket einmal selbst vollständig durchspielen, inklusive Selbstüberprüfung. |
 | Das Paket zeigt in der Lernplattform eine leere Seite | Anzeige auf „Neues Fenster“ stellen; prüfen, ob die ZIP-Datei unverändert hochgeladen wurde. |
-| Die Punktzahl kommt nicht an | Bewertungsmethode „Höchste Bewertung“ prüfen; den Nachweis bis zum Ende abgeben (Knopf „Abgeben“). |
+| Die Punktzahl kommt nicht an | Bewertungsmethode „Höchste Bewertung“ prüfen; die Selbstüberprüfung bis zum Ende abgeben (Knopf „Abgeben“). |
+| Die Aktivität wird nie als erledigt angezeigt | Der Aktivitätsabschluss wartet vermutlich auf „Bestanden“. Auf den Status „Abgeschlossen“ umstellen. |
+| Ein älteres Paket zeigt noch „Nachweis“ und „bestanden“ | Es stammt aus einer Vorlage vor Kompass 4.0. Claude bitten: „Heb das Paket auf die aktuelle Vorlage.“ |
 
 ## Ohne Claude oder mit anderen Werkzeugen
 
-Das Format der Skills (Ordner mit einer Datei `SKILL.md`) ist offen; auch andere KI-Werkzeuge können solche Skills lesen. Planen und Fragen erstellen klappt notfalls in jedem Chatbot: Lade dazu `prinzipien.md` und die Vorlagen aus dem Skill-Ordner hoch und bitte darum, danach zu arbeiten. Für Bauen und Prüfen braucht das Werkzeug die Möglichkeit, Programme auszuführen.
+Das Format der Skills (Ordner mit einer Datei `SKILL.md`) ist offen; auch andere KI-Werkzeuge können solche Skills lesen. Planen und Fragen erstellen klappt notfalls in jedem Chatbot: Lade dazu `prinzipien.md` (zwei Seiten) und die Vorlagen aus dem Skill-Ordner hoch und bitte darum, danach zu arbeiten. Für Bauen und Prüfen braucht das Werkzeug die Möglichkeit, Programme auszuführen.
 
 **Für Fortgeschrittene (Claude Code):** `skills/baue-skills.sh` ausführen und dann entweder den Gesamt-Skill `dist/build/lernpaket-kompass/` oder die fünf Einzel-Skill-Ordner aus `skills/` nach `~/.claude/skills/` kopieren (bzw. im Repository unter `.claude/skills/` ablegen).

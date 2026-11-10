@@ -1,11 +1,11 @@
 # Format für Fragen und Paketinhalt (Kompass-Vorlage 2)
 
-Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`. Die Engine (`js/engine.js`) setzt daraus Start, Entdecken, Üben, Nachweis und Abschluss zusammen und erfüllt dabei die technischen Muss-Punkte des Leitfadens automatisch. Die Beispieldatei in der Vorlage („Bits & Bytes“) zeigt jedes Feld im Einsatz.
+Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`. Die Engine (`js/engine.js`) setzt daraus Start, Entdecken, Üben, Selbstüberprüfung und Abschluss zusammen und erfüllt dabei die technischen Punkte des Leitfadens automatisch. Die Beispieldatei in der Vorlage („Bits & Bytes“) zeigt jedes Feld im Einsatz.
 
 ## Frage
 
 ```js
-{ id: 'F7', lz: 'LZ2', einsatz: ['check', 'nachweis'], typ: 'mc',
+{ id: 'F7', lz: 'LZ2', einsatz: ['check', 'selbstueberpruefung'], typ: 'mc',
   frage: 'Wie lautet <b>100</b> als 8-Bit-Binärzahl?',
   optionen: [
     { text: '<code>01100100</code>', richtig: true },
@@ -17,9 +17,9 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 
 | Feld | Pflicht | Bedeutung |
 |---|---|---|
-| `id` | ja | eindeutig im Paket, z. B. `F7`. Wird als `N<Versuch>_F7` an die Lernplattform gemeldet und in der Auswertung genutzt. Nach dem ersten Einsatz nicht mehr umbenennen. |
+| `id` | ja | eindeutig im Paket, z. B. `F7`. Wird als `S<Versuch>_F7` an die Lernplattform gemeldet und in der Auswertung genutzt. Nach dem ersten Einsatz nicht mehr umbenennen. |
 | `lz` | ja | Lernziel, z. B. `LZ2` |
-| `einsatz` | ja | Liste aus `check` (Kurz-Check), `nachweis` (Pool für Teil B), `uebung`, `vorab` (Vorab-Frage einer Station; früher `vorwissen`) |
+| `einsatz` | ja | Liste aus `check` (Kurz-Check), `selbstueberpruefung` (Pool für Teil B; älterer Name `nachweis` wird weiter gelesen), `uebung`, `vorab` (Vorab-Frage einer Station; früher `vorwissen`) |
 | `typ` | ja | `mc`, `zuordnen`, `zahl`, `text`, `hotspot` (siehe unten) |
 | `frage` | ja | Fragetext, HTML erlaubt |
 | `erklaerung` | ja | Warum die richtige Antwort richtig ist (Feedback, P6) |
@@ -41,7 +41,7 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 | `id` | `<präfix>-<name>` (Präfix für Projekt oder Fach, z. B. `ping-`), gleich dem Identifier im Manifest |
 | `titel`, `untertitel`, `dauer` | Anzeige |
 | `version` | Pflicht, Form `'1.0'`. Steht klein in der Kopfzeile („v1.0“), in der Fußzeile und auf Ergebnis-PDF und Merkblatt; `paket.py zip` überträgt sie ins Manifest. Bei jeder Änderung erhöhen: Korrektur 1.0 → 1.1, neue Inhalte 2.0. |
-| `bestehen` | 80 (Leitfaden) |
+| `bereit` | 80 (Leitfaden): Ab so viel Prozent in der Selbstüberprüfung „sitzt das Thema“. Die Selbstüberprüfung zählt nicht; begründet abweichbar. Älterer Name `bestehen` wird weiter gelesen |
 | `welt` | Pflicht: `{thema, kulisse, symbol, farbe}` – eigene Welt des Pakets. `thema`: `wirtschaft`, `technik`, `sprache`, `natur`, `gesundheit`, `gestaltung` (setzt Farben und Standard-Kulisse); `kulisse`: `buero`, `lager`, `werkstatt`, `serverraum`, `laden`, `stadt`, `natur`, `klasse`; `symbol`: Emoji im Kopf; `farbe`: Akzentfarbe (Hex), nur wenn das Thema nicht passt |
 | `figur` | `{name, rolle, aussehen}` der Story-Figur. `aussehen`: `{haut: 0–5, haare: 'schwarz'·'dunkelbraun'·'braun'·'rot'·'blond'·'grau'·'weiss' oder Hex, frisur: 'kurz'·'lang'·'zopf'·'dutt'·'locken'·'glatze'·'kopftuch', tuch (Farbe), kleidung (Farbe), krawatte (Farbe), brille, bart, ausdruck}` |
 | `figuren` | optional weitere Personen: `{schluessel: {name, rolle, aussehen}}`; in Stationen über `figur: 'schluessel'` als Auftraggeber, in Szenen über `kit.szene(…).person('schluessel')` |
@@ -52,12 +52,12 @@ Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`
 | `lernziele` | `[{id: 'LZ1', kurz, text: 'Ich kann …'}]` – drei bis acht. `kurz` (Pflicht, höchstens vier Wörter) steht als Etikett im Lernpfad der Startseite, `text` an jeder Station und im Abschluss |
 | `vorwissen` | veraltet: Liste von Fragen-IDs. Wird nach Lernziel den Stationen zugeordnet, wenn diese kein `vorab` haben. Neu: `vorab` an der Station |
 | `glossar` | `[{begriff, erklaerung, vorab}]` – alle Fachbegriffe, unter jeder Station und Übung aufklappbar. `vorab: 'S1'` stellt den Begriff an dieser Station als „Neu hier“ neben der Szene vor (Vortraining); `vorab: true` bedeutet Station 1 |
-| `stationen` | `[{id, titel, lz: [...], figur, mission, auftrag, leitfrage, inhalt, interaktion (Pflicht), selbsterklaerung: {schritt, frage}, steckbrief, vertiefung, mitdenken: {auftrag, muster}, beruf, check: [Fragen-IDs], vorab: Fragen-ID}]`. `vorab` ist die Vorab-Frage am Stationsanfang („Was vermutest du?“, zählt nicht): schwer zu erraten (Zahl, Text, Zuordnen, Mehrfachauswahl), nicht zugleich im Kurz-Check, möglichst nicht im Nachweis. Richtig beantwortet, darf die Station übersprungen werden; alle Vorab-Fragen zusammen bilden die Abkürzung „Ich kenne mich schon aus“. `vorab: false` schaltet die Zuordnung aus `vorwissen` ab. `inhalt` steht als „Kurz erklärt“ in der Notiz neben der Szene (höchstens etwa 40 Wörter). Ohne Szene nur mit `ohneInteraktion: 'Begründung'`; dann wird `beispiel: {titel, aufgabe, schritte: [{tun, warum}]}` als Text gezeigt. |
+| `stationen` | `[{id, titel, lz: [...], figur, mission, auftrag, inhalt, interaktion (Pflicht), selbsterklaerung: {schritt, frage}, steckbrief, vertiefung, mitdenken: {auftrag, muster}, beruf, check: [Fragen-IDs], vorab: Fragen-ID}]`. `vorab` ist die Vorab-Frage am Stationsanfang („Was vermutest du?“, zählt nicht) und zugleich die **Leitfrage**: Sie bleibt über der Szene stehen, und der Kurz-Check löst sie als erste Frage auf. Sie zielt auf den Kern der Station, ist schwer zu erraten (Zahl, Text, Zuordnen, Mehrfachauswahl) und steht nicht zusätzlich in `check`. Richtig beantwortet, darf die Station übersprungen werden; alle Vorab-Fragen zusammen bilden die Abkürzung „Ich kenne mich schon aus“. Ein eigenes Feld `leitfrage` nur an Stationen ohne Vorab-Frage. `check`: 2–3 Fragen (ohne Vorab-Frage 2–4). `vorab: false` schaltet die Zuordnung aus `vorwissen` ab. `inhalt` steht als „Kurz erklärt“ in der Notiz neben der Szene (höchstens etwa 40 Wörter). Ohne Szene nur mit `ohneInteraktion: 'Begründung'`; dann wird `beispiel: {titel, aufgabe, schritte: [{tun, warum}]}` als Text gezeigt. |
 | `uebungen` | `[{id, titel, lz, figur, auftrag, interaktion (wo möglich) oder frage (ID), tipps: [Denkanstoß, Teillösung, Lösung], mitdenken: {auftrag, muster}, reflexion: {frage, muster}, steckbrief}]` |
-| `nachweis` | `{dauer, gewichtA (Prozent, Standard 50), einleitung, teilA: {titel, figur, auftrag, inhalt, interaktion}, teilB: {proLZ: 2}}` |
+| `selbstueberpruefung` | `{dauer, gewichtA (Prozent, Standard 50), einleitung, danach, teilA: {titel, figur, auftrag, inhalt, interaktion}, teilB: {proLZ: 2}}`. Zählt nicht, beliebig oft wiederholbar. `danach` (optional): ein Satz, was folgt, wenn das Thema sitzt, z. B. der Kompetenznachweis in der Lernplattform. Älterer Name `nachweis` wird weiter gelesen |
 | `merkblatt` | `[{lz, titel, zeilen: [{text mit ___, loesung}], fehler, beispiel, schema}]` |
 | `selbsttest` | fünf Fragen-IDs für die Rückseite des Merkblatts |
-| `tafel` | optional: Tafelbild für einen freiwilligen Lehrer-Input (siehe „Tafelbild“ unten). Ohne dieses Feld gibt es kein Tafelbild. |
+| `tafel` | Tafelbild: zwei bis vier Szenen für den Mittelteil des Inputs (siehe „Tafelbild“ unten). Gehört zu jedem Paket (Soll); ohne dieses Feld meldet die Inhaltsprüfung einen Hinweis. |
 | `fragen` | Fragenpool (siehe oben) |
 
 ## Zum Mitdenken anregen (generatives Lernen)
@@ -71,7 +71,7 @@ Die Vorlage nutzt keinen Ton. Wer Ton oder Video einbaut, liefert immer den Text
 
 ## Interaktionen (Szenen zum Anfassen)
 
-Jede Station ist eine Szene (Leitfaden P14). Die Szene steht groß in der Mitte (die „Bühne“), daneben eine schmale Notiz mit „Kurz erklärt“, Live-Erklärungen und Steckbrief. Szenen sind Funktionen in `inhalt.js`:
+Jede Station ist eine Szene (Leitfaden P12). Die Szene steht groß in der Mitte (die „Bühne“), daneben eine schmale Notiz mit „Kurz erklärt“, Live-Erklärungen und Steckbrief. Szenen sind Funktionen in `inhalt.js`:
 
 ```js
 interaktion: function (box, api) {
@@ -87,7 +87,7 @@ interaktion: function (box, api) {
     ],
     zuruecksetzen: function () { /* nach der Vorführung: Szene in den Aufgabenzustand */ },
     loesen: function () { /* setzt die Musterlösung ein – Pflicht, für den automatischen Test */ },
-    auswerten: function () { /* nur Nachweis Teil A: [{lz: 'LZ1', text: 'Prüfpunkt', ok: true}] */ }
+    auswerten: function () { /* nur Selbstüberprüfung Teil A: [{lz: 'LZ1', text: 'Prüfpunkt', ok: true}] */ }
   };
 }
 ```
@@ -100,7 +100,7 @@ Regeln:
 - **Realistische Rückmeldung:** Fehler wirken sich aus wie in echt (der Server antwortet nicht, die Kundin fragt nach), dazu ein Satz zur Fehlvorstellung (`api.meldung`) oder eine Reaktion der Figur (`api.sage`).
 - **Bedienung:** Antippen statt nur Ziehen (Tablet), per Tastatur bedienbar (`<button>`), Ziele mindestens 40 px. In der Szene keine Knöpfe mit der Klasse `primaer` – der eine hervorgehobene Knopf ist „Weiter“ unten.
 - **Technik:** Beschriftungen direkt im Bild, Farben über CSS-Variablen (`var(--accent)`, `var(--ok)` usw.), keine externen Dateien, keine `alert/confirm/prompt`.
-- **Nachweis Teil A:** Die Szene läuft ohne Notiz; `meldung` und `erklaere` sind dort stumm. Fehler wirken sich, wo möglich, realistisch aus; `sage` nur für neutrale Story-Sätze.
+- **Selbstüberprüfung Teil A:** Die Szene läuft ohne Notiz; `meldung` und `erklaere` sind dort stumm (Rückmeldung erst nach dem Abgeben). Fehler wirken sich, wo möglich, realistisch aus; `sage` nur für neutrale Story-Sätze.
 
 ## Simulationsmodus (`PAKET.simulation`)
 
@@ -130,8 +130,8 @@ stationen: [ { id: 'K1', titel: 'Gibt es Hartmann Elektro wirklich?', lz: ['LZ1'
 - **`loesen(sim)`** führt den Schritt vollständig aus (auch nötige Wege, etwa erst suchen, dann öffnen) und muss `pruefe` erfüllen. Es dient für „Lösung zeigen“, für den automatischen Test und für den **Wiedereinstieg**: Nach dem Neuladen baut die Engine den Gegenstand neu und spielt `loesen` aller früheren Schritte still nach. Gespeichert werden nur die erledigten Schritte, nicht der Gegenstand.
 - **`zeigen: true`** macht einen Schritt zur Vorführung („Zeig’s mir“): Die Figur macht ihn vor, `frage`/`warum` dienen als Frage zum Selbsterklären. Mindestens der erste Schritt eines Kapitels, in dem etwas Neues bedient wird.
 - **Zustand gehört dem Gegenstand:** Was die Lernenden tun, bleibt stehen, auch über Kapitel hinweg. „↺ Schritt neu“ baut den Gegenstand bis vor diesen Schritt neu auf.
-- **Kurz-Check** (3–5 Fragen) öffnet sich, wenn alle Schritte des Kapitels erledigt sind, danach die Einschätzung je Lernziel; die Vorab-Frage steht vor dem ersten Schritt.
-- **Üben und Nachweis Teil A** bauen denselben Gegenstand mit **neuen Fällen** als `interaktion(box, api)` (Übung: `api.erledigt()`, Tipps; Nachweis: `auswerten()` mit Prüfpunkten je Lernziel, keine Hilfen).
+- **Kurz-Check** (erst die Auflösung der Vorab-Frage, dann 2–3 Fragen) öffnet sich, wenn alle Schritte des Kapitels erledigt sind, danach einmal je Lernziel die Einschätzung; die Vorab-Frage steht vor dem ersten Schritt und bleibt als Leitfrage stehen.
+- **Üben und Selbstüberprüfung Teil A** bauen denselben Gegenstand mit **neuen Fällen** als `interaktion(box, api)` (Übung: `api.erledigt()`, Tipps; Selbstüberprüfung: `auswerten()` mit Prüfpunkten je Lernziel, keine Hilfen). Auch die Tafelbild-Szenen nutzen den Gegenstand (`zeichne`).
 - Eigener Stil des Gegenstands als `<style>` mit Präfix (z. B. `.pc-…`) in `inhalt.js`, damit die Vorlage unverändert bleibt.
 - Beispiel: `beispiele/simulation-handelsregister.js` („Partner-Check“: Registerportal und Prüfliste).
 
@@ -155,7 +155,7 @@ stationen: [ { id: 'S1', titel: 'Woche 1 · …', lz: ['LZ1', 'LZ2'], check: ['C
 - **Lösungsbeispiel im Spiel:** Der erste Fall eines Levels wird geführt (Tutorial mit Hervorhebung), danach spielt man allein.
 - **Das Spiel vermittelt selbst (SQL-Island-Prinzip):** Jeder Schritt bringt genau ein neues Konzept als Teil der Geschichte, mit kurzem Hinweis in der Sprechblase; Regelbuch oder Übersicht liegt zum Nachschlagen neben dem Spiel.
 - **Spiel nur zum Üben (Form C):** kein Spielmodus, sondern die `interaktion` einer Übung (eine Übung je Runde oder eine Übung mit mehreren Runden, `api.erledigt()` am Ende); das Entdecken bleibt eine Simulation bzw. Illustration.
-- **Üben und Nachweis Teil A** nutzen dieselbe Mechanik als Funktion `interaktion(box, api)` mit neuen Fällen: in Übungen mit Rückmeldung und `api.erledigt()`, im Nachweis ohne Rückmeldung und Hilfen, `auswerten()` liefert Prüfpunkte je Lernziel.
+- **Üben und Selbstüberprüfung Teil A** nutzen dieselbe Mechanik als Funktion `interaktion(box, api)` mit neuen Fällen: in Übungen mit Rückmeldung und `api.erledigt()`, in der Selbstüberprüfung ohne Rückmeldung und Hilfen, `auswerten()` liefert Prüfpunkte je Lernziel.
 - Die Musterlösung `loesen()` muss ohne Animationen sofort durchlaufen (der Test wartet nicht).
 - Beispiele: `beispiele/spiel-stempel-drauf.js` (Schalter-Simulator) und `beispiele/spiel-firmendex.js` (Sammel- und Fangspiel mit Karte).
 
@@ -181,14 +181,13 @@ Fertige Bausteine für Szenen. Alle sind per Antippen und Tastatur bedienbar und
 
 Eigene Geräte oder Grafiken (z. B. `routerGeraet` im Beispiel) stehen oben in `inhalt.js`; ihr Stil darf dort als `<style>` ergänzt werden, nicht in `stil.css`.
 
-## Tafelbild (optional)
+## Tafelbild
 
-Für Pakete mit einem freiwilligen Lehrer-Input (Leitfaden C2). `js/tafel.js` zeigt die Szenen als Präsentation: groß, ohne erklärenden Text, Schritt für Schritt. Nicht jedes Paket braucht das – sinnvoll vor allem bei Simulationen, Abläufen und Vergleichen.
+Baustein für den Input der Lehrkraft (Leitfaden C2): Der Input läuft auf Folien; das Tafelbild ersetzt nur den Mittelteil, also Erklären und Beispiel. `js/tafel.js` zeigt die Szenen als Präsentation: groß, ohne erklärenden Text, Schritt für Schritt. Zwei bis vier Szenen gehören zu jedem Paket (Soll); sie entstehen aus den Szenen der Stationen.
 
 ```js
 tafel: {
-  titel: 'Bits & Bytes – Überblick',
-  dauer: '15 Minuten',
+  titel: 'Bits & Bytes – Erklären und Beispiel',
   szenen: [
     { id: 'stellenwerte', titel: 'Stellenwerte', station: 'S1',
       erklaerung: '<p>Kurz, für Schüler zuschaltbar …</p>',
@@ -205,7 +204,7 @@ tafel: {
 
 | Feld | Pflicht | Bedeutung |
 |---|---|---|
-| `titel`, `dauer` | nein | Anzeige im Dialog und in der Hinweiszeile auf der Startseite |
+| `titel` | nein | Anzeige im Tafelbild |
 | `szenen[].titel` | ja | kurzer Name (2–3 Wörter); erscheint nur mit eingeschalteten Erklärungen |
 | `szenen[].station` | ja | ID der Station, die das Thema vertieft – das Tafelbild zeigt nichts, was im Paket fehlt |
 | `szenen[].erklaerung` | ja | 2–4 kurze Sätze für Schüler, die das Tafelbild selbst öffnen |
@@ -214,18 +213,22 @@ tafel: {
 Regeln:
 
 - **Kein erklärender Text auf der Bühne.** Erlaubt: Beschriftungen im Bild, Zahlen, Symbole. Die Lehrkraft erklärt mündlich; die Erklärung steht in `erklaerung`.
-- **Höchstens etwa sechs Szenen** für 20 Minuten, je Szene eine Kernaussage. Die **letzte Szene sichert** (z. B. Vergleich mit aufdeckbaren Kennzahlen).
+- **Zwei bis vier Szenen**, je Szene eine Kernaussage. Einstieg, Üben und Sicherung des Inputs laufen auf den Folien, nicht im Tafelbild.
 - Jede Szene trägt das Muster **Vorhersagen → Klicken → Deuten**: Werkzeuge so anlegen, dass die Lehrkraft erst fragen und dann auslösen oder aufdecken kann (Schalter „Anzahl zeigen“, „Dezimal“ usw.).
 - Groß zeichnen: Die Bühne ist so breit wie der Beamer; Schrift und Linien in der Szene größer als in der Station.
 - Werkzeuge mit sprechendem Kurztext und Tastenkürzel; Kürzel `e`, `p`, `w`, `f`, Ziffern und Pfeiltasten sind vom Tafelbild belegt.
 - Nichts speichern: keine SCORM-Aufrufe, kein `localStorage`.
-- Zum Tafelbild gehört ein **Ablaufplan** für die Lehrkraft (`lehrer/input-ablauf.md`, Vorlage im Skill `lernpaket-bauen`).
+- Zugang über den Knopf „Tafelbild“ in der Kopfzeile und über `index.html#tafel` (Link aus den Folien); auf der Startseite steht kein Hinweis.
+- Einen eigenen Ablaufplan gibt es nicht: Was die Lehrkraft für die Notizen ihrer Folien braucht (ab wo das Tafelbild übernimmt, Klicks und Tasten, Vorhersage-Frage, erwartete Fehlvorstellung, Kernaussage, Rückweg), steht in `lehrer/tafelbild-notizen.md` (Vorlage im Skill `lernpaket-bauen`).
+- Die Szene darf die Interaktion einer Übung oder den Gegenstand der Simulation wiederverwenden (Beispiele: `beispiele/simulation-handelsregister.js`, `beispiele/spiel-stempel-drauf.js`).
 
 ## Mengen (Richtwerte aus dem Leitfaden)
 
 - Szene: in jeder Station (Pflicht), mit Vorführung (`demo`, 2–4 Schritte) und Selbsterklär-Frage.
-- Text: höchstens etwa 90 Wörter in Auftrag, Leitfrage und „Kurz erklärt“ je Station.
-- Kurz-Check: 3–5 Fragen je Station, mindestens eine je Lernziel der Station; ab Station 3 eine Frage zu früheren Stationen (P10).
-- Nachweis Teil B: `proLZ` = 2 Fragen je Lernziel pro Versuch; im Pool mindestens 4 je Lernziel, damit Wiederholungen nicht dieselben Fragen ziehen.
+- Text: höchstens etwa 90 Wörter in Auftrag und „Kurz erklärt“ je Station (die Vorab-Frage zählt nicht mit); im Simulationsmodus höchstens etwa 60 Wörter je Schritt, 2–6 Schritte je Kapitel.
+- Kurz-Check: 2–3 Fragen je Station, dazu kommt von selbst die Auflösung der Vorab-Frage (ohne Vorab-Frage 2–4); mindestens eine Frage je Lernziel der Station; ab Station 3 eine Frage zu früheren Stationen (P10).
+- Selbstüberprüfung Teil B: `proLZ` = 2 Fragen je Lernziel pro Versuch; im Pool mindestens 4 je Lernziel, damit Wiederholungen nicht dieselben Fragen ziehen.
 - Teil A: Prüfpunkte so verteilen, dass jedes Lernziel zusammen mit Teil B mindestens zwei Prüfungen hat.
 - Selbsttest: 5 Fragen, aus allen Lernzielen gemischt.
+- Tafelbild: zwei bis vier Szenen.
+- Einschätzung: nichts zu tun – die Engine fragt einmal je Lernziel, an der letzten Station, die das Lernziel behandelt.

@@ -1,6 +1,6 @@
-# Lernziele und Nachweis: <Titel>
+# Lernziele und Selbstüberprüfung: <Titel>
 
-Bestehensgrenze 80 %, beliebig oft wiederholbar, bestes Ergebnis zählt.
+Die Selbstüberprüfung am Ende des Pakets zählt nicht und ist beliebig oft wiederholbar; ab 80 % „sitzt das Thema“. Den Kompetenznachweis (bestanden oder nicht) legen die Lernenden außerhalb des Pakets ab.
 
 ## Lernziele (Schülersprache)
 
@@ -10,7 +10,9 @@ Bestehensgrenze 80 %, beliebig oft wiederholbar, bestes Ergebnis zählt.
 | LZ2 | Ich kann … | |
 | LZ3 | Ich kann … | |
 
-## Nachweis
+## Woran erkennt man das Können? (Selbstüberprüfung)
+
+Nach dem Steckbrief genügen Stichpunkte; ausformuliert wird im Drehbuch (Teil A) und im Fragenpool (Teil B).
 
 **Teil A – Handlungsaufgabe in neuer Situation (ohne Tipps)**
 
@@ -26,7 +28,7 @@ Auftrag: …
 
 | Lernziel | Fragethemen für den Pool | Fragetypen | Typische Fehler, die als Falschantworten dienen |
 |---|---|---|---|
-| LZ1 | | MC, Zahl, … | |
+| LZ1 | | Mehrfachauswahl, Zahl, … | |
 | LZ2 | | | |
 
 **Kontrolle:** Jedes Lernziel hat mindestens zwei Prüfungen (Prüfpunkte + Fragen) ☐ · Es wird nichts geprüft, was nicht geübt wird ☐

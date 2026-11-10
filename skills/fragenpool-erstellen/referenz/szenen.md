@@ -1,19 +1,19 @@
 # Simulation, Spiel und Szenen: Was bewegen die Lernenden?
 
-Ergänzung zu P12 (Simulation zuerst, Spiel nur begründet) und P14 (Handeln am Gegenstand). **Zuerst** kommt die Form für das ganze Paket, dann je Station die Szene, zuletzt der Text.
+Ergänzung zu P12 (Handeln am Gegenstand: Simulation zuerst, jede Station eine Szene, Spiel nur begründet). **Zuerst** kommt die Form für das ganze Paket, dann je Station die Szene, zuletzt der Text. Die Form wird gewählt, wenn die Lernziele stehen (Phase „Zielen“ vor „Erfinden“): Der Gegenstand muss die Lernziele tragen.
 
 ## Die Form wählen (Phase „Erfinden“)
 
-Vorbild sind die PING-Pakete: Dort trägt **ein realistischer Arbeitsgegenstand** das ganze Paket – der Server im Terminal („Shell Yeah!“, „Get-Going!“), das PC-Gehäuse („Plug & Pray“), der Lageplan zweier Gebäude („Strukturierte Verkabelung“). Der Lernstoff steckt in den Regeln dieses Gegenstands: Die Grafikkarte lässt sich erst ausbauen, wenn das Stromkabel ab ist; `ping` geht erst, wenn die Route stimmt; ein Kabel über 90 m meldet der Plan als Fehler.
+Vorbild sind die PING-Pakete: Dort trägt **ein Arbeitsgegenstand** das ganze Paket – der Server im Terminal („Shell Yeah!“, „Get-Going!“), das PC-Gehäuse („Plug & Pray“), der Lageplan zweier Gebäude („Strukturierte Verkabelung“). Der Lernstoff steckt in den Regeln dieses Gegenstands: Die Grafikkarte lässt sich erst ausbauen, wenn das Stromkabel ab ist; `ping` geht erst, wenn die Route stimmt; ein Kabel über 90 m meldet der Plan als Fehler.
 
 Prüfe die Formen **in dieser Reihenfolge** und nimm die erste, die passt:
 
 | Form | Wann | Wie | Vorbilder |
 |---|---|---|---|
-| **A Simulation** (Standard) | Es gibt einen Gegenstand, mit dem Fachleute bei diesem Thema arbeiten: Werkzeug, Programm, Gerät, Plan, Dokument, Portal, Gespräch | Derselbe Gegenstand durch Entdecken, Üben und Nachweis (im Nachweis ein neuer Fall: anderer Kunde, anderer Server). Er reagiert wie in echt, auch auf Fehler. | Werkzeug mit Tutorial: Terminal, PowerShell, Tabellenkalkulation, Buchungsmaske · Gegenstand zerlegen und bauen: PC, Maschine, Schaltung · Planspiel: Verkabelung, Raum- oder Ablaufplanung, Kalkulation · Fallbearbeitung: Dokumente, Portal, Kundengespräch |
+| **A Simulation** (Standard) | Es gibt einen Gegenstand, mit dem Fachleute bei diesem Thema arbeiten: Werkzeug, Programm, Gerät, Plan, Dokument, Portal, Gespräch | Derselbe Gegenstand durch Entdecken, Üben und Selbstüberprüfung (dort ein neuer Fall: anderer Kunde, anderer Server). Er reagiert wie in echt, auch auf Fehler. | Werkzeug mit Tutorial: Terminal, PowerShell, Tabellenkalkulation, Buchungsmaske · Gegenstand zerlegen und bauen: PC, Maschine, Schaltung · Planspiel: Verkabelung, Raum- oder Ablaufplanung, Kalkulation · Fallbearbeitung: Dokumente, Portal, Kundengespräch |
 | **B Interaktive Illustration** | Der Inhalt ist abstrakt und hat keinen Gegenstand, den man nachbauen könnte (Modelle, Schichten, Zahlensysteme, Prozesse im Inneren) | Ein bewegliches Modell: Lernende verändern eine Größe und sehen die Folge, schalten Schichten ein und aus, verfolgen einen Ablauf Schritt für Schritt | „Röntgenblick“ (Virtualisierung), Ausfall simulieren (Netzwerktopologien), Bits schalten (Vorlage „Bits & Bytes“) |
-| **C Erst vermitteln, dann im Spiel üben** | A oder B klärt die Grundlagen, aber es gibt Regeln, Zuordnungen oder Abläufe, die viel Übung brauchen, bis sie sitzen | Entdecken mit A oder B; im Üben ein Spiel mit **derselben Regel** in vielen kurzen Fällen; Nachweis wieder im Gegenstand (neuer Fall) | Erst im Registerportal recherchieren, dann im Sammelspiel Firmen der richtigen Abteilung zuordnen |
-| **D Lernspiel durchgehend** | Nur, wenn A und B nicht sinnvoll sind oder die Lehrkraft ausdrücklich ein Spiel wünscht | Das Spiel vermittelt selbst (SQL-Island-Prinzip, siehe unten); Üben und Nachweis mit derselben Mechanik in neuen Fällen | SQL Island; „Stempel drauf!“ |
+| **C Erst vermitteln, dann im Spiel üben** | A oder B klärt die Grundlagen, aber es gibt Regeln, Zuordnungen oder Abläufe, die viel Übung brauchen, bis sie sitzen | Entdecken mit A oder B; im Üben ein Spiel mit **derselben Regel** in vielen kurzen Fällen; Selbstüberprüfung wieder im Gegenstand (neuer Fall) | Erst im Registerportal recherchieren, dann im Sammelspiel Firmen der richtigen Abteilung zuordnen |
+| **D Lernspiel durchgehend** | Nur, wenn A und B nicht sinnvoll sind oder die Lehrkraft ausdrücklich ein Spiel wünscht | Das Spiel vermittelt selbst (SQL-Island-Prinzip, siehe unten); Üben und Selbstüberprüfung mit derselben Mechanik in neuen Fällen | SQL Island; „Stempel drauf!“ |
 
 Je Form gilt die **Plattform-Probe:** Könnte die Lernplattform das genauso (Test, H5P, Lückentext)? Dann ist es kein Kern eines Lernpakets.
 
@@ -48,11 +48,11 @@ Umsetzung in der Vorlage: A und B im **Simulationsmodus** `PAKET.simulation`, we
 
 ## Simulationsmodus (PAKET.simulation)
 
-Für Form A und B mit einem durchgehenden Arbeitsgegenstand: `PAKET.simulation = { titel, start(box, api) }`. Die Stationen heißen Kapitel; jedes hat 2–6 Schritte mit `auftrag`, `pruefe(sim)` und `loesen(sim)`. Was die Lernenden tun, bleibt im Gegenstand stehen, auch über Kapitel hinweg; nach dem Neuladen spielt die Engine die erledigten Schritte nach. So entsteht ein Tutorial wie bei „Shell Yeah!“ oder „Get-Going!“, aber für jedes Fach: ein Portal, ein Formular, eine Kalkulation, eine Werkstatt. Wann lieber eigene Szenen je Station: wenn die Stationen verschiedene Gegenstände brauchen. Format: `fragenformat.md` („Simulationsmodus“), Beispiel: `beispiele/simulation-handelsregister.js`.
+Für Form A und B mit einem durchgehenden Arbeitsgegenstand: `PAKET.simulation = { titel, start(box, api) }`. Die Stationen heißen Kapitel; jedes hat 2–6 Schritte mit `auftrag`, `pruefe(sim)` und `loesen(sim)`, je Schritt höchstens etwa 60 Wörter. Was die Lernenden tun, bleibt im Gegenstand stehen, auch über Kapitel hinweg; nach dem Neuladen spielt die Engine die erledigten Schritte nach. So entsteht ein Tutorial wie bei „Shell Yeah!“ oder „Get-Going!“, aber für jedes Fach: ein Portal, ein Formular, eine Kalkulation, eine Werkstatt. Wann lieber eigene Szenen je Station: wenn die Stationen verschiedene Gegenstände brauchen. Format: `fragenformat.md` („Simulationsmodus“), Beispiel: `beispiele/simulation-handelsregister.js`.
 
 ## Spielmodus (PAKET.spielwelt)
 
-Nur für Form D, ein Spiel über alle Stationen: `PAKET.spielwelt = { titel, tab, start(box, api) }`. Die Engine stellt eine große Spielbühne unter „① Spielen“; die Stationen sind die Level (`id`, `titel`, `lz`, `check`, optional `mitdenken`). Das Spiel meldet `api.level(id)`, wenn ein Level geschafft ist; danach erscheinen dessen Kurz-Check und Mitdenken-Auftrag in der Zwischenbilanz. Üben und Nachweis Teil A nutzen dieselbe Spielmechanik in neuen Fällen (Nachweis ohne Rückmeldung und ohne Hilfen). Format: `fragenformat.md` („Spielmodus“), Beispiele: `beispiele/spiel-stempel-drauf.js` und `beispiele/spiel-firmendex.js`.
+Nur für Form D, ein Spiel über alle Stationen: `PAKET.spielwelt = { titel, tab, start(box, api) }`. Die Engine stellt eine große Spielbühne unter „① Spielen“; die Stationen sind die Level (`id`, `titel`, `lz`, `check`, optional `mitdenken`). Das Spiel meldet `api.level(id)`, wenn ein Level geschafft ist; danach erscheinen dessen Kurz-Check und Mitdenken-Auftrag in der Zwischenbilanz. Üben und Teil A der Selbstüberprüfung nutzen dieselbe Spielmechanik in neuen Fällen (dort ohne Rückmeldung und ohne Hilfen). Die Spielbühne so auslegen, dass sie höchstens etwa 600 px hoch ist: Auf 1366 × 768 bleiben zwischen Kopfzeile und Fußleiste gut 600 px, und was darunter liegt (etwa die Knöpfe zum Entscheiden), sehen Lernende erst nach dem Scrollen. Format: `fragenformat.md` („Spielmodus“), Beispiele: `beispiele/spiel-stempel-drauf.js` und `beispiele/spiel-firmendex.js`.
 
 ## Szenen je Station
 
@@ -95,12 +95,21 @@ Die leichtere Spielform: Ein Spielrahmen verbindet einzelne Szenen-Stationen zu 
 - **Figuren** als Illustration (`figur.aussehen`): Ausbilderin, Kunde, Kollegin. Vielfältig besetzen (Hautton, Frisur, Kopftuch, Brille), nie reale Personen nachbilden.
 - **Symbol** im Kopf (`welt.symbol`), z. B. ein Emoji, das zum Thema passt.
 
+## Echt in der Funktion, sparsam im Aussehen
+
+Eine Szene muss sich verhalten wie der echte Gegenstand: dieselben Felder, Abläufe und Folgen. Sie muss nicht aussehen wie ein Foto davon. Aufwendige Nachbildungen bringen kaum mehr als einfache; wichtig ist, dass das, worauf es ankommt, gut zu erkennen ist (Belege in `belege.md`).
+
+- Zeigen, was zur Aufgabe gehört; weglassen, was im echten Programm nur stört (Werbung, Menüs ohne Funktion, zwanzig Felder, von denen drei gebraucht werden).
+- Das Wichtige hervorheben: die Zeile im Dokument, das Feld im Formular, die Leuchte am Gerät.
+- Kulisse und Figuren gehören in den Kopf, auf die Startseite und zum Auftrag (Sprechblase), nicht in den Arbeitsbereich der Szene.
+
 ## Textbudget
 
-- Auftrag in der Sprechblase: ein bis zwei Sätze. Leitfrage: ein Satz.
+- Auftrag in der Sprechblase: ein bis zwei Sätze. Die Vorab-Frage ist die Leitfrage und zählt nicht zum Budget; eine eigene Leitfrage (ein Satz) nur an Stationen ohne Vorab-Frage.
 - „Kurz erklärt“ in der Notiz: höchstens etwa 40 Wörter. Mehr gehört in den Steckbrief (zugeklappt) oder in die Szene.
 - Erklärungen, die zur Handlung passen, kommen über `api.erklaere()` genau dann, wenn sie gebraucht werden.
-- Zusammen höchstens etwa 90 Wörter sichtbarer Text je Station (Inhaltsprüfung), neben der Szene höchstens etwa 160 Wörter (Prüfskript).
+- Zusammen höchstens etwa 90 Wörter je Station (Inhaltsprüfung der Engine); im Simulationsmodus höchstens etwa 60 Wörter je Schritt. Das Prüfskript misst zusätzlich den sichtbaren Text neben der Szene (Hinweis ab 160 Wörtern, einschließlich Titel, Ziel, Vorab-Frage und Begriffen).
+- Die Szene ist auf 1366 × 768 ganz zu sehen: Station etwa 380 px hoch, Gegenstand im Simulationsmodus und Spielbühne etwa 600 px. Das Prüfskript misst die Unterkante gegen die Fußleiste.
 
 ## Erfundene Daten, echte Formen
 
