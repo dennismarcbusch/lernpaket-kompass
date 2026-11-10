@@ -6,7 +6,7 @@
    Figur, simuliertem Rechner und Dokument) steht in beispiele/wirtschaft-handelsregister.js
    (im Skill-Ordner, nicht im Paket).
 
-   Grundsatz (Leitfaden P14): Jede Station ist eine Szene zum Anfassen.
+   Grundsatz (Leitfaden P12): Jede Station ist eine Szene zum Anfassen.
    Die Lernenden bewegen etwas – schalten, sortieren, markieren, entscheiden,
    bedienen einen simulierten Rechner. Text steht kurz in der Notiz daneben.
 
@@ -29,12 +29,16 @@
                 typisch: [{antwort, feedback}].
      'hotspot'  svg: '<svg viewBox=…>…</svg>', bereiche: [{x,y,w,h | cx,cy,r,
                 label, richtig, feedback}] – genau ein Bereich ist richtig.
-   Jede Frage: id, lz, einsatz (['check'|'nachweis'|'uebung'|'vorab']),
+   Jede Frage: id, lz, einsatz (['check'|'selbstueberpruefung'|'uebung'|'vorab']),
    frage, erklaerung (warum die richtige Antwort richtig ist), optional bild.
 
-   Optional: tafel – Tafelbild für einen freiwilligen Input (siehe unten).
+   Station: Die Vorab-Frage (vorab) ist zugleich die Leitfrage – sie bleibt über
+   der Szene stehen und wird im Kurz-Check als erste Frage aufgelöst. Ein eigenes
+   Feld leitfrage braucht nur eine Station ohne Vorab-Frage.
 
-   Interaktionen (Station, Übung, Nachweis Teil A) sind Funktionen
+   tafel: zwei bis vier Tafelbild-Szenen für den Mittelteil des Inputs (siehe unten).
+
+   Interaktionen (Station, Übung, Selbstüberprüfung Teil A) sind Funktionen
    function (box, api) { … return { loesen, demo, zuruecksetzen, auswerten } }.
      box                      die Bühne (groß, in der Mitte)
      api.kit                  Baukasten (js/baukasten.js): szene, figur, computer,
@@ -48,7 +52,7 @@
                               Szene vorgeführt wird („Zeig's mir"); tun() bewegt die Szene
      zuruecksetzen()          nach der Vorführung: Szene in den Aufgabenzustand
      auswerten()              nur Teil A: [{lz, text, ok}] je Prüfpunkt
-   Im Nachweis Teil A sind meldung und erklaere stumm (keine Rückmeldung).
+   In Teil A der Selbstüberprüfung sind meldung und erklaere stumm (Rückmeldung erst nach dem Abgeben).
    ===================================================================== */
 
 /* ---- Bausteine, die nur dieses Paket braucht ---- */
@@ -125,8 +129,8 @@ window.PAKET = {
   id: 'beispiel-bits-und-bytes',          // = Identifier im imsmanifest.xml
   titel: 'Bits & Bytes',
   untertitel: 'Binärzahlen lesen und schreiben',
-  version: '2.1',
-  bestehen: 80,                         // Prozent, wie masteryscore im Manifest
+  version: '4.0',                       // Version dieses Pakets; eigene Pakete beginnen bei 1.0
+  bereit: 80,                           // ab so viel Prozent sitzt das Thema (Selbstüberprüfung, zählt nicht)
   dauer: 'etwa 90 Minuten',
   welt: { thema: 'technik', kulisse: 'serverraum' },
   figur: { name: 'Mira Hofmann', rolle: 'Ausbilderin bei Korbwerk IT-Service',
@@ -154,7 +158,6 @@ window.PAKET = {
     {
       id: 'S1', titel: 'Stellenwerte: So zählt ein Byte', lz: ['LZ1'], vorab: 'V1',
       auftrag: 'Der Router der Bäckerei Sommer zeigt <code>11000000</code>. Stell die Schalter genauso ein: Welche Dezimalzahl ist das?',
-      leitfrage: 'Welchen Wert hat jede der acht Stellen?',
       inhalt: '<p>Jede Stelle hat einen <b>Stellenwert</b>: rechts 1, nach links immer doppelt so viel. Eine 1 heißt: Dieser Wert zählt mit.</p>',
       interaktion: function (box, api) {
         var r = routerGeraet(box, { titel: 'Router Bäckerei Sommer', display: '11000000', beiAenderung: function (w) {
@@ -180,7 +183,6 @@ window.PAKET = {
     {
       id: 'S2', titel: 'Dezimal → binär', lz: ['LZ2'], vorab: 'V2',
       auftrag: 'Der Drucker der Schreinerei Maier bekommt im letzten Byte die <b>150</b>. Stell 150 an den Schaltern ein – diesmal ohne Summenanzeige.',
-      leitfrage: 'Wie zerlegst du eine Zahl in Stellenwerte?',
       inhalt: '<p>Von links nach rechts: Passt der Stellenwert noch in den Rest, Schalter an und mit dem Rest weiter. Passt er nicht, bleibt der Schalter aus.</p>',
       interaktion: function (box, api) {
         var rest = KIT.el('div', { class: 'router-summe', style: { color: 'var(--ink)' } });
@@ -208,7 +210,6 @@ window.PAKET = {
     {
       id: 'S3', titel: 'Wie viele Werte passen in n Bit?', lz: ['LZ3'], vorab: 'V3',
       auftrag: 'Mira fragt: „Wie viele verschiedene Adressen passen eigentlich in 4 Bit?“ Füge Bits hinzu und beobachte, wie viele Muster entstehen.',
-      leitfrage: 'Was passiert mit der Anzahl, wenn ein Bit dazukommt?',
       inhalt: '<p>Mit n Bit gibt es <b>2<sup>n</sup></b> Muster, von 0 bis 2<sup>n</sup> − 1.</p>',
       interaktion: function (box, api) {
         var E = KIT.el, n = 1;
@@ -316,8 +317,11 @@ window.PAKET = {
     }
   ],
 
-  nachweis: {
+  // Selbstüberprüfung am Ende: zählt nicht, beliebig oft wiederholbar; ab „bereit“ (80 %) sitzt das Thema.
+  // danach: was als Nächstes kommt, wenn es sitzt (z. B. der Kompetenznachweis in der Lernplattform).
+  selbstueberpruefung: {
     dauer: '15 Minuten',
+    danach: 'Du bist bereit für den Kompetenznachweis. Den legst du in der Lernplattform ab – sprich deine Lehrkraft an.',
     gewichtA: 50,                       // Anteil von Teil A am Ergebnis in Prozent
     einleitung: 'Jetzt bist du allein beim Kunden: <b>Gärtnerei Lindner</b>. Ich bin heute nicht erreichbar – du schaffst das!',
     teilA: {
@@ -347,7 +351,7 @@ window.PAKET = {
         };
       }
     },
-    teilB: { proLZ: 2 }                 // Fragen je Lernziel aus dem Pool (einsatz 'nachweis')
+    teilB: { proLZ: 2 }                 // Fragen je Lernziel aus dem Pool (einsatz 'selbstueberpruefung')
   },
 
   merkblatt: [
@@ -379,13 +383,13 @@ window.PAKET = {
       erklaerung: 'Jedes Bit verdoppelt die Möglichkeiten: 2 · 2 · 2 = 8 (von 000 bis 111).' },
 
     /* ---------- LZ1 ---------- */
-    { id: 'F1', lz: 'LZ1', einsatz: ['check', 'nachweis'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>00001011</code>?', zahl: { wert: 11 },
+    { id: 'F1', lz: 'LZ1', einsatz: ['check', 'selbstueberpruefung'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>00001011</code>?', zahl: { wert: 11 },
       typisch: [{ wert: 13, feedback: 'Du hast die Stellenwerte von links nach rechts vergeben. Die Stelle mit dem Wert 1 steht ganz rechts.' }, { wert: 1011, feedback: 'Das ist die Ziffernfolge als Dezimalzahl gelesen. Rechne mit den Stellenwerten 8, 4, 2, 1.' }],
       erklaerung: 'Die Einsen stehen bei 8, 2 und 1: 8 + 2 + 1 = 11.' },
     { id: 'F2', lz: 'LZ1', einsatz: ['check'], typ: 'mc', frage: 'Welchen Stellenwert hat das Bit ganz links in einem Byte?',
       optionen: [{ text: '128', richtig: true }, { text: '256', feedback: '256 wäre die neunte Stelle. Ein Byte hat Stellenwerte von 1 bis 128.' }, { text: '8', feedback: '8 ist die Anzahl der Bits in einem Byte, nicht der Stellenwert.' }, { text: '1', feedback: 'Der Stellenwert 1 steht ganz rechts.' }],
       erklaerung: 'Von rechts: 1, 2, 4, 8, 16, 32, 64, 128 – die achte Stelle hat den Wert 2⁷ = 128.' },
-    { id: 'F3', lz: 'LZ1', einsatz: ['nachweis'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>11000000</code>?', zahl: { wert: 192 },
+    { id: 'F3', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>11000000</code>?', zahl: { wert: 192 },
       typisch: [{ wert: 3, feedback: 'Du hast von links mit 1 und 2 angefangen. Die beiden Einsen stehen bei 128 und 64.' }],
       erklaerung: '128 + 64 = 192.' },
     { id: 'F4', lz: 'LZ1', einsatz: ['check'], typ: 'hotspot', frage: 'Tippe auf das Bit mit dem Stellenwert <b>32</b>.',
@@ -395,10 +399,10 @@ window.PAKET = {
         return { x: 10 + i * 68, y: 40, w: 60, h: 56, label: (i + 1) + '. Stelle von links', richtig: w === 32, feedback: w === 32 ? '' : 'Diese Stelle hat den Stellenwert ' + w + '. Zähl von rechts: 1, 2, 4, 8, 16, 32.' };
       }),
       erklaerung: 'Von rechts gezählt ist die sechste Stelle (dritte von links) die mit dem Stellenwert 32.' },
-    { id: 'F5', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc', frage: 'Welche dieser Binärzahlen haben den Dezimalwert 10?',
+    { id: 'F5', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc', frage: 'Welche dieser Binärzahlen haben den Dezimalwert 10?',
       optionen: [{ text: '<code>00001010</code>', richtig: true }, { text: '<code>1010</code>', richtig: true, feedback: 'Richtig – führende Nullen ändern den Wert nicht.' }, { text: '<code>00000101</code>', feedback: 'Das ist 5 – die Ziffern sind verdreht.' }, { text: '<code>10100000</code>', feedback: 'Hier stehen die Einsen bei 128 und 32: Das ist 160.' }],
       erklaerung: '10 = 8 + 2. Ob davor Nullen stehen, ändert den Wert nicht.' },
-    { id: 'F16', lz: 'LZ1', einsatz: ['nachweis'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>10101010</code>?', zahl: { wert: 170 },
+    { id: 'F16', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>10101010</code>?', zahl: { wert: 170 },
       typisch: [{ wert: 85, feedback: '85 wäre <code>01010101</code> – du hast die Stellenwerte um eine Stelle verschoben.' }],
       erklaerung: '128 + 32 + 8 + 2 = 170.' },
     { id: 'F19', lz: 'LZ1', einsatz: ['uebung'], typ: 'zahl', frage: 'Welche Dezimalzahl ist <code>10101000</code>?', zahl: { wert: 168 },
@@ -406,23 +410,23 @@ window.PAKET = {
       erklaerung: '128 + 32 + 8 = 168.' },
 
     /* ---------- LZ2 ---------- */
-    { id: 'F6', lz: 'LZ2', einsatz: ['check', 'nachweis'], typ: 'text', frage: 'Schreibe <b>200</b> als 8-Bit-Binärzahl.', akzeptiert: ['11001000', '1100 1000'],
+    { id: 'F6', lz: 'LZ2', einsatz: ['check', 'selbstueberpruefung'], typ: 'text', frage: 'Schreibe <b>200</b> als 8-Bit-Binärzahl.', akzeptiert: ['11001000', '1100 1000'],
       typisch: [{ antwort: '00010011', feedback: 'Die Ziffern sind verdreht: Die größte Stelle (128) steht links.' }],
       feedbackFalsch: 'Zerlege 200 in Stellenwerte: Welcher größte Stellenwert passt hinein?',
       erklaerung: '200 = 128 + 64 + 8 → 11001000.' },
     { id: 'F7', lz: 'LZ2', einsatz: ['check'], typ: 'mc', frage: 'Wie lautet <b>100</b> als 8-Bit-Binärzahl?',
       optionen: [{ text: '<code>01100100</code>', richtig: true }, { text: '<code>00100110</code>', feedback: 'Die Ziffern sind verdreht – die 64 steht weiter links als die 4.' }, { text: '<code>01100000</code>', feedback: 'Das ist 96: Der Rest 4 fehlt noch.' }, { text: '<code>10010100</code>', feedback: '128 passt nicht in 100 – die erste Stelle muss 0 sein.' }],
       erklaerung: '100 = 64 + 32 + 4 → 01100100.' },
-    { id: 'F8', lz: 'LZ2', einsatz: ['nachweis'], typ: 'zuordnen', frage: 'Ordne jeder Dezimalzahl die passende 8-Bit-Binärzahl zu.',
+    { id: 'F8', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'zuordnen', frage: 'Ordne jeder Dezimalzahl die passende 8-Bit-Binärzahl zu.',
       paare: [{ links: '1', rechts: '00000001' }, { links: '16', rechts: '00010000' }, { links: '128', rechts: '10000000' }, { links: '255', rechts: '11111111' }],
       erklaerung: 'Eine einzelne 1 an einer Stelle ergibt genau deren Stellenwert; alle acht Einsen ergeben 255.' },
     { id: 'F9', lz: 'LZ2', einsatz: ['check'], typ: 'mc', frage: 'Du rechnest <b>37</b> um. Welchen Stellenwert ziehst du als Erstes ab?',
       optionen: [{ text: '32', richtig: true }, { text: '64', feedback: '64 ist größer als 37 und passt nicht hinein.' }, { text: '16', feedback: '16 passt zwar, aber 32 ist der größte Stellenwert, der passt.' }, { text: '37', feedback: '37 ist kein Stellenwert. Stellenwerte sind 1, 2, 4, 8, 16, 32, 64, 128.' }],
       erklaerung: 'Man beginnt immer mit dem größten passenden Stellenwert: 32 (Rest 5).' },
-    { id: 'F10', lz: 'LZ2', einsatz: ['nachweis'], typ: 'text', frage: 'Schreibe <b>255</b> als 8-Bit-Binärzahl.', akzeptiert: ['11111111', '1111 1111'],
+    { id: 'F10', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'text', frage: 'Schreibe <b>255</b> als 8-Bit-Binärzahl.', akzeptiert: ['11111111', '1111 1111'],
       typisch: [{ antwort: '100000000', feedback: 'Das sind neun Stellen und der Wert 256. 255 ist der größte Wert eines Bytes.' }],
       erklaerung: '255 = 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1: alle acht Bits sind 1.' },
-    { id: 'F17', lz: 'LZ2', einsatz: ['nachweis'], typ: 'text', frage: 'Schreibe <b>64</b> als 8-Bit-Binärzahl.', akzeptiert: ['01000000', '0100 0000'],
+    { id: 'F17', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'text', frage: 'Schreibe <b>64</b> als 8-Bit-Binärzahl.', akzeptiert: ['01000000', '0100 0000'],
       typisch: [{ antwort: '1000000', feedback: 'Der Wert stimmt, aber ein Byte hat acht Stellen – vorne fehlt eine 0.' }, { antwort: '00000010', feedback: 'Die Ziffern sind verdreht: 00000010 ist 2.' }],
       erklaerung: '64 ist ein einzelner Stellenwert: zweite Stelle von links → 01000000.' },
 
@@ -430,19 +434,19 @@ window.PAKET = {
     { id: 'F11', lz: 'LZ3', einsatz: ['check'], typ: 'zahl', frage: 'Wie viele verschiedene Werte lassen sich mit <b>4 Bit</b> darstellen?', zahl: { wert: 16 },
       typisch: [{ wert: 15, feedback: '15 ist der größte Wert. Zusammen mit der 0 sind es 16 Werte.' }, { wert: 8, feedback: '8 wäre 2 · 4. Jedes Bit verdoppelt die Anzahl: 2 · 2 · 2 · 2.' }],
       erklaerung: '2⁴ = 16 Werte, von 0 bis 15.' },
-    { id: 'F12', lz: 'LZ3', einsatz: ['nachweis'], typ: 'mc', frage: 'Wie viele Bit brauchst du <b>mindestens</b>, um 1000 verschiedene Werte darzustellen?',
+    { id: 'F12', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc', frage: 'Wie viele Bit brauchst du <b>mindestens</b>, um 1000 verschiedene Werte darzustellen?',
       optionen: [{ text: '10', richtig: true }, { text: '9', feedback: '2⁹ = 512 reicht nicht für 1000 Werte.' }, { text: '1000', feedback: 'Jedes Bit verdoppelt die Anzahl – du brauchst viel weniger Bits als Werte.' }, { text: '4', feedback: 'Mit 4 Bit gibt es nur 16 Werte. Du hast vielleicht an die vier Ziffern von 1000 gedacht.' }],
       erklaerung: '2¹⁰ = 1024 ≥ 1000, 2⁹ = 512 < 1000. Also mindestens 10 Bit.' },
-    { id: 'F13', lz: 'LZ3', einsatz: ['check', 'nachweis'], typ: 'zahl', frage: 'Wie viele verschiedene Werte kann <b>ein Byte</b> annehmen?', zahl: { wert: 256 },
+    { id: 'F13', lz: 'LZ3', einsatz: ['check', 'selbstueberpruefung'], typ: 'zahl', frage: 'Wie viele verschiedene Werte kann <b>ein Byte</b> annehmen?', zahl: { wert: 256 },
       typisch: [{ wert: 255, feedback: '255 ist der größte Wert. Die 0 zählt mit: 256 Werte.' }],
       erklaerung: '2⁸ = 256 Werte, von 0 bis 255.' },
     { id: 'F14', lz: 'LZ3', einsatz: ['check'], typ: 'mc', frage: 'Was passiert mit der Anzahl der darstellbaren Werte, wenn ein Bit dazukommt?',
       optionen: [{ text: 'Sie verdoppelt sich.', richtig: true }, { text: 'Sie steigt um 1.', feedback: 'Das neue Bit kann bei jedem bisherigen Muster 0 oder 1 sein – das verdoppelt die Anzahl.' }, { text: 'Sie steigt um 2.', feedback: 'Bei einem Bit mehr gibt es alle bisherigen Muster einmal mit 0 und einmal mit 1 davor.' }, { text: 'Sie verzehnfacht sich.', feedback: 'Das gilt im Dezimalsystem mit zehn Ziffern. Ein Bit hat nur zwei Zustände.' }],
       erklaerung: 'Jedes zusätzliche Bit verdoppelt die Anzahl: 2ⁿ → 2ⁿ⁺¹.' },
-    { id: 'F15', lz: 'LZ3', einsatz: ['nachweis'], typ: 'zahl', frage: 'Ein Byte einer IPv4-Adresse hat 8 Bit. Welches ist der <b>größte</b> Wert, der darin stehen kann?', zahl: { wert: 255 },
+    { id: 'F15', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'zahl', frage: 'Ein Byte einer IPv4-Adresse hat 8 Bit. Welches ist der <b>größte</b> Wert, der darin stehen kann?', zahl: { wert: 255 },
       typisch: [{ wert: 256, feedback: '256 ist die Anzahl der Werte. Weil bei 0 begonnen wird, ist der größte Wert 255.' }],
       erklaerung: '2⁸ − 1 = 255.' },
-    { id: 'F18', lz: 'LZ3', einsatz: ['nachweis'], typ: 'zuordnen', frage: 'Ordne zu: Wie viele verschiedene Werte gibt es mit …',
+    { id: 'F18', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'zuordnen', frage: 'Ordne zu: Wie viele verschiedene Werte gibt es mit …',
       paare: [{ links: '1 Bit', rechts: '2' }, { links: '2 Bit', rechts: '4' }, { links: '8 Bit', rechts: '256' }, { links: '16 Bit', rechts: '65 536' }],
       erklaerung: 'Jeweils 2 hoch Anzahl der Bits: 2¹, 2², 2⁸, 2¹⁶.' },
     { id: 'F20', lz: 'LZ3', einsatz: ['uebung'], typ: 'zahl', frage: 'Wie viele verschiedene Bitmuster gibt es mit <b>6 Bit</b>?', zahl: { wert: 64 },
@@ -450,15 +454,17 @@ window.PAKET = {
       erklaerung: '2⁶ = 64.' }
   ],
 
-  /* ---------- Tafelbild für einen freiwilligen Input (optional, Leitfaden C2) ----------
+  /* ---------- Tafelbild: der Mittelteil des Inputs (Leitfaden C2) ----------
      Wird von js/tafel.js angezeigt: groß, ohne erklärenden Text, Schritt für Schritt.
+     Das Tafelbild ersetzt nur Erklären und Beispiel; Einstieg, Üben und Sicherung
+     laufen auf den Folien der Lehrkraft. Darum genügen zwei bis vier Szenen.
      Jede Szene zeigt nur, was auch in ihrer Station vorkommt (station), die Erklärung
      ist für Schüler zuschaltbar. Werkzeuge mit api.werkzeug() erscheinen unten in der
-     Leiste, mit Tastenkürzel. Ablaufplan für die Lehrkraft: lehrer/input-ablauf.md.
-     Pakete ohne Input lassen das Feld einfach weg. */
+     Leiste, mit Tastenkürzel. Was die Lehrkraft dazu in die Notizen ihrer Folien
+     schreibt (ab wo das Tafelbild übernimmt, Klicks, Vorhersage-Frage, Rückweg),
+     steht in lehrer/tafelbild-notizen.md. */
   tafel: {
-    titel: 'Bits & Bytes – Überblick',
-    dauer: '15 Minuten',
+    titel: 'Bits & Bytes – Erklären und Beispiel',
     szenen: [
       { id: 'stellenwerte', titel: 'Stellenwerte', station: 'S1',
         erklaerung: '<p>Jede der acht Stellen hat einen <b>Stellenwert</b>: rechts 1, nach links jeweils doppelt so viel.</p><p>Eine 1 bedeutet: Dieser Wert zählt mit. Die Zahl ist die Summe aller Stellenwerte mit einer 1.</p>',

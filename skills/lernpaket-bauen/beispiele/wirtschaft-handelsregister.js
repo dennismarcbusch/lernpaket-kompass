@@ -1,4 +1,5 @@
-/* BEISPIEL Wirtschaft (Lernpaket-Kompass 2): Station 1 aus „Das Handelsregister“.
+/* AUSSCHNITT Wirtschaft (kein vollständiges Paket): Station 1 aus „Das Handelsregister“ –
+   als Muster für eine einzelne Szene in einer Station (Form B „Fallakte“).
    Zeigt eine Szene mit simuliertem Rechner (Postfach, nachgebautes Portal, Chat),
    antippbarem Dokument, Gespräch mit Entscheidungen, Vorführung („Zeig's mir“),
    Spielrahmen und eigener Welt. Zum Nachschlagen, nicht als Vorlage kopieren.
@@ -71,7 +72,7 @@ window.PAKET = {
   titel: 'Das Handelsregister',
   untertitel: 'Eintragungen zuordnen und ihre Wirkung verstehen',
   version: '0.2',
-  bestehen: 80,
+  bereit: 80,
   dauer: 'etwa 45 Minuten (in zwei Abschnitten möglich)',
   welt: { thema: 'wirtschaft', kulisse: 'buero', symbol: '📇' },
   figur: { name: 'Katja Winter', rolle: 'Ausbilderin bei Kernwerk Bürobedarf',
@@ -80,7 +81,7 @@ window.PAKET = {
   spiel: {
     titel: 'Partner-Check bei Kernwerk',
     intro: 'Vier neue Geschäftspartner wollen Verträge mit <b>Kernwerk Bürobedarf</b>. Bevor wir unterschreiben, prüfst du jeden im Handelsregister. Ich zeige dir den ersten, dann bist du dran.',
-    ziel: 'Alle vier Partner prüfen, dann den Abschlusstest bestehen.',
+    ziel: 'Alle vier Partner prüfen und am Ende selbst testen, ob es sitzt.',
     zaehler: { name: 'Partner geprüft', symbol: '🤝' }
   },
 
@@ -91,7 +92,7 @@ window.PAKET = {
       id: 'S1', titel: 'Wozu gibt es das Handelsregister?', lz: ['LZ1'],
       mission: { ort: 'Hartmann Elektro', symbol: '⚡', ende: 'Hartmann Elektro ist geprüft – Katja kann den Vertrag vorbereiten.' },
       auftrag: 'Hartmann Elektro will uns beliefern. Schau im Registerportal nach, ob die Firma eingetragen ist und wer für sie unterschreiben darf. Danach besprechen wir das.',
-      leitfrage: 'Wer führt das Handelsregister, wer darf einsehen, wozu ist es gut?',
+      leitfrage: 'Wer führt das Handelsregister, wer darf einsehen, wozu ist es gut?',  // nur, weil diese Station keine Vorab-Frage hat – sonst ist die Vorab-Frage die Leitfrage
       inhalt: '<p>Das <b>Handelsregister</b> ist öffentlich. Das <b>Amtsgericht</b> führt es. Wer etwas ändern will, meldet es <b>elektronisch und öffentlich beglaubigt</b> an.</p>',
       selbsterklaerung: { schritt: 3, frage: 'Warum darf eigentlich jeder ins Handelsregister schauen, ohne einen Grund zu nennen?' },
       interaktion: function (box, api) {

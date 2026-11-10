@@ -1,12 +1,15 @@
 /* =====================================================================
-   Tafelbild-Baustein der Kompass-Vorlage (optional, Leitfaden C2)
-   Präsentationsmodus für den freiwilligen Lehrer-Input: dieselben
-   interaktiven Bilder wie im Paket, aber groß, ohne erklärenden Text,
-   Schritt für Schritt per Klick, Pfeiltaste oder Presenter.
+   Tafelbild-Baustein der Kompass-Vorlage (Leitfaden C2)
+   Präsentationsmodus für den Mittelteil eines Inputs (Erklären und Beispiel):
+   dieselben interaktiven Bilder wie im Paket, aber groß, ohne erklärenden
+   Text, Schritt für Schritt per Klick, Pfeiltaste oder Presenter. Einstieg,
+   Üben und Sicherung des Inputs laufen auf den Folien der Lehrkraft; ab wo
+   das Tafelbild übernimmt, steht in deren Notizen (Vorlage dafür im Skill
+   lernpaket-bauen: tafelbild-notizen.md). Zwei bis vier Szenen genügen.
    Diese Datei wird NICHT pro Paket verändert. Ohne PAKET.tafel tut sie nichts.
 
    Inhalt (in js/inhalt.js): PAKET.tafel = {
-     titel, dauer,
+     titel,
      szenen: [{ id, titel, station: 'S1', erklaerung: 'HTML',
                 zeichne: function (buehne, api) { …; return { aufraeumen } } }]
    }
@@ -14,9 +17,9 @@
                   gruppe, an, aktion(an, knopf) })  → { setze(an), knopf }
    api.praesentation   true, wenn ohne Erklärungen gestartet (#tafel)
 
-   Zugänge: Knopf „Tafelbild“ in der Kopfzeile, Karte auf der Startseite
-   (engine.js ruft TAFEL.startKarte() auf), Adresse index.html#tafel
-   (Präsentation) bzw. #tafel-3 (ab Szene 3).
+   Zugänge: Knopf „Tafelbild“ in der Kopfzeile, Adresse index.html#tafel
+   (Präsentation, z. B. als Link aus den Folien) bzw. #tafel-3 (ab Szene 3).
+   Auf der Startseite steht kein eigener Hinweis: Sie bleibt Überblick.
    Speichert nichts: kein suspend_data, kein localStorage, keine SCORM-Werte.
    Einbinden VOR engine.js; nutzt window.LERNPAKET nur für Stationslinks.
    ===================================================================== */
@@ -172,7 +175,7 @@
       var st = (P.stationen || []), k = -1;
       st.forEach(function (x, j) { if (x.id === s.station) k = j; });
       if (k >= 0 && window.LERNPAKET) {
-        D.erkl.appendChild(el('button', { type: 'button', class: 'tafel-station', html: 'Vertieft in <b>Station ' + (k + 1) + ': ' + st[k].titel + '</b> →', onclick: function () { schliessen(); window.LERNPAKET.zeige('entdecken', k); } }));
+        D.erkl.appendChild(el('button', { type: 'button', class: 'tafel-station', html: 'Vertieft in <b>' + (P.spielwelt ? 'Level ' : P.simulation ? 'Kapitel ' : 'Station ') + (k + 1) + ': ' + st[k].titel + '</b> →', onclick: function () { schliessen(); window.LERNPAKET.zeige('entdecken', k); } }));
       } else {
         D.erkl.appendChild(el('p', { class: 'klein', text: 'Die passende Station folgt im Ausbau des Pakets.' }));
       }
@@ -244,18 +247,9 @@
   function kopfKnopf() {
     var kopf = document.querySelector('.kopf');
     if (!kopf || kopf.querySelector('.tafel-knopf')) return;
-    var b = el('button', { type: 'button', class: 'tafel-knopf', title: 'Tafelbild: der Überblick aus dem Unterricht', 'aria-label': 'Tafelbild öffnen', html: TAFEL_ICON + '<span>Tafelbild</span>', onclick: function () { oeffnen({}); } });
+    var b = el('button', { type: 'button', class: 'tafel-knopf', title: 'Tafelbild: die Bilder aus dem Unterricht, groß und Schritt für Schritt', 'aria-label': 'Tafelbild öffnen', html: TAFEL_ICON + '<span>Tafelbild</span>', onclick: function () { oeffnen({}); } });
     var fp = document.getElementById('fortschritt');
     kopf.insertBefore(b, fp && fp.parentNode === kopf ? fp : null);
-  }
-  // Karte für die Startseite; engine.js hängt sie in vStart() ein
-  // Startseite: eine Zeile, kein Textblock (Leitfaden C2: Startseite nur als Überblick)
-  function startKarte() {
-    return el('div', { class: 'tafel-hinweis' }, [
-      el('span', { class: 'tafel-hinweis-icon', html: TAFEL_ICON, 'aria-hidden': 'true' }),
-      el('span', { html: 'Lieber erst gemeinsam? Freiwilliger Input, etwa ' + (T.dauer || '20 Minuten') + '.' }),
-      el('button', { type: 'button', class: 'link', text: 'Tafelbild ansehen', onclick: function () { oeffnen({}); } })
-    ]);
   }
   function ausAdresse() {
     var m = /^#tafel(?:-(\d+))?$/.exec(location.hash || '');
@@ -263,8 +257,8 @@
   }
 
   window.TAFEL = {
-    version: '1.0',
-    oeffnen: oeffnen, schliessen: schliessen, szene: szene, startKarte: startKarte,
+    version: '4.0',
+    oeffnen: oeffnen, schliessen: schliessen, szene: szene,
     zustand: function () { return { offen: Z.offen, szene: Z.i, erklaerungen: Z.erkl, praesentation: Z.praes, stift: Z.stift, anzahl: SZ.length }; }
   };
   kopfKnopf();

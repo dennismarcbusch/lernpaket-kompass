@@ -4,6 +4,8 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Lernpaket</title>
+<meta name="generator" content="Lernpaket-Kompass 4.0">
+<link rel="icon" href="data:,">  <!-- kein Abruf von favicon.ico (vermeidet einen 404-Eintrag) -->
 <link rel="stylesheet" href="css/stil.css">
 <link rel="stylesheet" href="css/baukasten.css">
 <link rel="stylesheet" href="css/tafel.css">
@@ -13,16 +15,16 @@
   <header class="kopf card">
     <div class="logo" aria-hidden="true"></div>
     <div class="titel"><h1 id="titel"></h1><div class="unter" id="untertitel"></div></div>
+    <nav class="tabs" id="tabs" aria-label="Teile des Lernpakets"></nav>  <!-- Teile mit Fortschritt, in der Kopfzeile -->
     <div class="fortschritt" id="fortschritt" aria-live="polite"></div>
   </header>
-  <nav class="tabs card" id="tabs" aria-label="Teile des Lernpakets"></nav>
   <main id="haupt" tabindex="-1"></main>
   <footer class="leiste card" id="leiste"></footer>
   <div class="fuss" id="fuss"></div>
 </div>
 <script src="js/baukasten.js"></script>  <!-- Bausteine für Szenen (window.KIT) -->
 <script src="js/inhalt.js"></script>
-<script src="js/tafel.js"></script>  <!-- optionales Tafelbild; tut nichts ohne PAKET.tafel -->
+<script src="js/tafel.js"></script>  <!-- Tafelbild für den Input; tut nichts ohne PAKET.tafel -->
 <script src="js/engine.js"></script>
 </body>
 </html>

@@ -42,8 +42,6 @@ html.tafel-offen,html.tafel-offen body{overflow:hidden}
 
 /* Zugänge im Paket */
 .tafel-knopf{display:inline-flex;align-items:center;gap:6px;font-weight:600}
-.tafel-hinweis{display:flex;gap:8px;align-items:center;flex-wrap:wrap;color:var(--ink-soft);font-size:.92rem}
-.tafel-hinweis-icon svg{width:22px;height:22px;display:block;color:var(--ink-soft)}
 
 @media (max-width:900px){
   .tafel-mitte{flex-direction:column}
@@ -56,4 +54,4 @@ html.tafel-offen,html.tafel-offen body{overflow:hidden}
   .tafel-nav{min-width:52px}
   .tafel .topo-hud{font-size:1.05rem}
 }
-@media print{.tafel,.tafel-knopf,.tafel-hinweis{display:none!important}}
+@media print{.tafel,.tafel-knopf{display:none!important}}

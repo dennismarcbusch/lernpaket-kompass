@@ -31,7 +31,7 @@ var FIRMLINGE = {
     falsch: 'Eine GmbH & Co. KG ist eine KG – also Abteilung A. Die GmbH ist nur ihre Komplementärin.' },
   sonnenkraft: { name: 'Sonnenkraft Obermain eG', rf: 'eingetragene Genossenschaft (eG)', art: 'frei', farbe: '#a3e635', symbol: '🔋', lz: 'LZ2',
     falsch: 'Genossenschaften stehen im Genossenschaftsregister. Lass sie frei.' },
-  // für Üben und Nachweis
+  // für Üben und Selbstüberprüfung
   weber: { name: 'Weber & Söhne OHG', rf: 'Offene Handelsgesellschaft (OHG)', art: 'hra', farbe: '#fb923c', symbol: '🧱', lz: 'LZ2',
     attr: [['Firma', 'Weber & Söhne OHG', 1], ['Gesellschafter', 'Erika Weber, Paul Weber', 1], ['Sitz', 'Kulmbach', 1], ['Gewinn', '90.000 €', 0], ['Mitarbeiter', '9', 0]], falsch: 'Die OHG ist eine Personengesellschaft: Abteilung A.' },
   klickwerk: { name: 'Klickwerk UG (haftungsbeschränkt)', rf: 'UG (haftungsbeschränkt)', art: 'hrb', farbe: '#e879f9', symbol: '🖱️', lz: 'LZ2',
@@ -57,7 +57,7 @@ var SCHATTEN = {
     falsch: 'Auch die UG entsteht als Kapitalgesellschaft erst mit der Eintragung.' },
   kernwerkGF: { name: 'Kernwerk Bürobedarf GmbH', farbe: '#14b8a6', symbol: '📎', siegel: 'd', lz: 'LZ4', steck: 'Herr Demir ist seit letzter Woche neuer Geschäftsführer.',
     falsch: 'Herr Demir ist Geschäftsführer, seit er bestellt wurde. Die Eintragung macht den Wechsel nur bekannt.' },
-  // Üben und Nachweis
+  // Üben und Selbstüberprüfung
   bohne: { name: 'Rösterei Bohne GmbH', farbe: '#92400e', symbol: '☕', siegel: 'k', lz: 'LZ4', steck: 'GmbH in Gründung, Stammkapital eingezahlt.', falsch: 'Die GmbH entsteht erst mit der Eintragung.' },
   dietz: { name: 'Autohaus Dietz e. K.', farbe: '#dc2626', symbol: '🚗', siegel: 'd', lz: 'LZ4', steck: 'Autohaus mit 25 Leuten, seit zehn Jahren am Markt, nie eingetragen.', falsch: 'Ein Autohaus dieser Größe ist schon kaufmännisch (Istkaufmann). Die Eintragung macht nur bekannt.' },
   honigtau: { name: 'Imkerei Honigtau e. K.', farbe: '#facc15', symbol: '🐝', siegel: 'k', lz: 'LZ4', steck: 'Kleine Imkerei im Nebenerwerb. Möchte freiwillig Kaufmann werden.', falsch: 'Kleingewerbe → Kaufmann erst durch die freiwillige Eintragung.' },
@@ -163,7 +163,7 @@ var REX = { name: 'Rivale Rex', aussehen: { haut: 3, haare: 'schwarz', frisur: '
 var NOTARIN = { name: 'Notarin Wolf', aussehen: { haut: 0, haare: 'rot', frisur: 'lang', kleidung: '#1f2937', brille: true } };
 var MIA = { name: 'Mia', aussehen: { haut: 4, haare: 'schwarz', frisur: 'zopf', kleidung: '#f59e0b' } };
 
-/* ---------- Begegnungen: die Spielmechanik, auch für Üben und Nachweis ----------
+/* ---------- Begegnungen: die Spielmechanik, auch für Üben und Selbstüberprüfung ----------
    schritt: { art: 'ball', id } | { art: 'siegel', id } | { art: 'duell', ids:[…] }
    opt: { pruefung, beglaubigt(): bool, fertig(ok, info), flucht() } */
 function begegnung(buehne, schritt, opt) {
@@ -218,7 +218,7 @@ function begegnung(buehne, schritt, opt) {
     // Dex-Eintrag: nur eintragen, was ins Register gehört (LZ3)
     var dexOderEnde = function (gefangen, freigelassen) {
       info.gefangen = gefangen;
-      // im Nachweis kommt der Dex-Eintrag immer (eigener Prüfpunkt), sonst nur nach dem Fang
+      // in der Selbstüberprüfung kommt der Dex-Eintrag immer (eigener Prüfpunkt), sonst nur nach dem Fang
       if (!f.attr || freigelassen || (!gefangen && !opt.pruefung)) return schliessen(gefangen);
       feld.innerHTML = '';
       feld.appendChild(E('div', { class: 'fd-dexkarte' }, [E('div', { html: firmlingSvg(f) }), E('div', {}, [E('div', { text: '📕 Neuer Eintrag' }), E('b', { text: f.name }), E('div', { html: '<span class="fd-badge ' + f.art + '">' + f.art.toUpperCase() + '</span>' })])]));
@@ -489,7 +489,7 @@ function firmendexSpiel(box, api) {
   };
 }
 
-/* ---------- Kurze Sequenzen für Üben und Nachweis ---------- */
+/* ---------- Kurze Sequenzen für Üben und Selbstüberprüfung ---------- */
 function sequenz(schritte, opt) {
   return function (box, api) {
     var E = KIT.el, i = 0, fehler = 0, ergebnisse = [], aktiv = null;
@@ -528,7 +528,7 @@ window.PAKET = {
   titel: 'Firmendex',
   untertitel: 'Das Handelsregister – fang sie dir alle!',
   version: '0.3',
-  bestehen: 80,
+  bereit: 80,
   dauer: 'etwa 45 Minuten',
   welt: { thema: 'wirtschaft', kulisse: 'stadt', symbol: '📕' },
   figur: { name: 'Professorin Linde', rolle: 'Registerforscherin', aussehen: LINDE.aussehen },
@@ -536,9 +536,9 @@ window.PAKET = {
   spielwelt: { titel: 'Firmendex – fang sie dir alle!', tab: 'Spielen', start: firmendexSpiel },
 
   stationen: [
-    { id: 'S1', titel: 'Level 1 · Die Firmlinge der Stadt', lz: ['LZ1', 'LZ2', 'LZ3'], check: ['C1', 'C4', 'C5'],
+    { id: 'S1', titel: 'Level 1 · Die Firmlinge der Stadt', lz: ['LZ1', 'LZ2', 'LZ3'], vorab: ['V1', 'V2', 'V3'], check: ['C1', 'C4', 'C5'],
       mitdenken: { auftrag: 'Erklär deinem Sitznachbarn, warum der Umsatz in deinem Dex immer „???“ bleibt.', muster: 'Das Handelsregister zeigt die rechtlichen Verhältnisse einer Firma: Firma, Sitz, Kapital, Vertretung. Geschäftszahlen wie Umsatz oder Gewinn werden nicht eingetragen.' } },
-    { id: 'S2', titel: 'Level 2 · Das Amtsgericht', lz: ['LZ4', 'LZ5'], check: ['C7', 'C10', 'C12'],
+    { id: 'S2', titel: 'Level 2 · Das Amtsgericht', lz: ['LZ4', 'LZ5'], vorab: ['V4', 'V5'], check: ['C7', 'C10', 'C12'],
       mitdenken: { auftrag: 'Zeichne auf Papier zwei Spalten: 🥚 „schlüpft erst durch die Eintragung“ und 🔔 „wird bekannt gemacht“. Sortiere alle Schatten aus Level 2 ein.', muster: '🥚 Lindgrün GmbH, Nähwerk Lenz, Roth Digital UG. 🔔 Fischer Großhandel, Prokura bei Hartmann, neuer Geschäftsführer bei Kernwerk.' } }
   ],
 
@@ -560,7 +560,7 @@ window.PAKET = {
       reflexion: { frage: 'Warum lohnt es sich für einen Händler, vor einem großen Geschäft ins Register zu schauen?', muster: 'Er sieht, wer die Firma vertreten darf. Auf das, was dort steht, darf er sich verlassen – Änderungen, die fehlen, gelten ihm gegenüber nicht.' } }
   ],
 
-  nachweis: {
+  selbstueberpruefung: {
     dauer: '15 Minuten',
     gewichtA: 50,
     einleitung: 'Die große Firmendex-Prüfung! Diesmal <b>ohne Hinweise</b>: Was du entscheidest, gilt. Ich schaue mir dein Ergebnis am Ende an.',
@@ -628,15 +628,28 @@ window.PAKET = {
     { id: 'LZ5', kurz: 'Öffentlicher Glaube, Prokura', text: 'Ich kann erklären, was „öffentlicher Glaube“ bedeutet, und Prokura und Handlungsvollmacht richtig einordnen.' }
   ],
 
-  vorwissen: ['V1', 'V2', 'V3', 'V4', 'V5'],
+
+  /* Tafelbild: der Mittelteil des Inputs (Erklären und Beispiel). Die Szenen nutzen dieselben Begegnungen
+     wie das Spiel – groß, gemeinsam entschieden: erst vorhersagen lassen, dann werfen oder siegeln. */
+  tafel: {
+    titel: 'Firmendex – Erklären und Beispiel',
+    szenen: [
+      { id: 'ball', titel: 'Welcher Ball – oder freilassen?', station: 'S1',
+        erklaerung: '<p>Entscheidend ist die <b>Rechtsform</b>: GmbH, UG, AG → 🔴 HRB. e. K., OHG, KG (auch GmbH & Co. KG) → 🔵 HRA.</p><p>Verein und Genossenschaft: freilassen, sie haben eigene Register.</p>',
+        zeichne: function (box) { sequenz([{ art: 'ball', id: 'mainblick' }, { art: 'ball', id: 'robotics' }, { art: 'ball', id: 'birkenhof' }], { maxFehler: 9 })(box, { erledigt: function () {} }); return {}; } },
+      { id: 'siegel', titel: 'Schlüpft es – oder gab es das schon?', station: 'S2',
+        erklaerung: '<p><b>Konstitutiv:</b> Erst die Eintragung lässt etwas entstehen (GmbH, UG, AG, freiwilliger Kaufmann).</p><p><b>Deklaratorisch:</b> Es gilt schon, die Eintragung macht es bekannt (Großbetrieb, Prokura, neuer Vorstand).</p>',
+        zeichne: function (box) { sequenz([{ art: 'siegel', id: 'fischer' }, { art: 'siegel', id: 'lenz' }], { maxFehler: 9 })(box, { erledigt: function () {} }); return {}; } }
+    ]
+  },
 
   glossar: [
-    { begriff: 'Handelsregister (HR)', erklaerung: 'Öffentliches Verzeichnis der Kaufleute eines Amtsgerichtsbezirks.', vorab: true },
-    { begriff: 'Abteilung A (HRA)', erklaerung: 'Teil des HR für Einzelunternehmen und Personengesellschaften (e. K., OHG, KG).', vorab: true },
-    { begriff: 'Abteilung B (HRB)', erklaerung: 'Teil des HR für Kapitalgesellschaften (GmbH, UG, AG).', vorab: true },
-    { begriff: 'konstitutiv', erklaerung: '„Rechtsbegründend“: Erst durch die Eintragung entsteht die Rechtswirkung.', vorab: true },
-    { begriff: 'deklaratorisch', erklaerung: '„Bekanntmachend“: Die Rechtswirkung gibt es schon. Die Eintragung macht sie nur öffentlich.', vorab: true },
-    { begriff: 'Prokura', erklaerung: 'Weitreichende Vollmacht. Sie wird ins HR eingetragen.', vorab: true },
+    { begriff: 'Handelsregister (HR)', erklaerung: 'Öffentliches Verzeichnis der Kaufleute eines Amtsgerichtsbezirks.', vorab: 'S1' },
+    { begriff: 'Abteilung A (HRA)', erklaerung: 'Teil des HR für Einzelunternehmen und Personengesellschaften (e. K., OHG, KG).', vorab: 'S1' },
+    { begriff: 'Abteilung B (HRB)', erklaerung: 'Teil des HR für Kapitalgesellschaften (GmbH, UG, AG).', vorab: 'S1' },
+    { begriff: 'konstitutiv', erklaerung: '„Rechtsbegründend“: Erst durch die Eintragung entsteht die Rechtswirkung.', vorab: 'S2' },
+    { begriff: 'deklaratorisch', erklaerung: '„Bekanntmachend“: Die Rechtswirkung gibt es schon. Die Eintragung macht sie nur öffentlich.', vorab: 'S2' },
+    { begriff: 'Prokura', erklaerung: 'Weitreichende Vollmacht. Sie wird ins HR eingetragen.', vorab: 'S2' },
     { begriff: 'Handlungsvollmacht', erklaerung: 'Begrenzte Vollmacht für übliche Geschäfte. Sie wird nicht eingetragen.' },
     { begriff: 'öffentlicher Glaube', erklaerung: 'Man darf sich auf das HR verlassen. Nicht Eingetragenes kann Gutgläubigen nicht entgegengehalten werden.' },
     { begriff: 'Stammkapital / Grundkapital', erklaerung: 'Festgelegtes Kapital einer GmbH bzw. AG.' },
@@ -648,46 +661,43 @@ window.PAKET = {
   /* FRAGEN-PLATZHALTER */
   fragen: [
 
-// ===== Vorwissens-Check (eine je Lernziel) =====
-{ id: 'V1', lz: 'LZ1', einsatz: ['vorwissen'], typ: 'mc',
-  frage: 'Wer darf ins Handelsregister schauen?',
-  optionen: [
-    { text: 'Jeder', richtig: true },
-    { text: 'Nur Kaufleute', feedback: 'Das HR ist öffentlich, auch Kunden, Lieferanten und Privatpersonen dürfen einsehen. Mehr dazu in Station 1.' },
-    { text: 'Nur, wer ein berechtigtes Interesse nachweist', feedback: 'Ein Nachweis ist nicht nötig, die Einsicht steht jedem offen. Mehr dazu in Station 1.' }
+// ===== Vorab-Fragen (eine je Lernziel, schwer zu erraten: Text, Zuordnen, Mehrfachauswahl) =====
+{ id: 'V1', lz: 'LZ1', einsatz: ['vorab'], typ: 'text',
+  frage: 'Welches Gericht führt das Handelsregister? Ein Wort genügt.',
+  akzeptiert: ['Amtsgericht', 'Registergericht', 'das Amtsgericht', 'Amtsgerichte'],
+  typisch: [{ antwort: 'Landgericht', feedback: 'Das Landgericht entscheidet größere Streitfälle. Das Register führt das Amtsgericht.' }, { antwort: 'IHK', feedback: 'Die IHK berät die Firmen, das Register führt ein Gericht.' }],
+  erklaerung: 'Das Handelsregister führt das Amtsgericht als Registergericht. Einsehen darf jeder, ohne einen Grund zu nennen.' },
+{ id: 'V2', lz: 'LZ2', einsatz: ['vorab'], typ: 'zuordnen',
+  frage: 'Ordne jede Rechtsform dem passenden Register zu.',
+  paare: [
+    { links: 'KG', rechts: 'Handelsregister Abteilung A' },
+    { links: 'GmbH', rechts: 'Handelsregister Abteilung B' },
+    { links: 'e. V.', rechts: 'Vereinsregister' }
   ],
-  erklaerung: 'Das Handelsregister ist öffentlich: Jeder darf einsehen, ohne einen Grund zu nennen.' },
-{ id: 'V2', lz: 'LZ2', einsatz: ['vorwissen'], typ: 'mc',
-  frage: 'In welche Abteilung des Handelsregisters gehört eine KG?',
+  feedbackFalsch: 'Einzelunternehmen und Personengesellschaften → A, Kapitalgesellschaften → B, Vereine haben ein eigenes Register.',
+  erklaerung: 'Die KG ist eine Personengesellschaft (A), die GmbH eine Kapitalgesellschaft (B). Eingetragene Vereine stehen im Vereinsregister.' },
+{ id: 'V3', lz: 'LZ3', einsatz: ['vorab'], typ: 'mc',
+  frage: 'Was steht bei einer GmbH im Handelsregister? Kreuze alle richtigen an.',
   optionen: [
-    { text: 'Abteilung A', richtig: true },
-    { text: 'Abteilung B', feedback: 'In B stehen Kapitalgesellschaften wie GmbH und AG. Die KG ist eine Personengesellschaft. Station 2 hilft.' },
-    { text: 'In keine, nur Kapitalgesellschaften sind eingetragen', feedback: 'Auch Einzelunternehmen und Personengesellschaften stehen im HR, nämlich in Abteilung A. Station 2 hilft.' }
+    { text: 'Das Stammkapital', richtig: true },
+    { text: 'Der Name des Geschäftsführers', richtig: true },
+    { text: 'Der Umsatz des letzten Jahres', feedback: 'Geschäftszahlen wie Umsatz oder Gewinn stehen nicht im Register.' },
+    { text: 'Die Zahl der Beschäftigten', feedback: 'Wie viele Leute dort arbeiten, steht nicht im Register.' }
   ],
-  erklaerung: 'Einzelunternehmen und Personengesellschaften (OHG, KG) stehen in Abteilung A.' },
-{ id: 'V3', lz: 'LZ3', einsatz: ['vorwissen'], typ: 'mc',
-  frage: 'Was steht bei einer GmbH nicht im Handelsregister?',
+  erklaerung: 'Im HR stehen Rechtsverhältnisse (Firma, Sitz, Kapital, Vertretung), keine Geschäftszahlen.' },
+{ id: 'V4', lz: 'LZ4', einsatz: ['vorab'], typ: 'mc',
+  frage: 'Was entsteht rechtlich erst mit der Eintragung ins Handelsregister? Kreuze alle richtigen an.',
   optionen: [
-    { text: 'Der Umsatz des letzten Jahres', richtig: true },
-    { text: 'Das Stammkapital', feedback: 'Das Stammkapital steht im HR. Geschäftszahlen wie der Umsatz dagegen nicht. Station 2 hilft.' },
-    { text: 'Der Name des Geschäftsführers', feedback: 'Der Geschäftsführer wird eingetragen. Nicht eingetragen werden Geschäftszahlen. Station 2 hilft.' }
+    { text: 'Eine GmbH', richtig: true },
+    { text: 'Eine AG', richtig: true },
+    { text: 'Die Kaufmannseigenschaft eines großen Autohauses', feedback: 'Wer einen großen kaufmännischen Betrieb führt, ist schon Kaufmann. Die Eintragung macht das nur bekannt.' },
+    { text: 'Die Prokura einer Mitarbeiterin', feedback: 'Die Prokura gilt, sobald sie erteilt ist. Die Eintragung macht sie nur bekannt.' }
   ],
-  erklaerung: 'Im HR stehen Rechtsverhältnisse (Firma, Sitz, Kapital, Vertretung), keine Geschäftszahlen wie Umsatz oder Gewinn.' },
-{ id: 'V4', lz: 'LZ4', einsatz: ['vorwissen'], typ: 'mc',
-  frage: 'Wann entsteht eine GmbH rechtlich?',
-  optionen: [
-    { text: 'Mit der Eintragung ins Handelsregister', richtig: true },
-    { text: 'Sobald der Gesellschaftsvertrag unterschrieben ist', feedback: 'Der Vertrag allein genügt nicht, die GmbH entsteht erst mit der Eintragung. Station 3 hilft.' },
-    { text: 'Sobald das erste Geschäft gemacht wird', feedback: 'Der Geschäftsbeginn ist nicht entscheidend. Erst die Eintragung lässt die GmbH entstehen. Station 3 hilft.' }
-  ],
-  erklaerung: 'Die Eintragung wirkt hier konstitutiv: Ohne sie gibt es die GmbH als solche noch nicht.' },
-{ id: 'V5', lz: 'LZ5', einsatz: ['vorwissen'], typ: 'mc',
-  frage: 'Welche Vollmacht wird ins Handelsregister eingetragen?',
-  optionen: [
-    { text: 'Die Prokura', richtig: true },
-    { text: 'Die Handlungsvollmacht', feedback: 'Handlungsvollmachten werden nicht eingetragen. Station 4 hilft.' },
-    { text: 'Beide', feedback: 'Nur die Prokura wird eingetragen. Station 4 hilft.' }
-  ],
+  erklaerung: 'Bei GmbH und AG wirkt die Eintragung konstitutiv: Ohne sie gibt es die Gesellschaft als solche noch nicht.' },
+{ id: 'V5', lz: 'LZ5', einsatz: ['vorab'], typ: 'text',
+  frage: 'Welche Vollmacht wird ins Handelsregister eingetragen? Ein Wort genügt.',
+  akzeptiert: ['Prokura', 'die Prokura', 'Einzelprokura'],
+  typisch: [{ antwort: 'Handlungsvollmacht', feedback: 'Handlungsvollmachten werden nicht eingetragen – nur die Prokura.' }],
   erklaerung: 'Die Prokura steht im HR, die Handlungsvollmacht nicht.' },
 
 // ===== Station 1: Wozu das Handelsregister (LZ1) =====
@@ -824,8 +834,8 @@ window.PAKET = {
   ],
   erklaerung: 'Die Art der Vertretung (einzeln oder gemeinsam) steht im HR und ist bindend.' },
 
-// ===== Nachweis Teil B: LZ1 =====
-{ id: 'N1', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc',
+// ===== Selbstüberprüfung Teil B: LZ1 =====
+{ id: 'N1', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welche Aussagen zum Handelsregister stimmen? Kreuze alle richtigen an.',
   optionen: [
     { text: 'Es wird vom Amtsgericht geführt.', richtig: true },
@@ -835,7 +845,7 @@ window.PAKET = {
     { text: 'Nur mit berechtigtem Interesse darf man einsehen.', feedback: 'Die Einsicht ist für jeden möglich.' }
   ],
   erklaerung: 'Das HR ist ein öffentliches Verzeichnis beim Amtsgericht und soll Rechtssicherheit schaffen.' },
-{ id: 'N2', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N2', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Ein Praktikant meint: „Den HR-Auszug unseres Lieferanten dürfen nur die Gesellschafter des Lieferanten sehen.“ Was antwortest du?',
   optionen: [
     { text: 'Falsch, jeder darf ihn abrufen.', richtig: true },
@@ -843,7 +853,7 @@ window.PAKET = {
     { text: 'Richtig, aber auch Kunden dürfen ihn sehen.', feedback: 'Der Kreis ist nicht begrenzt, es darf jeder einsehen.' }
   ],
   erklaerung: 'Öffentlichkeit ist Zweck des Registers: Jeder darf einsehen.' },
-{ id: 'N3', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N3', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Eine GmbH meldet einen neuen Geschäftsführer an. Welche Aussage ist richtig?',
   optionen: [
     { text: 'Die Anmeldung erfolgt elektronisch in öffentlich beglaubigter Form beim Registergericht.', richtig: true },
@@ -851,7 +861,7 @@ window.PAKET = {
     { text: 'Die Anmeldung erfolgt formlos beim Landgericht.', feedback: 'Zuständig ist das Registergericht beim Amtsgericht, und die Form ist vorgeschrieben.' }
   ],
   erklaerung: 'Für Anmeldungen gilt: elektronisch, öffentlich beglaubigt, beim Registergericht.' },
-{ id: 'N4', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N4', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welcher Nutzen ergibt sich für den Einkauf, wenn er vor einem Vertrag den HR-Auszug prüft?',
   optionen: [
     { text: 'Er weiß verlässlich, mit welcher Rechtsform und mit wem er es zu tun hat.', richtig: true },
@@ -860,8 +870,8 @@ window.PAKET = {
   ],
   erklaerung: 'Der Auszug zeigt rechtliche Verhältnisse wie Rechtsform, Vertretung und Haftung.' },
 
-// ===== Nachweis Teil B: LZ2 =====
-{ id: 'N5', lz: 'LZ2', einsatz: ['nachweis'], typ: 'zuordnen',
+// ===== Selbstüberprüfung Teil B: LZ2 =====
+{ id: 'N5', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'zuordnen',
   frage: 'Ordne die Unternehmen dem richtigen Register zu.',
   paare: [
     { links: 'Brandt Elektrik OHG', rechts: 'HR Abteilung A' },
@@ -871,7 +881,7 @@ window.PAKET = {
   ],
   feedbackFalsch: 'Personengesellschaften und Einzelunternehmen → A. GmbH, UG, AG → B. Genossenschaft und Verein haben eigene Register.',
   erklaerung: 'OHG → A, UG → B. Genossenschaften und eingetragene Vereine stehen nicht im Handelsregister.' },
-{ id: 'N6', lz: 'LZ2', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N6', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'In welche Abteilung gehört die Wiesental Möbel GmbH & Co. KG?',
   optionen: [
     { text: 'Abteilung A, weil sie eine KG ist.', richtig: true },
@@ -879,7 +889,7 @@ window.PAKET = {
     { text: 'In beide Abteilungen gleichzeitig.', feedback: 'Die KG steht in A. Die beteiligte GmbH hat ihren eigenen Eintrag in B, das ist ein anderes Unternehmen.' }
   ],
   erklaerung: 'Maßgeblich ist die Rechtsform der Gesellschaft selbst. Die KG steht in Abteilung A.' },
-{ id: 'N7', lz: 'LZ2', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N7', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welche Unternehmen stehen in Abteilung B? Kreuze alle richtigen an.',
   optionen: [
     { text: 'Nord Logistik GmbH', richtig: true },
@@ -889,7 +899,7 @@ window.PAKET = {
     { text: 'Bäckerei Hoff e. K.', feedback: 'Der eingetragene Kaufmann (e. K.) steht in Abteilung A.' }
   ],
   erklaerung: 'In Abteilung B stehen Kapitalgesellschaften: GmbH, UG und AG.' },
-{ id: 'N8', lz: 'LZ2', einsatz: ['nachweis'], typ: 'text',
+{ id: 'N8', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'text',
   frage: 'Der Bürostuhl-Hersteller Kern & Lenz KG wird eingetragen. In welche Abteilung? Antworte mit A oder B.',
   akzeptiert: ['A', 'HRA', 'Abteilung A', 'Abt. A'],
   typisch: [
@@ -898,8 +908,8 @@ window.PAKET = {
   ],
   erklaerung: 'Die KG ist eine Personengesellschaft, also Abteilung A.' },
 
-// ===== Nachweis Teil B: LZ3 =====
-{ id: 'N9', lz: 'LZ3', einsatz: ['nachweis'], typ: 'hotspot',
+// ===== Selbstüberprüfung Teil B: LZ3 =====
+{ id: 'N9', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'hotspot',
   frage: 'Hier ist ein Auszug der Nordstern Spedition GmbH. Tippe auf die Zeile, die <b>nicht</b> im Handelsregister steht.',
   svg: '<svg viewBox="0 0 360 200" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="HR-Auszug"><rect x="2" y="2" width="356" height="196" rx="6" fill="none" stroke="currentColor"/><text x="14" y="26" font-size="13" font-weight="bold" fill="currentColor">Amtsgericht – HRB 12345</text><text x="14" y="58" font-size="13" fill="currentColor">Firma: Nordstern Spedition GmbH</text><text x="14" y="86" font-size="13" fill="currentColor">Sitz: Hamburg</text><text x="14" y="114" font-size="13" fill="currentColor">Stammkapital: 25.000 €</text><text x="14" y="142" font-size="13" fill="currentColor">Geschäftsführer: Lena Voss</text><text x="14" y="170" font-size="13" fill="currentColor">Umsatz Vorjahr: 3,2 Mio. €</text></svg>',
   bereiche: [
@@ -910,7 +920,7 @@ window.PAKET = {
     { x: 6, y: 156, w: 348, h: 20, label: 'Umsatz Vorjahr', richtig: true, feedback: 'Richtig, Geschäftszahlen stehen nicht im HR.' }
   ],
   erklaerung: 'Im HR stehen Firma, Sitz, Kapital und Vertretung, aber keine Geschäftszahlen wie der Umsatz.' },
-{ id: 'N10', lz: 'LZ3', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N10', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welche Angaben werden bei einer Aktiengesellschaft eingetragen? Kreuze alle richtigen an.',
   optionen: [
     { text: 'Grundkapital', richtig: true },
@@ -920,7 +930,7 @@ window.PAKET = {
     { text: 'Liste aller Kunden', feedback: 'Kunden stehen nicht im HR, nur rechtliche Verhältnisse des Unternehmens.' }
   ],
   erklaerung: 'Bei der AG stehen Firma, Sitz, Gegenstand, Grundkapital, Vorstand und ggf. Prokuristen im HR.' },
-{ id: 'N11', lz: 'LZ3', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N11', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Du liest den Auszug einer KG. Woran erkennst du, bis zu welcher Höhe ein Kommanditist haftet?',
   optionen: [
     { text: 'An der eingetragenen Einlage des Kommanditisten', richtig: true },
@@ -928,7 +938,7 @@ window.PAKET = {
     { text: 'Gar nicht, die Einlage steht nicht im HR.', feedback: 'Die Einlage der Kommanditisten ist eintragungspflichtig.' }
   ],
   erklaerung: 'Bei der KG steht die Einlage der Kommanditisten im HR, so ist ihre Haftungsgrenze erkennbar.' },
-{ id: 'N12', lz: 'LZ3', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N12', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Im Auszug einer GmbH steht eine Prokura. Was kannst du daraus sicher ablesen?',
   optionen: [
     { text: 'Wer Prokurist ist und ob er allein oder nur gemeinsam vertritt.', richtig: true },
@@ -937,8 +947,8 @@ window.PAKET = {
   ],
   erklaerung: 'Eingetragen werden die Person und die Art der Vertretung (einzeln oder gemeinsam).' },
 
-// ===== Nachweis Teil B: LZ4 =====
-{ id: 'N13', lz: 'LZ4', einsatz: ['nachweis'], typ: 'mc',
+// ===== Selbstüberprüfung Teil B: LZ4 =====
+{ id: 'N13', lz: 'LZ4', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Die Eintragung einer GmbH ins HR wirkt …',
   optionen: [
     { text: 'konstitutiv: Erst durch sie entsteht die GmbH.', richtig: true },
@@ -946,7 +956,7 @@ window.PAKET = {
     { text: 'weder noch, sie ist nur eine Formsache.', feedback: 'Ohne Eintragung gibt es die GmbH als solche nicht, das ist mehr als eine Formsache.' }
   ],
   erklaerung: 'Die Eintragung begründet hier die Rechtswirkung (konstitutiv).' },
-{ id: 'N14', lz: 'LZ4', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N14', lz: 'LZ4', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Die Hartmann Textil OHG betreibt seit Jahren einen großen Handel und lässt sich jetzt eintragen. Welche Aussage stimmt?',
   optionen: [
     { text: 'Sie war schon vorher Kaufmann, die Eintragung ist deklaratorisch.', richtig: true },
@@ -954,7 +964,7 @@ window.PAKET = {
     { text: 'Ohne Eintragung durfte sie keine Verträge schließen.', feedback: 'Verträge sind auch ohne Eintragung möglich, die Eintragung macht die Verhältnisse nur bekannt.' }
   ],
   erklaerung: 'Bei einem Istkaufmann wirkt die Eintragung nur bekanntmachend.' },
-{ id: 'N15', lz: 'LZ4', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N15', lz: 'LZ4', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welche Eintragungen wirken deklaratorisch? Kreuze alle richtigen an.',
   optionen: [
     { text: 'Eintragung eines Istkaufmanns', richtig: true },
@@ -963,7 +973,7 @@ window.PAKET = {
     { text: 'Eintragung eines Kleingewerbetreibenden als Kannkaufmann', feedback: 'Hier entsteht die Kaufmannseigenschaft erst durch die Eintragung, das ist konstitutiv.' }
   ],
   erklaerung: 'Deklaratorisch ist die Eintragung dort, wo die Rechtswirkung schon vorher eingetreten ist.' },
-{ id: 'N16', lz: 'LZ4', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N16', lz: 'LZ4', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Sandra Hoff betreibt eine kleine Näherei und lässt sie als „Nähstudio Hoff e. K.“ eintragen. Welche Aussage ist richtig?',
   optionen: [
     { text: 'Die Eintragung macht sie erst zur Kauffrau (konstitutiv).', richtig: true },
@@ -972,8 +982,8 @@ window.PAKET = {
   ],
   erklaerung: 'Wer ein Kleingewerbe betreibt, wird durch die Eintragung zum Kaufmann (Kannkaufmann), die Eintragung wirkt konstitutiv.' },
 
-// ===== Nachweis Teil B: LZ5 =====
-{ id: 'N17', lz: 'LZ5', einsatz: ['nachweis'], typ: 'mc',
+// ===== Selbstüberprüfung Teil B: LZ5 =====
+{ id: 'N17', lz: 'LZ5', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welche Aussage zu Prokura und Handlungsvollmacht stimmt?',
   optionen: [
     { text: 'Die Prokura wird eingetragen, die Handlungsvollmacht nicht.', richtig: true },
@@ -981,7 +991,7 @@ window.PAKET = {
     { text: 'Die Prokura entsteht erst mit der Eintragung.', feedback: 'Die Prokura gilt schon mit ihrer Erteilung, die Eintragung ist nur bekanntmachend.' }
   ],
   erklaerung: 'Nur die Prokura wird ins HR eingetragen, und zwar deklaratorisch.' },
-{ id: 'N18', lz: 'LZ5', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N18', lz: 'LZ5', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Ein Prokurist hat intern nur Vollmacht bis 5 000 €, im HR steht keine Beschränkung. Er kauft für 20 000 € bei uns Ware. Was gilt?',
   optionen: [
     { text: 'Der Kauf gilt, die interne Beschränkung ist uns gegenüber unwirksam.', richtig: true },
@@ -989,7 +999,7 @@ window.PAKET = {
     { text: 'Der Kauf gilt nur, wenn wir nachweisen, dass wir die Grenze nicht kannten.', feedback: 'Auf Gutgläubigkeit kommt es hier nicht an, die Beschränkung wirkt Dritten gegenüber nie.' }
   ],
   erklaerung: 'Eine Beschränkung des Umfangs der Prokura ist Dritten gegenüber unwirksam.' },
-{ id: 'N19', lz: 'LZ5', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N19', lz: 'LZ5', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Eine GmbH hat ihren Geschäftsführer gewechselt, die Änderung steht noch nicht im HR. Der alte Geschäftsführer schließt noch einen Vertrag mit uns, wir wussten vom Wechsel nichts. Was gilt?',
   optionen: [
     { text: 'Die GmbH kann uns den Wechsel nicht entgegenhalten, weil wir gutgläubig waren.', richtig: true },
@@ -997,7 +1007,7 @@ window.PAKET = {
     { text: 'Wir hätten den Wechsel selbst prüfen müssen, sonst gilt der Vertrag nicht.', feedback: 'Es gibt keine Pflicht, laufend zu prüfen. Wer auf das HR vertraut, wird geschützt.' }
   ],
   erklaerung: 'Nicht eingetragene Tatsachen können gutgläubigen Dritten nicht entgegengehalten werden (öffentlicher Glaube).' },
-{ id: 'N20', lz: 'LZ5', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N20', lz: 'LZ5', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Eine Mitarbeiterin mit Handlungsvollmacht unterschreibt für ihre Firma. Welche Aussage ist richtig?',
   optionen: [
     { text: 'Sie ist nicht im HR eingetragen, wir müssen ihren Umfang bei Zweifeln erfragen.', richtig: true },

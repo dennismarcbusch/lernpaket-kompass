@@ -1,10 +1,10 @@
 /* =====================================================================
-   BEISPIEL Simulationsmodus (Lernpaket-Kompass 3.3, Form A „Simulation“):
+   BEISPIEL Simulationsmodus (Lernpaket-Kompass, Form A „Simulation“):
    „Partner-Check“ – das Handelsregister am Arbeitsplatz im Einkauf.
    Ein Arbeitsgegenstand trägt das ganze Paket: das nachgebaute Registerportal
    (oben) und die Prüfliste für neue Geschäftspartner (unten). Kapitel sind
-   Folgen kleiner Schritte am Gegenstand; Üben und Nachweis nutzen denselben
-   Gegenstand mit neuen Firmen. Alle Firmen, Personen, Registernummern und das
+   Folgen kleiner Schritte am Gegenstand; Üben, Selbstüberprüfung und Tafelbild
+   nutzen denselben Gegenstand mit neuen Firmen. Alle Firmen, Personen, Registernummern und das
    Portal sind erfunden bzw. nachgebaut (Übungsversion).
    Zum Nachschlagen: In einem echten Paket ersetzt diese Datei js/inhalt.js.
    ===================================================================== */
@@ -26,7 +26,7 @@ var FIRMEN = {
   mainblick: { firma: 'Kulturverein Mainblick e. V.', art: 'VR', nr: 'VR 412', gericht: 'Amtsgericht Coburg', sitz: 'Lichtenfels', gegenstand: 'Förderung von Kunst und Kultur',
     kapital: '–', vertretung: 'Vorstand: Lena Grün (1. Vorsitzende)', prokura: '–', datum: '21.01.2022',
     unterschrift: ['Lena Grün (Vorstand)', 'jedes Vereinsmitglied'], richtig: 'Lena Grün (Vorstand)' },
-  // für Üben und Nachweis (neue Fälle mit demselben Gegenstand)
+  // für Üben und Selbstüberprüfung (neue Fälle mit demselben Gegenstand)
   brunner: { firma: 'Brunner Backwaren AG', art: 'HRB', nr: 'HRB 2044', gericht: 'Amtsgericht Coburg', sitz: 'Bad Staffelstein', gegenstand: 'Herstellung und Vertrieb von Backwaren',
     kapital: 'Grundkapital: 120.000,00 EUR', vertretung: 'Der Vorstand vertritt.<br><b>Vorstand: Günter Fischer, Coburg</b>', prokura: '–', datum: '05.05.2025',
     unterschrift: ['Günter Fischer (Vorstand)', 'jeder Aktionär'], richtig: 'Günter Fischer (Vorstand)' },
@@ -128,7 +128,7 @@ function partnerCheck(box, partner, melde) {
     // Trefferliste zeigt die Firma k (Suche mit mindestens drei Buchstaben aus dem Namen)
     gefunden: function (k) { var q = String(stand.q || '').trim().toLowerCase(); return stand.seite === '/treffer' && q.length >= 3 && FIRMEN[k].firma.toLowerCase().indexOf(q) >= 0; },
     setze: function (k, id, v) { felder[k][id].value = v; stand.werte[k][id] = v; ge(); },
-    // Prüfungen für die Schritte, Übungen und den Nachweis
+    // Prüfungen für die Schritte, Übungen und die Selbstüberprüfung
     gerichtOk: function (k) { return norm(stand.werte[k].gericht) === norm(FIRMEN[k].gericht); },
     nrOk: function (k) { return norm(stand.werte[k].nr) === norm(FIRMEN[k].nr); },
     abtOk: function (k) { return stand.werte[k].abt === ABTEILUNG[FIRMEN[k].art]; },
@@ -166,7 +166,7 @@ window.PAKET = {
   titel: 'Partner-Check',
   untertitel: 'Geschäftspartner im Handelsregister prüfen',
   version: '0.1',
-  bestehen: 80,
+  bereit: 80,
   dauer: 'etwa 60 Minuten',
   welt: { thema: 'wirtschaft', kulisse: 'buero', symbol: '📇' },
   figur: { name: 'Katja Winter', rolle: 'Ausbilderin bei Kernwerk Bürobedarf', aussehen: { haut: 0, haare: 'blond', frisur: 'dutt', kleidung: '#0f766e' } },
@@ -268,7 +268,7 @@ window.PAKET = {
       reflexion: { frage: 'Jonas Birkner hat Handlungsvollmacht. Darf er nie unterschreiben?', muster: 'Doch, für übliche Geschäfte seines Bereichs. Im Register steht er aber nicht – darauf können wir uns also nicht berufen. Bei großen Verträgen lassen wir Geschäftsführer oder Prokuristin unterschreiben.' } }
   ],
 
-  nachweis: {
+  selbstueberpruefung: {
     dauer: '20 Minuten',
     gewichtA: 50,
     einleitung: 'Heute bin ich im Termin. <b>Du prüfst zwei neue Partner allein</b> – ohne Tipps und ohne Rückmeldung. Ich schaue mir deine Prüfliste später an.',
@@ -310,6 +310,32 @@ window.PAKET = {
     ], fehler: 'Handlungsvollmacht im Register suchen – sie wird nicht eingetragen.', beispiel: 'Seidl & Roth KG: Nur Bernd Seidl darf unterschreiben.', schema: 'Abdruck öffnen → Vertretung lesen → Prokura lesen (erloschen?) → Kommanditisten ausschließen.' }
   ],
   selbsttest: ['N2', 'N4', 'N6', 'N8', 'N18'],
+
+  /* Tafelbild: der Mittelteil des Inputs (Erklären und Beispiel). Beide Szenen zeigen denselben Gegenstand
+     wie das Paket, groß am Beamer: erst vorhersagen lassen („Was steht wohl im Abdruck?“), dann klicken, dann deuten. */
+  tafel: {
+    titel: 'Partner-Check – Erklären und Beispiel',
+    szenen: [
+      { id: 'abdruck', titel: 'Vom Namen zum Abdruck', station: 'K1',
+        erklaerung: '<p>Das Registerportal ist öffentlich. Oben im Abdruck stehen <b>Registergericht und Nummer</b> – damit ist die Firma eindeutig.</p><p>HRA oder HRB in der Nummer verrät die Abteilung.</p>',
+        zeichne: function (box, api) {
+          var pc = partnerCheck(box, ['hartmann'], null);
+          api.werkzeug({ icon: '🔍', text: 'Suchen', taste: 's', aktion: function () { pc.suchen('Hartmann'); } });
+          api.werkzeug({ icon: '📄', text: 'Abdruck', taste: 'a', aktion: function () { pc.oeffne('hartmann'); } });
+          api.werkzeug({ icon: '✍️', text: 'Eintragen', taste: 'n', aktion: function () { pc.fuelle('hartmann', ['reg']); } });
+          return {};
+        } },
+      { id: 'vertretung', titel: 'Wer darf unterschreiben?', station: 'K3',
+        erklaerung: '<p>Unter <b>Vertretung</b> und <b>Prokura</b> steht, wer unterschreiben darf. Eine erloschene Prokura zählt nicht mehr.</p><p>Der Kommanditist einer KG vertritt die Gesellschaft nicht.</p>',
+        zeichne: function (box, api) {
+          var pc = partnerCheck(box, ['seidl'], null);
+          pc.oeffne('seidl');
+          api.werkzeug({ icon: '📄', text: 'Abdruck', taste: 'a', aktion: function () { pc.oeffne('seidl'); } });
+          api.werkzeug({ icon: '✅', text: 'Auflösen', taste: 'l', aktion: function () { pc.fuelle('seidl', ['unt']); } });
+          return {};
+        } }
+    ]
+  },
 
   glossar: [
     { begriff: 'Handelsregister (HR)', erklaerung: 'Öffentliches Verzeichnis der Kaufleute eines Amtsgerichtsbezirks.', vorab: 'K1' },
@@ -425,7 +451,7 @@ window.PAKET = {
     { text: 'Kaufleute müssen alle Einträge auf Richtigkeit prüfen.', feedback: 'Eine solche Pflicht gibt es nicht. Wer sich auf das HR verlässt, wird geschützt.' }
   ],
   erklaerung: 'Wer gutgläubig auf das Register vertraut, wird geschützt: Nicht eingetragene Tatsachen kann man ihm nicht entgegenhalten.' },
-{ id: 'N1', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N1', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welche Aussagen zum Handelsregister stimmen? Kreuze alle richtigen an.',
   optionen: [
     { text: 'Es wird vom Amtsgericht geführt.', richtig: true },
@@ -435,7 +461,7 @@ window.PAKET = {
     { text: 'Nur mit berechtigtem Interesse darf man einsehen.', feedback: 'Die Einsicht ist für jeden möglich.' }
   ],
   erklaerung: 'Das HR ist ein öffentliches Verzeichnis beim Amtsgericht und soll Rechtssicherheit schaffen.' },
-{ id: 'N2', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N2', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Ein Praktikant meint: „Den HR-Auszug unseres Lieferanten dürfen nur die Gesellschafter des Lieferanten sehen.“ Was antwortest du?',
   optionen: [
     { text: 'Falsch, jeder darf ihn abrufen.', richtig: true },
@@ -443,7 +469,7 @@ window.PAKET = {
     { text: 'Richtig, aber auch Kunden dürfen ihn sehen.', feedback: 'Der Kreis ist nicht begrenzt, es darf jeder einsehen.' }
   ],
   erklaerung: 'Öffentlichkeit ist Zweck des Registers: Jeder darf einsehen.' },
-{ id: 'N3', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N3', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Eine GmbH meldet einen neuen Geschäftsführer an. Welche Aussage ist richtig?',
   optionen: [
     { text: 'Die Anmeldung erfolgt elektronisch in öffentlich beglaubigter Form beim Registergericht.', richtig: true },
@@ -451,7 +477,7 @@ window.PAKET = {
     { text: 'Die Anmeldung erfolgt formlos beim Landgericht.', feedback: 'Zuständig ist das Registergericht beim Amtsgericht, und die Form ist vorgeschrieben.' }
   ],
   erklaerung: 'Für Anmeldungen gilt: elektronisch, öffentlich beglaubigt, beim Registergericht.' },
-{ id: 'N4', lz: 'LZ1', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N4', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welcher Nutzen ergibt sich für den Einkauf, wenn er vor einem Vertrag den HR-Auszug prüft?',
   optionen: [
     { text: 'Er weiß verlässlich, mit welcher Rechtsform und mit wem er es zu tun hat.', richtig: true },
@@ -459,7 +485,7 @@ window.PAKET = {
     { text: 'Er kann dem Lieferanten Weisungen erteilen.', feedback: 'Das HR gibt nur Auskunft, es begründet keine Rechte gegenüber dem Lieferanten.' }
   ],
   erklaerung: 'Der Auszug zeigt rechtliche Verhältnisse wie Rechtsform, Vertretung und Haftung.' },
-{ id: 'N5', lz: 'LZ2', einsatz: ['nachweis'], typ: 'zuordnen',
+{ id: 'N5', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'zuordnen',
   frage: 'Ordne die Unternehmen dem richtigen Register zu.',
   paare: [
     { links: 'Brandt Elektrik OHG', rechts: 'HR Abteilung A' },
@@ -469,7 +495,7 @@ window.PAKET = {
   ],
   feedbackFalsch: 'Personengesellschaften und Einzelunternehmen → A. GmbH, UG, AG → B. Genossenschaft und Verein haben eigene Register.',
   erklaerung: 'OHG → A, UG → B. Genossenschaften und eingetragene Vereine stehen nicht im Handelsregister.' },
-{ id: 'N6', lz: 'LZ2', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N6', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'In welche Abteilung gehört die Wiesental Möbel GmbH & Co. KG?',
   optionen: [
     { text: 'Abteilung A, weil sie eine KG ist.', richtig: true },
@@ -477,7 +503,7 @@ window.PAKET = {
     { text: 'In beide Abteilungen gleichzeitig.', feedback: 'Die KG steht in A. Die beteiligte GmbH hat ihren eigenen Eintrag in B, das ist ein anderes Unternehmen.' }
   ],
   erklaerung: 'Maßgeblich ist die Rechtsform der Gesellschaft selbst. Die KG steht in Abteilung A.' },
-{ id: 'N7', lz: 'LZ2', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N7', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welche Unternehmen stehen in Abteilung B? Kreuze alle richtigen an.',
   optionen: [
     { text: 'Nord Logistik GmbH', richtig: true },
@@ -487,7 +513,7 @@ window.PAKET = {
     { text: 'Bäckerei Hoff e. K.', feedback: 'Der eingetragene Kaufmann (e. K.) steht in Abteilung A.' }
   ],
   erklaerung: 'In Abteilung B stehen Kapitalgesellschaften: GmbH, UG und AG.' },
-{ id: 'N8', lz: 'LZ2', einsatz: ['nachweis'], typ: 'text',
+{ id: 'N8', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'text',
   frage: 'Der Bürostuhl-Hersteller Kern & Lenz KG wird eingetragen. In welche Abteilung? Antworte mit A oder B.',
   akzeptiert: ['A', 'HRA', 'Abteilung A', 'Abt. A'],
   typisch: [
@@ -495,7 +521,7 @@ window.PAKET = {
     { antwort: 'HRB', feedback: 'HRB ist für Kapitalgesellschaften. Die KG ist eine Personengesellschaft und gehört in A.' }
   ],
   erklaerung: 'Die KG ist eine Personengesellschaft, also Abteilung A.' },
-{ id: 'N17', lz: 'LZ3', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N17', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Welche Aussage zu Prokura und Handlungsvollmacht stimmt?',
   optionen: [
     { text: 'Die Prokura wird eingetragen, die Handlungsvollmacht nicht.', richtig: true },
@@ -503,7 +529,7 @@ window.PAKET = {
     { text: 'Die Prokura entsteht erst mit der Eintragung.', feedback: 'Die Prokura gilt schon mit ihrer Erteilung, die Eintragung ist nur bekanntmachend.' }
   ],
   erklaerung: 'Nur die Prokura wird ins HR eingetragen, und zwar deklaratorisch.' },
-{ id: 'N18', lz: 'LZ3', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N18', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Ein Prokurist hat intern nur Vollmacht bis 5 000 €, im HR steht keine Beschränkung. Er kauft für 20 000 € bei uns Ware. Was gilt?',
   optionen: [
     { text: 'Der Kauf gilt, die interne Beschränkung ist uns gegenüber unwirksam.', richtig: true },
@@ -511,7 +537,7 @@ window.PAKET = {
     { text: 'Der Kauf gilt nur, wenn wir nachweisen, dass wir die Grenze nicht kannten.', feedback: 'Auf Gutgläubigkeit kommt es hier nicht an, die Beschränkung wirkt Dritten gegenüber nie.' }
   ],
   erklaerung: 'Eine Beschränkung des Umfangs der Prokura ist Dritten gegenüber unwirksam.' },
-{ id: 'N19', lz: 'LZ3', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N19', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Eine GmbH hat ihren Geschäftsführer gewechselt, die Änderung steht noch nicht im HR. Der alte Geschäftsführer schließt noch einen Vertrag mit uns, wir wussten vom Wechsel nichts. Was gilt?',
   optionen: [
     { text: 'Die GmbH kann uns den Wechsel nicht entgegenhalten, weil wir gutgläubig waren.', richtig: true },
@@ -519,7 +545,7 @@ window.PAKET = {
     { text: 'Wir hätten den Wechsel selbst prüfen müssen, sonst gilt der Vertrag nicht.', feedback: 'Es gibt keine Pflicht, laufend zu prüfen. Wer auf das HR vertraut, wird geschützt.' }
   ],
   erklaerung: 'Nicht eingetragene Tatsachen können gutgläubigen Dritten nicht entgegengehalten werden (öffentlicher Glaube).' },
-{ id: 'N20', lz: 'LZ3', einsatz: ['nachweis'], typ: 'mc',
+{ id: 'N20', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc',
   frage: 'Eine Mitarbeiterin mit Handlungsvollmacht unterschreibt für ihre Firma. Welche Aussage ist richtig?',
   optionen: [
     { text: 'Sie ist nicht im HR eingetragen, wir müssen ihren Umfang bei Zweifeln erfragen.', richtig: true },

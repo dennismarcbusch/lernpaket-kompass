@@ -2,12 +2,15 @@
 """Werkzeug zum Bauen von Lernpaketen aus der Kompass-Vorlage.
 
   python3 paket.py neu <zielordner> --id <präfix>-<name> --titel "Titel"
-      Kopiert die Vorlage (Engine, Stil, Beispielinhalt, Manifest) in einen neuen Ordner
-      und setzt Identifier und Titel im Manifest. Danach js/inhalt.js ersetzen.
+      Kopiert die Vorlage (Engine, Stil, Beispielinhalt, Manifest) in einen neuen Ordner,
+      setzt Identifier und Titel im Manifest und die Paketversion auf 1.0. Danach js/inhalt.js ersetzen.
 
   python3 paket.py zip <paketordner> [--aus <datei.zip>]
-      Aktualisiert die Dateiliste im Manifest, gleicht Titel, Version und masteryscore mit
+      Aktualisiert die Dateiliste im Manifest, gleicht Titel, Version und Identifier mit
       js/inhalt.js ab und packt das ZIP so, dass imsmanifest.xml im Wurzelverzeichnis liegt.
+      Ein masteryscore gehört nicht ins Manifest (die Selbstüberprüfung zählt nicht; mit
+      masteryscore würde die Lernplattform selbst „bestanden“ oder „nicht bestanden“ setzen);
+      ein vorhandener Eintrag wird entfernt.
       Standardname: <name>_scorm12.zip neben dem Paketordner.
 """
 import argparse, os, re, shutil, sys, zipfile
@@ -33,6 +36,7 @@ def neu(a):
     s = open(i, encoding='utf-8').read()
     s = re.sub(r"id: '[^']*'", f"id: '{a.id}'", s, count=1)
     s = re.sub(r"titel: '[^']*'", "titel: " + repr(a.titel), s, count=1)
+    s = re.sub(r"\bversion:\s*'[^']*'", "version: '1.0'", s, count=1)  # die Vorlage trägt die Kompass-Version, ein neues Paket beginnt bei 1.0
     open(i, 'w', encoding='utf-8').write(s)
     print(f'Neues Paket in {a.ziel} angelegt (id {a.id}). Als Nächstes js/inhalt.js mit den Inhalten füllen.')
 
@@ -44,11 +48,9 @@ def zippen(a):
         sys.exit('imsmanifest.xml fehlt im Paketordner.')
     t = open(m, encoding='utf-8').read()
     inhalt = os.path.join(root, 'js', 'inhalt.js')
+    t = re.sub(r'\n?[ \t]*<adlcp:masteryscore>[^<]*</adlcp:masteryscore>', '', t)
     if os.path.isfile(inhalt):
         s = open(inhalt, encoding='utf-8').read()
-        b = re.search(r'bestehen:\s*(\d+)', s)
-        if b:
-            t = re.sub(r'<adlcp:masteryscore>\d*</adlcp:masteryscore>', f'<adlcp:masteryscore>{b.group(1)}</adlcp:masteryscore>', t)
         ti = re.search(r"titel:\s*'((?:[^'\\]|\\.)*)'", s)
         if ti:
             t = re.sub(r'<title>[^<]*</title>', f'<title>{escape(ti.group(1))}</title>', t)
