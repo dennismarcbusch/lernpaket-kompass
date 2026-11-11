@@ -1,6 +1,6 @@
 # Lernpaket-Kompass – Leitfaden für interaktive Lernpakete
 
-Entwurf · Kompass 4.0 · Stand 10.11.2026 · Dennis Busch
+Entwurf · Kompass 4.0 · Stand 11.11.2026 · Dennis Busch
 
 ## Zweck und Kurzfassung
 
@@ -503,7 +503,7 @@ Gemeinsame Grundlage aller Skills ist eine kurze Referenzdatei mit den dreizehn 
 - [ ] Erproben, bevor weitere Regeln dazukommen: Bisher ist keine Fassung des Kompass mit Schülern erprobt. Ein Paket mit drei bis fünf Schülern testen (Beobachtungsbogen) und in der ByCS-Lernplattform prüfen, wie Status „abgeschlossen“ und Punktzahl dort ankommen und welche Einstellungen der Aktivität dazu passen.
 - [ ] Plattformen, die bisher auf den Status „bestanden“ warten (z. B. der Kruzly-Prototyp), auf „abgeschlossen“ umstellen.
 - [ ] Nachweis-Paket: eine eigene Form für den Kompetenznachweis (nicht öffentlich, Varianten, bestanden oder nicht) ist offen und nicht Teil von 4.0.
-- [ ] Das Ablaufdiagramm in der Dokumentfassung neu zeichnen (neue Reihenfolge der Phasen).
+- [x] Das Ablaufdiagramm in der Dokumentfassung neu zeichnen (neue Reihenfolge der Phasen).
 - [ ] Baukasten nach den ersten Paketen anderer Fächer erweitern (z. B. Tabellenkalkulation, Zeitstrahl, Karte) und Erfahrungen mit dem Spielrahmen sammeln.
 
 ## Literatur
