@@ -75,7 +75,7 @@ Gibt es weder Simulations- noch Spielmodus, wird für jede Station **zuerst** di
 | Sortieren | Karten antippen und dem passenden Fach zuordnen | Rechtsformen in HRA/HRB, Belege in Konten, Wörter in Wortarten, Lebensmittel nach Nährstoffen, Übungen nach Muskelgruppen | `sortieren` |
 | Ablauf ordnen | Schritte in die richtige Reihenfolge bringen | Wareneingang, Erste Hilfe, Bewerbungsablauf, Aufwärmprogramm, Gesetzgebungsverfahren | `reihenfolge` |
 | Ausprobieren mit Reglern | Eine Größe verändern und die Wirkung sofort sehen | Preis und Absatz, Zins und Laufzeit, Belastung und Puls, Spannung und Strom, Rabatt und Gewinn | `regler` + eigene Anzeige |
-| Gerät bedienen | Ein nachgebautes Gerät einstellen | Router, Kasse, Messgerät, Waage, Pulsuhr | eigenes Gerät in `inhalt.js` (Beispiel: `routerGeraet`) |
+| Gerät bedienen | Ein nachgebautes Gerät einstellen | Router, Kasse, Messgerät, Waage, Pulsuhr | eigenes Gerät in `quelle/paket.js` (Beispiel: `routerGeraet`) |
 | Bauen | Teile zu einem Ganzen zusammensetzen | PC, Netzwerk, Satzbau, Schaltung, Trainingsplan | `sortieren` (Fächer = Plätze) oder eigenes SVG |
 | Fehlersuche | In einem Fall mit eingebauten Fehlern die Fehler finden | Fehlerhafte Rechnung, fehlerhafter Brief, falsch konfigurierter Router, falsche Dosierung (fiktiv) | `dokument`, `formular` |
 

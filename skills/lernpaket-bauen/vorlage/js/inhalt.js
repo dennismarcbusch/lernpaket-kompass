@@ -1,5 +1,10 @@
+/* Erzeugt von paket.py bauen aus quelle/ – hier nichts ändern, sondern in quelle/ (dann paket.py bauen). */
+
+/* ---------- quelle/paket.js ---------- */
 /* =====================================================================
-   INHALT DES LERNPAKETS – nur diese Datei wird pro Paket angepasst.
+   INHALT DES LERNPAKETS – pro Paket werden nur die Dateien in quelle/ angepasst:
+   diese Datei (quelle/paket.js) und die Fragen in quelle/fragen.md.
+   paket.py bauen setzt daraus js/inhalt.js zusammen; js/inhalt.js nie von Hand ändern.
    Beispielinhalt: „Bits & Bytes“ (Binär ↔ Dezimal), Welt „technik“. Beim
    Bauen eines neuen Pakets vollständig durch die Inhalte aus Drehbuch und
    Fragenpool ersetzen. Ein zweites Beispiel aus der Wirtschaft (Szene mit
@@ -19,6 +24,9 @@
    spiel:  optionaler Spielrahmen {titel, intro, ziel, zaehler: {name, symbol}};
            dann je Station mission: {ort, symbol, ende}
 
+   Fragen stehen in quelle/fragen.md (Markdown, Format in referenz/fragenformat.md).
+   Nur eine Frage, deren Grafik per Code entsteht (wie F4 unten), steht hier in
+   fragen: [...]; der Build hängt die Fragen aus fragen.md an. Felder im Paket:
    Fragetypen (typ):
      'mc'       Multiple Choice; mehrere richtige Optionen → Mehrfachauswahl.
                 optionen: [{text, richtig, feedback}] – jede Falschantwort
@@ -371,87 +379,14 @@ window.PAKET = {
   selbsttest: ['F16', 'F17', 'F12', 'F5', 'F18'],
 
   fragen: [
-    /* ---------- Vorab-Fragen (je Station eine, schwer zu erraten; erst vermuten, dann ausprobieren) ---------- */
-    { id: 'V1', lz: 'LZ1', einsatz: ['vorab'], typ: 'zahl', frage: 'Welche Dezimalzahl ist <code>10000001</code>?', zahl: { wert: 129 },
-      typisch: [{ wert: 2, feedback: 'Du hast nur die Einsen gezählt. Jede Stelle hat aber einen eigenen Wert: ganz links 128, ganz rechts 1.' }, { wert: 10000001, feedback: 'Das ist die Ziffernfolge als Dezimalzahl gelesen. Im Binärsystem hat jede Stelle einen Stellenwert.' }],
-      erklaerung: 'Die Eins ganz links ist 128 wert, die ganz rechts 1: 128 + 1 = 129.' },
-    { id: 'V2', lz: 'LZ2', einsatz: ['vorab'], typ: 'text', frage: 'Wie lautet <b>12</b> als 8-Bit-Binärzahl?', akzeptiert: ['00001100', '0000 1100'],
-      typisch: [{ antwort: '1100', feedback: 'Der Wert stimmt, aber ein Byte hat immer 8 Stellen: vorne mit Nullen auffüllen.' }, { antwort: '00110000', feedback: 'Die Stellen sind vertauscht. Die kleinen Werte (8, 4, 2, 1) stehen rechts.' }],
-      erklaerung: '12 = 8 + 4. Die Stellen für 8 und 4 sind 1, alle anderen 0: 00001100.' },
-    { id: 'V3', lz: 'LZ3', einsatz: ['vorab'], typ: 'zahl', frage: 'Wie viele verschiedene Werte lassen sich mit <b>3 Bit</b> darstellen?', zahl: { wert: 8 },
-      typisch: [{ wert: 6, feedback: 'Mit jedem Bit verdoppelt sich die Anzahl, sie wächst nicht nur um 2.' }, { wert: 7, feedback: '7 ist der größte Wert (111). Dazu kommt noch die 0: also 8 Werte.' }, { wert: 3, feedback: '3 ist die Anzahl der Bits, nicht der möglichen Werte.' }],
-      erklaerung: 'Jedes Bit verdoppelt die Möglichkeiten: 2 · 2 · 2 = 8 (von 000 bis 111).' },
-
-    /* ---------- LZ1 ---------- */
-    { id: 'F1', lz: 'LZ1', einsatz: ['check', 'selbstueberpruefung'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>00001011</code>?', zahl: { wert: 11 },
-      typisch: [{ wert: 13, feedback: 'Du hast die Stellenwerte von links nach rechts vergeben. Die Stelle mit dem Wert 1 steht ganz rechts.' }, { wert: 1011, feedback: 'Das ist die Ziffernfolge als Dezimalzahl gelesen. Rechne mit den Stellenwerten 8, 4, 2, 1.' }],
-      erklaerung: 'Die Einsen stehen bei 8, 2 und 1: 8 + 2 + 1 = 11.' },
-    { id: 'F2', lz: 'LZ1', einsatz: ['check'], typ: 'mc', frage: 'Welchen Stellenwert hat das Bit ganz links in einem Byte?',
-      optionen: [{ text: '128', richtig: true }, { text: '256', feedback: '256 wäre die neunte Stelle. Ein Byte hat Stellenwerte von 1 bis 128.' }, { text: '8', feedback: '8 ist die Anzahl der Bits in einem Byte, nicht der Stellenwert.' }, { text: '1', feedback: 'Der Stellenwert 1 steht ganz rechts.' }],
-      erklaerung: 'Von rechts: 1, 2, 4, 8, 16, 32, 64, 128 – die achte Stelle hat den Wert 2⁷ = 128.' },
-    { id: 'F3', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>11000000</code>?', zahl: { wert: 192 },
-      typisch: [{ wert: 3, feedback: 'Du hast von links mit 1 und 2 angefangen. Die beiden Einsen stehen bei 128 und 64.' }],
-      erklaerung: '128 + 64 = 192.' },
+    /* Fragen, deren Grafik per Code entsteht. Alle übrigen Fragen stehen in fragen.md. */
     { id: 'F4', lz: 'LZ1', einsatz: ['check'], typ: 'hotspot', frage: 'Tippe auf das Bit mit dem Stellenwert <b>32</b>.',
       svg: IP_SVG([1, 0, 1, 1, 0, 0, 1, 0]),
       bereiche: [0, 1, 2, 3, 4, 5, 6, 7].map(function (i) {
         var w = [128, 64, 32, 16, 8, 4, 2, 1][i];
         return { x: 10 + i * 68, y: 40, w: 60, h: 56, label: (i + 1) + '. Stelle von links', richtig: w === 32, feedback: w === 32 ? '' : 'Diese Stelle hat den Stellenwert ' + w + '. Zähl von rechts: 1, 2, 4, 8, 16, 32.' };
       }),
-      erklaerung: 'Von rechts gezählt ist die sechste Stelle (dritte von links) die mit dem Stellenwert 32.' },
-    { id: 'F5', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'mc', frage: 'Welche dieser Binärzahlen haben den Dezimalwert 10?',
-      optionen: [{ text: '<code>00001010</code>', richtig: true }, { text: '<code>1010</code>', richtig: true, feedback: 'Richtig – führende Nullen ändern den Wert nicht.' }, { text: '<code>00000101</code>', feedback: 'Das ist 5 – die Ziffern sind verdreht.' }, { text: '<code>10100000</code>', feedback: 'Hier stehen die Einsen bei 128 und 32: Das ist 160.' }],
-      erklaerung: '10 = 8 + 2. Ob davor Nullen stehen, ändert den Wert nicht.' },
-    { id: 'F16', lz: 'LZ1', einsatz: ['selbstueberpruefung'], typ: 'zahl', frage: 'Welchen Dezimalwert hat <code>10101010</code>?', zahl: { wert: 170 },
-      typisch: [{ wert: 85, feedback: '85 wäre <code>01010101</code> – du hast die Stellenwerte um eine Stelle verschoben.' }],
-      erklaerung: '128 + 32 + 8 + 2 = 170.' },
-    { id: 'F19', lz: 'LZ1', einsatz: ['uebung'], typ: 'zahl', frage: 'Welche Dezimalzahl ist <code>10101000</code>?', zahl: { wert: 168 },
-      typisch: [{ wert: 21, feedback: 'Du hast von links mit 1 angefangen. Die Stelle ganz links hat den Wert 128.' }],
-      erklaerung: '128 + 32 + 8 = 168.' },
-
-    /* ---------- LZ2 ---------- */
-    { id: 'F6', lz: 'LZ2', einsatz: ['check', 'selbstueberpruefung'], typ: 'text', frage: 'Schreibe <b>200</b> als 8-Bit-Binärzahl.', akzeptiert: ['11001000', '1100 1000'],
-      typisch: [{ antwort: '00010011', feedback: 'Die Ziffern sind verdreht: Die größte Stelle (128) steht links.' }],
-      feedbackFalsch: 'Zerlege 200 in Stellenwerte: Welcher größte Stellenwert passt hinein?',
-      erklaerung: '200 = 128 + 64 + 8 → 11001000.' },
-    { id: 'F7', lz: 'LZ2', einsatz: ['check'], typ: 'mc', frage: 'Wie lautet <b>100</b> als 8-Bit-Binärzahl?',
-      optionen: [{ text: '<code>01100100</code>', richtig: true }, { text: '<code>00100110</code>', feedback: 'Die Ziffern sind verdreht – die 64 steht weiter links als die 4.' }, { text: '<code>01100000</code>', feedback: 'Das ist 96: Der Rest 4 fehlt noch.' }, { text: '<code>10010100</code>', feedback: '128 passt nicht in 100 – die erste Stelle muss 0 sein.' }],
-      erklaerung: '100 = 64 + 32 + 4 → 01100100.' },
-    { id: 'F8', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'zuordnen', frage: 'Ordne jeder Dezimalzahl die passende 8-Bit-Binärzahl zu.',
-      paare: [{ links: '1', rechts: '00000001' }, { links: '16', rechts: '00010000' }, { links: '128', rechts: '10000000' }, { links: '255', rechts: '11111111' }],
-      erklaerung: 'Eine einzelne 1 an einer Stelle ergibt genau deren Stellenwert; alle acht Einsen ergeben 255.' },
-    { id: 'F9', lz: 'LZ2', einsatz: ['check'], typ: 'mc', frage: 'Du rechnest <b>37</b> um. Welchen Stellenwert ziehst du als Erstes ab?',
-      optionen: [{ text: '32', richtig: true }, { text: '64', feedback: '64 ist größer als 37 und passt nicht hinein.' }, { text: '16', feedback: '16 passt zwar, aber 32 ist der größte Stellenwert, der passt.' }, { text: '37', feedback: '37 ist kein Stellenwert. Stellenwerte sind 1, 2, 4, 8, 16, 32, 64, 128.' }],
-      erklaerung: 'Man beginnt immer mit dem größten passenden Stellenwert: 32 (Rest 5).' },
-    { id: 'F10', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'text', frage: 'Schreibe <b>255</b> als 8-Bit-Binärzahl.', akzeptiert: ['11111111', '1111 1111'],
-      typisch: [{ antwort: '100000000', feedback: 'Das sind neun Stellen und der Wert 256. 255 ist der größte Wert eines Bytes.' }],
-      erklaerung: '255 = 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1: alle acht Bits sind 1.' },
-    { id: 'F17', lz: 'LZ2', einsatz: ['selbstueberpruefung'], typ: 'text', frage: 'Schreibe <b>64</b> als 8-Bit-Binärzahl.', akzeptiert: ['01000000', '0100 0000'],
-      typisch: [{ antwort: '1000000', feedback: 'Der Wert stimmt, aber ein Byte hat acht Stellen – vorne fehlt eine 0.' }, { antwort: '00000010', feedback: 'Die Ziffern sind verdreht: 00000010 ist 2.' }],
-      erklaerung: '64 ist ein einzelner Stellenwert: zweite Stelle von links → 01000000.' },
-
-    /* ---------- LZ3 ---------- */
-    { id: 'F11', lz: 'LZ3', einsatz: ['check'], typ: 'zahl', frage: 'Wie viele verschiedene Werte lassen sich mit <b>4 Bit</b> darstellen?', zahl: { wert: 16 },
-      typisch: [{ wert: 15, feedback: '15 ist der größte Wert. Zusammen mit der 0 sind es 16 Werte.' }, { wert: 8, feedback: '8 wäre 2 · 4. Jedes Bit verdoppelt die Anzahl: 2 · 2 · 2 · 2.' }],
-      erklaerung: '2⁴ = 16 Werte, von 0 bis 15.' },
-    { id: 'F12', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'mc', frage: 'Wie viele Bit brauchst du <b>mindestens</b>, um 1000 verschiedene Werte darzustellen?',
-      optionen: [{ text: '10', richtig: true }, { text: '9', feedback: '2⁹ = 512 reicht nicht für 1000 Werte.' }, { text: '1000', feedback: 'Jedes Bit verdoppelt die Anzahl – du brauchst viel weniger Bits als Werte.' }, { text: '4', feedback: 'Mit 4 Bit gibt es nur 16 Werte. Du hast vielleicht an die vier Ziffern von 1000 gedacht.' }],
-      erklaerung: '2¹⁰ = 1024 ≥ 1000, 2⁹ = 512 < 1000. Also mindestens 10 Bit.' },
-    { id: 'F13', lz: 'LZ3', einsatz: ['check', 'selbstueberpruefung'], typ: 'zahl', frage: 'Wie viele verschiedene Werte kann <b>ein Byte</b> annehmen?', zahl: { wert: 256 },
-      typisch: [{ wert: 255, feedback: '255 ist der größte Wert. Die 0 zählt mit: 256 Werte.' }],
-      erklaerung: '2⁸ = 256 Werte, von 0 bis 255.' },
-    { id: 'F14', lz: 'LZ3', einsatz: ['check'], typ: 'mc', frage: 'Was passiert mit der Anzahl der darstellbaren Werte, wenn ein Bit dazukommt?',
-      optionen: [{ text: 'Sie verdoppelt sich.', richtig: true }, { text: 'Sie steigt um 1.', feedback: 'Das neue Bit kann bei jedem bisherigen Muster 0 oder 1 sein – das verdoppelt die Anzahl.' }, { text: 'Sie steigt um 2.', feedback: 'Bei einem Bit mehr gibt es alle bisherigen Muster einmal mit 0 und einmal mit 1 davor.' }, { text: 'Sie verzehnfacht sich.', feedback: 'Das gilt im Dezimalsystem mit zehn Ziffern. Ein Bit hat nur zwei Zustände.' }],
-      erklaerung: 'Jedes zusätzliche Bit verdoppelt die Anzahl: 2ⁿ → 2ⁿ⁺¹.' },
-    { id: 'F15', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'zahl', frage: 'Ein Byte einer IPv4-Adresse hat 8 Bit. Welches ist der <b>größte</b> Wert, der darin stehen kann?', zahl: { wert: 255 },
-      typisch: [{ wert: 256, feedback: '256 ist die Anzahl der Werte. Weil bei 0 begonnen wird, ist der größte Wert 255.' }],
-      erklaerung: '2⁸ − 1 = 255.' },
-    { id: 'F18', lz: 'LZ3', einsatz: ['selbstueberpruefung'], typ: 'zuordnen', frage: 'Ordne zu: Wie viele verschiedene Werte gibt es mit …',
-      paare: [{ links: '1 Bit', rechts: '2' }, { links: '2 Bit', rechts: '4' }, { links: '8 Bit', rechts: '256' }, { links: '16 Bit', rechts: '65 536' }],
-      erklaerung: 'Jeweils 2 hoch Anzahl der Bits: 2¹, 2², 2⁸, 2¹⁶.' },
-    { id: 'F20', lz: 'LZ3', einsatz: ['uebung'], typ: 'zahl', frage: 'Wie viele verschiedene Bitmuster gibt es mit <b>6 Bit</b>?', zahl: { wert: 64 },
-      typisch: [{ wert: 63, feedback: '63 ist der größte Wert. Mit der 0 sind es 64 Muster.' }, { wert: 12, feedback: '12 wäre 2 · 6. Es heißt aber 2 hoch 6.' }],
-      erklaerung: '2⁶ = 64.' }
+      erklaerung: 'Von rechts gezählt ist die sechste Stelle (dritte von links) die mit dem Stellenwert 32.' }
   ],
 
   /* ---------- Tafelbild: der Mittelteil des Inputs (Leitfaden C2) ----------
@@ -513,3 +448,29 @@ window.PAKET = {
     ]
   }
 };
+
+/* ---------- quelle/fragen.md (erzeugt) ---------- */
+(function (P, F) { P.fragen = (P.fragen || []).concat(F); })(window.PAKET, [
+  {"id": "V1", "lz": "LZ1", "einsatz": ["vorab"], "typ": "zahl", "frage": "Welche Dezimalzahl ist <code>10000001<\/code>?", "zahl": {"wert": 129}, "typisch": [{"wert": 2, "feedback": "Du hast nur die Einsen gezählt. Jede Stelle hat aber einen eigenen Wert: ganz links 128, ganz rechts 1."}, {"wert": 10000001, "feedback": "Das ist die Ziffernfolge als Dezimalzahl gelesen. Im Binärsystem hat jede Stelle einen Stellenwert."}], "erklaerung": "Die Eins ganz links ist 128 wert, die ganz rechts 1: 128 + 1 = 129."},
+  {"id": "V2", "lz": "LZ2", "einsatz": ["vorab"], "typ": "text", "frage": "Wie lautet <b>12<\/b> als 8-Bit-Binärzahl?", "akzeptiert": ["00001100", "0000 1100"], "typisch": [{"antwort": "1100", "feedback": "Der Wert stimmt, aber ein Byte hat immer 8 Stellen: vorne mit Nullen auffüllen."}, {"antwort": "00110000", "feedback": "Die Stellen sind vertauscht. Die kleinen Werte (8, 4, 2, 1) stehen rechts."}], "erklaerung": "12 = 8 + 4. Die Stellen für 8 und 4 sind 1, alle anderen 0: 00001100."},
+  {"id": "V3", "lz": "LZ3", "einsatz": ["vorab"], "typ": "zahl", "frage": "Wie viele verschiedene Werte lassen sich mit <b>3 Bit<\/b> darstellen?", "zahl": {"wert": 8}, "typisch": [{"wert": 6, "feedback": "Mit jedem Bit verdoppelt sich die Anzahl, sie wächst nicht nur um 2."}, {"wert": 7, "feedback": "7 ist der größte Wert (111). Dazu kommt noch die 0: also 8 Werte."}, {"wert": 3, "feedback": "3 ist die Anzahl der Bits, nicht der möglichen Werte."}], "erklaerung": "Jedes Bit verdoppelt die Möglichkeiten: 2 · 2 · 2 = 8 (von 000 bis 111)."},
+  {"id": "F1", "lz": "LZ1", "einsatz": ["check", "selbstueberpruefung"], "typ": "zahl", "frage": "Welchen Dezimalwert hat <code>00001011<\/code>?", "zahl": {"wert": 11}, "typisch": [{"wert": 13, "feedback": "Du hast die Stellenwerte von links nach rechts vergeben. Die Stelle mit dem Wert 1 steht ganz rechts."}, {"wert": 1011, "feedback": "Das ist die Ziffernfolge als Dezimalzahl gelesen. Rechne mit den Stellenwerten 8, 4, 2, 1."}], "erklaerung": "Die Einsen stehen bei 8, 2 und 1: 8 + 2 + 1 = 11."},
+  {"id": "F2", "lz": "LZ1", "einsatz": ["check"], "typ": "mc", "frage": "Welchen Stellenwert hat das Bit ganz links in einem Byte?", "optionen": [{"text": "128", "richtig": true}, {"text": "256", "feedback": "256 wäre die neunte Stelle. Ein Byte hat Stellenwerte von 1 bis 128."}, {"text": "8", "feedback": "8 ist die Anzahl der Bits in einem Byte, nicht der Stellenwert."}, {"text": "1", "feedback": "Der Stellenwert 1 steht ganz rechts."}], "erklaerung": "Von rechts: 1, 2, 4, 8, 16, 32, 64, 128 – die achte Stelle hat den Wert 2⁷ = 128."},
+  {"id": "F3", "lz": "LZ1", "einsatz": ["selbstueberpruefung"], "typ": "zahl", "frage": "Welchen Dezimalwert hat <code>11000000<\/code>?", "zahl": {"wert": 192}, "typisch": [{"wert": 3, "feedback": "Du hast von links mit 1 und 2 angefangen. Die beiden Einsen stehen bei 128 und 64."}], "erklaerung": "128 + 64 = 192."},
+  {"id": "F5", "lz": "LZ1", "einsatz": ["selbstueberpruefung"], "typ": "mc", "frage": "Welche dieser Binärzahlen haben den Dezimalwert 10?", "optionen": [{"text": "<code>00001010<\/code>", "richtig": true}, {"text": "<code>1010<\/code>", "richtig": true, "feedback": "Richtig – führende Nullen ändern den Wert nicht."}, {"text": "<code>00000101<\/code>", "feedback": "Das ist 5 – die Ziffern sind verdreht."}, {"text": "<code>10100000<\/code>", "feedback": "Hier stehen die Einsen bei 128 und 32: Das ist 160."}], "erklaerung": "10 = 8 + 2. Ob davor Nullen stehen, ändert den Wert nicht."},
+  {"id": "F16", "lz": "LZ1", "einsatz": ["selbstueberpruefung"], "typ": "zahl", "frage": "Welchen Dezimalwert hat <code>10101010<\/code>?", "zahl": {"wert": 170}, "typisch": [{"wert": 85, "feedback": "85 wäre <code>01010101<\/code> – du hast die Stellenwerte um eine Stelle verschoben."}], "erklaerung": "128 + 32 + 8 + 2 = 170."},
+  {"id": "F19", "lz": "LZ1", "einsatz": ["uebung"], "typ": "zahl", "frage": "Welche Dezimalzahl ist <code>10101000<\/code>?", "zahl": {"wert": 168}, "typisch": [{"wert": 21, "feedback": "Du hast von links mit 1 angefangen. Die Stelle ganz links hat den Wert 128."}], "erklaerung": "128 + 32 + 8 = 168."},
+  {"id": "F6", "lz": "LZ2", "einsatz": ["check", "selbstueberpruefung"], "typ": "text", "frage": "Schreibe <b>200<\/b> als 8-Bit-Binärzahl.", "akzeptiert": ["11001000", "1100 1000"], "typisch": [{"antwort": "00010011", "feedback": "Die Ziffern sind verdreht: Die größte Stelle (128) steht links."}], "feedbackFalsch": "Zerlege 200 in Stellenwerte: Welcher größte Stellenwert passt hinein?", "erklaerung": "200 = 128 + 64 + 8 → 11001000."},
+  {"id": "F7", "lz": "LZ2", "einsatz": ["check"], "typ": "mc", "frage": "Wie lautet <b>100<\/b> als 8-Bit-Binärzahl?", "optionen": [{"text": "<code>01100100<\/code>", "richtig": true}, {"text": "<code>00100110<\/code>", "feedback": "Die Ziffern sind verdreht – die 64 steht weiter links als die 4."}, {"text": "<code>01100000<\/code>", "feedback": "Das ist 96: Der Rest 4 fehlt noch."}, {"text": "<code>10010100<\/code>", "feedback": "128 passt nicht in 100 – die erste Stelle muss 0 sein."}], "erklaerung": "100 = 64 + 32 + 4 → 01100100."},
+  {"id": "F8", "lz": "LZ2", "einsatz": ["selbstueberpruefung"], "typ": "zuordnen", "frage": "Ordne jeder Dezimalzahl die passende 8-Bit-Binärzahl zu.", "paare": [{"links": "1", "rechts": "00000001"}, {"links": "16", "rechts": "00010000"}, {"links": "128", "rechts": "10000000"}, {"links": "255", "rechts": "11111111"}], "erklaerung": "Eine einzelne 1 an einer Stelle ergibt genau deren Stellenwert; alle acht Einsen ergeben 255."},
+  {"id": "F9", "lz": "LZ2", "einsatz": ["check"], "typ": "mc", "frage": "Du rechnest <b>37<\/b> um. Welchen Stellenwert ziehst du als Erstes ab?", "optionen": [{"text": "32", "richtig": true}, {"text": "64", "feedback": "64 ist größer als 37 und passt nicht hinein."}, {"text": "16", "feedback": "16 passt zwar, aber 32 ist der größte Stellenwert, der passt."}, {"text": "37", "feedback": "37 ist kein Stellenwert. Stellenwerte sind 1, 2, 4, 8, 16, 32, 64, 128."}], "erklaerung": "Man beginnt immer mit dem größten passenden Stellenwert: 32 (Rest 5)."},
+  {"id": "F10", "lz": "LZ2", "einsatz": ["selbstueberpruefung"], "typ": "text", "frage": "Schreibe <b>255<\/b> als 8-Bit-Binärzahl.", "akzeptiert": ["11111111", "1111 1111"], "typisch": [{"antwort": "100000000", "feedback": "Das sind neun Stellen und der Wert 256. 255 ist der größte Wert eines Bytes."}], "erklaerung": "255 = 128 + 64 + 32 + 16 + 8 + 4 + 2 + 1: alle acht Bits sind 1."},
+  {"id": "F17", "lz": "LZ2", "einsatz": ["selbstueberpruefung"], "typ": "text", "frage": "Schreibe <b>64<\/b> als 8-Bit-Binärzahl.", "akzeptiert": ["01000000", "0100 0000"], "typisch": [{"antwort": "1000000", "feedback": "Der Wert stimmt, aber ein Byte hat acht Stellen – vorne fehlt eine 0."}, {"antwort": "00000010", "feedback": "Die Ziffern sind verdreht: 00000010 ist 2."}], "erklaerung": "64 ist ein einzelner Stellenwert: zweite Stelle von links → 01000000."},
+  {"id": "F11", "lz": "LZ3", "einsatz": ["check"], "typ": "zahl", "frage": "Wie viele verschiedene Werte lassen sich mit <b>4 Bit<\/b> darstellen?", "zahl": {"wert": 16}, "typisch": [{"wert": 15, "feedback": "15 ist der größte Wert. Zusammen mit der 0 sind es 16 Werte."}, {"wert": 8, "feedback": "8 wäre 2 · 4. Jedes Bit verdoppelt die Anzahl: 2 · 2 · 2 · 2."}], "erklaerung": "2⁴ = 16 Werte, von 0 bis 15."},
+  {"id": "F12", "lz": "LZ3", "einsatz": ["selbstueberpruefung"], "typ": "mc", "frage": "Wie viele Bit brauchst du <b>mindestens<\/b>, um 1000 verschiedene Werte darzustellen?", "optionen": [{"text": "10", "richtig": true}, {"text": "9", "feedback": "2⁹ = 512 reicht nicht für 1000 Werte."}, {"text": "1000", "feedback": "Jedes Bit verdoppelt die Anzahl – du brauchst viel weniger Bits als Werte."}, {"text": "4", "feedback": "Mit 4 Bit gibt es nur 16 Werte. Du hast vielleicht an die vier Ziffern von 1000 gedacht."}], "erklaerung": "2¹⁰ = 1024 ≥ 1000, 2⁹ = 512 &lt; 1000. Also mindestens 10 Bit."},
+  {"id": "F13", "lz": "LZ3", "einsatz": ["check", "selbstueberpruefung"], "typ": "zahl", "frage": "Wie viele verschiedene Werte kann <b>ein Byte<\/b> annehmen?", "zahl": {"wert": 256}, "typisch": [{"wert": 255, "feedback": "255 ist der größte Wert. Die 0 zählt mit: 256 Werte."}], "erklaerung": "2⁸ = 256 Werte, von 0 bis 255."},
+  {"id": "F14", "lz": "LZ3", "einsatz": ["check"], "typ": "mc", "frage": "Was passiert mit der Anzahl der darstellbaren Werte, wenn ein Bit dazukommt?", "optionen": [{"text": "Sie verdoppelt sich.", "richtig": true}, {"text": "Sie steigt um 1.", "feedback": "Das neue Bit kann bei jedem bisherigen Muster 0 oder 1 sein – das verdoppelt die Anzahl."}, {"text": "Sie steigt um 2.", "feedback": "Bei einem Bit mehr gibt es alle bisherigen Muster einmal mit 0 und einmal mit 1 davor."}, {"text": "Sie verzehnfacht sich.", "feedback": "Das gilt im Dezimalsystem mit zehn Ziffern. Ein Bit hat nur zwei Zustände."}], "erklaerung": "Jedes zusätzliche Bit verdoppelt die Anzahl: 2ⁿ → 2ⁿ⁺¹."},
+  {"id": "F15", "lz": "LZ3", "einsatz": ["selbstueberpruefung"], "typ": "zahl", "frage": "Ein Byte einer IPv4-Adresse hat 8 Bit. Welches ist der <b>größte<\/b> Wert, der darin stehen kann?", "zahl": {"wert": 255}, "typisch": [{"wert": 256, "feedback": "256 ist die Anzahl der Werte. Weil bei 0 begonnen wird, ist der größte Wert 255."}], "erklaerung": "2⁸ − 1 = 255."},
+  {"id": "F18", "lz": "LZ3", "einsatz": ["selbstueberpruefung"], "typ": "zuordnen", "frage": "Ordne zu: Wie viele verschiedene Werte gibt es mit …", "paare": [{"links": "1 Bit", "rechts": "2"}, {"links": "2 Bit", "rechts": "4"}, {"links": "8 Bit", "rechts": "256"}, {"links": "16 Bit", "rechts": "65 536"}], "erklaerung": "Jeweils 2 hoch Anzahl der Bits: 2¹, 2², 2⁸, 2¹⁶."},
+  {"id": "F20", "lz": "LZ3", "einsatz": ["uebung"], "typ": "zahl", "frage": "Wie viele verschiedene Bitmuster gibt es mit <b>6 Bit<\/b>?", "zahl": {"wert": 64}, "typisch": [{"wert": 63, "feedback": "63 ist der größte Wert. Mit der 0 sind es 64 Muster."}, {"wert": 12, "feedback": "12 wäre 2 · 6. Es heißt aber 2 hoch 6."}], "erklaerung": "2⁶ = 64."}
+]);

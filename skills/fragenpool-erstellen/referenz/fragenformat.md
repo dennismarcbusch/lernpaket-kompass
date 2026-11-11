@@ -1,8 +1,66 @@
 # Format für Fragen und Paketinhalt (Kompass-Vorlage 2)
 
-Alle Inhalte eines Pakets stehen in `js/inhalt.js` als ein Objekt `window.PAKET`. Die Engine (`js/engine.js`) setzt daraus Start, Entdecken, Üben, Selbstüberprüfung und Abschluss zusammen und erfüllt dabei die technischen Punkte des Leitfadens automatisch. Die Beispieldatei in der Vorlage („Bits & Bytes“) zeigt jedes Feld im Einsatz.
+Alle Inhalte eines Pakets landen in `js/inhalt.js` als ein Objekt `window.PAKET`. Die Engine (`js/engine.js`) setzt daraus Start, Entdecken, Üben, Selbstüberprüfung und Abschluss zusammen und erfüllt dabei die technischen Punkte des Leitfadens automatisch. Die Beispieldatei in der Vorlage („Bits & Bytes“) zeigt jedes Feld im Einsatz.
 
-## Frage
+## Quellen in `quelle/`
+
+Geschrieben wird nicht in `js/inhalt.js`, sondern in den Quellen; `paket.py bauen` setzt `js/inhalt.js` daraus zusammen.
+
+| Datei | Inhalt |
+|---|---|
+| `quelle/paket.js` | das Objekt `window.PAKET`: Texte, Lernziele, Stationen, Szenen, Übungen, Selbstüberprüfung, Merkblatt, Tafelbild |
+| `quelle/fragen.md` | alle Fragen als Markdown (Format unten). So prüft die Lehrkraft die Fragen direkt in der Quelle, ohne JavaScript. |
+| `quelle/bilder/*.svg` | Grafiken für Bildfragen und Hotspots (optional) |
+| weitere `quelle/*.js` | eigene Geräte oder Gegenstände (z. B. `netz.js`); sie kommen vor `paket.js`. Andere Reihenfolge: `quelle/reihenfolge.txt` |
+
+- **`js/inhalt.js` nie von Hand ändern**, wenn es `quelle/` gibt: Der nächste Build überschreibt es, und `pruefe_paket.py` meldet rot, wenn es nicht zu den Quellen passt. `paket.py zip` baut vorher selbst.
+- **`quelle/` kommt nicht ins ZIP.** Die Quellen gehören ins Repository; im Paket steht nur das Gebaute.
+- **Fragen mit Code** (z. B. ein Hotspot, dessen Grafik eine Funktion erzeugt) bleiben in `quelle/paket.js` unter `fragen: [...]`; der Build hängt die Fragen aus `fragen.md` an. Alles andere gehört in `fragen.md`.
+- **Ältere Pakete ohne `quelle/`** laufen weiter: Dort ist `js/inhalt.js` selbst die Quelle, und `paket.py bauen` lässt es unverändert.
+- Eine `fragen.md` lässt sich einzeln prüfen: `python3 <skill>/scripts/quellen.py quelle/fragen.md` (Fehler mit Zeilenangabe, Mengen je Lernziel und Einsatz; mit `--tabelle` eine Übersicht aller Fragen).
+
+## Fragen in `quelle/fragen.md`
+
+Jede Frage beginnt mit einer Überschrift `## ID · Lernziel · Typ · Einsatz` (statt `·` geht auch `|`). Darunter stehen der Fragetext, die Antworten und die Erklärung. Zeilen mit `# ` gliedern die Datei (z. B. `# LZ1 · Binär → dezimal`) und kommen nicht ins Paket; Text vor der ersten Frage auch nicht.
+
+```markdown
+## F7 · LZ2 · mc · check, selbstueberpruefung
+
+Wie lautet **100** als 8-Bit-Binärzahl?
+
+- [x] `01100100`
+- [ ] `00100110` → Die Ziffern sind verdreht: Die 64 steht weiter links als die 4.
+- [ ] `01100000` → Das ist 96: Der Rest 4 fehlt noch.
+
+> 100 = 64 + 32 + 4 → 01100100.
+```
+
+| Teil | Schreibweise |
+|---|---|
+| Kopf | `## F7 · LZ2 · mc · check, selbstueberpruefung` – ID, Lernziel, Typ (`mc`, `zuordnen`, `zahl`, `text`, `hotspot`), Einsatz (`check`, `selbstueberpruefung`, `uebung`, `vorab`, mehrere mit Komma) |
+| Fragetext | Absätze direkt unter dem Kopf; dazu Codeblöcke (```` ``` ````) und Tabellen (`\| … \|`). Listen gibt es im Fragetext nicht, weil `- ` eine Antwort beginnt. |
+| Bild | `![Beschreibung](bilder/datei.svg)` unter dem Fragetext; nur SVG, wird eingebettet. Die Beschreibung liest der Screenreader vor. |
+| Erklärung | Zeilen mit `> ` am Ende: warum die richtige Antwort richtig ist (P6). Pflicht. |
+| Tipp | `Tipp: …` – erscheint nach einer falschen Antwort im Kurz-Check |
+| Prüfnotiz | `Prüfen: …` – Frage an die Lehrkraft, kommt nicht ins Paket. `pruefe_paket.py` meldet offene Prüfnotizen gelb, bis die Zeile gelöscht ist. |
+
+Antworten je Typ:
+
+| Typ | Schreibweise |
+|---|---|
+| `mc` | `- [x] richtig` und `- [ ] falsch → Feedback zur Fehlvorstellung`; mehrere `[x]` → Mehrfachauswahl. Optional `Mischen: nein` (feste Reihenfolge) und `Mehrfach: ja` (Kästchen auch bei nur einer richtigen Antwort). |
+| `zuordnen` | `- links = rechts` je Paar (3–5 sinnvoll); jede rechte Seite nur einmal. Optional `Wenn falsch: …` und `Wenn richtig: …`. |
+| `zahl` | `= 129`, mit Toleranz und Einheit `= 2,5 ± 0,1 m` (Komma oder Punkt, ohne Tausenderpunkt). Typische Falschergebnisse: `- 13 → Feedback`. Optional `Wenn falsch: …`. |
+| `text` | `= 00001100` – je richtige Schreibweise eine Zeile (Groß- und Kleinschreibung und doppelte Leerzeichen zählen nicht). Typische Falschantworten: `- 1100 → Feedback`. Befehle dürfen in Backticks stehen: `` = `ls -l` ``. Optional `Wenn falsch: …`. |
+| `hotspot` | Bild ist Pflicht. Bereiche: `- [x] Router @ 120, 40, 60, 30` (Rechteck: x, y, Breite, Höhe in Koordinaten der SVG) oder `- [ ] Switch @ 300, 80, 25 → Feedback` (Kreis: x, y, Radius). Genau ein `[x]`; die Beschriftung vor `@` liest der Screenreader vor. |
+
+Text in Markdown statt HTML: `**fett**`, `*kursiv*`, `` `Code` ``, `~~durchgestrichen~~`, `2^8^` (hochgestellt), `H~2~O` (tiefgestellt), Zeilenumbruch mit `\` am Zeilenende. Spitze Klammern und `&` erscheinen als Text (`a < b` schreibt man einfach so); HTML-Tags sind nicht vorgesehen und werden als Hinweis gemeldet. Soll ein Zeichen wörtlich stehen, kommt ein `\` davor, z. B. `\*` oder `\→` (ein Pfeil im Antworttext, der kein Feedback einleitet) oder `\=` (ein Gleichheitszeichen links in einem Paar). Ein Feedback beginnt mit `→` oder `->`.
+
+Weitere Beispiele: `vorlage/quelle/fragen.md` (alle Typen außer Hotspot) und die Dateien `beispiele/*.fragen.md`.
+
+## Frage als Objekt in `window.PAKET`
+
+So steht eine Frage nach dem Build in `js/inhalt.js`; in dieser Form schreibt man nur Fragen mit Code (siehe oben) und Pakete ohne `quelle/`.
 
 ```js
 { id: 'F7', lz: 'LZ2', einsatz: ['check', 'selbstueberpruefung'], typ: 'mc',
@@ -71,7 +129,7 @@ Die Vorlage nutzt keinen Ton. Wer Ton oder Video einbaut, liefert immer den Text
 
 ## Interaktionen (Szenen zum Anfassen)
 
-Jede Station ist eine Szene (Leitfaden P12). Die Szene steht groß in der Mitte (die „Bühne“), daneben eine schmale Notiz mit „Kurz erklärt“, Live-Erklärungen und Steckbrief. Szenen sind Funktionen in `inhalt.js`:
+Jede Station ist eine Szene (Leitfaden P12). Die Szene steht groß in der Mitte (die „Bühne“), daneben eine schmale Notiz mit „Kurz erklärt“, Live-Erklärungen und Steckbrief. Szenen sind Funktionen in `quelle/paket.js` (oder einer eigenen Datei in `quelle/`):
 
 ```js
 interaktion: function (box, api) {
@@ -132,7 +190,7 @@ stationen: [ { id: 'K1', titel: 'Gibt es Hartmann Elektro wirklich?', lz: ['LZ1'
 - **Zustand gehört dem Gegenstand:** Was die Lernenden tun, bleibt stehen, auch über Kapitel hinweg. „↺ Schritt neu“ baut den Gegenstand bis vor diesen Schritt neu auf.
 - **Kurz-Check** (erst die Auflösung der Vorab-Frage, dann 2–3 Fragen) öffnet sich, wenn alle Schritte des Kapitels erledigt sind, danach einmal je Lernziel die Einschätzung; die Vorab-Frage steht vor dem ersten Schritt und bleibt als Leitfrage stehen.
 - **Üben und Selbstüberprüfung Teil A** bauen denselben Gegenstand mit **neuen Fällen** als `interaktion(box, api)` (Übung: `api.erledigt()`, Tipps; Selbstüberprüfung: `auswerten()` mit Prüfpunkten je Lernziel, keine Hilfen). Auch die Tafelbild-Szenen nutzen den Gegenstand (`zeichne`).
-- Eigener Stil des Gegenstands als `<style>` mit Präfix (z. B. `.pc-…`) in `inhalt.js`, damit die Vorlage unverändert bleibt.
+- Eigener Stil des Gegenstands als `<style>` mit Präfix (z. B. `.pc-…`) in `quelle/paket.js`, damit die Vorlage unverändert bleibt.
 - Beispiel: `beispiele/simulation-handelsregister.js` („Partner-Check“: Registerportal und Prüfliste).
 
 ## Spielmodus (`PAKET.spielwelt`)
@@ -179,7 +237,7 @@ Fertige Bausteine für Szenen. Alle sind per Antippen und Tastatur bedienbar und
 | Regler | `kit.regler(box, {label, min, max, schritt, wert, einheit, format, beiAenderung(wert)})` | `{wert(), setze(v)}` |
 | Helfer | `kit.el(tag, attrs, kinder)`, `kit.esc`, `kit.mischen`, `kit.wackeln(node)` | |
 
-Eigene Geräte oder Grafiken (z. B. `routerGeraet` im Beispiel) stehen oben in `inhalt.js`; ihr Stil darf dort als `<style>` ergänzt werden, nicht in `stil.css`.
+Eigene Geräte oder Grafiken (z. B. `routerGeraet` im Beispiel) stehen oben in `quelle/paket.js` oder in einer eigenen Datei in `quelle/` (z. B. `quelle/router.js`); ihr Stil darf dort als `<style>` ergänzt werden, nicht in `stil.css`.
 
 ## Tafelbild
 

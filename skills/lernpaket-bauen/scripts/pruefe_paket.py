@@ -7,7 +7,9 @@ Aufruf:
 1. Statische Prüfung (immer): Manifest im Wurzelverzeichnis, SCORM 1.2, kein masteryscore
    (die Selbstüberprüfung zählt nicht), Identifier im Format "<präfix>-<name>", alle Dateien
    vorhanden und im Manifest, keine externen Server, Größe, JavaScript-Syntax (wenn node
-   installiert ist).
+   installiert ist). Bei Paketen mit Ordner quelle/ zusätzlich die Quellen (mit quellen.py):
+   quelle/fragen.md lesbar, Erklärung und Feedback vorhanden, kein HTML im Text, keine offenen
+   Prüfnotizen, js/inhalt.js auf dem Stand von quelle/.
 2. Browser-Prüfung (wenn Python-Playwright mit Chromium installiert ist): lädt das Paket in
    einem nachgebauten SCORM-1.2-Player auf 1366 × 768 (Bezugsgröße: Schullaptop), löst bei
    Paketen aus der Vorlage alle Stationen, Übungen und die Selbstüberprüfung mit der
@@ -81,7 +83,7 @@ def statisch(root):
     for d, _, fs in os.walk(root):
         for f in fs:
             rel = os.path.relpath(os.path.join(d, f), root).replace(os.sep, '/')
-            if rel != 'imsmanifest.xml' and not rel.startswith('__MACOSX'):
+            if rel != 'imsmanifest.xml' and not rel.startswith(('__MACOSX', 'quelle/')):  # quelle/ kommt nicht ins ZIP
                 vorhanden.add(rel)
     fehlt = sorted(g for g in gelistet if g and g not in vorhanden)
     nicht = sorted(v for v in vorhanden if v not in gelistet)
@@ -114,6 +116,33 @@ def statisch(root):
                 p = subprocess.run(['node', '--check', os.path.join(root, v)], capture_output=True, text=True)
                 punkt(p.returncode == 0, 'Technik', f'JavaScript-Syntax {v}: ' + ('in Ordnung.' if p.returncode == 0 else p.stderr.strip().splitlines()[-1]))
     return href
+
+
+def quellen_pruefen(root):
+    """Pakete mit Ordner quelle/: fragen.md lesbar und vollständig, js/inhalt.js auf dem Stand der Quellen."""
+    if not os.path.isdir(os.path.join(root, 'quelle')):
+        return
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import quellen
+    except ImportError:
+        punkt(False, 'Quellen', 'quellen.py fehlt neben diesem Skript – Quellen in quelle/ nicht geprüft (Skill-Set neu bauen).', gelb=True)
+        return
+    text, fragen, meld = quellen.inhalt_erzeugen(root)
+    fehler = [t for a, t in meld if a == 'fehler']
+    hinweise = [t for a, t in meld if a == 'hinweis']
+    offen = [t for a, t in meld if a == 'pruefen']
+    if os.path.isfile(os.path.join(root, 'quelle', 'fragen.md')):
+        punkt(not fehler, 'Quellen', f'quelle/fragen.md gelesen: {len(fragen)} Fragen.' if not fehler else 'quelle/fragen.md hat Fehler: ' + ' | '.join(fehler[:5]))
+        punkt(not hinweise, 'Quellen', 'Jede Frage mit Erklärung, jede Falschantwort mit Feedback, kein HTML im Text.' if not hinweise else 'Hinweise zu fragen.md: ' + ' | '.join(hinweise[:5]), gelb=True)
+        punkt(not offen, 'Quellen', 'Keine offenen Prüfnotizen (Prüfen:) in fragen.md.' if not offen else f'{len(offen)} offene Prüfnotiz(en) – vor dem Einsatz klären und die Zeile „Prüfen:“ löschen: ' + ' | '.join(offen[:3]), gelb=True)
+    elif fehler:
+        punkt(False, 'Quellen', 'quelle/: ' + ' | '.join(fehler[:3]))
+    if text is not None:
+        ziel = os.path.join(root, 'js', 'inhalt.js')
+        ist = open(ziel, encoding='utf-8').read().replace('\r\n', '\n') if os.path.isfile(ziel) else ''
+        punkt(ist == text, 'Quellen', 'js/inhalt.js ist auf dem Stand von quelle/.' if ist == text
+              else 'js/inhalt.js passt nicht zu quelle/ – paket.py bauen ausführen (Änderungen gehören in quelle/, nicht in js/inhalt.js).')
 
 
 MOCK = r"""
@@ -641,6 +670,7 @@ def main():
     a = ap.parse_args()
     root, tmp = entpacken(a.paket)
     href = statisch(root)
+    quellen_pruefen(root)
     if href and not a.ohne_browser:
         browser(root, href, a.bilder)
     print(f'Prüfbericht für {a.paket}\n')

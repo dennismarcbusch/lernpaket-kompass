@@ -32,7 +32,7 @@ Sieh dir die Screenshots an und mache für jede Ansicht den **Fünf-Sekunden-Tes
 
 ### 3. Inhalt lesen
 
-Lies `js/inhalt.js` (bzw. die Texte in `index.html`) und beantworte die Prüffragen des **Kerns** und die Muss-Punkte der Checkliste mit Befund und Fundstelle:
+Lies die Quellen `quelle/paket.js` und `quelle/fragen.md` (bei Paketen ohne `quelle/`: `js/inhalt.js`, bei einem ZIP ebenfalls `js/inhalt.js`; dazu die Texte in `index.html`) und beantworte die Prüffragen des **Kerns** und die Muss-Punkte der Checkliste mit Befund und Fundstelle:
 
 - **P12 (zuerst):** Ist die Form begründet (A Simulation, B interaktive Illustration, C Spiel nur zum Üben, D Lernspiel nur begründet)? Steckt der Lernstoff in den Regeln des Gegenstands bzw. des Spiels (wer den Stoff nicht kann, kommt nicht weiter, nicht erst in einem Quiz danach)? Bei einem Spiel: Vermittelt es die Grundlagen selbst? Besteht das Paket die Plattform-Probe – oder ließe es sich mit Test, H5P oder Lückentext genauso umsetzen? Dann ist es rot, auch wenn alles andere stimmt. Hat jede Station (jedes Level) eine Szene, in der die Lernenden etwas bewegen? Verhält sie sich wie im Beruf, und reagiert sie auf Fehler? Ein Arbeitsblatt mit Klick-Quiz ist rot. Nicht bemängeln: dass die Szene schlichter aussieht als das echte Programm.
 - **P3:** Vorführung vor jedem neuen Aufgabentyp, mit Begründung je Schritt und Frage zum Selbsterklären, überspringbar?
@@ -52,7 +52,7 @@ Sprache und Deutsch als Zweitsprache: Gibt es ein Glossar, werden neue Begriffe 
 
 ### 4a. Tafelbild
 
-Zwei bis vier Tafelbild-Szenen gehören zu jedem Paket (Soll); fehlen sie, steht das als Soll-Punkt im Bericht. Erkennbar an `tafel:` in `js/inhalt.js`. Das Skript schaltet alle Szenen und Werkzeuge durch, prüft Konsolenfehler, `index.html#tafel` und dass nichts an die Lernplattform geschrieben wird. Du prüfst zusätzlich anhand der Screenshots `tafel-<n>.png` und des Inhalts:
+Zwei bis vier Tafelbild-Szenen gehören zu jedem Paket (Soll); fehlen sie, steht das als Soll-Punkt im Bericht. Erkennbar an `tafel:` in `quelle/paket.js` bzw. `js/inhalt.js`. Das Skript schaltet alle Szenen und Werkzeuge durch, prüft Konsolenfehler, `index.html#tafel` und dass nichts an die Lernplattform geschrieben wird. Du prüfst zusätzlich anhand der Screenshots `tafel-<n>.png` und des Inhalts:
 
 - **Textfrei:** Steht auf der Bühne ein erklärender Satz? Erlaubt sind Beschriftungen, Zahlen, Symbole.
 - **Lesbar am Beamer:** Schrift und Linien groß genug für die letzte Reihe?

@@ -9,6 +9,7 @@ cd "$(dirname "$0")"
 python3 pruefe_stand.py
 SKILLS=(lernpaket-planen fragenpool-erstellen lernpaket-bauen lernpaket-pruefen lernpaket-auswerten)
 MIT_PRUEFSKRIPT=(lernpaket-bauen lernpaket-pruefen)
+MIT_QUELLEN=(lernpaket-bauen lernpaket-pruefen fragenpool-erstellen)  # quellen.py: fragen.md lesen, js/inhalt.js bauen
 DIST="$(cd .. && pwd)/dist"
 mkdir -p "$DIST"
 
@@ -37,6 +38,10 @@ done
 for s in "${MIT_PRUEFSKRIPT[@]}"; do
   mkdir -p "$s/scripts"
   cp _gemeinsam/scripts/pruefe_paket.py "$s/scripts/"
+done
+for s in "${MIT_QUELLEN[@]}"; do
+  mkdir -p "$s/scripts"
+  cp _gemeinsam/scripts/quellen.py "$s/scripts/"
 done
 
 for s in "${SKILLS[@]}"; do

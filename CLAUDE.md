@@ -4,10 +4,11 @@ Leitfaden (`docs/`) und Skill-Set für Claude (`skills/`) zum Bauen von SCORM-1.
 
 ## Konventionen
 - Der Gesamt-Skill `lernpaket-kompass` entsteht beim Bauen aus `skills/_gesamt/SKILL.md` und den fünf Einzel-Skills (`gesamt_bauen.py`) und wird nicht eingecheckt. Inhaltliche Änderungen gehören in die Einzel-Skills.
-- `skills/*/referenz/` und die Kopien von `pruefe_paket.py` in den Skills sind generiert: nur `skills/_gemeinsam/` ändern, dann `skills/baue-skills.sh`.
+- `skills/*/referenz/` und die Kopien von `pruefe_paket.py` und `quellen.py` in den Skills sind generiert: nur `skills/_gemeinsam/` ändern, dann `skills/baue-skills.sh`.
 - Der Leitfaden wird als Dokument gepflegt; Änderungen per `skills/leitfaden_sync.py --export <export>` übernehmen. Der Export ersetzt `docs/leitfaden-lernpakete.md` ganz: Was nur im Markdown geändert wurde, vorher ins Dokument übertragen.
 - Eine Versionsnummer für alles (Datei `VERSION`): `skills/pruefe_stand.py --setze` trägt sie in Leitfaden, Skills und Vorlage ein; `baue-skills.sh` bricht ab, wenn der Stand nicht stimmt.
 - Nach Änderungen an der Vorlage (`engine.js`, `baukasten.js`, `tafel.js`, `index.html`, Dateien in `css/`) muss `pruefe_paket.py skills/lernpaket-bauen/vorlage` komplett grün sein; danach `paket.py zip` auf die Vorlage, damit das Manifest alle Dateien listet.
+- Inhalte stehen in Quellen: `quelle/paket.js` (window.PAKET) und `quelle/fragen.md` (Fragen als Markdown, Format in `_gemeinsam/fragenformat.md`). `js/inhalt.js` wird mit `paket.py bauen` erzeugt und nie von Hand geändert; nach Änderungen an `vorlage/quelle/` neu bauen (`pruefe_stand.py` prüft das). Fragen in Markdown statt HTML; nur Fragen mit Code (erzeugte Grafik) bleiben in `paket.js`. Handgeschriebene `js/inhalt.js` ohne `quelle/` (z. B. PING) bleiben gültig. `quelle/` kommt nicht ins ZIP.
 - Jede Station der Vorlage und der Beispiele ist eine Szene zum Anfassen (P12) und auf 1366 × 768 ganz zu sehen; Textbudget und Interaktivitätsprüfung nicht aufweichen.
 - Je Ansicht höchstens ein hervorgehobener Knopf (`primaer`); „Weiter“ erst nach erledigter Aufgabe. Eine Kopfzeile, keine zusätzlichen Leisten über der Szene.
 - Der Kern bleibt klein (sieben Prinzipien, P3–P8 und P12). Eine neue Regel wird erst Muss, wenn sie mit Schülern erprobt ist; was die Vorlage von selbst liefert, kommt ins Prüfskript, nicht in die Checkliste.

@@ -21,7 +21,7 @@ Kolleginnen und Kollegen laden nur einen Skill hoch: **`lernpaket-kompass`**. Er
 | Skill | Phase | Ergebnis |
 |---|---|---|
 | `lernpaket-planen` | Klären, Zielen, Erfinden; nach dem Prototyp: Entwerfen | Steckbrief, Lernziel-Tabelle, Konzept (Simulation, Spiel nur begründet); später Drehbuch |
-| `fragenpool-erstellen` | Entwerfen | Fragen mit erklärendem Feedback und Prüftabelle |
+| `fragenpool-erstellen` | Entwerfen | Fragen mit erklärendem Feedback als Markdown (`quelle/fragen.md`) |
 | `lernpaket-bauen` | Prototyp bauen, Ausbauen | SCORM-1.2-ZIP aus der Kompass-Vorlage (erst Prototyp, dann Ausbau) |
 | `lernpaket-pruefen` | Erproben | Prüfbericht mit Ampel (Checkliste, Prinzipien, Technik-Test); dazu der Kurztest mit Schülern |
 | `lernpaket-auswerten` | Auswerten | Auswertung des Berichtsexports (ohne Namen) mit Änderungsvorschlägen |

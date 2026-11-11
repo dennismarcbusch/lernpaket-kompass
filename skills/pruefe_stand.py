@@ -7,7 +7,8 @@
 1. Eine Versionsnummer für alles: Die Datei VERSION im Wurzelverzeichnis ist die Quelle. Dieselbe
    Nummer steht im Kopf des Leitfadens, am Ende jeder SKILL.md, in der Engine (LERNPAKET.version),
    im Tafelbild (TAFEL.version), in der index.html der Vorlage (generator) sowie in Beispielinhalt
-   und Manifest der Vorlage.
+   (quelle/paket.js) und Manifest der Vorlage. Das gebaute js/inhalt.js der Vorlage muss zu quelle/ passen
+   (--setze baut es neu).
 2. Keine überholten Begriffe: Nach einer Umbenennung bleiben leicht alte Wörter in Referenz,
    Vorlagen oder Beispielen stehen. Gesucht wird nach den Begriffen, die mit Kompass 4.0 ersetzt
    wurden. Zeilen, die ausdrücklich von früher sprechen („älter“, „früher“, „entfällt“ …), und der
@@ -28,7 +29,7 @@ STELLEN += [
     (os.path.join(VORLAGE, 'js', 'engine.js'), r"window\.LERNPAKET = \{\s*version: '([\d.]+)'", 'LERNPAKET.version'),
     (os.path.join(VORLAGE, 'js', 'tafel.js'), r"window\.TAFEL = \{\s*version: '([\d.]+)'", 'TAFEL.version'),
     (os.path.join(VORLAGE, 'index.html'), r'<meta name="generator" content="Lernpaket-Kompass ([\d.]+)">', 'generator in der index.html'),
-    (os.path.join(VORLAGE, 'js', 'inhalt.js'), r"^  version: '([\d.]+)'", 'Version des Beispielinhalts'),
+    (os.path.join(VORLAGE, 'quelle', 'paket.js'), r"^  version: '([\d.]+)'", 'Version des Beispielinhalts (quelle/paket.js)'),
     (os.path.join(VORLAGE, 'imsmanifest.xml'), r'<manifest identifier="[^"]*" version="([\d.]+)"', 'Version im Manifest der Vorlage'),
     ('README.md', r'Aktueller Stand: \*\*Kompass ([\d.]+)\*\*', 'README'),
 ]
@@ -85,6 +86,26 @@ def version_pruefen(soll, setze):
     return fehler
 
 
+def vorlage_gebaut(setze):
+    """js/inhalt.js der Vorlage muss dem entsprechen, was paket.py bauen aus quelle/ erzeugt."""
+    sys.path.insert(0, os.path.join(HIER, '_gemeinsam', 'scripts'))
+    import quellen
+    root = os.path.join(REPO, VORLAGE)
+    text, _, meld = quellen.inhalt_erzeugen(root)
+    if text is None:
+        return [f'{VORLAGE}/quelle: ' + t for a, t in meld if a == 'fehler'] or [f'{VORLAGE}/quelle fehlt']
+    ziel = os.path.join(root, 'js', 'inhalt.js')
+    ist = open(ziel, encoding='utf-8').read() if os.path.isfile(ziel) else ''
+    if ist == text:
+        return []
+    if setze:
+        with open(ziel, 'w', encoding='utf-8', newline='\n') as f:
+            f.write(text)
+        print(f'gebaut   {VORLAGE}/js/inhalt.js aus quelle/')
+        return []
+    return [f'{VORLAGE}/js/inhalt.js passt nicht zu quelle/ – python3 skills/lernpaket-bauen/scripts/paket.py bauen {VORLAGE}']
+
+
 def begriffe_pruefen():
     fehler = []
     for d, ordner, dateien in os.walk(REPO):
@@ -94,7 +115,7 @@ def begriffe_pruefen():
             rel = os.path.normpath(os.path.join(rel_d, f))
             if not f.endswith(SUCH_ENDUNGEN) or rel in AUSNAHME_DATEIEN:
                 continue
-            if rel.startswith(os.path.join('skills', 'lernpaket-')) and os.sep + 'scripts' + os.sep in rel and f == 'pruefe_paket.py':
+            if rel.startswith(os.path.join('skills', '')) and not rel.startswith(os.path.join('skills', '_gemeinsam')) and os.sep + 'scripts' + os.sep in rel and f in ('pruefe_paket.py', 'quellen.py'):
                 continue  # Kopie aus _gemeinsam
             geschichte = False
             for nr, zeile in enumerate(lies(rel).split('\n'), 1):
@@ -121,6 +142,7 @@ def main():
     if not re.fullmatch(r'\d+\.\d+(\.\d+)?', soll):
         sys.exit(f'VERSION enthält keine Versionsnummer: {soll!r}')
     fehler = version_pruefen(soll, setze)
+    fehler += vorlage_gebaut(setze)
     alt = begriffe_pruefen()
     if fehler:
         print(f'Versionsnummer (VERSION = {soll}):')

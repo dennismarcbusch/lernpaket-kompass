@@ -18,7 +18,7 @@ Gebaut wird früh: Der Prototyp einer Station entsteht gleich nach dem Konzept, 
 | 1 Planen, Teil 1 | `phasen/1-planen.md` (Teil 1) | Steckbrief, Lernziel-Tabelle, Konzept (Simulation zuerst) mit Kurzplan für Station 1 |
 | 2 Prototyp bauen | `phasen/3-bauen.md` (Schritte 1, 2, 5, 6) | eine Station mit zwei Fragen zum Ausprobieren |
 | 3 Planen, Teil 2 | `phasen/1-planen.md` (Teil 2) | Drehbuch für das ganze Paket |
-| 4 Fragen | `phasen/2-fragen.md` | Fragenpool mit Feedback und Prüftabelle |
+| 4 Fragen | `phasen/2-fragen.md` | Fragenpool mit Feedback als `quelle/fragen.md` |
 | 5 Ausbauen | `phasen/3-bauen.md` (ab Schritt 3) | SCORM-ZIP mit Tafelbild-Szenen |
 | 6 Prüfen | `phasen/4-pruefen.md` | Prüfbericht mit Ampel; Erprobung mit drei bis fünf Schülern |
 | 7 Auswerten | `phasen/5-auswerten.md` | Auswertung des Berichtsexports mit Änderungsvorschlägen |

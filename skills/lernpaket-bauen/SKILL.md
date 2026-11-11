@@ -7,9 +7,9 @@ description: Baut ein SCORM-1.2-Lernpaket für die ByCS-Lernplattform mit der Ko
 
 Du baust ein SCORM-1.2-Paket (ZIP), das die Lehrkraft in die ByCS-Lernplattform hochlädt. Gebaut wird in zwei Schritten: zuerst der **Prototyp** (eine Station, zwei Fragen) direkt aus dem Konzept, damit die Lehrkraft früh sieht, ob die Idee trägt; nach Drehbuch und Fragenpool der **Ausbau**.
 
-Grundlage ist die **Kompass-Vorlage** in `vorlage/`: Sie enthält die Engine, die Aufbau, Bedienung und Datenübergabe bereits umsetzt. Du schreibst nur den Inhalt (`js/inhalt.js`) und die Szenen. **Das Wichtigste ist das Konzept aus der Planung** (`konzept.md`, P12). Form A und B: Trägt ein Arbeitsgegenstand das ganze Paket, baust du im **Simulationsmodus** (`simulation`: Lektion links in Kapiteln und Schritten, Gegenstand rechts, bleibt erhalten); sonst ist jede Station eine eigene Szene. Form C: zusätzlich das Spiel als Interaktion der Übungen. Form D: Spielmodus, in dem das Spiel die Grundlagen selbst vermittelt (SQL-Island-Prinzip, `referenz/szenen.md`). Nie ein Text mit Quiz darunter. Fehlt das Konzept, holst du die Phasen „Zielen“ und „Erfinden“ aus `lernpaket-planen` nach, bevor du baust.
+Grundlage ist die **Kompass-Vorlage** in `vorlage/`: Sie enthält die Engine, die Aufbau, Bedienung und Datenübergabe bereits umsetzt. Du schreibst nur die Quellen in `quelle/`: den Inhalt mit den Szenen (`quelle/paket.js`) und die Fragen (`quelle/fragen.md`, Markdown); `paket.py bauen` setzt daraus `js/inhalt.js` zusammen. **Das Wichtigste ist das Konzept aus der Planung** (`konzept.md`, P12). Form A und B: Trägt ein Arbeitsgegenstand das ganze Paket, baust du im **Simulationsmodus** (`simulation`: Lektion links in Kapiteln und Schritten, Gegenstand rechts, bleibt erhalten); sonst ist jede Station eine eigene Szene. Form C: zusätzlich das Spiel als Interaktion der Übungen. Form D: Spielmodus, in dem das Spiel die Grundlagen selbst vermittelt (SQL-Island-Prinzip, `referenz/szenen.md`). Nie ein Text mit Quiz darunter. Fehlt das Konzept, holst du die Phasen „Zielen“ und „Erfinden“ aus `lernpaket-planen` nach, bevor du baust.
 
-**Lies vor dem Start:** `referenz/fragenformat.md` (Inhaltsformat, Szenen, Baukasten) und `referenz/szenen.md` (Textbudget, Welt, echt in der Funktion). Sieh dir **ein** Beispiel an, das zur Form im Konzept passt: Simulationsmodus `beispiele/simulation-handelsregister.js` („Partner-Check“) · Stationen mit eigenen Szenen `vorlage/js/inhalt.js` („Bits & Bytes“, eigenes Gerät) und als Ausschnitt mit simuliertem Rechner `beispiele/wirtschaft-handelsregister.js` · Spielmodus `beispiele/spiel-stempel-drauf.js` oder `beispiele/spiel-firmendex.js`. Nur bei Bedarf: `referenz/gestaltung.md` (Abschnitte „Simulation und Szene zuerst“ und „Orientierung“), `referenz/technik.md` vor dem ZIP.
+**Lies vor dem Start:** `referenz/fragenformat.md` (Quellen, Fragen als Markdown, Inhaltsformat, Szenen, Baukasten) und `referenz/szenen.md` (Textbudget, Welt, echt in der Funktion). Sieh dir **ein** Beispiel an, das zur Form im Konzept passt: Simulationsmodus `beispiele/simulation-handelsregister.js` („Partner-Check“) · Stationen mit eigenen Szenen `vorlage/quelle/paket.js` („Bits & Bytes“, eigenes Gerät) und als Ausschnitt mit simuliertem Rechner `beispiele/wirtschaft-handelsregister.js` · Spielmodus `beispiele/spiel-stempel-drauf.js` oder `beispiele/spiel-firmendex.js`. Die Fragen der Beispiele stehen jeweils daneben in `….fragen.md`, die der Vorlage in `vorlage/quelle/fragen.md`. Nur bei Bedarf: `referenz/gestaltung.md` (Abschnitte „Simulation und Szene zuerst“ und „Orientierung“), `referenz/technik.md` vor dem ZIP.
 
 **Rückfragen zum Anklicken:** Hat eine Frage an die Lehrkraft absehbare Antworten (Klasse, Dauer, Einsatzform, Ja/Nein, Wahl zwischen deinen Vorschlägen, nächster Schritt), stellst du sie mit dem Werkzeug für Rückfragen mit Antwortknöpfen, sofern deine Umgebung eines anbietet: zwei bis vier Optionen, dein Vorschlag zuerst, eine eigene Antwort bleibt immer möglich. Mehrere solche Fragen bündelst du in einem Aufruf. Frei schreiben lässt du die Lehrkraft nur, wo sie Inhalte liefert (Thema, typische Schülerfehler, fachliche Korrekturen, Rückmeldung zum Prototyp). Gibt es kein solches Werkzeug, nummerierst du die Optionen, damit eine Zahl als Antwort genügt.
 
@@ -27,7 +27,7 @@ Grundlage ist die **Kompass-Vorlage** in `vorlage/`: Sie enthält die Engine, di
 - **Tafelbild** (`js/tafel.js`): Präsentationsmodus für den Mittelteil des Inputs, Knopf in der Kopfzeile, Aufruf über `index.html#tafel`; speichert nichts.
 - **Technik:** eigene Welt (`welt`), Baukasten `js/baukasten.js`, Glossar, SCORM 1.2 (Ergebnis als Information, Status „completed“, objectives, interactions, suspend_data, Name), läuft ohne Lernplattform, Tablet und Tastatur.
 
-**`js/engine.js`, `js/baukasten.js`, `js/tafel.js`, `index.html` und alle Dateien in `css/` nicht verändern.** Sie sorgen dafür, dass alle Pakete gleich aussehen und sich gleich bedienen. Fehlt eine Funktion, löse sie in `inhalt.js` (z. B. als Interaktion) und notiere den Wunsch für die Pflege der Vorlage.
+**`js/engine.js`, `js/baukasten.js`, `js/tafel.js`, `index.html` und alle Dateien in `css/` nicht verändern.** Sie sorgen dafür, dass alle Pakete gleich aussehen und sich gleich bedienen. Fehlt eine Funktion, löse sie in `quelle/paket.js` (z. B. als Interaktion) und notiere den Wunsch für die Pflege der Vorlage.
 
 ## Ablauf
 
@@ -42,13 +42,21 @@ Grundlage ist die **Kompass-Vorlage** in `vorlage/`: Sie enthält die Engine, di
 python3 <skill>/scripts/paket.py neu <arbeitsordner>/<name> --id <präfix>-<name> --titel "Titel"
 ```
 
-Das setzt die `version` in `js/inhalt.js` auf `'1.0'`; stelle sie für den Prototyp auf `'0.1'`, für die erste Fassung im Unterricht auf `'1.0'`. Sie steht klein in der Kopfzeile und auf den Ausdrucken. (Die Versionsnummer des Kompass selbst steht in der `index.html` und hat damit nichts zu tun.)
+Das legt das Paket mit dem Ordner `quelle/` an (`paket.js`, `fragen.md`) und setzt die `version` in `quelle/paket.js` auf `'1.0'`; stelle sie für den Prototyp auf `'0.1'`, für die erste Fassung im Unterricht auf `'1.0'`. Sie steht klein in der Kopfzeile und auf den Ausdrucken. (Die Versionsnummer des Kompass selbst steht in der `index.html` und hat damit nichts zu tun.)
+
+Nach jeder Änderung in `quelle/` baust du `js/inhalt.js` neu (das ZIP in Schritt 6 tut es selbst):
+
+```bash
+python3 <skill>/scripts/paket.py bauen <paketordner>
+```
+
+Ein Fehler in `fragen.md` bricht den Build mit Zeilenangabe ab. `js/inhalt.js` änderst du nie von Hand.
 
 Das Präfix steht für das Projekt oder Fach und kommt aus dem Steckbrief (z. B. `ping-` für die IT-Pakete, `bwl-` oder `deutsch-`). Ist keins festgelegt, frag die Lehrkraft; alle Pakete eines Projekts nutzen dasselbe Präfix.
 
 ### 2. Prototyp: eine Station, zwei Fragen
 
-Ersetze den Beispielinhalt in `js/inhalt.js` durch: Titel, **Welt** (`welt.thema`, `kulisse`, `symbol`), **Figur mit Aussehen**, Leitsituation, ggf. Spielrahmen, alle Lernziele, **Station 1 vollständig** mit Vorab-Frage und zwei Kurz-Check-Fragen. **Im Simulationsmodus** stattdessen: den Gegenstand mit allen Befehlen, die `loesen` braucht, und Kapitel 1 mit allen Schritten (`pruefe`, `loesen`). **Im Spielmodus**: Spielwelt mit Level 1 vollständig spielbar (geführter erster Fall, alle Fälle, Folgen, Erfolgskriterium) und dessen Zwischenbilanz. Sonst baue Station 1 in dieser Reihenfolge:
+Ersetze den Beispielinhalt in `quelle/paket.js` und `quelle/fragen.md` durch: Titel, **Welt** (`welt.thema`, `kulisse`, `symbol`), **Figur mit Aussehen**, Leitsituation, ggf. Spielrahmen, alle Lernziele, **Station 1 vollständig** mit Vorab-Frage und zwei Kurz-Check-Fragen. **Im Simulationsmodus** stattdessen: den Gegenstand mit allen Befehlen, die `loesen` braucht, und Kapitel 1 mit allen Schritten (`pruefe`, `loesen`). **Im Spielmodus**: Spielwelt mit Level 1 vollständig spielbar (geführter erster Fall, alle Fälle, Folgen, Erfolgskriterium) und dessen Zwischenbilanz. Sonst baue Station 1 in dieser Reihenfolge:
 
 1. **Szene** aus dem Kurzplan mit dem Baukasten (`api.kit`) oder einem eigenen Gerät: Was sehen die Lernenden, was bewegen sie, woran erkennt das Paket den Erfolg, wie reagiert die Szene auf Fehler? Etwa 380 px hoch, damit sie ganz zu sehen ist.
 2. **Vorführung** (`demo`) an einem anderen Fall, 2–4 Schritte, mit `selbsterklaerung` an einem entscheidenden Schritt; `zuruecksetzen` stellt danach die Aufgabe her.
@@ -61,7 +69,7 @@ Teste (Schritt 5; im Prototyp sind rote Punkte zu Selbstüberprüfung und Daten�
 
 ### 3. Ausbau
 
-Mit Drehbuch und Fragenpool alle Stationen, Übungen, die Selbstüberprüfung (Teil A als Interaktion, Teil B aus dem Pool), Merkblatt, Selbsttest, die Vorab-Fragen aller Stationen und das Tafelbild ergänzen.
+Mit Drehbuch und Fragenpool alle Stationen, Übungen, die Selbstüberprüfung (Teil A als Interaktion, Teil B aus dem Pool), Merkblatt, Selbsttest, die Vorab-Fragen aller Stationen und das Tafelbild ergänzen. Der Fragenpool kommt als `quelle/fragen.md` aus `fragenpool-erstellen` und wird unverändert übernommen; Korrekturen an Fragen machst du dort, nicht im gebauten `js/inhalt.js`.
 
 Beim Schreiben der Texte:
 
@@ -84,7 +92,7 @@ Beim Schreiben der Texte:
 
 ### 3a. Tafelbild: zwei bis vier Szenen
 
-Erst wenn die Stationen stehen, deren Szenen das Tafelbild zeigt. Es gehört zu jedem Paket (Soll) und ersetzt im Input der Lehrkraft nur den Mittelteil (Erklären und Beispiel); Einstieg, Üben und Sicherung laufen auf ihren Folien. Format und Regeln: `referenz/fragenformat.md`, Abschnitt „Tafelbild“; Beispiele in `vorlage/js/inhalt.js` und in `beispiele/`.
+Erst wenn die Stationen stehen, deren Szenen das Tafelbild zeigt. Es gehört zu jedem Paket (Soll) und ersetzt im Input der Lehrkraft nur den Mittelteil (Erklären und Beispiel); Einstieg, Üben und Sicherung laufen auf ihren Folien. Format und Regeln: `referenz/fragenformat.md`, Abschnitt „Tafelbild“; Beispiele in `vorlage/quelle/paket.js` und in `beispiele/`.
 
 - Szenen aus dem Drehbuch-Abschnitt „Tafelbild“ als `tafel.szenen`. Dieselben Bausteine oder denselben Gegenstand wie in der Station wiederverwenden (gleiche Optik = Wiedererkennung), aber größer und **ohne erklärenden Text**; nur Beschriftungen im Bild, Zahlen, Symbole.
 - Werkzeuge über `api.werkzeug()` mit kurzem Text und Tastenkürzel. Für die Vorhersage: Ergebnisse als Schalter zum Aufdecken anlegen statt sofort anzuzeigen.
@@ -97,7 +105,7 @@ Erst wenn die Stationen stehen, deren Szenen das Tafelbild zeigt. Es gehört zu 
 Vertrag, Regeln und alle Bausteine stehen in `referenz/fragenformat.md` („Interaktionen“ und „Baukasten“). Kurz:
 
 - `function (box, api) { …; return { demo, zuruecksetzen, loesen, auswerten } }` – `loesen()` ist **Pflicht** (setzt die Musterlösung, der automatische Test braucht es), `demo` und `zuruecksetzen` gehören zu jeder Station, `auswerten()` nur in Teil A.
-- **Erst im Baukasten suchen** (`api.kit.computer`, `browser`, `mail`, `formular`, `dokument`, `dialog`, `szene`, `sortieren`, `reihenfolge`, `regler`), dann eigene Geräte oder SVG-Grafiken oben in `inhalt.js` bauen (wie `routerGeraet` im Beispiel). Eigener Stil dafür als `<style>` in `inhalt.js`.
+- **Erst im Baukasten suchen** (`api.kit.computer`, `browser`, `mail`, `formular`, `dokument`, `dialog`, `szene`, `sortieren`, `reihenfolge`, `regler`), dann eigene Geräte oder SVG-Grafiken oben in `quelle/paket.js` oder in einer eigenen Datei in `quelle/` bauen (wie `routerGeraet` im Beispiel). Eigener Stil dafür als `<style>` in derselben Datei.
 - Bedienung mit `<button>`-Elementen (Tastatur), **Antippen statt nur Ziehen**, große Ziele (mind. 40 px). **In der Szene keine Knöpfe mit der Klasse `primaer`:** Die Akzentfarbe gehört dem einen nächsten Schritt, den die Engine hervorhebt.
 - Grafiken als Inline-SVG, Beschriftungen im Bild; keine externen Dateien, Schriften, Bibliotheken oder CDNs; keine `alert/confirm/prompt`.
 - Rückmeldung nach jedem Versuch mit Begründung (`api.meldung`) oder als Reaktion der Figur (`api.sage`), Erfolg mit `api.erledigt('…')`.
@@ -109,7 +117,7 @@ Vertrag, Regeln und alle Bausteine stehen in `referenz/fragenformat.md` („Inte
 python3 <skill>/scripts/pruefe_paket.py <paketordner> --bilder <ordner-fuer-screenshots>
 ```
 
-Das Skript prüft Manifest (kein masteryscore), externe Verweise, JavaScript-Syntax und Inhalt (Mengen, Feedback, IDs). Im Browser auf 1366 × 768 **löst es alle Stationen, Übungen und die Selbstüberprüfung mit der Musterlösung** und prüft: Szene ganz zu sehen (auch die Unterkante), höchstens ein hervorgehobener Knopf, „Weiter“ erst nach der Aufgabe, Datenübergabe (Ergebnis als Information, Status „completed“, nie bestanden oder nicht bestanden), Wiedereinstieg, Konsolenfehler, Tablet- und Handy-Breite, Tafelbild.
+Das Skript prüft Manifest (kein masteryscore), externe Verweise, JavaScript-Syntax, die Quellen (`fragen.md` lesbar, Erklärung und Feedback vorhanden, offene Prüfnotizen, `js/inhalt.js` auf dem Stand von `quelle/`) und Inhalt (Mengen, Feedback, IDs). Im Browser auf 1366 × 768 **löst es alle Stationen, Übungen und die Selbstüberprüfung mit der Musterlösung** und prüft: Szene ganz zu sehen (auch die Unterkante), höchstens ein hervorgehobener Knopf, „Weiter“ erst nach der Aufgabe, Datenübergabe (Ergebnis als Information, Status „completed“, nie bestanden oder nicht bestanden), Wiedereinstieg, Konsolenfehler, Tablet- und Handy-Breite, Tafelbild.
 
 - Alle roten Punkte beheben. Gelbe Hinweise beheben oder der Lehrkraft begründen.
 - **Sieh dir die Screenshots selbst an** (Fünf-Sekunden-Test: Sieht man sofort, was man anfassen kann? Ist klar, was zu tun ist? Ist nichts abgeschnitten? Steht im Arbeitsbereich nur, was zur Aufgabe gehört?).
@@ -123,7 +131,7 @@ Das Skript prüft Manifest (kein masteryscore), externe Verweise, JavaScript-Syn
 python3 <skill>/scripts/paket.py zip <paketordner>
 ```
 
-Das aktualisiert die Dateiliste im Manifest, übernimmt Titel, ID und Version aus `inhalt.js`, entfernt einen alten masteryscore und legt `<name>_scorm12.zip` neben den Ordner. Gib der Lehrkraft das ZIP und diese Hinweise:
+Das baut zuerst `js/inhalt.js` aus `quelle/`, aktualisiert die Dateiliste im Manifest, übernimmt Titel, ID und Version aus `js/inhalt.js`, entfernt einen alten masteryscore und legt `<name>_scorm12.zip` neben den Ordner. Der Ordner `quelle/` kommt nicht ins ZIP. Gib der Lehrkraft das ZIP und diese Hinweise:
 
 1. In der ByCS-Lernplattform im Kurs eine Aktivität **„Lernpaket“** (SCORM) anlegen und das ZIP hochladen.
 2. Empfohlene Einstellungen: Versuche unbegrenzt, Bewertungsmethode „Höchste Bewertung“, Anzeige in neuem Fenster oder mindestens 1000 px breit. Wird der Aktivitätsabschluss genutzt: an den Status „Abgeschlossen“ binden, nicht an „Bestanden“ – das Paket meldet nie bestanden. Die Punktzahl der Selbstüberprüfung ist als Information gedacht, nicht als Note.
@@ -131,13 +139,15 @@ Das aktualisiert die Dateiliste im Manifest, übernimmt Titel, ID und Version au
 4. Danach: Review durch eine Kollegin oder einen Kollegen (Skill `lernpaket-pruefen`) und **Kurztest mit drei bis fünf Schülern** mit dem Beobachtungsbogen `vorlagen-lehrkraft/erprobung.md` – der gehört zu jedem Paket.
 5. Tafelbild: Im Input an der passenden Stelle `index.html#tafel` öffnen (als Link aus den Folien; F = Vollbild). Die Hinweise aus `tafelbild-notizen.md` in die Notizen der Folien übernehmen und einmal am echten Board ausprobieren.
 
-Wenn in einem Repository mit mehreren Paketen gearbeitet wird (z. B. PING): Quellen nach `packages/<name>/src/`, Steckbrief nach `packages/<name>/README.md`, Planung nach `packages/<name>/planung/`, Hinweise zum Tafelbild und Beobachtungsbogen nach `packages/<name>/lehrer/`; ZIPs nicht einchecken (`./build.sh` baut sie).
+Wenn in einem Repository mit mehreren Paketen gearbeitet wird (z. B. PING): Paketordner (mit `quelle/`) nach `packages/<name>/src/`, Steckbrief nach `packages/<name>/README.md`, Planung nach `packages/<name>/planung/`, Hinweise zum Tafelbild und Beobachtungsbogen nach `packages/<name>/lehrer/`; ZIPs nicht einchecken (`./build.sh` baut sie).
 
 ## Änderungen an bestehenden Paketen
 
-Version in `inhalt.js` erhöhen, Änderung im Steckbrief notieren, Fragen-IDs beibehalten (geänderte Frage = neue ID), danach Schritte 5 und 6.
+Version in `quelle/paket.js` erhöhen (bei Paketen ohne `quelle/` in `js/inhalt.js`), Änderung im Steckbrief notieren, Fragen-IDs beibehalten (geänderte Frage = neue ID), danach Schritte 5 und 6.
 
 **Ältere Pakete auf die aktuelle Vorlage heben:** `js/engine.js`, `js/baukasten.js`, `js/tafel.js`, `css/` und `index.html` aus `vorlage/` übernehmen; `inhalt.js` bleibt. Die alten Namen `nachweis`, `bestehen` und `einsatz: ['nachweis']` werden weiter gelesen (die Inhaltsprüfung nennt sie als Hinweis); umbenennen in `selbstueberpruefung`, `bereit` und `einsatz: ['selbstueberpruefung']`. `leitfrage` an Stationen mit Vorab-Frage entfernen, Kurz-Checks auf 2–3 Fragen kürzen, zwei bis vier Tafelbild-Szenen ergänzen. Danach Schritte 5 und 6; `paket.py zip` entfernt den masteryscore.
+
+**Auf Quellen umstellen** (für Pakete, die weiter gepflegt werden): Ordner `quelle/` anlegen, `js/inhalt.js` nach `quelle/paket.js` verschieben, die Fragen aus `fragen: [...]` nach `quelle/fragen.md` übertragen (Format in `referenz/fragenformat.md`; Fragen, deren Grafik per Code entsteht, bleiben in `paket.js`), Text dabei von HTML auf Markdown umstellen (`<b>` → `**…**`, `<code>` → `` `…` ``). Fragen-IDs bleiben gleich. Dann `paket.py bauen` und Schritt 5.
 
 ## Grenzen
 

@@ -36,26 +36,28 @@ Eine Frage darf mehrere Einsätze haben, aber Kurz-Check und Selbstüberprüfung
 - **Falschantworten aus echten Fehlern**, nie ausgedacht oder albern. Jede Falschantwort steht für eine Fehlvorstellung und bekommt ein eigenes `feedback`, das sie anspricht und einen nächsten Schritt nennt („Du hast … Die kleinste Stelle steht rechts.“).
 - **Keine Ratehilfen:** Die richtige Antwort ist nicht die längste oder genaueste, keine grammatischen Hinweise, kein „alle oben genannten“ oder „keine davon“, keine doppelten Verneinungen, keine Fangfragen.
 - **Mehrere richtige Antworten** sind erwünscht, wo es fachlich passt (echtes Nachdenken statt Ausschlussverfahren).
-- **Eingabefelder:** alle richtigen Schreibweisen in `akzeptiert`, bei Zahlen eine sinnvolle `toleranz`; typische Fehlergebnisse in `typisch` mit Feedback.
+- **Eingabefelder:** alle richtigen Schreibweisen (je eine Zeile `= …`), bei Zahlen eine sinnvolle Toleranz (`= 2,5 ± 0,1`); typische Fehlergebnisse als `- Wert → Feedback`.
 - **Fragen der Selbstüberprüfung** verlangen auch Anwendung in neuen Situationen, nicht nur Wiedererkennen von Formulierungen aus den Stationen.
-- **`erklaerung`** sagt, warum die richtige Antwort richtig ist, in ein bis zwei Sätzen, ohne Lob ohne Inhalt.
+- **Die Erklärung** (Zeilen mit `> `) sagt, warum die richtige Antwort richtig ist, in ein bis zwei Sätzen, ohne Lob ohne Inhalt.
 - Sprache wie im Paket („du“ bzw. „Sie“), kurz, ohne Lehrbuchton. Erfundene Firmen und Personen.
 
 ## Ablauf
 
 1. Für jedes Lernziel eine kurze Liste: typische Fehler → welche Fragen sie aufgreifen.
 2. Fragen schreiben, zunächst für ein Lernziel, und der Lehrkraft zeigen. Fragen nach Rückmeldung zum Stil, dann die übrigen.
-3. **Prüftabelle für die Lehrkraft** (Markdown), damit sie jede Frage fachlich abnehmen kann:
+3. **Fragen in `quelle/fragen.md` schreiben** (Format: `referenz/fragenformat.md`, Abschnitt „Fragen in quelle/fragen.md“): je Frage `## ID · Lernziel · Typ · Einsatz`, Fragetext, Antworten mit `→ Feedback` an jeder Falschantwort, Erklärung mit `> `. Gliedere mit `# `-Zeilen nach Vorab-Fragen und Lernzielen. Die Datei ist zugleich die Vorlage für die fachliche Abnahme: Die Lehrkraft liest und korrigiert sie direkt, ohne JavaScript.
+4. **Selbstkontrolle vor der Übergabe:**
 
-   | ID | LZ | Einsatz | Typ | Frage | Richtig | Falschantworten → Fehlvorstellung | geprüft |
-   |---|---|---|---|---|---|---|---|
+   ```bash
+   python3 <skill>/scripts/quellen.py quelle/fragen.md
+   ```
 
-4. Selbstkontrolle vor der Übergabe: Mengen erfüllt? Jede Falschantwort mit Feedback? Jede Frage mit `erklaerung`? Hotspots mit genau einem richtigen Bereich und `label`? Rechnungen nachgerechnet (bei Zahlen selbst nachrechnen, am besten mit Code)?
-5. Übergabe als JavaScript-Liste im Format aus `referenz/fragenformat.md` (Datei `fragen.js` bzw. direkt für `js/inhalt.js`) **und** die Prüftabelle.
+   Das meldet Fehler mit Zeilenangabe, fehlende Erklärungen und Feedbacks und zeigt die Mengen je Lernziel und Einsatz. Dazu prüfst du selbst: Mengen erfüllt? Hotspots mit genau einem richtigen Bereich und Beschriftung? Rechnungen nachgerechnet (bei Zahlen selbst nachrechnen, am besten mit Code)?
+5. **Übergabe:** die Datei `quelle/fragen.md` (bei einem angelegten Paket direkt in dessen Ordner `quelle/`) und für den schnellen Überblick die Tabelle aus `python3 <skill>/scripts/quellen.py quelle/fragen.md --tabelle` (ID, Lernziel, Einsatz, Typ, Frage, richtige Antwort, Falschantworten mit Fehlvorstellung). Bitte die Lehrkraft, jede Frage fachlich abzunehmen.
 
 ## Grenzen
 
-- Du kennzeichnest Fragen, bei denen du fachlich unsicher bist, in der Prüftabelle („bitte prüfen: …“).
+- Du kennzeichnest Fragen, bei denen du fachlich unsicher bist, mit einer Zeile `Prüfen: …` unter der Frage. Sie kommt nicht ins Paket; das Prüfskript meldet sie gelb, bis die Lehrkraft die Frage geklärt und die Zeile gelöscht hat.
 - Fragen-IDs nach dem ersten Einsatz nicht mehr ändern; sie verbinden die Auswertung mit der Frage. Eine inhaltlich geänderte Frage bekommt eine neue ID.
 
 **Nächster Schritt:** „Mit Drehbuch und Fragenpool baue ich jetzt den Rest des Pakets (Skill `lernpaket-bauen`).“
