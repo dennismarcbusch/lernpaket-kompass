@@ -31,6 +31,14 @@ import quellen  # noqa: E402  (liegt neben diesem Skript)
 VORLAGE = os.path.join(HIER, '..', 'vorlage')
 ID_MUSTER = re.compile(r'[a-z0-9]+-[a-z0-9]+(?:-[a-z0-9]+)*')  # <präfix>-<name>
 NICHT_INS_ZIP = ('quelle/',)  # Quellen gehören ins Repository, nicht ins Paket
+PAKET_BEGINN = re.compile(r'window\.PAKET\s*=')
+
+
+def paket_ab(s):
+    """Stelle, an der window.PAKET beginnt. Davor stehen oft eigene Geräte und Hilfsfunktionen
+    mit eigenen Feldern titel: oder id: – Titel, Version und ID des Pakets stehen erst danach."""
+    m = PAKET_BEGINN.search(s)
+    return m.end() if m else 0
 
 
 def bauen(root, still=False):
@@ -68,10 +76,12 @@ def neu(a):
     quelle = os.path.join(a.ziel, 'quelle', 'paket.js')
     i = quelle if os.path.isfile(quelle) else os.path.join(a.ziel, 'js', 'inhalt.js')
     s = open(i, encoding='utf-8').read()
+    ab = paket_ab(s)
+    davor, s = s[:ab], s[ab:]
     s = re.sub(r"id: '[^']*'", f"id: '{a.id}'", s, count=1)
     s = re.sub(r"titel: '[^']*'", "titel: " + repr(a.titel), s, count=1)
     s = re.sub(r"\bversion:\s*'[^']*'", "version: '1.0'", s, count=1)  # die Vorlage trägt die Kompass-Version, ein neues Paket beginnt bei 1.0
-    open(i, 'w', encoding='utf-8').write(s)
+    open(i, 'w', encoding='utf-8').write(davor + s)
     bauen(os.path.abspath(a.ziel), still=True)
     print(f'Neues Paket in {a.ziel} angelegt (id {a.id}). Als Nächstes quelle/paket.js und quelle/fragen.md mit den Inhalten füllen, dann paket.py bauen.')
 
@@ -87,6 +97,7 @@ def zippen(a):
     t = re.sub(r'\n?[ \t]*<adlcp:masteryscore>[^<]*</adlcp:masteryscore>', '', t)
     if os.path.isfile(inhalt):
         s = open(inhalt, encoding='utf-8').read()
+        s = s[paket_ab(s):]  # erst ab window.PAKET: Geräte davor haben eigene Felder titel: und id:
         ti = re.search(r"titel:\s*'((?:[^'\\]|\\.)*)'", s)
         if ti:
             t = re.sub(r'<title>[^<]*</title>', f'<title>{escape(ti.group(1))}</title>', t)

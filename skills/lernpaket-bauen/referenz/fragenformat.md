@@ -1,4 +1,4 @@
-# Format für Fragen und Paketinhalt (Kompass-Vorlage 2)
+# Format für Fragen und Paketinhalt
 
 Alle Inhalte eines Pakets landen in `js/inhalt.js` als ein Objekt `window.PAKET`. Die Engine (`js/engine.js`) setzt daraus Start, Entdecken, Üben, Selbstüberprüfung und Abschluss zusammen und erfüllt dabei die technischen Punkte des Leitfadens automatisch. Die Beispieldatei in der Vorlage („Bits & Bytes“) zeigt jedes Feld im Einsatz.
 
