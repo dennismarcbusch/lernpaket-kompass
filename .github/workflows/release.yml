@@ -37,7 +37,7 @@ jobs:
             echo '<!doctype html><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Lernpaket-Kompass</title>'
             echo '<style>body{font:16px/1.5 system-ui,sans-serif;max-width:42rem;margin:2rem auto;padding:0 1rem}</style>'
             echo "<h1>Lernpaket-Kompass</h1><p>Leitfaden für interaktive Lernpakete · Stand: ${GITHUB_REF_NAME}</p>"
-            echo "<p><a href=\"${repo}/docs/leitfaden-lernpakete.md\">Leitfaden lesen</a> · <a href=\"${repo}/docs/skill-set-anleitung.md\">Anleitung zum Skill-Set</a></p>"
+            echo "<p><a href=\"${repo}/docs/leitfaden-lernpakete.md\">Leitfaden lesen</a> · <a href=\"${repo}/docs/skill-set-anleitung.md\">Anleitung zum Skill-Set</a> · <a href=\"${repo}/docs/wissenschaftliche-grundlagen.md\">Wissenschaftliche Grundlagen</a></p>"
             echo '<h2>Skill zum Hochladen in Claude</h2><p><a href="skill_lernpaket-kompass.zip"><b>skill_lernpaket-kompass.zip</b></a> – führt durch alle fünf Phasen. Nicht entpacken und nicht umbenennen.</p>'
             echo '<h3>Einzel-Skills (nur für Fortgeschrittene, nicht zusätzlich hochladen)</h3><ul>'
             for f in site/*.zip; do n=$(basename "$f"); [ "$n" = skill_lernpaket-kompass.zip ] && continue; echo "<li><a href=\"$n\">$n</a></li>"; done

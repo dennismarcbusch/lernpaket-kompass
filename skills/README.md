@@ -121,7 +121,7 @@ python3 skills/lernpaket-bauen/scripts/paket.py bauen skills/lernpaket-bauen/vor
 
 Auch die Beispiele prüfen: in eine Kopie der Vorlage `<name>.js` als `quelle/paket.js` und `<name>.fragen.md` als `quelle/fragen.md` legen, bauen und das Prüfskript darauf laufen lassen.
 
-**Veröffentlichen.** Einen Tag mit der Versionsnummer setzen und pushen, also `v` und der Inhalt von `VERSION`, zum Beispiel `v4.0`. Eine GitHub Action baut dann die ZIP-Dateien, hängt sie an ein Release und stellt sie auf die [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/). Voraussetzung in den Einstellungen des Repositorys: *Settings → Pages → Source: GitHub Actions*.
+**Veröffentlichen.** Einen Tag mit der Versionsnummer setzen und pushen, also `v` und der Inhalt von `VERSION`, zum Beispiel `v4.0`. Ändert sich nur die Dokumentation und nichts an Leitfaden, Skills oder Vorlage, bleibt `VERSION` unverändert, und der Tag bekommt eine dritte Stelle, zum Beispiel `v4.0.1`. Eine GitHub Action baut dann die ZIP-Dateien, hängt sie an ein Release und stellt sie auf die [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/). Voraussetzung in den Einstellungen des Repositorys: *Settings → Pages → Source: GitHub Actions*.
 
 ## Den Skill in Claude Code nutzen
 

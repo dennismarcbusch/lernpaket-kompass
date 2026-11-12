@@ -38,6 +38,7 @@ Jedes Paket aus dem Kompass hat denselben Aufbau, damit sich Lernende sofort zur
 |---|---|
 | **Anleitung für den Einstieg** | [docs/skill-set-anleitung.md](docs/skill-set-anleitung.md): Einrichten in etwa zehn Minuten, dann alle Arbeitsschritte mit Beispielsätzen, die du an Claude schreiben kannst |
 | **Leitfaden** | [docs/leitfaden-lernpakete.md](docs/leitfaden-lernpakete.md): was die Lernforschung sagt, 13 Gestaltungsprinzipien (sieben davon sind Pflicht), Aufbau eines Pakets, Arbeitsablauf, technische Standards und eine Checkliste |
+| **Wissenschaftliche Grundlagen** | [docs/wissenschaftliche-grundlagen.md](docs/wissenschaftliche-grundlagen.md): auf welche Forschung sich die Prinzipien stützen, wie belastbar sie ist und wo sie endet, erklärt ohne Fachsprache |
 | **Skill zum Herunterladen** | `skill_lernpaket-kompass.zip` auf der [Downloadseite](https://dennismarcbusch.github.io/lernpaket-kompass/) oder unter [Releases](../../releases) |
 | **Beispiele** | das Beispielpaket „Bits & Bytes“ (Vorlage für jedes neue Paket) und vier Beispiele zum Thema Handelsregister: die Simulation [„Partner-Check“](skills/lernpaket-bauen/beispiele/simulation-handelsregister.js), die Spiele [„Stempel drauf!“](skills/lernpaket-bauen/beispiele/spiel-stempel-drauf.js) und [„Firmendex“](skills/lernpaket-bauen/beispiele/spiel-firmendex.js) sowie eine [einzelne Station](skills/lernpaket-bauen/beispiele/wirtschaft-handelsregister.js) |
 
@@ -78,7 +79,7 @@ Die Fragen stehen in einer einfachen Textdatei, die du ohne Programmierkenntniss
 - **Die Selbstüberprüfung zählt nicht.** Das Paket sagt den Lernenden, ob das Thema sitzt. Ob jemand ein Thema nachweislich beherrscht, entscheidet ein Kompetenznachweis außerhalb des Pakets, zum Beispiel ein beaufsichtigter Test.
 - **Auf dem Schullaptop ganz zu sehen.** Jede Szene passt auf einen Bildschirm mit 1366 × 768 Pixeln und funktioniert auch auf dem Tablet.
 
-Begründung und Belege zu jedem Grundsatz stehen im [Leitfaden](docs/leitfaden-lernpakete.md).
+Worauf sich diese Grundsätze stützen und wie gut sie belegt sind, fasst die Seite [Wissenschaftliche Grundlagen](docs/wissenschaftliche-grundlagen.md) zusammen. Alle Einzelheiten und die Literatur stehen im [Leitfaden](docs/leitfaden-lernpakete.md).
 
 ## Ein Paket ansehen, ohne etwas einzurichten
 
@@ -119,7 +120,7 @@ Wer Leitfaden, Skill oder Vorlage selbst ändern möchte, findet in [skills/READ
 
 ```
 VERSION     Versionsnummer des Kompass
-docs/       Leitfaden, Anleitung, Bilder
+docs/       Leitfaden, Anleitung, wissenschaftliche Grundlagen, Bilder
 skills/     der Skill in fünf Teilen, die Paketvorlage, Beispiele und das Prüfskript
 ```
 
