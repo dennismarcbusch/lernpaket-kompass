@@ -1,10 +1,12 @@
 # Anleitung: Lernpakete bauen mit dem Skill-Set
 
-Diese Anleitung richtet sich an Kolleginnen und Kollegen, die ein Lernpaket für die ByCS-Lernplattform bauen möchten und bisher wenig oder gar nicht mit KI-Werkzeugen über einfache Chats hinaus gearbeitet haben. Programmierkenntnisse brauchst du nicht.
+Diese Anleitung richtet sich an Lehrkräfte, die ein Lernpaket für ihren Unterricht bauen möchten und bisher wenig oder gar nicht mit KI-Werkzeugen über einfache Chats hinaus gearbeitet haben. Programmierkenntnisse brauchst du nicht.
 
 ## Worum es geht
 
-Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 13 Prinzipien, von denen sieben Pflicht sind, eine feste Paketstruktur und eine Checkliste. Der Skill **`lernpaket-kompass`** ist eine Arbeitsanweisung für die KI Claude, die genau diesen Leitfaden umsetzt und dich Schritt für Schritt durch dein Lernpaket führt. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt wenige Fragen, wendet die Prinzipien an und baut das Paket in unserem einheitlichen Design.
+Ein **Lernpaket** ist eine interaktive Lerneinheit zu einem Thema, die im Browser läuft: Die Schüler bedienen darin zum Beispiel ein nachgebautes Gerät oder prüfen ein Dokument und bekommen erklärende Rückmeldung. Am Ende steht eine ZIP-Datei, die du in deine Lernplattform hochlädst. Die Beispiele hier beziehen sich auf die ByCS-Lernplattform; das Paket läuft aber in jeder Lernplattform, die das Format SCORM 1.2 versteht, etwa in Moodle.
+
+Der [Leitfaden](leitfaden-lernpakete.md) beschreibt, wie gute Lernpakete aussehen: 13 Prinzipien, von denen sieben Pflicht sind, eine feste Paketstruktur und eine Checkliste. Der Skill **`lernpaket-kompass`** ist eine Arbeitsanweisung für die KI Claude, die genau diesen Leitfaden umsetzt und dich Schritt für Schritt durch dein Lernpaket führt. Du musst den Leitfaden also nicht auswendig kennen: Claude stellt wenige Fragen, wendet die Prinzipien an und baut das Paket in einem einheitlichen Design.
 
 Gebaut wird früh: Schon nach dem Konzept bekommst du eine erste Station zum Ausprobieren. Erst wenn die überzeugt, entsteht der Rest.
 
@@ -87,7 +89,7 @@ Trägt die Idee nicht, sag es jetzt: Ein neues Konzept kostet an dieser Stelle e
 
 > Der Prototyp passt. Schreib jetzt das Drehbuch.
 
-Jetzt fragt Claude nach allen typischen Fehlern deiner Schüler. **Nimm dir dafür Zeit** – daraus entstehen gute Falschantworten und gutes Feedback. Du bekommst das Drehbuch für alle Stationen, danach den Fragenpool, zusätzlich als Tabelle. **Geh jede Frage durch**: Stimmt die richtige Antwort? Sind die Falschantworten typische Fehler deiner Schüler? Ist das Feedback verständlich? Schreib Änderungen einfach hin („Frage F7: Option c ist zu leicht zu erkennen“).
+Jetzt fragt Claude nach allen typischen Fehlern deiner Schüler. **Nimm dir dafür Zeit** – daraus entstehen gute Falschantworten und gutes Feedback. Du bekommst das Drehbuch für alle Stationen, danach den Fragenpool: eine gut lesbare Textdatei (`fragen.md`) mit allen Fragen, Antworten und Rückmeldungen, dazu eine Tabelle für den schnellen Überblick. **Geh jede Frage durch**: Stimmt die richtige Antwort? Sind die Falschantworten typische Fehler deiner Schüler? Ist das Feedback verständlich? Schreib Änderungen einfach hin („Frage F7: Option c ist zu leicht zu erkennen“).
 
 ### Schritt 4: Ausbau
 
@@ -150,6 +152,22 @@ Du siehst, welche Fragen im ersten Versuch zu schwer oder zu leicht sind, bei we
 | Die Punktzahl kommt nicht an | Bewertungsmethode „Höchste Bewertung“ prüfen; die Selbstüberprüfung bis zum Ende abgeben (Knopf „Abgeben“). |
 | Die Aktivität wird nie als erledigt angezeigt | Der Aktivitätsabschluss wartet vermutlich auf „Bestanden“. Auf den Status „Abgeschlossen“ umstellen. |
 | Ein älteres Paket zeigt noch „Nachweis“ und „bestanden“ | Es stammt aus einer Vorlage vor Kompass 4.0. Claude bitten: „Heb das Paket auf die aktuelle Vorlage.“ |
+
+## Begriffe
+
+| Begriff | Bedeutung |
+|---|---|
+| Lernpaket | interaktive Lerneinheit als ZIP-Datei für eine Lernplattform |
+| SCORM 1.2 | Standardformat für Lernpakete; regelt, wie Paket und Lernplattform Fortschritt und Punkte austauschen |
+| Skill | Arbeitsanweisung mit Vorlagen und Werkzeugen, die du in Claude hochlädst |
+| Station | ein Lernschritt im Paket |
+| Szene | der Gegenstand einer Station, mit dem die Schüler arbeiten (Gerät, Dokument, Gespräch …) |
+| Prototyp | erste Fassung mit nur einer Station, zum Ausprobieren der Idee |
+| Drehbuch | Plan für alle Stationen: was die Schüler jeweils tun und sehen |
+| Fragenpool | alle Fragen des Pakets mit richtigen Antworten, typischen Falschantworten und Rückmeldung |
+| Selbstüberprüfung | Fragen am Ende des Pakets, die nicht zählen |
+| Kompetenznachweis | Prüfung außerhalb des Pakets, mit der jemand ein Thema nachweist |
+| Tafelbild | Ansicht des Pakets für den Beamer |
 
 ## Ohne Claude oder mit anderen Werkzeugen
 
