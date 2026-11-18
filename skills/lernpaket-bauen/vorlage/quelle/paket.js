@@ -64,20 +64,32 @@
 /* ---- Bausteine, die nur dieses Paket braucht ---- */
 var WERTE = [128, 64, 32, 16, 8, 4, 2, 1];
 
-// Router mit Display und acht Kippschaltern – das Gerät, an dem gearbeitet wird
+// Router mit Anzeige und acht Schaltern – das Gerät, an dem gearbeitet wird.
+// Lebensnah im Aussehen (referenz/szenen.md): Gehäuse mit Antennen, Schrauben und Füßen, Statusleuchten,
+// Typenschild des erfundenen Herstellers, Etikett des Kunden. Bedienbar sind nur die acht Schalter;
+// je Schalter zeigt eine Leuchte den Zustand, die Ziffer darunter sagt dasselbe ohne Farbe.
+function geraeteTeile(geraet, mit) {
+  var E = KIT.el;
+  (mit || []).forEach(function (k) { geraet.appendChild(E('span', { class: k, 'aria-hidden': 'true' })); });
+  ['ol', 'or', 'ul', 'ur'].forEach(function (k) { geraet.appendChild(E('span', { class: 'router-schraube ' + k, 'aria-hidden': 'true' })); });
+}
 function routerGeraet(box, opt) {
   opt = opt || {};
   var E = KIT.el, bits = [0, 0, 0, 0, 0, 0, 0, 0], gesperrt = false;
-  var geraet = E('div', { class: 'router', role: 'group', 'aria-label': opt.beschriftung || 'Router mit acht Bit-Schaltern' });
+  var geraet = E('div', { class: 'router geraet', role: 'group', 'aria-label': opt.beschriftung || 'Router mit acht Bit-Schaltern' });
   var display = E('div', { class: 'router-display', 'aria-live': 'polite' });
   var reihe = E('div', { class: 'router-reihe' });
   var summe = E('div', { class: 'router-summe', 'aria-live': 'polite' });
-  geraet.appendChild(E('div', { class: 'router-kopf' }, [E('span', { class: 'router-led' }), E('span', { text: opt.titel || 'KW-Router 8' }), display]));
+  geraeteTeile(geraet, ['router-antenne l', 'router-antenne r', 'router-fuss l', 'router-fuss r']);
+  geraet.appendChild(E('div', { class: 'router-kopf' }, [
+    E('span', { class: 'router-status', 'aria-hidden': 'true' }, [E('span', { class: 'router-led' }), E('i', { text: 'PWR' }), E('span', { class: 'router-led' }), E('i', { text: 'NET' }), E('span', { class: 'router-led aus' }), E('i', { text: 'USB' })]),
+    E('span', { class: 'router-etikett', text: opt.titel || 'KW-Router 8' }), display]));
   geraet.appendChild(reihe); geraet.appendChild(summe);
+  geraet.appendChild(E('span', { class: 'router-schild', 'aria-hidden': 'true', html: '<b>KORBWERK</b> KW-R8 · 12 V ⎓ 1 A' }));
   var knoepfe = WERTE.map(function (w, i) {
     var b = E('button', { type: 'button', class: 'kipp', 'aria-pressed': 'false', 'aria-label': 'Bit mit Stellenwert ' + w,
       onclick: function () { if (gesperrt) return; bits[i] = 1 - bits[i]; zeichne(); if (opt.beiAenderung) opt.beiAenderung(wert()); } },
-      [E('span', { class: 'kipp-wert', text: w }), E('span', { class: 'kipp-hebel' }), E('span', { class: 'kipp-bit', text: '0' })]);
+      [E('span', { class: 'kipp-led' }), E('span', { class: 'kipp-wert', text: w }), E('span', { class: 'kipp-hebel' }), E('span', { class: 'kipp-bit', text: '0' })]);
     reihe.appendChild(b); return b;
   });
   box.appendChild(geraet);
@@ -86,6 +98,7 @@ function routerGeraet(box, opt) {
     knoepfe.forEach(function (b, i) { b.classList.toggle('an', !!bits[i]); b.setAttribute('aria-pressed', bits[i] ? 'true' : 'false'); b.querySelector('.kipp-bit').textContent = bits[i]; });
     display.textContent = opt.display !== undefined ? opt.display : bits.join('');
     var teile = WERTE.filter(function (w, i) { return bits[i]; });
+    summe.classList.toggle('aus', opt.zeigeSumme === false);
     summe.innerHTML = opt.zeigeSumme === false ? '&nbsp;' : (teile.length ? teile.join(' + ') + ' = ' : '') + '<b>' + wert() + '</b>';
   }
   zeichne();
@@ -96,28 +109,67 @@ function routerGeraet(box, opt) {
     markiere: function (idx) { knoepfe.forEach(function (b, i) { b.classList.toggle('hervor', idx.indexOf(i) >= 0); }); },
     display: function (s) { opt.display = s; zeichne(); },
     summe: function (an) { opt.zeigeSumme = an; zeichne(); },
-    sperre: function (s) { gesperrt = s; }
+    sperre: function (s) { gesperrt = s; geraet.classList.toggle('gesperrt', !!s); }
   };
 }
-// Stil für den Router (gehört zu diesem Paket, daher hier statt in stil.css)
+// Stil für die Geräte dieses Pakets (gehört zu diesem Paket, daher hier statt in stil.css)
 (function () {
-  var css = '.router{max-width:720px;margin:8px auto 0;background:linear-gradient(#2a2f3a,#1c2029);border-radius:18px;padding:14px 16px 18px;box-shadow:0 14px 30px rgba(10,15,40,.35);color:#cfd6e4}' +
-    '.router-kopf{display:flex;align-items:center;gap:10px;font-family:var(--titel);font-weight:800;margin-bottom:12px}' +
-    '.router-led{width:10px;height:10px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399}' +
-    '.router-display{margin-left:auto;font-family:ui-monospace,Consolas,monospace;font-size:1.5rem;letter-spacing:.2em;background:#0b1220;color:#7dd3fc;border:1px solid #334155;border-radius:8px;padding:4px 12px;min-width:10ch;text-align:center;text-shadow:0 0 8px rgba(125,211,252,.6)}' +
+  var css = '.router{position:relative;max-width:720px;margin:8px auto 0;background:linear-gradient(#323845,#1b1f27);border:1px solid #0e1116;border-radius:14px;padding:14px 24px 20px;box-shadow:inset 0 1px 0 #535b6b,inset 0 -3px 0 #10131a,0 14px 26px rgba(10,15,40,.32);color:#cfd6e4}' +
+    '.router.geraet{margin:36px auto 8px}' +
+    /* Antennen, Füße, Schrauben, Typenschild: gehören zum Bild, tun nichts */
+    '.router-antenne{position:absolute;top:-32px;width:9px;height:32px;border-radius:5px 5px 1px 1px;background:linear-gradient(90deg,#454c5a,#1d2129)}' +
+    '.router-antenne::after{content:"";position:absolute;left:-3px;right:-3px;bottom:0;height:6px;border-radius:3px 3px 0 0;background:#14171d}' +
+    '.router-antenne.l{left:52px;transform:rotate(-7deg);transform-origin:bottom}.router-antenne.r{right:52px;transform:rotate(7deg);transform-origin:bottom}' +
+    '.router-fuss{position:absolute;bottom:-7px;width:48px;height:7px;border-radius:0 0 5px 5px;background:#12151b}.router-fuss.l{left:44px}.router-fuss.r{right:44px}' +
+    '.router-schraube{position:absolute;width:9px;height:9px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#b4bac5,#5a606b 72%);box-shadow:inset 0 0 0 1px #1a1d24}' +
+    '.router-schraube::after{content:"";position:absolute;left:1.5px;right:1.5px;top:4px;height:1px;background:#262a33;transform:rotate(35deg)}' +
+    '.router-schraube.ol{left:7px;top:7px}.router-schraube.or{right:7px;top:7px}.router-schraube.ul{left:7px;bottom:8px}.router-schraube.ur{right:7px;bottom:8px}' +
+    '.router-schild{position:absolute;right:26px;bottom:5px;font-size:.52rem;letter-spacing:.14em;color:#6f7888}.router-schild b{color:#8e97a7}' +
+    '.router-kopf{display:flex;align-items:center;flex-wrap:wrap;gap:8px 12px;font-family:var(--titel);font-weight:800;margin-bottom:12px}' +
+    '.router-status{display:flex;align-items:center;gap:4px}.router-status i{font:normal 700 .52rem var(--schrift);letter-spacing:.08em;color:#7d8696;margin-right:5px}' +
+    '.router-led{flex:0 0 auto;width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 7px #34d399}.router-led.aus{background:#39404c;box-shadow:inset 0 0 0 1px #14171d}' +
+    '.router-etikett{background:#f4f1e6;color:#1c2029;font-family:var(--schrift);font-weight:700;font-size:.82rem;line-height:1.3;padding:2px 9px;border-radius:3px;box-shadow:0 1px 2px rgba(0,0,0,.45)}' +
+    '.router-display{margin-left:auto;font-family:ui-monospace,Consolas,monospace;font-size:1.5rem;letter-spacing:.2em;background:#0b1220;color:#7dd3fc;border:1px solid #334155;border-radius:6px;padding:4px 12px;min-width:10ch;min-height:1.9em;text-align:center;text-shadow:0 0 8px rgba(125,211,252,.6);box-shadow:inset 0 2px 6px #000}' +
     '.router-reihe{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:8px}' +
-    '.kipp{display:flex;flex-direction:column;align-items:center;gap:6px;background:#111620;border:1px solid #3b4252;color:#e5e7eb;border-radius:12px;padding:8px 0 10px;min-height:120px}' +
-    '.kipp:hover{border-color:#94a3b8}' +
-    '.kipp-wert{font-size:.85rem;color:#94a3b8;font-weight:700}' +
-    '.kipp-hebel{width:22px;height:48px;border-radius:11px;background:#3b4252;position:relative;transition:background .15s}' +
-    '.kipp-hebel::after{content:"";position:absolute;left:3px;right:3px;height:20px;bottom:3px;border-radius:8px;background:#e5e7eb;transition:bottom .15s}' +
-    '.kipp.an .kipp-hebel{background:var(--deko)}.kipp.an .kipp-hebel::after{bottom:25px}' +
-    '.kipp-bit{font-family:ui-monospace,Consolas,monospace;font-size:1.4rem;font-weight:800}' +
+    '.kipp{display:flex;flex-direction:column;align-items:center;gap:5px;background:linear-gradient(#171c26,#0f131b);border:1px solid #3b4252;color:#e5e7eb;border-radius:10px;padding:8px 0 8px;min-height:126px}' +
+    '.kipp:hover{border-color:#94a3b8}.kipp.an{border-color:var(--deko)}' +
+    '.router.gesperrt .kipp{cursor:default}.router.gesperrt .kipp:hover{border-color:#3b4252}.router.gesperrt .kipp.an:hover{border-color:var(--deko)}' +
+    '.kipp-led{width:9px;height:9px;border-radius:50%;background:#2c3340;box-shadow:inset 0 0 0 1px #0b0e13;transition:background .15s,box-shadow .15s}' +
+    '.kipp.an .kipp-led{background:var(--deko);box-shadow:0 0 9px var(--deko)}' +
+    '.kipp-wert{font-size:.85rem;color:#aab4c5;font-weight:700}' +
+    '.kipp-hebel{width:24px;height:46px;border-radius:5px;background:#05070b;box-shadow:inset 0 2px 4px #000,0 1px 0 #3b4252;position:relative}' +
+    '.kipp-hebel::after{content:"";position:absolute;left:3px;right:3px;height:20px;bottom:3px;border-radius:3px;background:repeating-linear-gradient(#f3efe4 0 3px,#cbc5b3 3px 4px);box-shadow:0 1px 2px rgba(0,0,0,.7);transition:bottom .15s}' +
+    '.kipp.an .kipp-hebel::after{bottom:23px}' +
+    '.kipp-bit{font-family:ui-monospace,Consolas,monospace;font-size:1.4rem;font-weight:800;line-height:1.1}' +
     '.kipp.hervor{outline:3px solid var(--deko);outline-offset:2px}' +
     '.router-summe{margin-top:12px;text-align:center;font-size:1.2rem;color:#e5e7eb;min-height:1.6em}' +
-    '.muster-kacheln{display:flex;flex-wrap:wrap;gap:6px;justify-content:center;margin:10px 0}' +
-    '.muster-kacheln span{font-family:ui-monospace,Consolas,monospace;background:var(--card);border:1px solid var(--line);border-radius:8px;padding:4px 8px;animation:kit-auf .2s ease-out}' +
-    '@media (max-width:560px){.router-reihe{gap:4px}.kipp{min-height:100px}.router-display{font-size:1.1rem}}';
+    '.router .router-summe{margin:10px auto 0;max-width:420px;font-family:ui-monospace,Consolas,monospace;font-size:1.05rem;background:#0b1220;border:1px solid #334155;border-radius:6px;padding:3px 10px;box-shadow:inset 0 2px 6px #000}' +
+    '.router .router-summe.aus{visibility:hidden}' +
+    /* Bit-Tester (Station 3): Lampen zum Antippen, Tafel mit allen Mustern */
+    '.tester .router-display{letter-spacing:.04em;font-size:1.25rem;min-width:0}' +
+    '.tester-knopf{min-height:38px;padding:4px 12px;border-radius:8px;background:linear-gradient(#4a5262,#343a47);border:1px solid #0e1116;color:#fff;font-weight:700;box-shadow:inset 0 1px 0 #6b7486,0 2px 0 #0e1116}' +
+    '.tester-knopf:hover{border-color:#94a3b8}.tester-knopf:active{transform:translateY(1px);box-shadow:inset 0 1px 0 #6b7486}' +
+    '.tester-bank{display:flex;justify-content:center;gap:10px;min-height:74px;margin-bottom:10px}' +
+    '.lampe{display:flex;flex-direction:column;align-items:center;gap:4px;min-width:58px;min-height:0;padding:6px 6px 5px;background:linear-gradient(#171c26,#0f131b);border:1px solid #3b4252;border-radius:10px;color:#e5e7eb;animation:kit-auf .2s ease-out}' +
+    '.lampe:hover{border-color:#94a3b8}.lampe.an{border-color:var(--deko)}' +
+    '.lampe-glas{width:30px;height:30px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#59627299,#232a36 70%);box-shadow:inset 0 0 0 2px #0b0e13;transition:background .15s,box-shadow .15s}' +
+    '.lampe.an .lampe-glas{background:radial-gradient(circle at 35% 30%,#fff,var(--deko) 60%);box-shadow:inset 0 0 0 2px #0b0e13,0 0 14px var(--deko)}' +
+    '.lampe-bit{font-family:ui-monospace,Consolas,monospace;font-weight:800;line-height:1}' +
+    '.muster-kacheln{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:6px;background:#0b1220;border:1px solid #334155;border-radius:8px;padding:8px;min-height:100px;align-content:start;box-shadow:inset 0 2px 6px #000}' +
+    '.muster-kacheln span{display:flex;flex-direction:column;align-items:center;gap:3px;font-family:ui-monospace,Consolas,monospace;font-size:.95rem;color:#9fb3c8;border:1px solid transparent;border-radius:6px;padding:4px 2px;animation:kit-auf .2s ease-out}' +
+    '.muster-kacheln span.aktiv{border-color:var(--deko);color:#fff;background:rgba(255,255,255,.07)}' +
+    '.muster-kacheln i{display:flex;gap:3px}.muster-kacheln i b{width:7px;height:7px;border-radius:50%;background:#263041}.muster-kacheln i b.an{background:var(--deko);box-shadow:0 0 5px var(--deko)}' +
+    /* Notizzettel, Werkbank (Gerät und Vordruck nebeneinander), Adressplan auf Papier */
+    '.zettel{display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:8px;max-width:560px;margin:18px auto 0;padding:8px 14px;background:linear-gradient(#fff6b8,#fdeb8f);border-radius:2px 2px 2px 14px;box-shadow:0 6px 12px rgba(60,50,0,.16);color:#3b3413}' +
+    '.zettel input{width:5.5em}' +
+    '.werkbank{display:flex;flex-wrap:wrap;gap:8px 22px;align-items:center;justify-content:center}' +
+    '.werkbank>.router{flex:1 1 520px;min-width:0}.werkbank>.kit-formular,.werkbank>.kit-dok{flex:0 1 330px;margin:0}' +
+    '.werkbank>.kit-dok{flex:1 1 460px}' +
+    '.bitplan{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px 12px;margin:10px 0 6px}' +
+    '.bitplan>span{display:grid;grid-template-columns:repeat(8,minmax(0,1fr));gap:2px}' +
+    '.bitplan b{text-align:center;font-family:ui-monospace,Consolas,monospace;font-size:.85rem;line-height:1.9;border:1px solid #cfc4ac;border-radius:3px;background:#efe9da;color:#6b6252}' +
+    '.bitplan b.frei{background:#fde68a;border-color:#d4a514;color:#3b3413}' +
+    '@media (max-width:560px){.router{padding:12px 14px 18px}.router-reihe{gap:4px}.kipp{min-height:112px}.router-display{font-size:1.1rem}.router-status i,.router-schild{display:none}.muster-kacheln{grid-template-columns:repeat(4,minmax(0,1fr))}.bitplan{grid-template-columns:repeat(2,minmax(0,1fr))}}';
   var s = document.createElement('style'); s.textContent = css; document.head.appendChild(s);
 })();
 
@@ -218,21 +270,43 @@ window.PAKET = {
       auftrag: 'Mira fragt: „Wie viele verschiedene Adressen passen eigentlich in 4 Bit?“ Füge Bits hinzu und beobachte, wie viele Muster entstehen.',
       inhalt: '<p>Mit n Bit gibt es <b>2<sup>n</sup></b> Muster, von 0 bis 2<sup>n</sup> − 1.</p>',
       interaktion: function (box, api) {
-        var E = KIT.el, n = 1;
-        var leiste = E('div', { class: 'steuerung', style: { justifyContent: 'center' } });
-        var anzeige = E('div', { class: 'router-summe', style: { color: 'var(--ink)', fontFamily: 'var(--titel)', fontWeight: 800, fontSize: '1.6rem' } });
+        // Bit-Tester: je Bit eine Lampe zum Antippen, darunter die Tafel mit allen Mustern
+        var E = KIT.el, n = 1, an = [0, 0, 0, 0];
+        var geraet = E('div', { class: 'router tester', role: 'group', 'aria-label': 'Bit-Tester mit Lampen und Mustertafel' });
+        geraeteTeile(geraet);
+        var anzeige = E('div', { class: 'router-display', 'aria-live': 'polite' });
+        var minus = E('button', { type: 'button', class: 'tester-knopf', text: '− Bit', onclick: function () { if (n > 1) { n--; zeichne(); } } });
+        var plus = E('button', { type: 'button', class: 'tester-knopf', text: '+ Bit', onclick: function () { if (n < 4) { n++; zeichne(); } } });
+        geraet.appendChild(E('div', { class: 'router-kopf' }, [E('span', { class: 'router-led', 'aria-hidden': 'true' }), E('span', { class: 'router-etikett', text: 'Bit-Tester' }), minus, plus, anzeige]));
+        var bank = E('div', { class: 'tester-bank' });
         var kacheln = E('div', { class: 'muster-kacheln', 'aria-live': 'polite' });
-        var minus = E('button', { type: 'button', text: '− Bit', onclick: function () { if (n > 1) { n--; zeichne(); } } });
-        var plus = E('button', { type: 'button', text: '+ Bit', onclick: function () { if (n < 4) { n++; zeichne(); } } });
-        leiste.appendChild(minus); leiste.appendChild(plus);
-        var frage = E('div', { class: 'steuerung', style: { justifyContent: 'center', marginTop: '10px' } });
+        geraet.appendChild(bank); geraet.appendChild(kacheln);
+        geraet.appendChild(E('span', { class: 'router-schild', 'aria-hidden': 'true', html: '<b>KORBWERK</b> KW-T4' }));
+        var frage = E('div', { class: 'zettel' });
         var eing = E('input', { type: 'text', inputmode: 'numeric', size: 4, 'aria-label': 'Anzahl der Muster bei 8 Bit' });
         frage.appendChild(E('span', { html: 'Und bei <b>8 Bit</b>? Anzahl der Muster:' })); frage.appendChild(eing);
         frage.appendChild(E('button', { type: 'button', text: '✔ Prüfen', onclick: pruefe }));
-        box.appendChild(leiste); box.appendChild(anzeige); box.appendChild(kacheln); box.appendChild(frage);
-        function zeichne() {
+        box.appendChild(geraet); box.appendChild(frage);
+        function muster() {
+          // Tafel: jedes Muster als Leuchtpunkte und als Ziffern; das an den Lampen eingestellte ist hervorgehoben
+          var jetzt = an.slice(0, n).join('');
           kacheln.innerHTML = '';
-          for (var m = 0; m < Math.pow(2, n); m++) kacheln.appendChild(E('span', { text: (m + 256).toString(2).slice(-n) }));
+          for (var m = 0; m < Math.pow(2, n); m++) {
+            var t = (m + 256).toString(2).slice(-n);
+            kacheln.appendChild(E('span', { class: t === jetzt ? 'aktiv' : null, html: '<i aria-hidden="true">' + t.split('').map(function (z) { return '<b' + (z === '1' ? ' class="an"' : '') + '></b>'; }).join('') + '</i>' + t }));
+          }
+        }
+        function zeichne() {
+          an = [0, 0, 0, 0];
+          bank.innerHTML = '';
+          for (var i = 0; i < n; i++) (function (i) {
+            var l = E('button', { type: 'button', class: 'lampe', 'aria-pressed': 'false', 'aria-label': 'Lampe für Bit ' + (i + 1), onclick: function () {
+              an[i] = 1 - an[i]; l.classList.toggle('an', !!an[i]); l.setAttribute('aria-pressed', an[i] ? 'true' : 'false'); l.lastChild.textContent = an[i]; muster();
+            } }, [E('span', { class: 'lampe-glas' }), E('span', { class: 'lampe-bit', text: '0' })]);
+            bank.appendChild(l);
+          })(i);
+          muster();
+          minus.disabled = n <= 1; plus.disabled = n >= 4;
           anzeige.textContent = n + ' Bit → ' + Math.pow(2, n) + ' Muster';
           api.erklaere(n === 1 ? '<p>Ein Bit: 0 oder 1. Füge ein Bit hinzu.</p>' : '<p>Jedes alte Muster gibt es jetzt zweimal: mit 0 und mit 1 davor. Aus ' + Math.pow(2, n - 1) + ' werden ' + Math.pow(2, n) + '.</p>');
         }
@@ -266,15 +340,15 @@ window.PAKET = {
       id: 'U1', titel: 'Router-Anzeige lesen', lz: ['LZ1'],
       auftrag: 'Bei der Gärtnerei Lindner zeigt der Router das zweite Byte der Adresse als <code>10101000</code>. Trag die Dezimalzahl ins Protokoll ein.',
       interaktion: function (box, api) {
-        var r = routerGeraet(box, { titel: 'Router Gärtnerei Lindner', display: '10101000', zeigeSumme: false });
+        var bank = KIT.el('div', { class: 'werkbank' }); box.appendChild(bank);
+        var r = routerGeraet(bank, { titel: 'Router Gärtnerei Lindner', display: '10101000', zeigeSumme: false });
         r.setze(168); r.sperre(true);
-        var f = KIT.formular(box, { titel: 'Einrichtungsprotokoll', knopf: 'Ins Protokoll eintragen', felder: [
+        var f = KIT.formular(bank, { kopf: '<b>Korbwerk IT-Service</b><br>Kunde: Gärtnerei Lindner', nummer: 'Protokoll E 07', titel: 'Einrichtungsprotokoll', knopf: 'Ins Protokoll eintragen', vermerk: 'Protokolliert', felder: [
           { id: 'b2', label: '2. Byte der Adresse (dezimal)', typ: 'zahl', richtig: '168', hinweis: 'Stimmt noch nicht. Schreib dir die Stellenwerte über die Bits.' }
         ], beiSenden: function (w, ok) {
           if (ok.b2) { api.sage('Sauber protokolliert.', 'froh'); api.erledigt('10101000 = 128 + 32 + 8 = 168.'); }
           else if (w.b2 === '21') api.meldung('21 entsteht, wenn man links mit 1 anfängt. Die Stelle ganz links hat den Wert 128.', 'bad');
         } });
-        f.el.style.margin = '12px auto 0';
         return { loesen: function () { f.setze({ b2: '168' }); f.sende(); } };
       },
       tipps: ['Schreib zuerst die Stellenwerte 128 64 32 16 8 4 2 1 über die Bits.', 'Die Einsen stehen bei 128, 32 und 8.', '128 + 32 + 8 = 168.'],
@@ -300,22 +374,23 @@ window.PAKET = {
       id: 'U3', titel: 'Wie viele Geräte passen?', lz: ['LZ3'],
       auftrag: 'In einem kleinen Netz bei Lindner bleiben die letzten 6 Bit der Adresse für Geräte frei. Wie viele verschiedene Bitmuster gibt es dafür?',
       interaktion: function (box, api) {
-        var E = KIT.el;
-        var plan = E('div', { class: 'router', 'aria-label': 'Adresse mit 26 Bit Netz und 6 Bit für Geräte' });
-        var reihe = E('div', { style: { display: 'grid', gridTemplateColumns: 'repeat(16,minmax(0,1fr))', gap: '3px' } });
-        for (var i = 0; i < 32; i++) reihe.appendChild(E('span', { text: i < 26 ? 'N' : '?', style: { textAlign: 'center', borderRadius: '5px', padding: '6px 0', fontFamily: 'ui-monospace,monospace', fontWeight: 800, background: i < 26 ? '#3b4252' : 'var(--deko)', color: i < 26 ? '#cfd6e4' : '#111' } }));
-        plan.appendChild(E('div', { class: 'router-kopf' }, [E('span', { class: 'router-led' }), E('span', { text: 'Netzplan Gärtnerei Lindner' }), E('span', { class: 'router-display', text: '26 + 6 Bit' })]));
-        plan.appendChild(reihe);
-        plan.appendChild(E('div', { class: 'router-summe', html: 'N = Netzteil (fest) · <b>?</b> = frei für Geräte' }));
-        box.appendChild(plan);
-        var f = KIT.formular(box, { titel: 'Planung', knopf: 'Eintragen', felder: [
-          { id: 'n', label: 'Wie viele verschiedene Bitmuster gibt es für die 6 freien Bit?', typ: 'zahl', richtig: '64', hinweis: 'Bei n Bit gibt es 2 hoch n Muster.' }
+        // Adressplan auf Papier: 32 Bit in vier Bytes, die letzten 6 sind frei
+        var bank = KIT.el('div', { class: 'werkbank' }); box.appendChild(bank);
+        var kaestchen = '';
+        for (var i = 0; i < 32; i++) kaestchen += (i % 8 === 0 ? '<span>' : '') + '<b' + (i < 26 ? '>N' : ' class="frei">?') + '</b>' + (i % 8 === 7 ? '</span>' : '');
+        KIT.dokument(bank, {
+          absender: { name: 'Korbwerk IT-Service', zeile: 'Netzplanung' }, zeichen: 'NP-0412', datum: 'Kunde: Gärtnerei Lindner',
+          titel: 'Adressplan · 26 Bit Netz, 6 Bit für Geräte',
+          text: '<div class="bitplan" role="img" aria-label="Adresse mit 32 Bit: 26 Bit Netz, die letzten 6 Bit frei für Geräte">' + kaestchen + '</div>',
+          fuss: 'N = Netzteil (fest) · <b>?</b> = frei für Geräte'
+        });
+        var f = KIT.formular(bank, { kopf: '<b>Korbwerk IT-Service</b>', nummer: 'Planung NP 2', titel: 'Planung', knopf: 'Eintragen', vermerk: 'Geplant', felder: [
+          { id: 'n', label: 'Bitmuster für die 6 freien Bit', typ: 'zahl', richtig: '64', hinweis: 'Bei n Bit gibt es 2 hoch n Muster.' }
         ], beiSenden: function (w, ok) {
           if (ok.n) api.erledigt('2⁶ = 64 Muster.');
           else if (w.n === '63') api.meldung('63 ist der größte Wert. Mit der 0 sind es 64 Muster.', 'bad');
           else if (w.n === '12') api.meldung('12 wäre 2 · 6. Es heißt aber 2 hoch 6.', 'bad');
         } });
-        f.el.style.margin = '12px auto 0';
         return { loesen: function () { f.setze({ n: '64' }); f.sende(); } };
       },
       tipps: ['Wie viele Möglichkeiten hat ein einzelnes Bit?', 'Bei n Bit gibt es 2 hoch n Muster.', '2⁶ = 64.'],

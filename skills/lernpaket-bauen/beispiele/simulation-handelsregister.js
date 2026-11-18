@@ -1,8 +1,9 @@
 /* =====================================================================
    BEISPIEL Simulationsmodus (Lernpaket-Kompass, Form A „Simulation“):
    „Partner-Check“ – das Handelsregister am Arbeitsplatz im Einkauf.
-   Ein Arbeitsgegenstand zieht sich durch das ganze Paket: das nachgebaute Registerportal
-   (oben) und die Prüfliste für neue Geschäftspartner (unten). Kapitel sind
+   Ein Arbeitsgegenstand zieht sich durch das ganze Paket: der Arbeitsplatz im Einkauf mit dem
+   nachgebauten Registerportal auf dem Bildschirm (oben) und der Prüfliste für neue Geschäftspartner
+   auf dem Klemmbrett (unten). Kapitel sind
    Folgen kleiner Schritte am Gegenstand; Üben, Selbstüberprüfung und Tafelbild
    nutzen denselben Gegenstand mit neuen Firmen. Alle Firmen, Personen, Registernummern und das
    Portal sind erfunden bzw. nachgebaut (Übungsversion).
@@ -57,17 +58,22 @@ var ABTEILUNG = { HRA: 'A', HRB: 'B', VR: 'anderes Register', GnR: 'anderes Regi
 function partnerCheck(box, partner, melde) {
   var E = KIT.el, stand = { seite: '/', q: '', offen: null, werte: {} };
   partner.forEach(function (k) { stand.werte[k] = { gericht: '', nr: '', abt: '', unterschrift: '' }; });
+  // Arbeitsplatz im Einkauf: hinten der Bildschirm mit dem Portal, davor das Klemmbrett mit der Prüfliste
   var platz = E('div', { class: 'pc-platz' });
   var portalBox = E('div', { class: 'pc-portal' }), listeBox = E('div', { class: 'pc-liste' });
-  platz.appendChild(portalBox); platz.appendChild(listeBox); box.appendChild(platz);
+  platz.appendChild(E('div', { class: 'pc-schirm' }, portalBox));
+  platz.appendChild(E('div', { class: 'pc-brett' }, [E('span', { class: 'pc-klemme', 'aria-hidden': 'true' }), listeBox]));
+  box.appendChild(platz);
   function ge() { if (melde) melde(); }
   var portal = KIT.browser(portalBox, {
-    adresse: 'registerportal.uebung', start: '/',
+    adresse: 'registerportal.uebung', start: '/', reiter: false,  // ohne Reiterzeile: Bildschirm und Klemmbrett teilen sich die Höhe
+    // Gerüst der Webseite: Kopf mit Wappen und Name, Navigation (ruhig, nicht bedienbar), Fußzeile
+    portal: { name: 'Registerportal', unter: 'Handels-, Genossenschafts-, Partnerschafts- und Vereinsregister', logo: WAPPEN, menue: ['Suche', 'Bekanntmachungen', 'Hilfe'], fuss: 'Übungsversion – nachgebaut, keine echten Registerdaten.' },
     beiSeite: function (pfad, d) { stand.seite = pfad; stand.offen = pfad === '/abdruck' && d ? d.k : null; if (pfad === '/treffer') stand.q = (d && d.q) || ''; ge(); },
     seiten: {
       '/': function (seite, nav) {
-        seite.appendChild(E('h3', { text: 'Registerportal · Suche', style: { margin: '0 0 4px' } }));
-        seite.appendChild(E('p', { class: 'klein', html: 'Handels-, Genossenschafts-, Partnerschafts- und Vereinsregister. <b>Einsicht für jeden, ohne Anmeldung.</b>', style: { margin: '0 0 6px' } }));
+        seite.appendChild(E('h3', { text: 'Suche im Register', style: { margin: '0 0 4px' } }));
+        seite.appendChild(E('p', { class: 'klein', html: '<b>Einsicht für jeden, ohne Anmeldung.</b>', style: { margin: '0 0 6px' } }));
         var feld = E('input', { type: 'text', 'aria-label': 'Firmenname', placeholder: 'Teil des Namens, z. B. Hartmann', style: { width: '100%', maxWidth: '320px' } });
         var los = E('button', { type: 'button', text: '🔍 Suchen', onclick: function () { nav('/treffer', { q: feld.value }); } });
         feld.addEventListener('keydown', function (e) { if (e.key === 'Enter') los.click(); });
@@ -97,14 +103,14 @@ function partnerCheck(box, partner, melde) {
             { id: 'vertretung', label: 'Vertretung', wert: f.vertretung },
             { id: 'prokura', label: 'Prokura', wert: f.prokura },
             { id: 'datum', label: 'Letzte Eintragung', wert: f.datum }
-          ],
-          fuss: 'Übungsversion – nachgebaut, keine echten Registerdaten.'
+          ]
         });
       }
     }
   });
   // Prüfliste: eine Zeile je Geschäftspartner
-  listeBox.appendChild(E('div', { class: 'pc-listentitel', html: '📋 <b>Prüfliste neue Geschäftspartner</b> · Kernwerk Bürobedarf, Einkauf' }));
+  // Prüfliste: Vordruck des Betriebs auf dem Klemmbrett
+  listeBox.appendChild(E('div', { class: 'pc-listentitel' }, [E('span', { class: 'pc-logo', 'aria-hidden': 'true', text: 'KB' }), E('span', { html: '<b>Prüfliste neue Geschäftspartner</b><small>Kernwerk Bürobedarf GmbH · Einkauf</small>' }), E('span', { class: 'pc-nummer', text: 'Vordruck EK 3' })]));
   var tab = E('table', { class: 'pc-tabelle' });
   tab.appendChild(E('tr', {}, ['Partner', 'Registergericht', 'Nummer', 'Abteilung', 'Darf unterschreiben'].map(function (h) { return E('th', { text: h }); })));
   var felder = {};
@@ -143,21 +149,35 @@ function partnerCheck(box, partner, melde) {
   };
 }
 
-// Kleine Darstellung nur für diesen Gegenstand (die Vorlage selbst bleibt unverändert)
+// Darstellung nur für diesen Gegenstand (die Vorlage selbst bleibt unverändert).
+// Lebensnah im Aussehen (referenz/szenen.md): Schreibtisch, Bildschirm mit dem Portal, Klemmbrett mit dem Vordruck.
 (function () {
-  var css = '.pc-platz{display:flex;flex-direction:column;gap:10px;flex:1}' +
-    '.pc-portal{border:1px solid var(--line);border-radius:12px;overflow:hidden;background:var(--card);min-height:180px;display:flex;flex-direction:column}' +
-    '.pc-portal .kit-seite{padding:10px 12px;max-height:30vh;overflow:auto}' +
+  var css = '.pc-platz{display:flex;flex-direction:column;gap:12px;flex:1;padding:8px 10px 10px;border-radius:12px;background:linear-gradient(180deg,var(--k1),var(--k2))}' +
+    '.pc-schirm{position:relative;display:flex;flex-direction:column;min-height:0;padding:7px 7px 10px;border-radius:10px;background:linear-gradient(#2c303a,#1a1d24);box-shadow:inset 0 1px 0 #454b57,0 8px 16px rgba(20,25,40,.2)}' +
+    '.pc-schirm::after{content:"";position:absolute;right:12px;bottom:3px;width:4px;height:4px;border-radius:50%;background:#34d399;box-shadow:0 0 5px #34d399}' +
+    '.pc-portal{border-radius:3px;overflow:hidden;background:var(--card);min-height:170px;display:flex;flex-direction:column}' +
+    '.pc-portal .kit-portal{max-height:27vh}' +
+    '.pc-portal .kit-seite{padding:10px 12px}' +
     '.pc-treffer{display:flex;justify-content:space-between;align-items:center;gap:8px;margin:6px 0;flex-wrap:wrap}' +
-    '.pc-liste{border:1px solid var(--line);border-radius:12px;background:var(--card);padding:8px 10px}' +
-    '.pc-listentitel{font-size:.9rem;margin-bottom:6px}' +
+    '.pc-brett{position:relative;padding:12px 8px 8px;border-radius:9px;background:linear-gradient(#8f6f4c,#74573a);box-shadow:inset 0 1px 0 rgba(255,255,255,.18),0 6px 14px rgba(40,25,10,.25)}' +
+    '.pc-klemme{position:absolute;z-index:1;top:-6px;left:50%;width:124px;height:19px;margin-left:-62px;border-radius:6px 6px 3px 3px;background:linear-gradient(#dfe2e8,#8c93a0);box-shadow:0 2px 3px rgba(0,0,0,.35)}' +
+    '.pc-klemme::after{content:"";position:absolute;left:50%;top:-6px;width:24px;height:10px;margin-left:-15px;border:3px solid #969daa;border-bottom:0;border-radius:8px 8px 0 0}' +
+    '.pc-liste{padding:12px 12px 4px;border-radius:2px;background:linear-gradient(#fffefb,#fffaf0);box-shadow:0 1px 3px rgba(0,0,0,.28);color:#2a2620}' +
+    '.pc-listentitel{display:flex;align-items:center;gap:8px;font-size:.9rem;line-height:1.2;margin-bottom:6px;padding-bottom:5px;border-bottom:2px solid #2a2620}' +
+    '.pc-listentitel b{font-family:var(--titel)}.pc-listentitel small{display:block;font-size:.72rem;color:#857b68}' +
+    '.pc-logo{flex:0 0 auto;width:28px;height:28px;display:grid;place-items:center;border-radius:6px;background:var(--accent);color:var(--accent-ink);font-family:var(--titel);font-weight:800;font-size:.72rem}' +
+    '.pc-nummer{margin-left:auto;font-size:.68rem;white-space:nowrap;border:1px solid #b9ad94;border-radius:2px;padding:1px 6px;color:#857b68}' +
     '.pc-scroll{overflow-x:auto}' +
     '.pc-tabelle{border-collapse:collapse;width:100%;font-size:.88rem}' +
-    '.pc-tabelle th{text-align:left;font-size:.75rem;text-transform:uppercase;letter-spacing:.04em;color:var(--muted);padding:2px 4px}' +
-    '.pc-tabelle td{padding:3px 4px;border-top:1px solid var(--line)}' +
-    '.pc-tabelle input,.pc-tabelle select{width:100%;min-width:90px;font:inherit;padding:4px 6px;border:1px solid var(--line);border-radius:8px;background:var(--card)}';
+    '.pc-tabelle th{text-align:left;font-size:.7rem;text-transform:uppercase;letter-spacing:.05em;color:#6b6252;padding:2px 4px}' +
+    '.pc-tabelle td{padding:3px 4px;border-top:1px dotted #cfc4ac}.pc-tabelle td:first-child{white-space:nowrap}' +
+    '.pc-tabelle input,.pc-tabelle select{width:100%;min-width:84px;font:inherit;font-weight:700;color:#1e3a8a;padding:4px 6px 3px;border:0;border-bottom:1.5px solid #8d8371;border-radius:0;background-color:rgba(120,100,60,.06)}' +
+    '.pc-tabelle input::placeholder{color:#a79c86;font-weight:400}' +
+    '@media (max-width:560px){.pc-platz{padding:8px}.pc-nummer{display:none}}';
   var s = document.createElement('style'); s.textContent = css; document.head.appendChild(s);
 })();
+// Wappen des nachgebauten Portals (eigene Zeichnung, kein echtes Hoheitszeichen)
+var WAPPEN = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-6 9 6M5 9v9M9.5 9v9M14.5 9v9M19 9v9M3 21h18"/></svg>';
 
 var PARTNER = ['hartmann', 'ostwind', 'seidl', 'mainblick'];
 

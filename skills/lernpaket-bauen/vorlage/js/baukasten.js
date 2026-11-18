@@ -324,13 +324,13 @@
   }
 
   // opt: {adresse: 'registerportal.uebung', seiten: {'/': function (seite, nav, daten) {...}}, start: '/', beiSeite,
-  //       titel: 'Text im Reiter',
+  //       titel: 'Text im Reiter', reiter: false (Reiterzeile weglassen, wenn die Höhe knapp ist),
   //       portal: {name, unter, logo, menue: ['Suche', {text, pfad}], fuss}}   Gerüst der Webseite um jede Seite
   function browser(box, opt) {
     var verlaufListe = [], P = opt.portal;
-    var fenster = box.closest ? box.closest('.kit-fenster') : null;
+    var fenster = opt.reiter !== false && box.closest ? box.closest('.kit-fenster') : null;
     if (fenster) fenster.classList.add('kit-mit-reiter');  // im Rechner ersetzt die Reiterzeile die Titelzeile
-    var reiter = el('div', { class: 'kit-reiter', 'aria-hidden': 'true' }, [
+    var reiter = opt.reiter === false ? null : el('div', { class: 'kit-reiter', 'aria-hidden': 'true' }, [
       el('span', { class: 'kit-reiterkarte' }, [el('span', { class: 'kit-reitersymbol', html: (P && P.logo) || '' }), el('span', { class: 'kit-reitertitel', text: opt.titel || (P && P.name) || opt.adresse }), el('span', { class: 'kit-reiterzu', text: '×' })]),
       el('span', { class: 'kit-reiterplus', text: '+' }),
       fenster ? el('span', { class: 'kit-punkte' }) : null]);
@@ -350,7 +350,8 @@
         seite,
         el('div', { class: 'kit-portalfuss', html: P.fuss || 'Übungsversion' })]);
     }
-    box.appendChild(reiter); box.appendChild(leiste); box.appendChild(balken); box.appendChild(ansicht);
+    if (reiter) box.appendChild(reiter);
+    box.appendChild(leiste); box.appendChild(balken); box.appendChild(ansicht);
     function nav(pfad, daten, ohneVerlauf) {
       var f = opt.seiten[pfad];
       if (!f) return;
