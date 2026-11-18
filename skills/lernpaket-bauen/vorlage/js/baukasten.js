@@ -9,11 +9,11 @@
                                     serverraum, laden, stadt, natur, klasse
    KIT.szene(box, opt)              Bühne mit Kulisse und Personen
    KIT.dialog(box, opt)             Gespräch mit Antwortknöpfen
-   KIT.computer(box, opt)           simulierter Rechner mit Apps (Fenster)
-   KIT.browser(fenster, opt)        simulierter Browser (erfundene Adressen)
-   KIT.mail(fenster, opt)           simuliertes Postfach
-   KIT.formular(box, opt)           Formular mit Prüfung je Feld
-   KIT.dokument(box, opt)           Papier-Dokument mit antippbaren Stellen
+   KIT.computer(box, opt)           Rechner am Arbeitsplatz: Monitor, Taskleiste mit Uhr, Fenster
+   KIT.browser(fenster, opt)        Browser mit Reiter und Adresszeile, auf Wunsch Portal-Gerüst
+   KIT.mail(fenster, opt)           Postfach mit Ordnern, Absender-Kürzeln und Anhang
+   KIT.formular(box, opt)           Formular als Vordruck, Programm-Maske oder Webformular
+   KIT.dokument(box, opt)           Papier-Dokument mit Briefkopf, Unterschrift und Stempel
    KIT.sortieren(box, opt)          Karten antippen, dann Fach antippen
    KIT.reihenfolge(box, opt)        Schritte in die richtige Reihenfolge tippen
    KIT.regler(box, opt)             Schieberegler mit Live-Wert
@@ -228,12 +228,15 @@
     var wahl = el('div', { class: 'kit-wahl' });
     wrap.appendChild(verlauf); wrap.appendChild(wahl); box.appendChild(wrap);
     var d = figurDaten(opt.figur), i = 0, fehler = 0;
+    // Im Fenster des Rechners rollt der Inhalt: nach jeder Zeile ans Ende, damit die Antworten zu sehen sind
+    function nachUnten() { var f = wrap.closest ? wrap.closest('.kit-fensterinhalt') : null; if (f) f.scrollTop = f.scrollHeight; }
     function zeile(text, wer) {
       var z = el('div', { class: 'kit-zeile ' + (wer === 'ich' ? 'ich' : 'sie') });
       if (wer !== 'ich') z.appendChild(el('div', { class: 'kit-mini', html: figur(opt.figur) }));
       z.appendChild(el('div', { class: 'kit-sprech', html: (wer !== 'ich' && d.name ? '<b>' + esc(d.name) + '</b><br>' : '') + text }));
       verlauf.appendChild(z);
       verlauf.scrollTop = verlauf.scrollHeight;
+      nachUnten();
     }
     function weiter() {
       wahl.innerHTML = '';
@@ -248,6 +251,7 @@
           if (a.richtig) { i++; weiter(); } else { fehler++; }
         } }));
       });
+      nachUnten();
     }
     weiter();
     return {
@@ -256,17 +260,44 @@
     };
   }
 
-  /* ---------- Simulierter Rechner ---------- */
-  // opt: {titel, apps: [{id, name, symbol, start: function (fenster, os)}], start: 'id', hoehe}
+  /* ---------- Rechner am Arbeitsplatz ---------- */
+  function zwei(n) { return (n < 10 ? '0' : '') + n; }
+  // Kürzel aus einem Namen („Katja Winter“ → „KW“) und eine feste Farbe dazu
+  function kuerzel(name) { var w = String(name || '?').replace(/[^A-Za-zÄÖÜäöüß0-9 ]/g, ' ').trim().split(/\s+/); return ((w[0] || '?').charAt(0) + (w.length > 1 ? w[w.length - 1].charAt(0) : '')).toUpperCase(); }
+  function farbton(text) { var h = 0; String(text || '').split('').forEach(function (c) { h = (h * 31 + c.charCodeAt(0)) % 360; }); return 'hsl(' + h + ',42%,40%)'; }
+
+  // opt: {apps: [{id, name, symbol, start: function (fenster, os, daten)}], start: 'id', hinweis,
+  //       hoehe: Höhe des ganzen Rechners mit Standfuß in px (Standard 380, damit er in eine Station passt;
+  //              der Bildschirm wächst nicht mit, längere Inhalte rollen im Fenster wie in echt),
+  //       uhr: '08:15', datum: '04.05.2026' (sonst die Zeit des Geräts), marke: 'Korbwerk' (erfundener Hersteller)}
   function computer(box, opt) {
     var pc = el('div', { class: 'kit-pc' });
-    var schirm = el('div', { class: 'kit-schirm', style: { minHeight: (opt.hoehe || 380) + 'px' } });
-    var dock = el('div', { class: 'kit-dock', role: 'toolbar', 'aria-label': 'Programme' });
+    var jetzt = new Date();
+    var schirm = el('div', { class: 'kit-schirm' });
     var fensterbox = el('div', { class: 'kit-fensterbox' });
-    schirm.appendChild(fensterbox); schirm.appendChild(dock);
-    pc.appendChild(schirm); pc.appendChild(el('div', { class: 'kit-pc-fuss' }));
+    var dock = el('div', { class: 'kit-dock', role: 'toolbar', 'aria-label': 'Programme' });
+    var uhr = el('div', { class: 'kit-uhr', 'aria-hidden': 'true' }, [
+      el('span', { text: opt.uhr || zwei(jetzt.getHours()) + ':' + zwei(jetzt.getMinutes()) }),
+      el('span', { text: opt.datum || zwei(jetzt.getDate()) + '.' + zwei(jetzt.getMonth() + 1) + '.' + jetzt.getFullYear() })]);
+    schirm.appendChild(fensterbox);
+    schirm.appendChild(el('div', { class: 'kit-taskleiste' }, [el('span', { class: 'kit-startknopf', 'aria-hidden': 'true' }), dock, uhr]));
+    // Gehäuse: Rahmen mit Kamera, Bildschirm, Kinn mit Marke und Betriebsleuchte; darunter Standfuß und Tischkante
+    pc.appendChild(el('div', { class: 'kit-monitor', style: { height: Math.max(220, (opt.hoehe || 380) - 26) + 'px' } }, [
+      el('span', { class: 'kit-kamera', 'aria-hidden': 'true' }), schirm,
+      el('div', { class: 'kit-kinn', 'aria-hidden': 'true' }, [el('span', { class: 'kit-marke', text: opt.marke || '' }), el('span', { class: 'kit-betrieb' })])]));
+    pc.appendChild(el('div', { class: 'kit-pc-fuss', 'aria-hidden': 'true' }));
     box.appendChild(pc);
     var offen = null, knopf = {};
+    function schreibtisch() {
+      // Kein Fenster offen: Programme als Symbole auf dem Schreibtisch
+      fensterbox.innerHTML = '';
+      var d = el('div', { class: 'kit-desktop' });
+      opt.apps.forEach(function (a) {
+        d.appendChild(el('button', { type: 'button', class: 'kit-symbol', onclick: function () { os.oeffne(a.id); } }, [el('span', { class: 'kit-app-symbol', text: a.symbol || '▢' }), el('span', { class: 'kit-symbolname', text: a.name })]));
+      });
+      fensterbox.appendChild(d);
+      fensterbox.appendChild(el('div', { class: 'kit-desktop-hinweis', text: opt.hinweis || 'Öffne ein Programm.' }));
+    }
     var os = {
       oeffne: function (id, daten) {
         var app = opt.apps.filter(function (a) { return a.id === id; })[0];
@@ -274,7 +305,8 @@
         fensterbox.innerHTML = '';
         Object.keys(knopf).forEach(function (k) { knopf[k].classList.toggle('aktiv', k === id); });
         var f = el('div', { class: 'kit-fenster', role: 'region', 'aria-label': app.name });
-        f.appendChild(el('div', { class: 'kit-titelleiste' }, [el('span', { class: 'kit-punkte', 'aria-hidden': 'true' }), el('span', { text: (app.symbol ? app.symbol + ' ' : '') + app.name })]));
+        // Die Fensterknöpfe gehören zum Bild eines Fensters, tun aber nichts: ruhig gehalten, nicht bedienbar
+        f.appendChild(el('div', { class: 'kit-titelleiste' }, [el('span', { text: (app.symbol ? app.symbol + ' ' : '') + app.name }), el('span', { class: 'kit-punkte', 'aria-hidden': 'true' })]));
         var inhalt = el('div', { class: 'kit-fensterinhalt' });
         f.appendChild(inhalt); fensterbox.appendChild(f);
         offen = id;
@@ -287,19 +319,38 @@
       dock.appendChild(knopf[a.id]);
     });
     if (opt.start) os.oeffne(opt.start);
-    else fensterbox.appendChild(el('div', { class: 'kit-desktop-hinweis', text: opt.hinweis || 'Öffne ein Programm unten.' }));
+    else schreibtisch();
     return os;
   }
 
-  // opt: {adresse: 'register-portal.example', seiten: {'/': function (seite, nav, daten) {...}}, start: '/'}
+  // opt: {adresse: 'registerportal.uebung', seiten: {'/': function (seite, nav, daten) {...}}, start: '/', beiSeite,
+  //       titel: 'Text im Reiter',
+  //       portal: {name, unter, logo, menue: ['Suche', {text, pfad}], fuss}}   Gerüst der Webseite um jede Seite
   function browser(box, opt) {
-    var verlaufListe = [];
+    var verlaufListe = [], P = opt.portal;
+    var fenster = box.closest ? box.closest('.kit-fenster') : null;
+    if (fenster) fenster.classList.add('kit-mit-reiter');  // im Rechner ersetzt die Reiterzeile die Titelzeile
+    var reiter = el('div', { class: 'kit-reiter', 'aria-hidden': 'true' }, [
+      el('span', { class: 'kit-reiterkarte' }, [el('span', { class: 'kit-reitersymbol', html: (P && P.logo) || '' }), el('span', { class: 'kit-reitertitel', text: opt.titel || (P && P.name) || opt.adresse }), el('span', { class: 'kit-reiterzu', text: '×' })]),
+      el('span', { class: 'kit-reiterplus', text: '+' }),
+      fenster ? el('span', { class: 'kit-punkte' }) : null]);
     var leiste = el('div', { class: 'kit-browserleiste' });
     var zurueck = el('button', { type: 'button', class: 'kit-zurueck', 'aria-label': 'Zurück', text: '←', disabled: true });
     var adr = el('div', { class: 'kit-adresse', 'aria-label': 'Adresse' });
-    leiste.appendChild(zurueck); leiste.appendChild(adr);
-    var seite = el('div', { class: 'kit-seite' });
-    box.appendChild(leiste); box.appendChild(seite);
+    leiste.appendChild(zurueck); leiste.appendChild(el('span', { class: 'kit-neuladen', 'aria-hidden': 'true', text: '⟳' })); leiste.appendChild(adr);
+    var balken = el('div', { class: 'kit-ladebalken', 'aria-hidden': 'true' });
+    var seite = el('div', { class: 'kit-seite' }), ansicht = seite;
+    if (P) {
+      var menue = el('div', { class: 'kit-portalmenue' });
+      (P.menue || []).forEach(function (m) {
+        menue.appendChild(typeof m === 'string' ? el('span', { text: m, 'aria-hidden': 'true' }) : el('button', { type: 'button', class: 'link', text: m.text, onclick: function () { nav(m.pfad); } }));
+      });
+      ansicht = el('div', { class: 'kit-portal' }, [
+        el('div', { class: 'kit-portalkopf' }, [el('span', { class: 'kit-portallogo', 'aria-hidden': 'true', html: P.logo || '' }), el('span', { class: 'kit-portalname' }, [el('b', { text: P.name || opt.adresse }), P.unter ? el('small', { text: P.unter }) : null]), menue]),
+        seite,
+        el('div', { class: 'kit-portalfuss', html: P.fuss || 'Übungsversion' })]);
+    }
+    box.appendChild(reiter); box.appendChild(leiste); box.appendChild(balken); box.appendChild(ansicht);
     function nav(pfad, daten, ohneVerlauf) {
       var f = opt.seiten[pfad];
       if (!f) return;
@@ -307,7 +358,8 @@
       zurueck.disabled = verlaufListe.length < 2;
       adr.innerHTML = '<span class="kit-schloss" aria-hidden="true">🔒</span> ' + esc(opt.adresse + (pfad === '/' ? '' : pfad));
       seite.innerHTML = '';
-      seite.scrollTop = 0;
+      ansicht.scrollTop = 0;
+      if (verlaufListe.length > 1 || ohneVerlauf) { balken.classList.remove('laedt'); void balken.offsetWidth; balken.classList.add('laedt'); }  // kurzer Ladebalken als Folge des Klicks
       f(seite, nav, daten);
       if (opt.beiSeite) opt.beiSeite(pfad, daten);
     }
@@ -316,54 +368,99 @@
     return { nav: nav, seite: function () { return verlaufListe.length ? verlaufListe[verlaufListe.length - 1][0] : null; } };
   }
 
-  // opt: {mails: [{id, von, betreff, text, anhang}], offen: id (gleich geöffnet), beiOeffnen: fn(mail)}
+  // opt: {mails: [{id, von, adresse, zeit, betreff, text, anhang: {name, groesse, oeffnen}, gelesen}], offen: id (gleich geöffnet),
+  //       beiOeffnen: fn(mail), konto: 'Name des Postfachs', ordner: false (Ordnerspalte weglassen)}
   function mail(box, opt) {
-    var w = el('div', { class: 'kit-mail' });
+    var w = el('div', { class: 'kit-mail' + (opt.ordner === false ? ' ohne-ordner' : '') });
     var liste = el('div', { class: 'kit-mailliste', role: 'list' });
     var lesen = el('div', { class: 'kit-mailtext', 'aria-live': 'polite', html: '<p class="kit-leer">Wähle links eine Nachricht.</p>' });
+    var zahl = el('span', { class: 'kit-mailzahl' });
+    function zaehle() { var n = liste.querySelectorAll('.neu').length; zahl.textContent = n || ''; zahl.hidden = !n; }
+    if (opt.ordner !== false) {
+      // Ordner gehören zum Bild eines Postfachs; gebraucht wird nur der Posteingang, der Rest ist ruhig und nicht bedienbar
+      w.appendChild(el('div', { class: 'kit-mailordner', 'aria-hidden': 'true' }, [
+        opt.konto ? el('div', { class: 'kit-mailkonto', text: opt.konto }) : null,
+        el('div', { class: 'aktiv' }, [el('span', { text: '📥 Posteingang' }), zahl]),
+        el('div', { text: '📤 Gesendet' }), el('div', { text: '📝 Entwürfe' }), el('div', { text: '🗑️ Papierkorb' })]));
+    }
     w.appendChild(liste); w.appendChild(lesen); box.appendChild(w);
+    function bild(m) { return el('span', { class: 'kit-mailbild', 'aria-hidden': 'true', text: kuerzel(m.von), style: { background: farbton(m.von) } }); }
     opt.mails.forEach(function (m) {
       var b = el('button', { type: 'button', class: 'kit-mailzeile' + (m.gelesen ? '' : ' neu'), role: 'listitem', onclick: function () {
-        b.classList.remove('neu');
+        b.classList.remove('neu'); zaehle();
         liste.querySelectorAll('.aktiv').forEach(function (x) { x.classList.remove('aktiv'); });
         b.classList.add('aktiv');
-        lesen.innerHTML = '<div class="kit-mailkopf"><b>' + esc(m.betreff) + '</b><br><span>Von: ' + esc(m.von) + '</span></div><div>' + m.text + '</div>';
-        if (m.anhang) lesen.appendChild(el('button', { type: 'button', class: 'kit-anhang', text: '📎 ' + m.anhang.name, onclick: function () { if (m.anhang.oeffnen) m.anhang.oeffnen(); } }));
+        lesen.innerHTML = '';
+        lesen.appendChild(el('div', { class: 'kit-mailkopf' }, [
+          el('b', { text: m.betreff }),
+          el('div', { class: 'kit-mailvon' }, [bild(m), el('span', { html: 'Von: ' + esc(m.von) + (m.adresse ? ' &lt;' + esc(m.adresse) + '&gt;' : '') + '<br>An: ' + esc(opt.konto || 'mich') }), m.zeit ? el('span', { class: 'kit-mailzeit', text: m.zeit }) : null])]));
+        lesen.appendChild(el('div', { class: 'kit-mailinhalt', html: m.text }));
+        if (m.anhang) {
+          var art = (String(m.anhang.name).split('.').pop() || '').toUpperCase().slice(0, 4);
+          var teile = [el('span', { class: 'kit-anhangart', text: art }), el('span', { class: 'kit-anhangname' }, [el('b', { text: m.anhang.name }), m.anhang.groesse ? el('small', { text: m.anhang.groesse }) : null])];
+          // Nur ein Anhang, der sich öffnen lässt, ist ein Knopf
+          lesen.appendChild(m.anhang.oeffnen ? el('button', { type: 'button', class: 'kit-anhang', 'aria-label': 'Anhang ' + m.anhang.name + ' öffnen', onclick: function () { m.anhang.oeffnen(); } }, teile) : el('div', { class: 'kit-anhang' }, teile));
+        }
         if (opt.beiOeffnen) opt.beiOeffnen(m);
-      } }, [el('b', { text: m.von }), el('span', { text: m.betreff })]);
+      } }, [bild(m), el('b', { text: m.von }), m.zeit ? el('span', { class: 'kit-mailzeit', text: m.zeit }) : null, el('span', { class: 'kit-mailbetreff', text: m.betreff })]);
       liste.appendChild(b);
       if (opt.offen && opt.offen === m.id) setTimeout(function () { b.click(); }, 0);
     });
+    zaehle();
     return w;
   }
 
-  // opt: {titel, felder: [{id, label, typ: 'text'|'auswahl'|'zahl', optionen, platzhalter, richtig, hinweis}], knopf, beiSenden: fn(werte, ergebnis)}
+  // opt: {titel, art: 'vordruck' (Standard, Papier) | 'maske' (Programmfenster) | 'web' (Standard in einer Browser-Seite),
+  //       kopf: html (Betrieb oder Behörde), nummer: 'Formular 12a', vermerk: 'Eingegangen' (Stempel oder Statuszeile nach dem Absenden),
+  //       felder: [{id, label, typ: 'text'|'auswahl'|'zahl', optionen, platzhalter, richtig, hinweis, breite: 'halb'|'drittel', pflicht}
+  //                | {abschnitt: 'Zwischenüberschrift'}],
+  //       knopf, beiSenden: fn(werte, ergebnis), ohneRueckmeldung}
   function formular(box, opt) {
-    var f = el('form', { class: 'kit-formular', novalidate: true });
+    var art = opt.art || (box.closest && box.closest('.kit-seite') ? 'web' : 'vordruck');
+    var f = el('form', { class: 'kit-formular kit-form-' + art, novalidate: true });
+    if (opt.kopf || opt.nummer) f.appendChild(el('div', { class: 'kit-formkopf' }, [el('div', { class: 'kit-formabsender', html: opt.kopf || '' }), opt.nummer ? el('div', { class: 'kit-formnummer', text: opt.nummer }) : null]));
     if (opt.titel) f.appendChild(el('div', { class: 'kit-formtitel', html: opt.titel }));
-    var inputs = {};
+    var inputs = {}, felder = opt.felder.filter(function (fd) { return !fd.abschnitt; });
+    var raster = el('div', { class: 'kit-formfelder' });
     opt.felder.forEach(function (fd) {
+      if (fd.abschnitt) { raster.appendChild(el('div', { class: 'kit-formabschnitt', html: fd.abschnitt })); return; }
       var id = 'kitf-' + fd.id + '-' + Math.random().toString(36).slice(2, 6);
       var inp;
       if (fd.typ === 'auswahl') { inp = el('select', { id: id }, [el('option', { value: '', text: '– bitte wählen –' })].concat(fd.optionen.map(function (o) { return el('option', { value: o, text: o }); }))); }
       else inp = el('input', { id: id, type: 'text', inputmode: fd.typ === 'zahl' ? 'decimal' : null, placeholder: fd.platzhalter || '', autocomplete: 'off' });
       inputs[fd.id] = inp;
-      f.appendChild(el('div', { class: 'kit-feld' }, [el('label', { for: id, html: fd.label }), inp, el('div', { class: 'kit-feldhinweis', 'aria-live': 'polite' })]));
+      raster.appendChild(el('div', { class: 'kit-feld' + (fd.breite ? ' ' + fd.breite : '') }, [el('label', { for: id, html: fd.label + (fd.pflicht ? ' <span class="kit-pflicht" title="Pflichtfeld">*</span>' : '') }), inp, el('div', { class: 'kit-feldhinweis', 'aria-live': 'polite' })]));
     });
-    f.appendChild(el('button', { type: 'submit', class: 'kit-senden', text: opt.knopf || 'Absenden' }));
+    f.appendChild(raster);
+    var status = el('div', { class: 'kit-formstatus', 'aria-live': 'polite', text: art === 'maske' ? 'Bereit' : '' });
+    f.appendChild(el('div', { class: 'kit-formfuss' }, [el('button', { type: 'submit', class: 'kit-senden', text: opt.knopf || 'Absenden' }), status]));
+    var abdruck = null;
+    function melde(zustand, falsch) {
+      // Sichtbare Folge des Absendens: Stempel auf dem Vordruck, Statuszeile in Maske und Webformular
+      if (abdruck) { abdruck.remove(); abdruck = null; }
+      var text = zustand === 'fehler' ? (falsch === 1 ? '1 Feld prüfen' : falsch + ' Felder prüfen') : zustand === 'ok' ? (opt.vermerk || (art === 'maske' ? 'Gespeichert' : art === 'web' ? 'Gesendet' : 'Eingegangen')) : (art === 'vordruck' ? 'Abgegeben' : 'Gespeichert');
+      status.className = 'kit-formstatus ' + zustand;
+      if (art === 'vordruck' && zustand !== 'fehler') {
+        status.textContent = '';
+        abdruck = el('div', { class: 'kit-stempel neu' + (zustand === 'ok' ? ' gruen' : ' blau'), text: text });
+        f.appendChild(abdruck);
+        status.appendChild(el('span', { class: 'kit-nurvorlesen', text: text }));
+      } else status.textContent = (zustand === 'fehler' ? '' : '✓ ') + text;
+    }
     f.addEventListener('submit', function (e) {
       e.preventDefault();
-      var werte = {}, erg = {};
-      opt.felder.forEach(function (fd) {
+      var werte = {}, erg = {}, falsch = 0;
+      felder.forEach(function (fd) {
         var v = inputs[fd.id].value.trim(); werte[fd.id] = v;
         var ok = fd.richtig === undefined ? true : (typeof fd.richtig === 'function' ? fd.richtig(v) : [].concat(fd.richtig).some(function (r) { return String(r).toLowerCase() === v.toLowerCase(); }));
-        erg[fd.id] = ok;
+        erg[fd.id] = ok; if (!ok) falsch++;
         var feld = inputs[fd.id].parentNode;
         if (!opt.ohneRueckmeldung) {
           feld.classList.toggle('ok', ok); feld.classList.toggle('falsch', !ok);
           feld.querySelector('.kit-feldhinweis').innerHTML = ok ? '' : (fd.hinweis || 'Prüf das noch einmal.');
         }
       });
+      melde(opt.ohneRueckmeldung ? 'abgegeben' : falsch ? 'fehler' : 'ok', falsch);
       if (opt.beiSenden) opt.beiSenden(werte, erg);
     });
     box.appendChild(f);
@@ -376,14 +473,47 @@
   }
 
   /* ---------- Dokument mit antippbaren Stellen ---------- */
-  // opt: {kopf: html, titel, zeilen: [{id, label, wert}], fuss: html, stempel: 'Text', beiWahl: fn(id, zeile, knopf)}
+  // Unterschrift als geschwungene Linie, aus dem Namen errechnet (immer gleich für denselben Namen):
+  // je Wort eine hohe Schleife für den Großbuchstaben, dann flache, ungleiche Bögen, am Ende ein Unterstrich
+  function schriftzug(name) {
+    var x = 8, d = 'M8 26', worte = String(name || 'x').trim().split(/\s+/).slice(0, 3);
+    function z(v) { return (Math.round(v * 10) / 10) + ' '; }
+    worte.forEach(function (w, wi) {
+      w.split('').slice(0, 7).forEach(function (c, i) {
+        var n = c.charCodeAt(0) + wi * 7 + i * 3;
+        if (i === 0) {
+          var h = 17 + n % 6, b = 10 + n % 5;
+          d += ' c' + z(b * .1) + z(-h) + z(b * .9) + z(-h) + z(b * .6) + z(-h * .35) + 'c' + z(-b * .3) + z(h * .5) + z(b * .1) + z(h * .45) + z(b * .4) + z(h * .35);
+          x += b;
+        } else {
+          var h2 = 2 + n % 6, b2 = 4 + n % 5;
+          d += ' q' + z(b2 * .4) + z(-h2 * 2) + z(b2 * .55) + z(-h2 * .4) + 't' + z(b2 * .45) + z(h2 * .4);
+          x += b2;
+        }
+      });
+      if (wi < worte.length - 1) { d += ' q3 2 6 -1'; x += 6; }
+    });
+    d += ' q8 -2 15 -7 M' + z(x + 12) + '30 Q' + z(x * .5) + '37 5 32';
+    return '<svg viewBox="0 0 ' + Math.round(x + 24) + ' 40" width="' + Math.round(Math.min(200, (x + 24) * 1.3)) + '" height="' + Math.round(40 * Math.min(1.3, 200 / (x + 24))) + '" aria-hidden="true"><path d="' + d + '" fill="none" stroke="#1e3a8a" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  }
+  // opt: {absender: {name, zeile, logo}, zeichen, datum (Briefkopf), kopf: html, titel, text: html (vor den Zeilen),
+  //       zeilen: [{id, label, wert, nr, waehlbar}], nach: html (nach den Zeilen), unterschrift: 'Name' | {name, rolle},
+  //       fuss: html, stempel: 'Text' (von Anfang an), beiWahl: fn(id, zeile, knopf), art}
   function dokument(box, opt) {
     var d = el('div', { class: 'kit-dok' + (opt.art ? ' ' + opt.art : '') });
+    var A = opt.absender;
+    if (A || opt.zeichen || opt.datum) {
+      d.appendChild(el('div', { class: 'kit-briefkopf' }, [
+        A ? el('span', { class: 'kit-brieflogo', 'aria-hidden': 'true', html: A.logo || esc(kuerzel(A.name)) }) : null,
+        A ? el('span', { class: 'kit-briefabsender' }, [el('b', { text: A.name }), A.zeile ? el('small', { html: A.zeile }) : null]) : null,
+        el('span', { class: 'kit-briefdaten', html: (opt.zeichen ? 'Zeichen: ' + esc(opt.zeichen) + '<br>' : '') + (opt.datum ? esc(opt.datum) : '') })]));
+    }
     if (opt.kopf) d.appendChild(el('div', { class: 'kit-dokkopf', html: opt.kopf }));
     if (opt.titel) d.appendChild(el('div', { class: 'kit-doktitel', html: opt.titel }));
+    if (opt.text) d.appendChild(el('div', { class: 'kit-doktext', html: opt.text }));
     var knoepfe = {};
     var tab = el('div', { class: 'kit-dokzeilen' });
-    opt.zeilen.forEach(function (z, i) {
+    (opt.zeilen || []).forEach(function (z, i) {
       var inhalt = [el('span', { class: 'kit-doknr', text: z.nr || String(i + 1) }), el('span', { class: 'kit-doklabel', html: z.label }), el('span', { class: 'kit-dokwert', html: z.wert })];
       var zeile = opt.beiWahl && z.waehlbar !== false
         ? el('button', { type: 'button', class: 'kit-dokzeile', 'data-id': z.id, onclick: function () { opt.beiWahl(z.id, z, zeile); } }, inhalt)
@@ -391,13 +521,25 @@
       knoepfe[z.id] = zeile; tab.appendChild(zeile);
     });
     d.appendChild(tab);
+    if (opt.nach) d.appendChild(el('div', { class: 'kit-doktext', html: opt.nach }));
+    if (opt.unterschrift) {
+      var u = typeof opt.unterschrift === 'string' ? { name: opt.unterschrift } : opt.unterschrift;
+      d.appendChild(el('div', { class: 'kit-unterschrift' }, [el('span', { html: schriftzug(u.name) }), el('span', { class: 'kit-unterschrift-name', html: esc(u.name) + (u.rolle ? '<br><small>' + esc(u.rolle) + '</small>' : '') })]));
+    }
     if (opt.fuss) d.appendChild(el('div', { class: 'kit-dokfuss', html: opt.fuss }));
     if (opt.stempel) d.appendChild(el('div', { class: 'kit-stempel', text: opt.stempel, 'aria-hidden': 'true' }));
     box.appendChild(d);
     return {
       el: d,
       markiere: function (id, art) { if (knoepfe[id]) { knoepfe[id].classList.remove('markiert', 'richtig', 'falsch'); if (art) knoepfe[id].classList.add(art); if (art === 'falsch') wackeln(knoepfe[id]); } },
-      zeile: function (id) { return knoepfe[id]; }
+      zeile: function (id) { return knoepfe[id]; },
+      // Stempel als Folge einer Handlung aufdrücken. o: {farbe: 'rot'|'gruen'|'blau', oben: true}
+      stemple: function (text, o) {
+        o = o || {};
+        var s = el('div', { class: 'kit-stempel neu' + (o.farbe && o.farbe !== 'rot' ? ' ' + o.farbe : '') + (o.oben ? ' oben' : ''), text: text, role: 'status' });
+        d.appendChild(s);
+        return s;
+      }
     };
   }
 

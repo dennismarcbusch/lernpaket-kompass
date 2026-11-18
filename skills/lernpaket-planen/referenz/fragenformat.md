@@ -227,15 +227,23 @@ Fertige Bausteine für Szenen. Alle sind per Antippen und Tastatur bedienbar und
 | Kulisse | `kit.kulisse('buero')` | SVG-Text (Hintergrund) |
 | Szene | `kit.szene(box, {kulisse, hoehe})` | `{ebene, person(key, {links, rechts, text, groesse}), ding(node, {links, oben})}`; Person: `sage(text, ausdruck)` |
 | Gespräch | `kit.dialog(box, {figur, schritte: [{sagt} oder {frage, antworten: [{text, richtig, reaktion}]}], fertig(fehler)})` | `{loesen(), fehler()}` |
-| Rechner | `kit.computer(box, {apps: [{id, name, symbol, start(fenster, os, daten)}], start})` | `os` mit `oeffne(id, daten)` |
-| Browser | `kit.browser(fenster, {adresse, seiten: {'/': fn(seite, nav, daten)}, beiSeite})` | `{nav(pfad, daten), seite()}` |
-| Postfach | `kit.mail(fenster, {mails: [{id, von, betreff, text, anhang: {name, oeffnen}}], offen: id, beiOeffnen})` | Element |
-| Formular | `kit.formular(box, {titel, felder: [{id, label, typ: 'text'·'zahl'·'auswahl', optionen, richtig, hinweis}], knopf, beiSenden(werte, ok), ohneRueckmeldung})` | `{setze(werte), sende(), werte()}` |
-| Dokument | `kit.dokument(box, {kopf, titel, zeilen: [{id, label, wert}], fuss, stempel, beiWahl(id)})` | `{markiere(id, 'markiert'·'richtig'·'falsch'), zeile(id)}` |
+| Rechner | `kit.computer(box, {apps: [{id, name, symbol, start(fenster, os, daten)}], start, hoehe, uhr, datum, marke})` | `os` mit `oeffne(id, daten)`, `offen()` |
+| Browser | `kit.browser(fenster, {adresse, titel, seiten: {'/': fn(seite, nav, daten)}, beiSeite, portal: {name, unter, logo, menue, fuss}})` | `{nav(pfad, daten), seite()}` |
+| Postfach | `kit.mail(fenster, {konto, mails: [{id, von, adresse, zeit, betreff, text, gelesen, anhang: {name, groesse, oeffnen}}], offen: id, beiOeffnen})` | Element |
+| Formular | `kit.formular(box, {art: 'vordruck'·'maske'·'web', kopf, nummer, titel, felder: [{id, label, typ: 'text'·'zahl'·'auswahl', optionen, richtig, hinweis, breite: 'halb'·'drittel', pflicht} oder {abschnitt}], knopf, vermerk, beiSenden(werte, ok), ohneRueckmeldung})` | `{setze(werte), sende(), werte()}` |
+| Dokument | `kit.dokument(box, {absender: {name, zeile, logo}, zeichen, datum, kopf, titel, text, zeilen: [{id, label, wert}], nach, unterschrift, fuss, stempel, beiWahl(id)})` | `{markiere(id, 'markiert'·'richtig'·'falsch'), zeile(id), stemple(text, {farbe, oben})}` |
 | Sortieren | `kit.sortieren(box, {karten: [{id, html, ziel}], faecher: [{id, titel, html}], beiFehler, beiRichtig, fertig})` | `{loesen(), lage(), richtig()}` |
 | Reihenfolge | `kit.reihenfolge(box, {schritte: [html in richtiger Folge], beiFehler, fertig})` | `{loesen()}` |
 | Regler | `kit.regler(box, {label, min, max, schritt, wert, einheit, format, beiAenderung(wert)})` | `{wert(), setze(v)}` |
 | Helfer | `kit.el(tag, attrs, kinder)`, `kit.esc`, `kit.mischen`, `kit.wackeln(node)` | |
+
+Damit die Bausteine lebensnah aussehen (`szenen.md`, „Echt in der Funktion, lebensnah im Aussehen“), gib ihnen die typischen Einzelheiten des Originals mit:
+
+- **Rechner:** Monitor mit Standfuß auf der Tischkante, Taskleiste mit Uhr. `hoehe` ist die Höhe des ganzen Rechners (Standard 380 px, passt in eine Station); der Bildschirm wächst nicht mit, längere Inhalte rollen im Fenster. `uhr` und `datum` legen die Zeit der Geschichte fest („08:15“, „Mo. 04.05.2026“), `marke` nennt den erfundenen Hersteller. Ohne `start` liegen die Programme als Symbole auf dem Schreibtisch.
+- **Browser:** Reiter (`titel`), Adresszeile, kurzer Ladebalken beim Seitenwechsel. Mit `portal` bekommt jede Seite das Gerüst der Webseite: Kopf mit `logo` (Emoji oder SVG-Text) und `name`, Unterzeile `unter`, Navigation `menue` (Texte sind ruhig und nicht bedienbar; `{text, pfad}` führt zu einer Seite) und Fußzeile `fuss` (Standard „Übungsversion“).
+- **Postfach:** Ordnerspalte, Kürzel des Absenders, `zeit` und `adresse` je Nachricht, `konto` als eigene Adresse. Ein Anhang ist nur dann ein Knopf, wenn er `oeffnen` hat.
+- **Formular:** `art: 'vordruck'` (Standard) ist ein Vordruck auf Papier mit Kopf (`kopf`: Betrieb oder Behörde, `nummer`: Formularnummer); nach dem richtigen Absenden wird der `vermerk` aufgestempelt (Standard „Eingegangen“). `art: 'maske'` ist die Maske eines Programms mit Titelzeile, Menüzeile (`kopf`) und Statuszeile. `art: 'web'` ist das schlichte Webformular und Standard innerhalb einer Browser-Seite. `{abschnitt: 'Titel'}` gliedert, `breite` setzt Felder nebeneinander. Mit `ohneRueckmeldung` verrät die Meldung nach dem Absenden nicht, ob alles stimmt.
+- **Dokument:** `absender` (Name, Adresszeile, Logo oder Kürzel), `zeichen` und `datum` ergeben den Briefkopf; `text` und `nach` stehen vor und nach den Zeilen; `unterschrift: 'Name'` oder `{name, rolle}` zeichnet eine Unterschrift. `stempel` ist von Anfang an da; `stemple(text)` drückt einen Stempel als Folge einer Handlung auf.
 
 Eigene Geräte oder Grafiken (z. B. `routerGeraet` im Beispiel) stehen oben in `quelle/paket.js` oder in einer eigenen Datei in `quelle/` (z. B. `quelle/router.js`); ihr Stil darf dort als `<style>` ergänzt werden, nicht in `stil.css`.
 

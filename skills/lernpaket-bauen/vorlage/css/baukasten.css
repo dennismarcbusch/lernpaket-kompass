@@ -30,54 +30,171 @@
 .kit-wahl button{border-color:var(--accent);background:var(--card);text-align:left}
 .kit-wahl button.kit-weiter{background:var(--card2);border-color:var(--line)}
 
-/* Simulierter Rechner */
-.kit-pc{max-width:880px;margin:0 auto}
-.kit-schirm{position:relative;background:linear-gradient(135deg,var(--kopf-a),var(--kopf-b));border:10px solid #23262d;border-radius:14px 14px 4px 4px;padding:12px 12px 78px;display:flex;flex-direction:column}
-.kit-pc-fuss{height:16px;margin:0 -4%;background:linear-gradient(#cfd3da,#a9aeb8);border-radius:0 0 16px 16px}
-.kit-fensterbox{flex:1;display:flex}
-.kit-desktop-hinweis{margin:auto;color:#fff;opacity:.85;font-weight:700}
-.kit-fenster{flex:1;display:flex;flex-direction:column;background:var(--card);border-radius:10px;overflow:hidden;box-shadow:0 10px 30px rgba(0,0,0,.25);animation:kit-auf .2s ease-out}
-.kit-titelleiste{display:flex;align-items:center;gap:10px;background:#eceef2;border-bottom:1px solid var(--line);padding:6px 10px;font-size:.88rem;font-weight:700}
-.kit-punkte{width:46px;height:12px;background:radial-gradient(circle at 6px 6px,#ff5f57 5px,transparent 5.5px),radial-gradient(circle at 23px 6px,#febc2e 5px,transparent 5.5px),radial-gradient(circle at 40px 6px,#28c840 5px,transparent 5.5px)}
-.kit-fensterinhalt{flex:1;display:flex;flex-direction:column;min-height:0}
-.kit-dock{position:absolute;left:50%;bottom:8px;transform:translateX(-50%);display:flex;gap:6px;background:rgba(255,255,255,.18);border:1px solid rgba(255,255,255,.3);border-radius:16px;padding:5px;backdrop-filter:blur(4px)}
-.kit-app{display:flex;flex-direction:column;align-items:center;gap:0;min-width:66px;padding:4px 6px;background:transparent;border-color:transparent;color:#fff;border-radius:12px;min-height:46px}
-.kit-app:hover,.kit-app.aktiv{background:rgba(255,255,255,.22);border-color:rgba(255,255,255,.4)}
-.kit-app-symbol{font-size:1.35rem;line-height:1.1}
-.kit-app-name{font-size:.7rem;font-weight:700}
-.kit-browserleiste{display:flex;gap:8px;align-items:center;padding:6px 8px;border-bottom:1px solid var(--line);background:var(--card2)}
-.kit-zurueck{min-height:32px;padding:2px 10px}
+/* Rechner am Arbeitsplatz: Monitor mit Kamera, Kinn und Betriebsleuchte, Standfuß auf der Tischkante */
+.kit-pc{max-width:880px;margin:0 auto;display:flex;flex-direction:column;align-items:center}
+.kit-monitor{position:relative;align-self:stretch;display:flex;flex-direction:column;background:linear-gradient(#2c303a,#1a1d24);border-radius:13px 13px 9px 9px;padding:10px 10px 0;box-shadow:inset 0 1px 0 #454b57,0 8px 18px rgba(20,25,40,.2)}
+.kit-kamera{position:absolute;top:3px;left:50%;width:5px;height:5px;margin-left:-2.5px;border-radius:50%;background:#0b0d11;box-shadow:0 0 0 1px #3d434e}
+.kit-schirm{position:relative;flex:1;display:flex;flex-direction:column;min-height:0;border-radius:3px;overflow:hidden;background:radial-gradient(120% 90% at 88% 112%,rgba(255,255,255,.17),transparent 60%),radial-gradient(90% 70% at 8% -12%,rgba(255,255,255,.13),transparent 55%),linear-gradient(135deg,var(--kopf-a),var(--kopf-b))}
+.kit-kinn{position:relative;height:14px;display:flex;align-items:center;justify-content:center}
+.kit-marke{font-size:.5rem;font-weight:700;letter-spacing:.24em;text-transform:uppercase;color:#8b919d}
+.kit-betrieb{position:absolute;right:12px;top:5px;width:4px;height:4px;border-radius:50%;background:#34d399;box-shadow:0 0 5px #34d399}
+.kit-pc-fuss{position:relative;align-self:stretch;height:26px;background:linear-gradient(var(--k2),var(--k3)) left bottom/100% 8px no-repeat;border-radius:0 0 4px 4px}
+.kit-pc-fuss::before{content:"";position:absolute;left:50%;top:0;width:84px;height:13px;margin-left:-42px;background:linear-gradient(90deg,#8e949f,#c9cdd5 45%,#9da3ae);clip-path:polygon(12% 0,88% 0,100% 100%,0 100%)}
+.kit-pc-fuss::after{content:"";position:absolute;left:50%;top:12px;width:210px;height:6px;margin-left:-105px;border-radius:6px 6px 2px 2px;background:linear-gradient(#d3d7de,#a4aab5);box-shadow:0 2px 3px rgba(20,25,40,.25)}
+.kit-fensterbox{flex:1;display:flex;flex-direction:column;min-height:0;padding:9px 9px 7px}
+.kit-taskleiste{display:flex;align-items:center;gap:8px;min-height:46px;padding:3px 10px;background:rgba(10,14,24,.58);border-top:1px solid rgba(255,255,255,.14)}
+.kit-startknopf{flex:0 0 auto;width:24px;height:24px;opacity:.7;background:radial-gradient(circle,#fff 1.7px,transparent 2.1px) 0 0/8px 8px}
+.kit-dock{flex:1;display:flex;gap:4px;min-width:0}
+.kit-app{position:relative;display:flex;flex-direction:row;align-items:center;gap:7px;min-height:40px;padding:3px 10px 3px 5px;background:transparent;border:1px solid transparent;color:#fff;border-radius:9px;min-width:0}
+.kit-app:hover,.kit-app.aktiv{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.26)}
+.kit-app.aktiv::after{content:"";position:absolute;left:12px;right:12px;bottom:-1px;height:3px;border-radius:2px;background:var(--deko)}
+.kit-app-symbol{flex:0 0 auto;width:28px;height:28px;display:grid;place-items:center;font-size:1.05rem;line-height:1;border-radius:8px;background:rgba(255,255,255,.94);box-shadow:0 1px 2px rgba(0,0,0,.3)}
+.kit-app-name{font-size:.78rem;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.kit-uhr{flex:0 0 auto;display:flex;flex-direction:column;align-items:flex-end;color:#fff;font-size:.68rem;line-height:1.25;font-variant-numeric:tabular-nums;opacity:.92}
+.kit-uhr span:first-child{font-weight:700;font-size:.76rem}
+@media (max-width:560px){.kit-app-name,.kit-uhr span:last-child,.kit-startknopf{display:none}}
+.kit-desktop{display:flex;flex-wrap:wrap;gap:6px;align-content:flex-start;padding:4px}
+.kit-symbol{display:flex;flex-direction:column;align-items:center;gap:5px;width:96px;min-height:0;padding:8px 4px;background:transparent;border:1px solid transparent;color:#fff;border-radius:10px}
+.kit-symbol:hover{background:rgba(255,255,255,.16);border-color:rgba(255,255,255,.3)}
+.kit-symbol .kit-app-symbol{width:44px;height:44px;font-size:1.6rem;border-radius:12px}
+.kit-symbolname{font-size:.75rem;font-weight:700;text-align:center;text-shadow:0 1px 2px rgba(0,0,0,.55)}
+.kit-desktop-hinweis{margin:auto auto 4px;color:#fff;opacity:.85;font-weight:700;font-size:.9rem}
+.kit-fenster{flex:1;display:flex;flex-direction:column;min-height:0;background:var(--card);border-radius:9px;overflow:hidden;box-shadow:0 0 0 1px rgba(0,0,0,.28),0 14px 32px rgba(0,0,0,.34);animation:kit-auf .2s ease-out}
+.kit-titelleiste{display:flex;align-items:center;gap:10px;background:linear-gradient(#f4f5f8,#e5e7ec);border-bottom:1px solid var(--line);padding:5px 10px;font-size:.86rem;font-weight:700}
+/* Fensterknöpfe: gehören zum Bild, tun nichts – deshalb blass und kein Knopf */
+.kit-punkte{flex:0 0 auto;margin-left:auto;width:58px;height:12px;opacity:.5;background:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 58 12' fill='none' stroke='%23485263' stroke-width='1.4'%3E%3Cpath d='M3 6h9M25 2h8v8h-8zM47 2l8 8M55 2l-8 8'/%3E%3C/svg%3E") center/contain no-repeat}
+.kit-fenster.kit-mit-reiter>.kit-titelleiste{display:none}
+.kit-fensterinhalt{flex:1;display:flex;flex-direction:column;min-height:0;overflow:auto}
+
+/* Browser: Reiter, Adresszeile, Ladebalken als Folge des Seitenwechsels */
+.kit-reiter{display:flex;align-items:flex-end;gap:4px;min-height:32px;padding:5px 8px 0;background:#dde0e6}
+.kit-reiterkarte{display:flex;align-items:center;gap:7px;min-width:0;max-width:280px;padding:5px 10px 6px;background:var(--card2);border-radius:9px 9px 0 0;font-size:.8rem;font-weight:700}
+.kit-reitersymbol{flex:0 0 auto;width:15px;height:15px;display:grid;place-items:center;font-size:.72rem;line-height:1}
+.kit-reitersymbol:empty{width:10px;height:10px;border-radius:50%;background:var(--accent)}
+.kit-reitersymbol svg{width:15px;height:15px}
+.kit-reitertitel{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.kit-reiterzu,.kit-reiterplus{color:var(--muted);font-weight:400;opacity:.6}
+.kit-reiterplus{padding:0 6px 5px;font-size:1.05rem}
+.kit-reiter .kit-punkte{margin:0 2px 9px auto}
+.kit-browserleiste{display:flex;gap:8px;align-items:center;padding:5px 8px;border-bottom:1px solid var(--line);background:var(--card2)}
+.kit-zurueck{min-height:32px;padding:2px 11px;border-radius:999px}
+.kit-neuladen{color:var(--muted);opacity:.55;font-size:1.05rem;line-height:1}
 .kit-adresse{flex:1;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:4px 12px;font-size:.85rem;color:var(--ink-soft);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.kit-ladebalken{height:2px;margin-top:-2px;background:var(--accent);transform-origin:left;transform:scaleX(0);opacity:0;position:relative;z-index:1}
+.kit-ladebalken.laedt{animation:kit-laden .4s ease-out}
+@keyframes kit-laden{0%{transform:scaleX(0);opacity:1}75%{transform:scaleX(1);opacity:1}100%{transform:scaleX(1);opacity:0}}
 .kit-seite{flex:1;overflow:auto;padding:14px 16px;max-height:420px}
 .kit-seite h3:first-child{margin-top:0}
-.kit-mail{display:grid;grid-template-columns:220px minmax(0,1fr);flex:1;min-height:260px}
-@media (max-width:640px){.kit-mail{grid-template-columns:1fr}}
-.kit-mailliste{border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:auto}
-.kit-mailzeile{display:flex;flex-direction:column;align-items:flex-start;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;background:var(--card);font-size:.88rem;min-height:56px}
-.kit-mailzeile.neu b::before{content:"● ";color:var(--accent)}
-.kit-mailzeile.aktiv{background:var(--accent-soft)}
-.kit-mailtext{padding:12px 14px;overflow:auto}
-.kit-mailkopf{border-bottom:1px solid var(--line);padding-bottom:6px;margin-bottom:8px}
-.kit-mailkopf span{font-size:.85rem;color:var(--muted)}
-.kit-leer{color:var(--muted)}
-.kit-anhang{margin-top:8px}
+/* Portal-Gerüst um jede Seite: Kopf mit Logo und Name, Navigation, Fußzeile */
+.kit-portal{flex:1;display:flex;flex-direction:column;overflow:auto;max-height:420px;background:var(--card)}
+.kit-portal .kit-seite{flex:1 0 auto;overflow:visible;max-height:none}
+.kit-portalkopf{display:flex;align-items:center;gap:10px;padding:7px 14px;background:var(--kopf-b);color:#fff}
+.kit-portallogo{flex:0 0 auto;width:30px;height:30px;display:grid;place-items:center;font-size:1.15rem;line-height:1;background:#fff;color:var(--kopf-a);border-radius:8px}
+.kit-portallogo:empty{display:none}
+.kit-portallogo svg{width:22px;height:22px}
+.kit-portalname{display:flex;flex-direction:column;line-height:1.15;min-width:0}
+.kit-portalname b{font-family:var(--titel);font-size:1rem}
+.kit-portalname small{font-size:.7rem;opacity:.85}
+.kit-portalmenue{margin-left:auto;display:flex;align-items:center;gap:14px;font-size:.8rem;white-space:nowrap}
+.kit-portalmenue span{opacity:.72}
+.kit-portalmenue button.link{color:#fff;min-height:30px}
+@media (max-width:560px){.kit-portalmenue span{display:none}}
+.kit-portalfuss{padding:5px 14px;font-size:.72rem;color:var(--muted);background:var(--card2);border-top:1px solid var(--line)}
 
-/* Formular */
-.kit-formular{display:flex;flex-direction:column;gap:10px;max-width:520px}
+/* Postfach: Ordner, Liste mit Absender-Kürzeln, Lesebereich */
+.kit-mail{display:grid;grid-template-columns:146px 226px minmax(0,1fr);grid-template-rows:minmax(0,1fr);flex:1;min-height:0}
+.kit-mail.ohne-ordner{grid-template-columns:226px minmax(0,1fr)}
+@media (max-width:900px){.kit-mail{grid-template-columns:210px minmax(0,1fr)}.kit-mailordner{display:none!important}}
+@media (max-width:640px){.kit-mail,.kit-mail.ohne-ordner{grid-template-columns:1fr;grid-template-rows:auto;flex:0 0 auto}}
+.kit-mailordner{display:flex;flex-direction:column;gap:2px;padding:8px 6px;background:var(--card2);border-right:1px solid var(--line);font-size:.76rem;color:var(--muted);user-select:none}
+.kit-mailordner>div{display:flex;justify-content:space-between;align-items:center;gap:4px;padding:5px 6px;border-radius:7px;white-space:nowrap}
+.kit-mailordner>div>span:first-child{min-width:0;overflow:hidden;text-overflow:ellipsis}
+.kit-mailordner .aktiv{background:var(--accent-soft);color:var(--ink);font-weight:700}
+.kit-mailordner .kit-mailkonto{display:block;font-weight:700;color:var(--ink-soft);border-bottom:1px solid var(--line);border-radius:0;margin-bottom:4px;overflow:hidden;text-overflow:ellipsis}
+.kit-mailzahl{flex:0 0 auto;background:var(--accent);color:var(--accent-ink);border-radius:999px;padding:0 6px;font-size:.68rem}
+.kit-mailliste{border-right:1px solid var(--line);display:flex;flex-direction:column;overflow:auto;min-height:0}
+.kit-mailzeile{display:grid;grid-template-columns:30px minmax(0,1fr) auto;column-gap:8px;align-items:center;text-align:left;border:0;border-bottom:1px solid var(--line);border-radius:0;background:var(--card);font-size:.84rem;min-height:56px;padding:7px 9px}
+.kit-mailzeile .kit-mailbild{grid-row:1 / span 2}
+.kit-mailzeile b{overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.kit-mailbetreff{grid-column:2 / span 2;color:var(--ink-soft);overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
+.kit-mailzeile.neu b::before{content:"● ";color:var(--accent)}
+.kit-mailzeile.neu .kit-mailbetreff{color:var(--ink);font-weight:700}
+.kit-mailzeile.aktiv{background:var(--accent-soft);box-shadow:inset 3px 0 0 var(--accent)}
+.kit-mailbild{flex:0 0 auto;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:#fff;font-size:.66rem;font-weight:700;letter-spacing:.02em}
+.kit-mailzeit{font-size:.72rem;color:var(--muted);white-space:nowrap}
+.kit-mailtext{padding:12px 16px;overflow:auto;min-height:0}
+.kit-mailkopf{border-bottom:1px solid var(--line);padding-bottom:8px;margin-bottom:10px}
+.kit-mailkopf>b{font-family:var(--titel);font-size:1.05rem}
+.kit-mailvon{display:flex;align-items:center;gap:8px;margin-top:6px;font-size:.8rem;line-height:1.3;color:var(--muted)}
+.kit-mailvon .kit-mailzeit{margin-left:auto}
+.kit-mailinhalt>p:first-child{margin-top:0}
+.kit-leer{color:var(--muted)}
+.kit-anhang{display:inline-flex;align-items:center;gap:9px;margin-top:6px;padding:5px 12px 5px 6px;min-height:0;border:1px solid var(--line);border-radius:10px;background:var(--card2);text-align:left}
+.kit-anhangart{flex:0 0 auto;width:30px;height:38px;display:flex;align-items:flex-end;justify-content:center;padding-bottom:2px;border:1px solid #c5cad4;border-radius:4px;background:linear-gradient(#fff 60%,#c0392b 60%);color:#fff;font-size:.54rem;font-weight:800;letter-spacing:.04em}
+.kit-anhangname{display:flex;flex-direction:column;font-size:.84rem;line-height:1.25}
+.kit-anhangname small{color:var(--muted);font-size:.72rem}
+
+/* Formular: Vordruck auf Papier (Standard), Maske eines Programms, Webformular */
+.kit-formular{position:relative;display:flex;flex-direction:column;gap:10px;max-width:560px}
 .kit-formtitel{font-family:var(--titel);font-weight:800;font-size:1.1rem}
-.kit-feld{display:flex;flex-direction:column;gap:3px}
+.kit-formkopf{display:flex;justify-content:space-between;align-items:flex-start;gap:12px;font-size:.84rem}
+.kit-formnummer{flex:0 0 auto;font-size:.7rem;white-space:nowrap;border:1px solid currentColor;border-radius:2px;padding:1px 6px;opacity:.7}
+.kit-formfelder{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:9px 12px}
+.kit-feld{grid-column:span 6;display:flex;flex-direction:column;gap:3px;min-width:0}
+.kit-feld.halb{grid-column:span 3}
+.kit-feld.drittel{grid-column:span 2}
+@media (max-width:520px){.kit-feld.halb,.kit-feld.drittel{grid-column:span 6}}
+.kit-formabschnitt{grid-column:span 6;margin-top:4px;padding-bottom:2px;border-bottom:1px solid var(--line);font-size:.74rem;font-weight:700;text-transform:uppercase;letter-spacing:.07em;color:var(--muted)}
 .kit-feld label{font-weight:700;font-size:.92rem}
+.kit-pflicht{color:var(--bad)}
 .kit-feld input,.kit-feld select{width:100%}
 .kit-feld.ok input,.kit-feld.ok select{border-color:var(--ok);background:var(--ok-soft)}
 .kit-feld.falsch input,.kit-feld.falsch select{border-color:var(--bad);background:var(--bad-soft)}
 .kit-feldhinweis{font-size:.85rem;color:var(--bad)}
-.kit-senden{align-self:flex-start;background:var(--card);border:2px solid var(--accent);color:var(--accent);font-weight:700}
+.kit-formfuss{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.kit-senden{background:var(--card);border:2px solid var(--accent);color:var(--accent);font-weight:700}
 .kit-senden:hover{background:var(--accent-soft)}
+.kit-formstatus{font-size:.86rem;font-weight:700;color:var(--muted)}
+.kit-formstatus.ok{color:var(--ok)}
+.kit-formstatus.fehler{color:var(--bad)}
+.kit-nurvorlesen{position:absolute;width:1px;height:1px;overflow:hidden;clip-path:inset(50%)}
+.kit-form-vordruck{margin:0 auto;padding:16px 20px 14px;background:linear-gradient(#fffefb,#fffaf0);border:1px solid #e4dccb;border-radius:2px;box-shadow:0 1px 0 #f3ecdc,0 2px 0 #e9e1cf,0 10px 24px rgba(60,40,10,.13);color:#2a2620}
+.kit-form-vordruck .kit-formkopf{border-bottom:2px solid #2a2620;padding-bottom:6px}
+.kit-form-vordruck .kit-formabschnitt{border-color:#cfc4ac;color:#6b6252}
+.kit-form-vordruck .kit-feld label{font-size:.72rem;text-transform:uppercase;letter-spacing:.05em;color:#6b6252}
+.kit-form-vordruck .kit-feld input,.kit-form-vordruck .kit-feld select{border:0;border-bottom:1.5px solid #8d8371;border-radius:0;background-color:rgba(120,100,60,.06);padding:6px 6px 4px;color:#1e3a8a;font-weight:700}
+.kit-form-vordruck .kit-feld.ok input,.kit-form-vordruck .kit-feld.ok select{border-color:var(--ok);background-color:var(--ok-soft)}
+.kit-form-vordruck .kit-feld.falsch input,.kit-form-vordruck .kit-feld.falsch select{border-color:var(--bad);background-color:var(--bad-soft)}
+.kit-form-vordruck .kit-stempel{bottom:12px}
+.kit-form-maske{gap:0;overflow:hidden;background:#eef0f4;border:1px solid #b4bac6;border-radius:8px;box-shadow:0 8px 22px rgba(20,30,50,.14)}
+.kit-form-maske .kit-formtitel{order:-2;padding:6px 12px;background:linear-gradient(#3d4454,#2a2f3a);color:#fff;font-family:var(--schrift);font-size:.86rem;font-weight:700}
+.kit-form-maske .kit-formkopf{order:-1;padding:4px 12px;background:#e1e4ea;border-bottom:1px solid #c7ccd6;font-size:.78rem;color:var(--ink-soft)}
+.kit-form-maske .kit-formfelder{padding:12px}
+.kit-form-maske .kit-formabschnitt{border-color:#c7ccd6}
+.kit-form-maske .kit-feld:not(.halb):not(.drittel){flex-direction:row;flex-wrap:wrap;align-items:center;gap:0 8px}
+.kit-form-maske .kit-feld:not(.halb):not(.drittel) label{flex:0 0 36%;font-size:.84rem}
+.kit-form-maske .kit-feld:not(.halb):not(.drittel) input,.kit-form-maske .kit-feld:not(.halb):not(.drittel) select{flex:1;width:auto;min-width:0}
+.kit-form-maske .kit-feld label{font-size:.84rem}
+.kit-form-maske .kit-feldhinweis{flex-basis:100%}
+.kit-form-maske .kit-feld input,.kit-form-maske .kit-feld select{border-radius:4px;border-color:#a8afbc;padding:5px 7px}
+.kit-form-maske .kit-formfuss{flex-direction:row-reverse;justify-content:space-between;padding:6px 12px;background:#dfe3ea;border-top:1px solid #c7ccd6}
+.kit-form-maske .kit-formstatus{font-size:.78rem}
+.kit-form-maske .kit-senden{min-height:34px;padding:4px 14px;border-radius:6px}
+.kit-form-web{max-width:520px}
 
-/* Dokument */
-.kit-dok{position:relative;background:#fffdf8;border:1px solid #e4dccb;border-radius:4px;box-shadow:0 2px 0 #eee6d4,0 10px 26px rgba(60,40,10,.12);padding:18px 20px;max-width:720px;margin:0 auto;font-size:.95rem}
+/* Dokument: Blatt mit Briefkopf, Unterschrift und Stempel */
+.kit-dok{position:relative;background:linear-gradient(#fffefb,#fffaf0);border:1px solid #e4dccb;border-radius:2px;box-shadow:0 1px 0 #f3ecdc,0 2px 0 #e9e1cf,0 12px 28px rgba(60,40,10,.14);padding:20px 26px 18px;max-width:740px;margin:0 auto;font-size:.95rem}
+.kit-briefkopf{display:flex;align-items:center;gap:10px;margin-bottom:12px}
+.kit-brieflogo{flex:0 0 auto;width:38px;height:38px;display:grid;place-items:center;border-radius:8px;background:var(--accent);color:var(--accent-ink);font-family:var(--titel);font-weight:800;font-size:.95rem;line-height:1}
+.kit-brieflogo svg{width:26px;height:26px}
+.kit-briefabsender{display:flex;flex-direction:column;line-height:1.2;min-width:0}
+.kit-briefabsender b{font-family:var(--titel);font-size:1.02rem}
+.kit-briefabsender small{font-size:.72rem;color:#857b68}
+.kit-briefdaten{margin-left:auto;text-align:right;font-size:.74rem;line-height:1.35;color:#6b6252;white-space:nowrap}
 .kit-dokkopf{font-size:.85rem;color:var(--ink-soft);border-bottom:2px solid var(--ink);padding-bottom:6px;margin-bottom:8px}
 .kit-doktitel{font-family:var(--titel);font-weight:800;font-size:1.15rem;margin-bottom:8px}
+.kit-doktext{margin:6px 0 8px}
+.kit-doktext p{margin:.4em 0}
 .kit-dokzeilen{display:flex;flex-direction:column}
 .kit-dokzeile{display:grid;grid-template-columns:2.2em minmax(120px,.8fr) minmax(0,1.6fr);gap:8px;text-align:left;align-items:start;border:0;border-bottom:1px dotted #cfc4ac;border-radius:0;background:transparent;padding:7px 4px;min-height:0;font-size:inherit}
 button.kit-dokzeile:hover{background:#fff3c4}
@@ -86,9 +203,18 @@ button.kit-dokzeile:hover{background:#fff3c4}
 .kit-dokzeile.markiert{background:#fff0a6;box-shadow:inset 4px 0 0 #f2c200}
 .kit-dokzeile.richtig{background:var(--ok-soft);box-shadow:inset 4px 0 0 var(--ok)}
 .kit-dokzeile.falsch{background:var(--bad-soft);box-shadow:inset 4px 0 0 var(--bad)}
+.kit-unterschrift{display:inline-flex;flex-direction:column;margin-top:10px;min-width:170px}
+.kit-unterschrift svg{display:block;margin-bottom:-9px}
+.kit-unterschrift-name{border-top:1px solid #8d8371;padding-top:2px;font-size:.78rem;line-height:1.25;color:#6b6252}
 .kit-dokfuss{margin-top:10px;font-size:.82rem;color:var(--muted)}
-.kit-stempel{position:absolute;right:18px;bottom:16px;transform:rotate(-12deg);border:3px solid rgba(180,40,40,.55);color:rgba(180,40,40,.6);font-weight:800;letter-spacing:.08em;padding:4px 10px;border-radius:6px;font-family:var(--titel);text-transform:uppercase;font-size:.9rem}
-@media (max-width:600px){.kit-dokzeile{grid-template-columns:1.6em minmax(0,1fr)}.kit-dokwert{grid-column:2}}
+.kit-stempel{position:absolute;right:18px;bottom:16px;transform:rotate(-12deg);border:3px solid rgba(180,40,40,.55);color:rgba(180,40,40,.6);font-weight:800;letter-spacing:.08em;padding:4px 10px;border-radius:6px;font-family:var(--titel);text-transform:uppercase;font-size:.9rem;pointer-events:none}
+.kit-stempel.gruen{border-color:rgba(21,128,61,.6);color:rgba(21,128,61,.78)}
+.kit-stempel.blau{border-color:rgba(30,64,175,.5);color:rgba(30,64,175,.7)}
+.kit-stempel.oben{bottom:auto;top:16px}
+/* Der Stempel wird aufgedrückt, wenn er Folge einer Handlung ist (dokument.stemple, Formular nach dem Absenden) */
+.kit-stempel.neu{animation:kit-stempeln .3s cubic-bezier(.2,.9,.3,1.2)}
+@keyframes kit-stempeln{0%{opacity:0;transform:rotate(-12deg) scale(1.7)}60%{opacity:1;transform:rotate(-12deg) scale(.94)}100%{transform:rotate(-12deg) scale(1)}}
+@media (max-width:600px){.kit-dok{padding:16px 16px 14px}.kit-dokzeile{grid-template-columns:1.6em minmax(0,1fr)}.kit-dokwert{grid-column:2}.kit-briefdaten{display:none}}
 
 /* Sortieren und Reihenfolge */
 .kit-sort{display:flex;flex-direction:column;gap:12px}
