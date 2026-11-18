@@ -32,7 +32,7 @@ Eine Frage darf mehrere Einsätze haben, aber Kurz-Check und Selbstüberprüfung
 ## Regeln für gute Fragen
 
 - **Jede Frage prüft genau ein Lernziel** und passt zu dessen Verb: „berechnen“ → Zahleneingabe, „zuordnen“ → Zuordnen, „erkennen“ → Bildfrage oder Hotspot, „begründen/auswählen“ → Multiple Choice mit Begründungen als Optionen.
-- **Fragetypen mischen:** Einfachauswahl, Mehrfachauswahl, Zuordnen, Zahl, Text, Hotspot (jede Frage kann ein Bild tragen). Mindestens drei verschiedene Typen im Pool.
+- **Fragetypen mischen:** Einfachauswahl, Mehrfachauswahl, Zuordnen, Zahl, Text, Hotspot (jede Frage kann ein Bild enthalten). Mindestens drei verschiedene Typen im Pool.
 - **Falschantworten aus echten Fehlern**, nie ausgedacht oder albern. Jede Falschantwort steht für eine Fehlvorstellung und bekommt ein eigenes `feedback`, das sie anspricht und einen nächsten Schritt nennt („Du hast … Die kleinste Stelle steht rechts.“).
 - **Keine Ratehilfen:** Die richtige Antwort ist nicht die längste oder genaueste, keine grammatischen Hinweise, kein „alle oben genannten“ oder „keine davon“, keine doppelten Verneinungen, keine Fangfragen.
 - **Mehrere richtige Antworten** sind erwünscht, wo es fachlich passt (echtes Nachdenken statt Ausschlussverfahren).

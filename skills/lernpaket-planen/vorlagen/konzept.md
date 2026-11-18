@@ -13,9 +13,10 @@ Ergebnis der Phase „Erfinden“ (P12), nachdem die Lernziele stehen. Die Form 
 
 ## Vorschlag 1: [Name des Gegenstands bzw. des Spiels]
 
-- **Was sehen die Lernenden?** [Werkzeug, Gerät, Plan, Dokument, Modell – in der Funktion wie im Beruf, im Aussehen auf das Nötige reduziert]
+- **Was sehen die Lernenden?** [Werkzeug, Gerät, Plan, Dokument, Modell – in der Funktion wie im Beruf, im Aussehen lebensnah]
+- **Woran erkennt man den Gegenstand wieder?** [drei bis fünf typische Merkmale des Originals: Gehäuse, Anschlüsse, Leuchten, Fensterrahmen, Briefkopf …; welche Zustände man sieht; bei einem Spiel: Ort, Figuren, sichtbare Folge einer Handlung]
 - **Was bewegen sie?** [tippen, zerlegen, verlegen, einstellen, ausfüllen, umschalten …]
-- **Mockup:** [Skizze des wichtigsten Bildschirms im Chat bzw. als Datei: Gegenstand in typischem Zustand, Auftrag, Notiz, Bedienelemente; der Gegenstand passt in gut 600 px Höhe]
+- **Mockup:** [Skizze des wichtigsten Bildschirms im Chat bzw. als Datei: Gegenstand in typischem Zustand und so gezeichnet, wie er in echt aussieht, Auftrag, Notiz, Bedienelemente; der Gegenstand passt in gut 600 px Höhe]
 - **Beispielzug:** [„Du tippst `ip route` – der Server antwortet: Netzwerk nicht erreichbar.“]
 - **Durch das Paket:** Entdecken [geführte Schritte am Gegenstand] · Üben [neue Fälle / bei C: Spiel] · Selbstüberprüfung [neuer Fall, ohne Hilfe] · Tafelbild [was sich davon groß zeigen lässt]
 

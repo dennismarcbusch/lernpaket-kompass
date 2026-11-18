@@ -1,10 +1,10 @@
 # Simulation, Spiel und Szenen: Was bewegen die Lernenden?
 
-Ergänzung zu P12 (Handeln am Gegenstand: Simulation zuerst, jede Station eine Szene, Spiel nur begründet). **Zuerst** kommt die Form für das ganze Paket, dann je Station die Szene, zuletzt der Text. Die Form wird gewählt, wenn die Lernziele stehen (Phase „Zielen“ vor „Erfinden“): Der Gegenstand muss die Lernziele tragen.
+Ergänzung zu P12 (Handeln am Gegenstand: Simulation zuerst, jede Station eine Szene, Spiel nur begründet). **Zuerst** kommt die Form für das ganze Paket, dann je Station die Szene, zuletzt der Text. Die Form wird gewählt, wenn die Lernziele stehen (Phase „Zielen“ vor „Erfinden“): Am Gegenstand müssen sich die Lernziele erreichen lassen.
 
 ## Die Form wählen (Phase „Erfinden“)
 
-Vorbild sind die PING-Pakete: Dort trägt **ein Arbeitsgegenstand** das ganze Paket – der Server im Terminal („Shell Yeah!“, „Get-Going!“), das PC-Gehäuse („Plug & Pray“), der Lageplan zweier Gebäude („Strukturierte Verkabelung“). Der Lernstoff steckt in den Regeln dieses Gegenstands: Die Grafikkarte lässt sich erst ausbauen, wenn das Stromkabel ab ist; `ping` geht erst, wenn die Route stimmt; ein Kabel über 90 m meldet der Plan als Fehler.
+Vorbild sind die PING-Pakete: Dort zieht sich **ein Arbeitsgegenstand** durch das ganze Paket – der Server im Terminal („Shell Yeah!“, „Get-Going!“), das PC-Gehäuse („Plug & Pray“), der Lageplan zweier Gebäude („Strukturierte Verkabelung“). Der Lernstoff steckt in den Regeln dieses Gegenstands: Die Grafikkarte lässt sich erst ausbauen, wenn das Stromkabel ab ist; `ping` geht erst, wenn die Route stimmt; ein Kabel über 90 m meldet der Plan als Fehler.
 
 Prüfe die Formen **in dieser Reihenfolge** und nimm die erste, die passt:
 
@@ -19,7 +19,7 @@ Je Form gilt die **Plattform-Probe:** Könnte die Lernplattform das genauso (Tes
 
 ### Vorschlag an die Lehrkraft
 
-Claude **berät**: kurze Empfehlung mit Begründung, warum diese Form hier passt und die anderen weniger. Dann schlägt Claude **eine** Umsetzung vor, die zur ersten passenden Form gehört, und – wenn es eine sinnvolle gibt – eine Alternative (z. B. A pur oder A mit Spiel zum Üben). Je Vorschlag: der Arbeitsgegenstand (was sieht man, was bewegt man), ein Beispielzug („Du tippst `ip route` – der Server antwortet: Netzwerk nicht erreichbar“), die Tabelle **Lernstoff → Regel oder Reaktion des Gegenstands** (jeder Kerninhalt und jeder typische Fehler), die Plattform-Probe, der Aufwand und ein **Mockup** des wichtigsten Bildschirms (Gegenstand in der Mitte in einem typischen Zustand, Auftrag und Notiz daneben, Bedienelemente beschriftet; alle Vorschläge im selben Ausschnitt). Spielideen schlägt Claude nur für C oder D vor. Vorlage: `vorlagen/konzept.md`.
+Claude **berät**: kurze Empfehlung mit Begründung, warum diese Form hier passt und die anderen weniger. Dann schlägt Claude **eine** Umsetzung vor, die zur ersten passenden Form gehört, und – wenn es eine sinnvolle gibt – eine Alternative (z. B. A pur oder A mit Spiel zum Üben). Je Vorschlag: der Arbeitsgegenstand (was sieht man, woran erkennt man ihn wieder, was bewegt man), ein Beispielzug („Du tippst `ip route` – der Server antwortet: Netzwerk nicht erreichbar“), die Tabelle **Lernstoff → Regel oder Reaktion des Gegenstands** (jeder Kerninhalt und jeder typische Fehler), die Plattform-Probe, der Aufwand und ein **Mockup** des wichtigsten Bildschirms (Gegenstand in der Mitte in einem typischen Zustand, Auftrag und Notiz daneben, Bedienelemente beschriftet; alle Vorschläge im selben Ausschnitt). Spielideen schlägt Claude nur für C oder D vor. Vorlage: `vorlagen/konzept.md`.
 
 ### Wenn ein Spiel: das SQL-Island-Prinzip
 
@@ -30,7 +30,8 @@ Ein Spiel ohne eingebaute Anleitung lehrt vor allem das Spiel. Deshalb vermittel
 - **Sofortige Folge im Spiel** und ein Satz, warum (P6); Neustart des Schritts statt Strafe.
 - **Nachschlagen jederzeit:** Regelbuch, Befehlsübersicht oder Tabellen neben dem Spiel, ohne das Spiel zu verlassen (P9).
 - **Der Lernstoff ist die Spielregel** (intrinsische Integration): Wer ihn nicht kann, kommt im Spiel nicht weiter – kein Quiz als Tor zum nächsten Level.
-- Story und Spielwelt tragen den Inhalt, statt ihn zu schmücken; kein Zeitdruck, keine Ranglisten.
+- Story und Spielwelt vermitteln den Inhalt, statt ihn zu schmücken; kein Zeitdruck, keine Ranglisten.
+- **Es sieht aus wie ein Spiel:** Spielwelt mit Ort und Figuren, Bewegung, sichtbare Folge jeder Handlung (siehe „Echt in der Funktion, lebensnah im Aussehen“).
 
 ### Spiel-Genres (nur für C und D)
 
@@ -44,7 +45,7 @@ Ein Spiel ohne eingebaute Anleitung lehrt vor allem das Spiel. Deshalb vermittel
 | Aufbau und Wirtschaft | Tycoon-Spiele | Entscheiden → Kennzahlen ändern sich → reagieren | Wirkungszusammenhänge, Kalkulation | Eigenen Laden führen, Preis und Absatz ausprobieren |
 | Rollenspiel-Gespräch | Visual Novel | Figur sagt etwas → Antwort wählen → Ausgang ändert sich | Kommunikation, Beratung, Konflikte | Reklamationsgespräch, das je nach Antwort kippt |
 
-Umsetzung in der Vorlage: A und B im **Simulationsmodus** `PAKET.simulation`, wenn ein Arbeitsgegenstand das ganze Paket trägt (Lektion links in Kapiteln und Schritten, Gegenstand rechts, bleibt erhalten), sonst als Stationen mit eigenen Szenen; C mit Szenen im Entdecken und dem Spiel als Interaktion der Übungen (eine Übung je Spielrunde oder eine Übung mit mehreren Runden); D im Spielmodus `PAKET.spielwelt`.
+Umsetzung in der Vorlage: A und B im **Simulationsmodus** `PAKET.simulation`, wenn sich ein Arbeitsgegenstand durch das ganze Paket zieht (Lektion links in Kapiteln und Schritten, Gegenstand rechts, bleibt erhalten), sonst als Stationen mit eigenen Szenen; C mit Szenen im Entdecken und dem Spiel als Interaktion der Übungen (eine Übung je Spielrunde oder eine Übung mit mehreren Runden); D im Spielmodus `PAKET.spielwelt`.
 
 ## Simulationsmodus (PAKET.simulation)
 
@@ -95,13 +96,28 @@ Die leichtere Spielform: Ein Spielrahmen verbindet einzelne Szenen-Stationen zu 
 - **Figuren** als Illustration (`figur.aussehen`): Ausbilderin, Kunde, Kollegin. Vielfältig besetzen (Hautton, Frisur, Kopftuch, Brille), nie reale Personen nachbilden.
 - **Symbol** im Kopf (`welt.symbol`), z. B. ein Emoji, das zum Thema passt.
 
-## Echt in der Funktion, sparsam im Aussehen
+## Echt in der Funktion, lebensnah im Aussehen
 
-Eine Szene muss sich verhalten wie der echte Gegenstand: dieselben Felder, Abläufe und Folgen. Sie muss nicht aussehen wie ein Foto davon. Aufwendige Nachbildungen bringen kaum mehr als einfache; wichtig ist, dass das, worauf es ankommt, gut zu erkennen ist (Belege in `belege.md`).
+Eine Szene verhält sich wie der echte Gegenstand (dieselben Felder, Abläufe und Folgen) **und sie sieht so aus, dass man ihn auf einen Blick wiedererkennt**. Lernende sind aus den Apps und Spielen ihres Alltags ein gewisses Maß an Grafik gewohnt und erwarten es auch von einem Lernpaket; die frühere Regel „sparsam im Aussehen“ führte zu langweiligen Paketen. Fotorealismus ist nicht nötig, eine sorgfältige Illustration genügt; ein Kasten mit Beschriftung genügt nicht (Begründung und Belege in `belege.md`: eigene Entscheidung, noch nicht erprobt).
 
-- Zeigen, was zur Aufgabe gehört; weglassen, was im echten Programm nur stört (Werbung, Menüs ohne Funktion, zwanzig Felder, von denen drei gebraucht werden).
-- Das Wichtige hervorheben: die Zeile im Dokument, das Feld im Formular, die Leuchte am Gerät.
-- Kulisse und Figuren gehören in den Kopf, auf die Startseite und zum Auftrag (Sprechblase), nicht in den Arbeitsbereich der Szene.
+**Probe:** Erkennt jemand, der das Original kennt, den Gegenstand ohne Beschriftung? Erkennt jemand, der ihn nur aus dem Paket kennt, später das Original wieder?
+
+So wird ein Gegenstand lebensnah:
+
+- **Form und Material des Originals:** das Gerät mit Gehäuse, Kanten, Schrauben und Schatten; das Programm mit Fensterrahmen, Titelzeile, Menü und der passenden Schrift (Terminal: dunkel, Festbreitenschrift, blinkende Schreibmarke); das Portal mit Kopf, Navigation, Suchfeld und Fußzeile; das Dokument mit Briefkopf, Stempel, Unterschrift und Papierrand.
+- **Typische Einzelheiten:** Anschlüsse in echter Anordnung und Beschriftung, Leuchten, Typenschild eines erfundenen Herstellers, Logo des erfundenen Betriebs. Drei bis fünf solcher Merkmale genügen meist zum Wiedererkennen.
+- **Zustände sichtbar wie in echt:** Die Leuchte blinkt bei Datenverkehr, das Kabel steckt, der Lüfter läuft, der Bildschirm zeigt die Ausgabe, der Stempel hinterlässt einen Abdruck.
+- **Folgen als Bewegung:** Das Datenpaket wandert durch das Kabel, die Karte rastet ein, die Kundin verzieht das Gesicht. Kurz, und nur als Folge einer Handlung oder als Zustand.
+- **Der Arbeitsplatz** darf dazugehören, wenn er beim Wiedererkennen hilft: der PC auf der Werkbank, der Switch im Serverschrank, das Formular auf dem Schreibtisch.
+- **Ein Spiel sieht aus wie ein Spiel:** eine Spielwelt mit Ort und Figuren, die reagieren, Bewegung und eine sichtbare Folge jeder Handlung. Ein Quiz mit Punktestand ist kein Spiel.
+
+Drei Grenzen:
+
+- **Nur, was dazugehört:** Alles Sichtbare gehört zum Gegenstand, zu seinem Arbeitsplatz oder zur Spielwelt. Schmuck ohne Bezug, witzige Nebenhandlungen und Werbung bleiben weg (verführerische Details). Kulisse und Figuren der Welt stehen im Kopf, auf der Startseite und beim Auftrag; in die Szene gehören Figuren, wenn sie mitspielen (die Kundin im Gespräch, die Figuren eines Spiels).
+- **Das Wichtige ist am leichtesten zu erkennen:** die Zeile im Dokument, das Feld im Formular, die Leuchte am Gerät. Was zur Aufgabe gehört, ist bedienbar und deutlich; was der Gegenstand sonst noch hat (weitere Menüpunkte, Anschlüsse, Felder), ist zu sehen, aber ruhig gehalten, und sieht nicht anklickbar aus, wenn es nichts tut. Zwanzig Felder, von denen drei gebraucht werden, bleiben weg.
+- **Nichts bewegt sich nur zur Zierde,** nichts blinkt neben der Aufgabe. Die Vorlage schaltet Bewegung ab, wenn das Gerät auf „weniger Bewegung“ steht; die Information darf deshalb nie nur in der Bewegung stecken.
+
+Technik: Inline-SVG und CSS im Paket (Verläufe, Schatten, kurze Übergänge), keine externen Bilder, Schriften oder Bibliotheken; die Szene bleibt auf 1366 × 768 ganz zu sehen.
 
 ## Textbudget
 

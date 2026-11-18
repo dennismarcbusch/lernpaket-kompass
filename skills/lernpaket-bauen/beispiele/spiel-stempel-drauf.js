@@ -497,9 +497,9 @@ window.PAKET = {
   spielwelt: { titel: 'Stempel drauf! Zwei Wochen am Registergericht', tab: 'Am Schalter', start: stempelSpiel },
 
   stationen: [
-    { id: 'S1', titel: 'Woche 1 · Erste Tage am Schalter', lz: ['LZ1', 'LZ2'], vorab: ['V1', 'V2'], check: ['C1', 'C3', 'C4'],
+    { id: 'S1', titel: 'Woche 1 · Erste Tage am Schalter', lz: ['LZ1', 'LZ2'], check: ['C1', 'C3', 'C4'],
       mitdenken: { auftrag: 'Erklär deinem Sitznachbarn in drei Sätzen, warum Frau Grün ihre Anmeldung nicht einfach mailen darf.', muster: 'Das Register ist öffentlich und alle verlassen sich darauf. Darum muss sicher sein, dass die Anmeldung echt ist. Das garantiert die öffentliche Beglaubigung durch den Notar.' } },
-    { id: 'S2', titel: 'Woche 2 · Die neue Dienstanweisung', lz: ['LZ3', 'LZ4', 'LZ5'], vorab: ['V3', 'V4', 'V5'], check: ['C5', 'C7', 'C10'],
+    { id: 'S2', titel: 'Woche 2 · Die neue Dienstanweisung', lz: ['LZ3', 'LZ4', 'LZ5'], check: ['C5', 'C7', 'C10'],
       mitdenken: { auftrag: 'Zeichne auf Papier zwei Spalten: 🟥 „entsteht mit Eintragung“ und 🟦 „wird bekannt gemacht“. Sortiere alle Fälle von Woche 2 ein.', muster: '🟥 Lindgrün GmbH, Nähwerk Lenz. 🟦 Fischer Großhandel, Prokura Okafor, Geschäftsführer Demir.' } }
   ],
 

@@ -9,7 +9,7 @@ Entsteht nach dem Prototyp: Station 1 ist gebaut und ausprobiert, die Rückmeldu
 - Einstiegstext der Figur (2–3 Sätze, höchstens etwa 40 Wörter – der einzige Fließtext auf der Startseite): …
 - **Welt:** Thema (wirtschaft · technik · sprache · natur · gesundheit · gestaltung), Kulisse (buero · lager · werkstatt · serverraum · laden · stadt · natur · klasse), Symbol
 - **Arbeitsmittel aus dem Beruf**, die als Szene nachgebaut werden (Dokumente, Programme, Geräte, Gespräche): …
-- **Form** (aus `konzept.md`): A Simulation mit dem Gegenstand „…“ / B interaktive Illustration „…“ (beide im Simulationsmodus, wenn ein Gegenstand alle Kapitel trägt) / C wie A oder B, dazu Spiel „…“ in den Übungen / D Spielmodus „…“ (Stationen = Level, nur begründet); optional Spielrahmen mit Ziel und Zähler, je Station ein Ort
+- **Form** (aus `konzept.md`): A Simulation mit dem Gegenstand „…“ / B interaktive Illustration „…“ (beide im Simulationsmodus, wenn sich ein Gegenstand durch alle Kapitel zieht) / C wie A oder B, dazu Spiel „…“ in den Übungen / D Spielmodus „…“ (Stationen = Level, nur begründet); optional Spielrahmen mit Ziel und Zähler, je Station ein Ort
 
 ## Einstieg (Startseite)
 
@@ -114,8 +114,8 @@ Baustein für den Input der Lehrkraft: Das Tafelbild ersetzt nur den Mittelteil 
 | P4 Jede Station mit Auftrag, Vorab-Frage als Leitfrage und Rückmeldung; Übungen mit drei Tipps | ☐ | |
 | P5 Kurz-Check an jeder Station (2–3 Fragen, zählt nicht) | ☐ | |
 | P6 Feedback, das erklärt; typische Fehler mit eigenem Feedback | ☐ | |
-| P7 Text im Budget; im Arbeitsbereich nur, was zur Aufgabe gehört | ☐ | |
+| P7 Text im Budget; im Arbeitsbereich nur, was zum Gegenstand gehört | ☐ | |
 | P8 Jedes Lernziel mit mindestens zwei Prüfungen in der Selbstüberprüfung | ☐ | |
-| P12 Form begründet; jede Station eine Szene; Lernstoff in den Regeln; Plattform-Probe | ☐ | |
+| P12 Form begründet; jede Station eine Szene, lebensnah im Aussehen; Lernstoff in den Regeln; Plattform-Probe | ☐ | |
 
 Ausbau, soweit sinnvoll: Leitsituation durchgehend (P1) · wechselnde Situationen (P2) · Steckbriefe (P9) · Wiederholungsfragen (P10) · Reflexionsfragen (P11) · Merkblatt (P13) · zwei bis vier Tafelbild-Szenen.

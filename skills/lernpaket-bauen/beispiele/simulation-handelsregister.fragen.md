@@ -2,44 +2,6 @@
 
 Format: referenz/fragenformat.md, Abschnitt „Fragen in quelle/fragen.md“. Jede Frage beginnt mit ## ID · Lernziel · Typ · Einsatz; Zeilen mit # gliedern nur.
 
-# Vorab-Fragen
-
-## VA · LZ1 · text · vorab
-
-Welches Gericht führt das Handelsregister? Ein Wort genügt.
-
-= Amtsgericht
-= Registergericht
-= das Amtsgericht
-= Amtsgerichte
-- Landgericht → Das Landgericht entscheidet größere Streitfälle. Das Register führt das Amtsgericht.
-- Finanzamt → Das Finanzamt ist kein Gericht und führt das Register nicht.
-
-> Das Handelsregister führt das Amtsgericht als Registergericht.
-
-## VB · LZ2 · mc · vorab
-
-Welche Unternehmen stehen in Abteilung B des Handelsregisters? Kreuze alle richtigen an.
-
-- [x] Kernwerk Bürobedarf GmbH
-- [ ] Ostwind Papier e. K. → e. K. ist ein Einzelunternehmen und steht in Abteilung A.
-- [ ] Seidl & Roth KG → Die KG ist eine Personengesellschaft und steht in Abteilung A.
-- [x] Brunner Backwaren AG
-- [x] Lindgrün Verpackung UG (haftungsbeschränkt)
-
-> In Abteilung B stehen Kapitalgesellschaften: GmbH, UG und AG.
-
-## VC · LZ3 · mc · vorab
-
-Wer darf laut Handelsregister eine GmbH nach außen vertreten? Kreuze alle richtigen an.
-
-- [x] Geschäftsführer
-- [x] Prokuristen
-- [ ] Mitarbeiter mit Handlungsvollmacht → Handlungsvollmacht wird nicht ins Register eingetragen.
-- [ ] Gesellschafter ohne Geschäftsführeramt → Gesellschafter vertreten eine GmbH nicht, nur ihre Geschäftsführer.
-
-> Im Register stehen bei einer GmbH die Geschäftsführer und die Prokuristen; sie dürfen die GmbH nach außen vertreten.
-
 # LZ2 · Abteilung A/B
 
 ## C20 · LZ2 · mc · check

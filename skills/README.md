@@ -74,7 +74,7 @@ skills/
   lernpaket-planen/vorlagen/         Steckbrief, Lernziel-Tabelle, Konzept, Drehbuch
   _gesamt/SKILL.md         Einstieg des Gesamt-Skills
   gesamt_bauen.py          setzt den Gesamt-Skill aus den Einzel-Skills zusammen
-  leitfaden_sync.py        übernimmt Änderungen am Leitfaden in die Auszüge
+  leitfaden_sync.py        erzeugt die vier Auszüge aus dem Leitfaden neu
   pruefe_stand.py          prüft Versionsnummer und überholte Begriffe
   baue-skills.sh           prüft, verteilt und packt (siehe oben)
 ```
@@ -89,14 +89,13 @@ skills/
 
 ## Pflege
 
-**Der Leitfaden wurde geändert.** Der Leitfaden wird als Dokument außerhalb des Repositorys gepflegt; `docs/leitfaden-lernpakete.md` ist dessen Export. Den Markdown-Export des Dokuments holen und übernehmen:
+**Der Leitfaden wird geändert.** Der Leitfaden wird nur im Repository gepflegt: `docs/leitfaden-lernpakete.md` ist die Quelle und wird direkt bearbeitet. Bei inhaltlichen Änderungen das Datum „Stand“ in der Kopfzeile anpassen. Danach:
 
 ```bash
-python3 skills/leitfaden_sync.py --export <export>
 skills/baue-skills.sh
 ```
 
-Der Export ersetzt `docs/leitfaden-lernpakete.md` vollständig und erzeugt die vier Auszüge in `_gemeinsam/` neu. Was nur in der Markdown-Datei geändert wurde, geht dabei verloren und muss vorher ins Dokument. Ohne `--export` werden nur die Auszüge neu erzeugt. `prinzipien.md`, `belege.md`, `szenen.md` und `fragenformat.md` sind von Hand geschrieben und müssen von Hand angepasst werden.
+Das Skript erzeugt zuerst die vier Auszüge in `_gemeinsam/` aus dem Leitfaden neu (`leitfaden_sync.py`, auch einzeln aufrufbar). Bis zum 12. Nov. 2026 wurde der Leitfaden als Dokument außerhalb des Repositorys gepflegt; dieses Dokument ist stillgelegt. `prinzipien.md`, `belege.md`, `szenen.md` und `fragenformat.md` sind von Hand geschrieben und müssen von Hand angepasst werden.
 
 **Eine neue Version.** Die Zahl in `VERSION` ändern, dann:
 

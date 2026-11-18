@@ -2,65 +2,6 @@
 
 Format: referenz/fragenformat.md, Abschnitt „Fragen in quelle/fragen.md“. Jede Frage beginnt mit ## ID · Lernziel · Typ · Einsatz; Zeilen mit # gliedern nur.
 
-# Vorab-Fragen
-
-## V1 · LZ1 · text · vorab
-
-Welches Gericht führt das Handelsregister? Ein Wort genügt.
-
-= Amtsgericht
-= Registergericht
-= das Amtsgericht
-= Amtsgerichte
-- Landgericht → Das Landgericht entscheidet größere Streitfälle. Das Register führt das Amtsgericht.
-- IHK → Die IHK berät die Firmen, das Register führt ein Gericht.
-
-> Das Handelsregister führt das Amtsgericht als Registergericht. Einsehen darf jeder, ohne einen Grund zu nennen.
-
-## V2 · LZ2 · zuordnen · vorab
-
-Ordne jede Rechtsform dem passenden Register zu.
-
-- KG = Handelsregister Abteilung A
-- GmbH = Handelsregister Abteilung B
-- e. V. = Vereinsregister
-Wenn falsch: Einzelunternehmen und Personengesellschaften → A, Kapitalgesellschaften → B, Vereine haben ein eigenes Register.
-
-> Die KG ist eine Personengesellschaft (A), die GmbH eine Kapitalgesellschaft (B). Eingetragene Vereine stehen im Vereinsregister.
-
-## V3 · LZ3 · mc · vorab
-
-Was steht bei einer GmbH im Handelsregister? Kreuze alle richtigen an.
-
-- [x] Das Stammkapital
-- [x] Der Name des Geschäftsführers
-- [ ] Der Umsatz des letzten Jahres → Geschäftszahlen wie Umsatz oder Gewinn stehen nicht im Register.
-- [ ] Die Zahl der Beschäftigten → Wie viele Leute dort arbeiten, steht nicht im Register.
-
-> Im HR stehen Rechtsverhältnisse (Firma, Sitz, Kapital, Vertretung), keine Geschäftszahlen.
-
-## V4 · LZ4 · mc · vorab
-
-Was entsteht rechtlich erst mit der Eintragung ins Handelsregister? Kreuze alle richtigen an.
-
-- [x] Eine GmbH
-- [x] Eine AG
-- [ ] Die Kaufmannseigenschaft eines großen Autohauses → Wer einen großen kaufmännischen Betrieb führt, ist schon Kaufmann. Die Eintragung macht das nur bekannt.
-- [ ] Die Prokura einer Mitarbeiterin → Die Prokura gilt, sobald sie erteilt ist. Die Eintragung macht sie nur bekannt.
-
-> Bei GmbH und AG wirkt die Eintragung konstitutiv: Ohne sie gibt es die Gesellschaft als solche noch nicht.
-
-## V5 · LZ5 · text · vorab
-
-Welche Vollmacht wird ins Handelsregister eingetragen? Ein Wort genügt.
-
-= Prokura
-= die Prokura
-= Einzelprokura
-- Handlungsvollmacht → Handlungsvollmachten werden nicht eingetragen – nur die Prokura.
-
-> Die Prokura steht im HR, die Handlungsvollmacht nicht.
-
 # LZ1 · Zweck und Einsicht
 
 ## C1 · LZ1 · mc · check

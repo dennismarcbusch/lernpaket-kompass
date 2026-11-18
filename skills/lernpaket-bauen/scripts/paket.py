@@ -80,7 +80,7 @@ def neu(a):
     davor, s = s[:ab], s[ab:]
     s = re.sub(r"id: '[^']*'", f"id: '{a.id}'", s, count=1)
     s = re.sub(r"titel: '[^']*'", "titel: " + repr(a.titel), s, count=1)
-    s = re.sub(r"\bversion:\s*'[^']*'", "version: '1.0'", s, count=1)  # die Vorlage trägt die Kompass-Version, ein neues Paket beginnt bei 1.0
+    s = re.sub(r"\bversion:\s*'[^']*'", "version: '1.0'", s, count=1)  # die Vorlage hat die Kompass-Version, ein neues Paket beginnt bei 1.0
     open(i, 'w', encoding='utf-8').write(davor + s)
     bauen(os.path.abspath(a.ziel), still=True)
     print(f'Neues Paket in {a.ziel} angelegt (id {a.id}). Als Nächstes quelle/paket.js und quelle/fragen.md mit den Inhalten füllen, dann paket.py bauen.')

@@ -162,7 +162,7 @@ Regeln:
 
 ## Simulationsmodus (`PAKET.simulation`)
 
-Für Form A und B (Simulation, interaktive Illustration, P12), wenn **ein** Arbeitsgegenstand das ganze Paket trägt: ein Registerportal, eine Konsole, ein Netzplan, ein Formular, eine Werkstatt. Vorbild sind Tutorials wie „Shell Yeah!“: links die Lektion, rechts der Gegenstand, der sich nie zurücksetzt. Die Stationen heißen für die Lernenden **Kapitel**, jedes Kapitel hat 2–6 **Schritte**. Im Entdecken steht links die Lektionskarte (Lernziel, „Neu hier“, Schrittpunkte, Auftrag der Figur, Kurz erklärt, Knöpfe), rechts die Bühne mit dem Gegenstand, auf großen Bildschirmen mitlaufend. Auf schmalen Bildschirmen folgt der Gegenstand direkt auf den Schritt; Kurz-Check und Mitdenken stehen darunter.
+Für Form A und B (Simulation, interaktive Illustration, P12), wenn sich **ein** Arbeitsgegenstand durch das ganze Paket zieht: ein Registerportal, eine Konsole, ein Netzplan, ein Formular, eine Werkstatt. Vorbild sind Tutorials wie „Shell Yeah!“: links die Lektion, rechts der Gegenstand, der sich nie zurücksetzt. Die Stationen heißen für die Lernenden **Kapitel**, jedes Kapitel hat 2–6 **Schritte**. Im Entdecken steht links die Lektionskarte (Lernziel, „Neu hier“, Schrittpunkte, Auftrag der Figur, Kurz erklärt, Knöpfe), rechts die Bühne mit dem Gegenstand, auf großen Bildschirmen mitlaufend. Auf schmalen Bildschirmen folgt der Gegenstand direkt auf den Schritt; Kurz-Check und Mitdenken stehen darunter.
 
 ```js
 simulation: { titel: 'Arbeitsplatz Einkauf · Registerportal und Prüfliste', start: function (box, api) {
@@ -272,7 +272,7 @@ Regeln:
 
 - **Kein erklärender Text auf der Bühne.** Erlaubt: Beschriftungen im Bild, Zahlen, Symbole. Die Lehrkraft erklärt mündlich; die Erklärung steht in `erklaerung`.
 - **Zwei bis vier Szenen**, je Szene eine Kernaussage. Einstieg, Üben und Sicherung des Inputs laufen auf den Folien, nicht im Tafelbild.
-- Jede Szene trägt das Muster **Vorhersagen → Klicken → Deuten**: Werkzeuge so anlegen, dass die Lehrkraft erst fragen und dann auslösen oder aufdecken kann (Schalter „Anzahl zeigen“, „Dezimal“ usw.).
+- Jede Szene folgt dem Muster **Vorhersagen → Klicken → Deuten**: Werkzeuge so anlegen, dass die Lehrkraft erst fragen und dann auslösen oder aufdecken kann (Schalter „Anzahl zeigen“, „Dezimal“ usw.).
 - Groß zeichnen: Die Bühne ist so breit wie der Beamer; Schrift und Linien in der Szene größer als in der Station.
 - Werkzeuge mit sprechendem Kurztext und Tastenkürzel; Kürzel `e`, `p`, `w`, `f`, Ziffern und Pfeiltasten sind vom Tafelbild belegt.
 - Nichts speichern: keine SCORM-Aufrufe, kein `localStorage`.

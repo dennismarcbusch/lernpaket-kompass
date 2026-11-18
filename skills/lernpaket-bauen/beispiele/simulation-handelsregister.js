@@ -1,7 +1,7 @@
 /* =====================================================================
    BEISPIEL Simulationsmodus (Lernpaket-Kompass, Form A „Simulation“):
    „Partner-Check“ – das Handelsregister am Arbeitsplatz im Einkauf.
-   Ein Arbeitsgegenstand trägt das ganze Paket: das nachgebaute Registerportal
+   Ein Arbeitsgegenstand zieht sich durch das ganze Paket: das nachgebaute Registerportal
    (oben) und die Prüfliste für neue Geschäftspartner (unten). Kapitel sind
    Folgen kleiner Schritte am Gegenstand; Üben, Selbstüberprüfung und Tafelbild
    nutzen denselben Gegenstand mit neuen Firmen. Alle Firmen, Personen, Registernummern und das
@@ -185,7 +185,7 @@ window.PAKET = {
   ],
 
   stationen: [
-    { id: 'K1', titel: 'Gibt es Hartmann Elektro wirklich?', lz: ['LZ1'], vorab: 'VA', check: ['C1', 'C2', 'C3'],
+    { id: 'K1', titel: 'Gibt es Hartmann Elektro wirklich?', lz: ['LZ1'], check: ['C1', 'C2', 'C3'],
       schritte: [
         { zeigen: true, auftrag: 'Wir wollen bei <b>Hartmann Elektro</b> bestellen. Such die Firma im Registerportal.',
           erklaerung: 'Das Registerportal ist öffentlich: Jeder darf ohne Anmeldung und ohne Grund suchen.',
@@ -202,7 +202,7 @@ window.PAKET = {
       ],
       mitdenken: { auftrag: 'Erklär in zwei Sätzen, warum wir vor dem ersten Auftrag ins Register schauen.', muster: 'Wir sehen, ob es die Firma gibt und wie sie genau heißt. Auf das, was dort steht, dürfen wir uns verlassen.' } },
 
-    { id: 'K2', titel: 'A, B oder ganz woanders?', lz: ['LZ2'], vorab: 'VB', check: ['C4', 'C20', 'C21'],
+    { id: 'K2', titel: 'A, B oder ganz woanders?', lz: ['LZ2'], check: ['C4', 'C20', 'C21'],
       schritte: [
         { zeigen: true, auftrag: 'In welcher <b>Abteilung</b> steht Hartmann Elektro? Trag sie in der Prüfliste ein.',
           erklaerung: 'HRB heißt Abteilung B: Dort stehen Kapitalgesellschaften wie GmbH, UG und AG.',
@@ -222,7 +222,7 @@ window.PAKET = {
       ],
       mitdenken: { auftrag: 'Skizziere auf Papier: Welche Rechtsformen stehen in A, welche in B, welche ganz woanders?', muster: 'A: e. K., OHG, KG (auch GmbH & Co. KG). B: GmbH, UG, AG. Eigene Register: Verein (VR), Genossenschaft (GnR).' } },
 
-    { id: 'K3', titel: 'Wer darf unterschreiben?', lz: ['LZ3'], vorab: 'VC', check: ['C10', 'C11', 'C12'],
+    { id: 'K3', titel: 'Wer darf unterschreiben?', lz: ['LZ3'], check: ['C10', 'C11', 'C12'],
       schritte: [
         { zeigen: true, auftrag: 'Wer darf für <b>Hartmann Elektro</b> den Vertrag unterschreiben? Trag es in der Prüfliste ein.',
           erklaerung: 'Im Abdruck stehen alle, die vertreten dürfen: Geschäftsführer, Inhaber, persönlich haftende Gesellschafter und Prokuristen.',

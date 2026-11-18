@@ -69,7 +69,7 @@ Claude stellt dir wenige Fragen, höchstens zwei Runden: Was können die Schüle
 
 Dann schlägt Claude **Lernziele** vor („Ich kann …“) und hält fest, woran man das Können am Ende erkennt. Korrigiere, was nicht passt.
 
-Erst danach kommt die **kreative Phase**: Claude schlägt dir eine **Simulation** vor – einen Arbeitsgegenstand aus dem Beruf, der das ganze Paket trägt, zum Beispiel ein nachgebautes Registerportal, eine Buchungsmaske oder ein Gerät, das sich zerlegen lässt. Bei abstrakten Inhalten wird es eine interaktive Illustration. Zu jedem Vorschlag siehst du eine Skizze des Bildschirms und warum die Lernplattform das allein nicht könnte. Ein Spiel schlägt Claude vor, wenn es zum Üben passt oder du es dir ausdrücklich wünschst; dann lernen die Schüler die Grundlagen im Spiel selbst, wie in SQL Island.
+Erst danach kommt die **kreative Phase**: Claude schlägt dir eine **Simulation** vor – einen Arbeitsgegenstand aus dem Beruf, der sich durch das ganze Paket zieht, zum Beispiel ein nachgebautes Registerportal, eine Buchungsmaske oder ein Gerät, das sich zerlegen lässt. Bei abstrakten Inhalten wird es eine interaktive Illustration. Zu jedem Vorschlag siehst du eine Skizze des Bildschirms und warum die Lernplattform das allein nicht könnte. Ein Spiel schlägt Claude vor, wenn es zum Üben passt oder du es dir ausdrücklich wünschst; dann lernen die Schüler die Grundlagen im Spiel selbst, wie in SQL Island.
 
 Am Ende hast du Steckbrief, Lernziel-Tabelle und Konzept.
 
@@ -83,7 +83,7 @@ Gib Rückmeldung wie einer Kollegin:
 
 > Der Text in Station 1 ist zu lang. Das Beispiel sollte mit Euro statt Kilogramm rechnen. Auf dem Tablet ist der Knopf zu klein.
 
-Trägt die Idee nicht, sag es jetzt: Ein neues Konzept kostet an dieser Stelle eine Stunde, später Tage.
+Überzeugt dich die Idee nicht, sag es jetzt: Ein neues Konzept kostet an dieser Stelle eine Stunde, später Tage.
 
 ### Schritt 3: Drehbuch und Fragen
 

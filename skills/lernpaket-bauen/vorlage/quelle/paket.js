@@ -34,12 +34,13 @@
                 typisch: [{antwort, feedback}].
      'hotspot'  svg: '<svg viewBox=…>…</svg>', bereiche: [{x,y,w,h | cx,cy,r,
                 label, richtig, feedback}] – genau ein Bereich ist richtig.
-   Jede Frage: id, lz, einsatz (['check'|'selbstueberpruefung'|'uebung'|'vorab']),
+   Jede Frage: id, lz, einsatz (['check'|'selbstueberpruefung'|'uebung']),
    frage, erklaerung (warum die richtige Antwort richtig ist), optional bild.
 
-   Station: Die Vorab-Frage (vorab) ist zugleich die Leitfrage – sie bleibt über
-   der Szene stehen und wird im Kurz-Check als erste Frage aufgelöst. Ein eigenes
-   Feld leitfrage braucht nur eine Station ohne Vorab-Frage.
+   Station: check nennt die 2–3 Fragen des Kurz-Checks. Dieselben Fragen sind die
+   Wissensabfrage, wenn jemand die Station überspringen will – mindestens eine
+   davon schwer zu erraten (Zahl, Text, Zuordnen, Mehrfachauswahl). Eine
+   Leitfrage (leitfrage, ein Satz) ist möglich, aber nicht nötig.
 
    tafel: zwei bis vier Tafelbild-Szenen für den Mittelteil des Inputs (siehe unten).
 
@@ -161,7 +162,7 @@ window.PAKET = {
 
   stationen: [
     {
-      id: 'S1', titel: 'Stellenwerte: So zählt ein Byte', lz: ['LZ1'], vorab: 'V1',
+      id: 'S1', titel: 'Stellenwerte: So zählt ein Byte', lz: ['LZ1'],
       auftrag: 'Der Router der Bäckerei Sommer zeigt <code>11000000</code>. Stell die Schalter genauso ein: Welche Dezimalzahl ist das?',
       inhalt: '<p>Jede Stelle hat einen <b>Stellenwert</b>: rechts 1, nach links immer doppelt so viel. Eine 1 heißt: Dieser Wert zählt mit.</p>',
       interaktion: function (box, api) {
@@ -186,7 +187,7 @@ window.PAKET = {
       check: ['F2', 'F4', 'F1']
     },
     {
-      id: 'S2', titel: 'Dezimal → binär', lz: ['LZ2'], vorab: 'V2',
+      id: 'S2', titel: 'Dezimal → binär', lz: ['LZ2'],
       auftrag: 'Der Drucker der Schreinerei Maier bekommt im letzten Byte die <b>150</b>. Stell 150 an den Schaltern ein – diesmal ohne Summenanzeige.',
       inhalt: '<p>Von links nach rechts: Passt der Stellenwert noch in den Rest, Schalter an und mit dem Rest weiter. Passt er nicht, bleibt der Schalter aus.</p>',
       interaktion: function (box, api) {
@@ -213,7 +214,7 @@ window.PAKET = {
       check: ['F7', 'F9', 'F6']
     },
     {
-      id: 'S3', titel: 'Wie viele Werte passen in n Bit?', lz: ['LZ3'], vorab: 'V3',
+      id: 'S3', titel: 'Wie viele Werte passen in n Bit?', lz: ['LZ3'],
       auftrag: 'Mira fragt: „Wie viele verschiedene Adressen passen eigentlich in 4 Bit?“ Füge Bits hinzu und beobachte, wie viele Muster entstehen.',
       inhalt: '<p>Mit n Bit gibt es <b>2<sup>n</sup></b> Muster, von 0 bis 2<sup>n</sup> − 1.</p>',
       interaktion: function (box, api) {

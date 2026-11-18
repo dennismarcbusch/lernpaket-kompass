@@ -86,7 +86,7 @@ code{font-family:ui-monospace,Consolas,"Cascadia Mono",monospace;font-size:.92em
 .pfad{display:inline-flex;gap:5px;align-items:center;flex-wrap:wrap;margin:0;padding:0}
 .pfad-punkt{width:30px;height:30px;min-height:30px;padding:0;border-radius:50%;font-size:.8rem;font-weight:700;background:var(--card);border:2px solid var(--line);color:var(--ink)}
 .pfad-punkt.fertig{background:var(--ok);border-color:var(--ok);color:#fff}
-.pfad-punkt.skip{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.pfad-punkt.fertig.skip{background:var(--card);border-style:dashed;border-color:var(--ok);color:var(--ok)}
 .pfad-punkt.aktiv{border-color:var(--ink);box-shadow:0 0 0 2px var(--ink)}
 main{display:block;outline:none}
 main>*+*{margin-top:10px}
@@ -249,7 +249,6 @@ dl.glossar dd{margin:0}
 /* ---------- Startseite: Lernpfad statt Textblöcke (Leitfaden C2, Teil 0) ---------- */
 button.link{background:none;border:none;padding:4px 2px;min-height:36px;color:var(--accent);font-weight:700;text-decoration:underline;text-underline-offset:3px}
 button.link:hover{border:none;filter:brightness(.85)}
-.start-extra{display:flex;flex-wrap:wrap;gap:6px 18px;align-items:center;justify-content:space-between;padding:0 6px}
 .lernpfad{padding:14px 16px}
 .lp-teile{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:10px}
 .lp-teil{position:relative;border:1px solid var(--line);border-radius:14px;padding:8px 10px;background:var(--card2);min-width:0}
@@ -263,7 +262,7 @@ button.link:hover{border:none;filter:brightness(.85)}
 .lp-punkte{display:flex;flex-wrap:wrap;gap:5px;margin:4px 0 2px}
 .lp-punkt{width:30px;height:30px;min-height:30px;padding:0;border-radius:50%;font-size:.8rem;font-weight:700;background:var(--card);border:2px solid var(--accent);color:var(--ink)}
 .lp-punkt.fertig{background:var(--ok);border-color:var(--ok);color:#fff}
-.lp-punkt.skip{border-style:dashed;border-color:var(--muted);color:var(--muted)}
+.lp-punkt.fertig.skip{background:var(--card);border-style:dashed;border-color:var(--ok);color:var(--ok)}
 .lp-ziele{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:10px}
 .lp-ziele-titel{font-size:.78rem;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--muted);margin-right:4px}
 .ziel-chip{border-radius:999px;padding:3px 12px 3px 8px;min-height:32px;font-size:.88rem;background:var(--card);display:inline-flex;align-items:center;gap:6px}
@@ -276,12 +275,9 @@ button.link:hover{border:none;filter:brightness(.85)}
 .lp-zielsatz:empty{display:none}
 @media (max-width:760px){.lp-teile{grid-template-columns:1fr 1fr}.lp-teil+.lp-teil::before{display:none}}
 
-/* ---------- Station: Ziel, Vorab-Frage, neue Begriffe, Einschätzung ---------- */
+/* ---------- Station: Ziel, neue Begriffe, Einschätzung; Wissensabfrage beim Überspringen ---------- */
 .st-ziel{font-size:.92rem;color:var(--ink-soft);margin-top:2px}
-.vorab-karte{border:2px dashed var(--accent);border-radius:14px;padding:12px 14px;margin:6px 0 10px;background:var(--accent-soft)}
-.vorab-karte .vorab-kopf{font-size:1.04rem}
-.vorab-karte .frage{background:var(--card)}
-.vorab-notiz{font-size:.92rem;color:var(--ink-soft);margin:0 0 8px}
+.wissen>p{margin:8px 0 10px}
 .abgleich{margin-top:2px}
 .neu-begriffe{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
 .begriff-chip{border-radius:999px;padding:2px 12px;min-height:32px;font-size:.88rem;background:var(--card)}

@@ -12,16 +12,18 @@ Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern st
 - Die Szene steht groß in der Mitte und ist auf einem Schullaptop (1366 × 768) ganz zu sehen, ohne Scrollen; das Prüfskript misst Ober- und Unterkante. Der Auftrag steht als Sprechblase der Figur (1–2 Sätze), „Kurz erklärt“ in einer schmalen Notiz daneben (höchstens etwa 40 Wörter); zusammen höchstens etwa 90 Wörter je Station. Im Simulationsmodus gilt je Schritt: höchstens etwa 60 Wörter.
 - Erklärungen erscheinen dann, wenn sie gebraucht werden: als Reaktion auf das, was die Lernenden gerade tun.
 - Das Lösungsbeispiel wird in der Szene vorgeführt („Zeig’s mir“), an einem anderen Fall; danach sind die Lernenden dran.
-- Echt in der Funktion, sparsam im Aussehen: Dokumente, Portale und Geräte verhalten sich wie im Beruf (Felder, Abläufe, Folgen), mit erfundenen Firmen und Daten. Gezeigt wird, was zur Aufgabe gehört, und das Wichtige ist gut zu erkennen (Teil A2). Echte Webseiten werden als Übungsversion nachgebaut, nicht kopiert.
+- Echt in der Funktion, lebensnah im Aussehen: Dokumente, Portale und Geräte verhalten sich wie im Beruf (Felder, Abläufe, Folgen), mit erfundenen Firmen und Daten. Sie sehen so aus, dass man sie auf einen Blick wiedererkennt: Form, Material und die typischen Einzelheiten des Originals (am Gerät Gehäuse, Anschlüsse, Leuchten und Beschriftung; am Programm Fensterrahmen, Menü und Schrift; am Dokument Briefkopf, Stempel und Papier). Zustände sind sichtbar wie in echt: Die Leuchte blinkt, das Kabel steckt, der Lüfter läuft. Fotorealismus ist nicht nötig, eine sorgfältige Illustration genügt; ein Kasten mit Beschriftung genügt nicht (Teil B1, zu P12). Echte Webseiten werden als Übungsversion nachgebaut, nicht kopiert.
+- Ein Spiel sieht aus wie ein Spiel: eine Spielwelt mit Ort und Figuren, Bewegung und eine sichtbare Folge jeder Handlung. Ein Quiz mit Punktestand ist kein Spiel.
+- Das Aussehen hat drei Grenzen. Alles, was zu sehen ist, gehört zum Gegenstand, zu seinem Arbeitsplatz oder zur Spielwelt; Schmuck ohne Bezug und Nebenhandlungen bleiben weg (verführerische Details, Teil A2). Das Wichtige ist am leichtesten zu erkennen: Was zur Aufgabe gehört, ist bedienbar und deutlich, alles Übrige ruhig gehalten. Bewegung zeigt einen Zustand oder die Folge einer Handlung; nichts bewegt sich nur zur Zierde.
 - Fehler wirken sich in der Szene aus wie in echt (die Kundin fragt nach, der Server antwortet nicht), dazu ein Satz zur Fehlvorstellung.
-- Gleiche Bedienung, eigene Welt: Aufbau und Bedienung sind in allen Paketen gleich; jedes Paket hat eigene Farben, eine Kulisse und illustrierte Figuren passend zum Fach. Kulisse und Figuren stehen im Kopf, auf der Startseite und beim Auftrag (Sprechblase); im Arbeitsbereich der Szene steht nur, was zur Aufgabe gehört. Figuren vielfältig besetzen, keine realen Personen nachbilden.
+- Gleiche Bedienung, eigene Welt: Aufbau und Bedienung sind in allen Paketen gleich; jedes Paket hat eigene Farben, eine Kulisse und illustrierte Figuren passend zum Fach. Kulisse und Figuren stehen im Kopf, auf der Startseite und beim Auftrag (Sprechblase). Im Arbeitsbereich der Szene steht der Gegenstand; er darf an seinem Arbeitsplatz stehen (Werkbank, Schreibtisch, Serverschrank), wenn das beim Wiedererkennen hilft. Figuren gehören dorthin, wenn sie mitspielen (die Kundin im Gespräch, die Figuren eines Spiels). Figuren vielfältig besetzen, keine realen Personen nachbilden.
 - Das Konzept aus der Phase „Erfinden“ gibt den Rahmen vor: Bei einer Simulation mit einem durchgehenden Arbeitsgegenstand steht dieser im Simulationsmodus neben der Lektion und bleibt über alle Kapitel erhalten; die Lektion führt in kleinen Schritten, die sich am Gegenstand selbst abhaken, wie in den Tutorials „Shell Yeah!“ und „Get-Going!“. Üben und Selbstüberprüfung nutzen denselben Gegenstand mit neuen Fällen. Erklärung und Gegenstand stehen so nebeneinander statt nacheinander, und was die Lernenden aufgebaut haben, geht beim Kapitelwechsel nicht verloren. Wechselt der Gegenstand, ist jede Station eine eigene Szene; bei einer interaktiven Illustration ein Ausschnitt desselben Modells. Ein Spiel zum Üben steckt in den Übungen und nutzt die Regel, die im Entdecken geklärt wurde. Ein durchgehendes Lernspiel (Spielmodus, Stationen sind Level) vermittelt die Grundlagen selbst: ein neues Konzept je Schritt in der Story, der erste Zug vorgemacht, Nachschlagen neben dem Spiel. Immer steckt der Lernstoff in den Regeln, Fehler haben Folgen, es gibt keinen Zeitdruck und keine Ranglisten; ein Spielrahmen (Mission mit Karte) ist optional. Im Arbeitsbereich sind Story und Kulisse ohne Bezug zum Lernziel verführerische Details (Teil A2).
 - Ein Szenen-Katalog mit Beispielen für alle Fächer liegt im Skill-Set (`szenen.md`).
 
 **Bildschirm und Darstellung (nach Mayer)**
 
 - Wort und Bild zusammen statt Text allein: Zu jeder Erklärung gehört eine passende Grafik, Skizze oder Animation, die zum Inhalt passt, nicht zu einem angeblichen Lerntyp (Multimedia).
-- Alles weglassen, was nicht dem Lernziel dient: keine Deko-Bilder, keine Hintergrundmusik, keine „interessanten Nebenfakten“ neben der Aufgabe (Kohärenz). Solche interessanten, aber unwichtigen Details heißen in der Forschung „verführerische Details“: Sie ziehen Aufmerksamkeit vom Wesentlichen ab. Die eigene Welt des Pakets ist damit nicht gemeint, solange sie Rahmen bleibt (Kopf, Startseite, Auftraggeberin): Freundliche Gestaltung schadet nicht und hilft eher leicht (Brom et al. 2018).
+- Alles weglassen, was nicht dem Lernziel dient: keine Deko-Bilder, keine Hintergrundmusik, keine „interessanten Nebenfakten“ neben der Aufgabe (Kohärenz). Solche interessanten, aber unwichtigen Details heißen in der Forschung „verführerische Details“: Sie ziehen Aufmerksamkeit vom Wesentlichen ab. Die eigene Welt des Pakets ist damit nicht gemeint, solange sie Rahmen bleibt (Kopf, Startseite, Auftraggeberin): Freundliche Gestaltung schadet nicht und hilft eher leicht (Brom et al. 2018). Auch das lebensnahe Aussehen des Gegenstands ist nicht gemeint: Es gehört zur Aufgabe, nicht daneben.
 - Das Wichtige hervorheben: Schlüsselbegriffe fett, im Bild ein Pfeil oder Rahmen genau auf die Stelle, um die es geht, Zwischenüberschriften statt langer Textblöcke. Farben und Markierungen sparsam einsetzen und im ganzen Paket immer mit derselben Bedeutung (Signalisierung).
 - Beschriftung direkt ans Bild, nicht in eine Legende darunter; Erklärung und zugehörige Grafik gleichzeitig sichtbar (räumliche und zeitliche Nähe; in der Lernpsychologie spricht man vom „Split-Attention-Effekt“, der geteilten Aufmerksamkeit).
 - Alles, was für eine Aufgabe nötig ist, gleichzeitig sichtbar halten: Auftrag, Bild oder Terminal und Eingabe stehen auf einem Bildschirm, ohne Scrollen oder Umschalten.
@@ -38,7 +40,7 @@ Die Regeln übersetzen die Prinzipien in überprüfbare Vorgaben; in Klammern st
 Ergänzend nach Kerres (2024, Kap. 6.6):
 
 - Das Bild vor dem zugehörigen Text zeigen; es dient als Anker für das Lesen.
-- Für Einsteiger einfache Skizzen und Schemata statt Fotos oder realistischer Animationen; die Vereinfachung zeigt, worauf es ankommt.
+- Erklärende Grafiken für Einsteiger als einfache Skizzen und Schemata statt Fotos oder realistischer Animationen; die Vereinfachung zeigt, worauf es ankommt. Für den Arbeitsgegenstand der Szene gilt stattdessen die Regel „lebensnah im Aussehen“ (oben; eigene Entscheidung).
 - Einfache Grafiken mit kurzem Text erklären; sehr komplexe Abläufe dürfen zusätzlich eine gesprochene Erklärung bekommen.
 - Persönliche Ansprache dosiert einsetzen und optisch vom Lernstoff abheben, z. B. als Sprechblase der Story-Figur.
 - Den Bezug zu Beruf oder Alltag ausdrücklich nennen: Wozu brauche ich das?
@@ -108,7 +110,7 @@ Die Gestaltungsregeln sind Faustregeln. Für manche Lernende gelten sie nur eing
 
 **Story und Spielelemente**
 
-- Eine Rahmengeschichte mit wiederkehrenden Figuren ist erwünscht; sie trägt Motivation und Lebensweltbezug.
+- Eine Rahmengeschichte mit wiederkehrenden Figuren ist erwünscht; sie stärkt Motivation und Lebensweltbezug.
 - Punkte und Abzeichen nur, wenn sie eine Funktion für das Lernen haben. Kein Zeitdruck: Eine laufende Uhr belastet gerade die Schwächeren und passt nicht zu Aufgaben, die nicht zählen.
 
 * Keine Ranglisten: Fortschritt an einem sachlichen Ziel messen („7 von 9 Lernzielen erreicht“) oder an der eigenen früheren Leistung, nicht am Vergleich mit Mitschülern. Der Vergleich demotiviert schwächere Lernende und widerspricht dem Datenschutz, wenn Ergebnisse für andere sichtbar werden (Kerres 2024).
@@ -123,7 +125,7 @@ Kerres (2024) bestätigt das aus der Forschung zum digitalen Lernen: Wer allein 
 
 | Merkmal | SeGeL (selbstgesteuert) | Klassisch (lehrkraftgeleitet) |
 | --- | --- | --- |
-| Rolle des Pakets | Trägt die Lerneinheit vom Einstieg bis zur Selbstüberprüfung | Baustein für eine Phase: Erarbeitung, Übung, Simulation oder Vorbereitung (Flipped) |
+| Rolle des Pakets | Deckt die ganze Lerneinheit ab, vom Einstieg bis zur Selbstüberprüfung | Baustein für eine Phase: Erarbeitung, Übung, Simulation oder Vorbereitung (Flipped) |
 | Zeitstruktur | Kein 45/90-Minuten-Raster; Fortschritt wird gespeichert, Wiedereinstieg jederzeit | Abschnitte von etwa 20–30 Minuten, die in eine Stunde passen; Stationen einzeln aufrufbar |
 | Einstieg | Im Paket: Startseite mit Leitsituation und Lernpfad, Abkürzung für Lernende mit Vorwissen. Dazu der Input der Lehrkraft auf Folien, im Mittelteil wahlweise mit dem Tafelbild des Pakets (C2) | Durch die Lehrkraft, im Mittelteil z. B. mit dem Tafelbild des Pakets; das Paket kann den Einstieg kurz halten |
 | Steuerung | Empfohlener Pfad mit Freiheit beim Tempo; Springen möglich, aber mit Hinweis, was vorausgesetzt wird | Lehrkraft gibt Abschnitte frei bzw. vor |
@@ -132,7 +134,7 @@ Kerres (2024) bestätigt das aus der Forschung zum digitalen Lernen: Wer allein 
 | Selbstüberprüfung und Kompetenznachweis | Selbstüberprüfung im Paket: zählt nicht, beliebig oft. Der Kompetenznachweis liegt außerhalb des Pakets, beaufsichtigt in der Lernplattform, bestanden oder nicht | Selbstüberprüfung als Übung oder Hausaufgabe; die Lernzielkontrolle macht die Lehrkraft |
 | Rolle der Lehrkraft | Lernbegleitung: Auswertung der Daten, gezielte Gespräche mit Lernenden, die hängen | Unterrichtsleitung: Einführung, Moderation, Sicherung der Ergebnisse |
 | Daten für die Lehrkraft | Wichtig: Ergebnisse je Lernziel und je Frage, Bearbeitungsstand | Hilfreich, aber nicht zwingend |
-| Lebensweltbezug (K+5) | Trägt die Motivation über längere Zeit: echte Aufgaben, Bezug zu eigenen Geräten und Medien | Kann von der Lehrkraft im Unterrichtsgespräch hergestellt werden |
+| Lebensweltbezug (K+5) | Hält die Motivation über längere Zeit: echte Aufgaben, Bezug zu eigenen Geräten und Medien | Kann von der Lehrkraft im Unterrichtsgespräch hergestellt werden |
 
 **Festlegung:** Pakete grundsätzlich für SeGeL bauen und so gliedern, dass einzelne Stationen auch im klassischen Unterricht einsetzbar sind. Umgekehrt (ein klassisches Paket nachträglich „SeGeL-tauglich“ machen) ist deutlich aufwendiger. Das gilt für alle Fächer, auch dort, wo es noch keine SeGeL-Kurse gibt.
 
@@ -144,7 +146,7 @@ Kerres (2024) bestätigt das aus der Forschung zum digitalen Lernen: Wer allein 
 | das Paket Teil eines Lehrgangs mit Prüfung ist | es um freiwilliges Weiterlernen geht |
 | die Klasse ähnliches Vorwissen hat | die Lernenden sehr unterschiedlich sind |
 | die Lernenden selbstständiges Lernen wenig gewohnt sind | sie gern und geübt selbstständig lernen |
-| die Motivation vor allem von außen kommt (Note, Prüfung) | eigenes Interesse trägt |
+| die Motivation vor allem von außen kommt (Note, Prüfung) | das eigene Interesse antreibt |
 | das Vorwissen gering ist | die Grundbegriffe schon sitzen |
 
 Für die meisten Berufsschulklassen spricht das für einen empfohlenen Weg mit Freiheit beim Tempo, wie oben beschrieben. Mit wachsender Erfahrung der Lernenden kann ein Paket mehr Freiheit lassen.

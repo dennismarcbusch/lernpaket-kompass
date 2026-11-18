@@ -17,7 +17,7 @@ skills/baue-skills.sh in die Skills kopiert.
 import html, json, os, re, sys
 
 TYPEN = ('mc', 'zuordnen', 'zahl', 'text', 'hotspot')
-EINSAETZE = ('check', 'selbstueberpruefung', 'uebung', 'vorab')
+EINSAETZE = ('check', 'selbstueberpruefung', 'uebung')
 PFEIL = re.compile(r'\s+(?:→|->)\s+')
 SCHLUESSEL = {'tipp': 'hinweis', 'wenn falsch': 'feedbackFalsch', 'wenn richtig': 'feedbackRichtig',
               'mischen': 'mischen', 'mehrfach': 'mehrfach', 'prüfen': 'pruefen', 'pruefen': 'pruefen'}
@@ -151,6 +151,9 @@ def kopf_lesen(text, nr):
     for e in ein:
         if e == 'nachweis':
             raise Fehler(f'Zeile {nr}: Einsatz „nachweis“ heißt seit Kompass 4.0 „selbstueberpruefung“.')
+        if e == 'vorab':
+            raise Fehler(f'Zeile {nr}: Einsatz „vorab“ gibt es nicht mehr (Vorab-Fragen sind entfallen). Die Frage streichen '
+                         'oder mit Einsatz „check“ in den Kurz-Check einer Station aufnehmen.')
         if e not in EINSAETZE:
             raise Fehler(f'Zeile {nr}: Einsatz „{e}“ gibt es nicht ({", ".join(EINSAETZE)}).')
     if not ein:

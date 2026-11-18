@@ -1,0 +1,45 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 490" role="img" aria-label="Im Labor wirken fast alle Gestaltungsregeln stärker als im Durchschnitt" font-family="Lexend, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="13">
+<title>Im Labor wirken fast alle Gestaltungsregeln stärker als im Durchschnitt</title>
+<rect width="760" height="490" rx="12" fill="#ffffff"/>
+<text x="24" y="30" font-size="15" font-weight="600" fill="#1a2130">Im Labor wirken fast alle Gestaltungsregeln stärker als im Durchschnitt</text>
+<text x="24" y="52" font-size="11.5" fill="#5b6473">Effektstärke je Regel in Mayers Studien; 11 von 12 liegen über dem Mittel von 0,37</text>
+<text x="278" y="100" text-anchor="end" fill="#1a2130">Text und Bild statt nur Text</text>
+<rect x="290" y="87" width="361.8" height="18" rx="3" fill="#c3c8d2"><title>Text und Bild statt nur Text: d = 1,67</title></rect>
+<text x="659.8" y="100" font-size="12" fill="#5b6473">1,67</text>
+<text x="278" y="128" text-anchor="end" fill="#1a2130">Bild und Erklärung gleichzeitig</text>
+<rect x="290" y="115" width="281.7" height="18" rx="3" fill="#c3c8d2"><title>Bild und Erklärung gleichzeitig: d = 1,30</title></rect>
+<text x="579.7" y="128" font-size="12" fill="#5b6473">1,30</text>
+<text x="278" y="156" text-anchor="end" fill="#1a2130">Nicht vorlesen, was dasteht</text>
+<rect x="290" y="143" width="188.5" height="18" rx="3" fill="#c3c8d2"><title>Nicht vorlesen, was dasteht: d = 0,87</title></rect>
+<text x="486.5" y="156" font-size="12" fill="#5b6473">0,87</text>
+<text x="278" y="184" text-anchor="end" fill="#1a2130">Persönliche Ansprache</text>
+<rect x="290" y="171" width="171.2" height="18" rx="3" fill="#c3c8d2"><title>Persönliche Ansprache: d = 0,79</title></rect>
+<text x="469.2" y="184" font-size="12" fill="#5b6473">0,79</text>
+<text x="278" y="212" text-anchor="end" fill="#1a2130">Beschriftung direkt am Bild</text>
+<rect x="290" y="199" width="171.2" height="18" rx="3" fill="#c3c8d2"><title>Beschriftung direkt am Bild: d = 0,79</title></rect>
+<text x="469.2" y="212" font-size="12" fill="#5b6473">0,79</text>
+<text x="278" y="240" text-anchor="end" fill="#1a2130">Menschliche statt Computerstimme</text>
+<rect x="290" y="227" width="160.3" height="18" rx="3" fill="#c3c8d2"><title>Menschliche statt Computerstimme: d = 0,74</title></rect>
+<text x="458.3" y="240" font-size="12" fill="#5b6473">0,74</text>
+<text x="278" y="268" text-anchor="end" fill="#1a2130">Erklärung gesprochen statt geschrieben</text>
+<rect x="290" y="255" width="156" height="18" rx="3" fill="#c3c8d2"><title>Erklärung gesprochen statt geschrieben: d = 0,72</title></rect>
+<text x="454" y="268" font-size="12" fill="#5b6473">0,72</text>
+<text x="278" y="296" text-anchor="end" fill="#1a2130">Unnötiges weglassen</text>
+<rect x="290" y="283" width="151.7" height="18" rx="3" fill="#c3c8d2"><title>Unnötiges weglassen: d = 0,70</title></rect>
+<text x="449.7" y="296" font-size="12" fill="#5b6473">0,70</text>
+<text x="278" y="324" text-anchor="end" fill="#1a2130">In kleine Schritte teilen</text>
+<rect x="290" y="311" width="151.7" height="18" rx="3" fill="#c3c8d2"><title>In kleine Schritte teilen: d = 0,70</title></rect>
+<text x="449.7" y="324" font-size="12" fill="#5b6473">0,70</text>
+<text x="278" y="352" text-anchor="end" fill="#1a2130">Wichtiges hervorheben</text>
+<rect x="290" y="339" width="99.7" height="18" rx="3" fill="#c3c8d2"><title>Wichtiges hervorheben: d = 0,46</title></rect>
+<text x="397.7" y="352" font-size="12" fill="#5b6473">0,46</text>
+<text x="278" y="380" text-anchor="end" fill="#1a2130">Begriffe vorab klären</text>
+<rect x="290" y="367" width="99.7" height="18" rx="3" fill="#c3c8d2"><title>Begriffe vorab klären: d = 0,46</title></rect>
+<text x="397.7" y="380" font-size="12" fill="#5b6473">0,46</text>
+<text x="278" y="408" text-anchor="end" fill="#1a2130">Gestik einer Erklärfigur</text>
+<rect x="290" y="395" width="78" height="18" rx="3" fill="#c3c8d2"><title>Gestik einer Erklärfigur: d = 0,36</title></rect>
+<text x="376" y="408" font-size="12" fill="#5b6473">0,36</text>
+<line x1="370.2" x2="370.2" y1="76" y2="428" stroke="#485263" stroke-width="1.5" stroke-dasharray="4 4"/>
+<text x="370.2" y="448" font-size="11.5" fill="#1a2130">Mittel aller Studien, nachgerechnet (Cromley &amp; Chen)</text>
+<text x="370.2" y="464" font-size="11.5" fill="#1a2130">g = 0,37</text>
+</svg>

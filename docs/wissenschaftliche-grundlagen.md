@@ -63,7 +63,7 @@ Zu jedem Gedanken steht, was die Forschung sagt, was der Kompass daraus macht un
 
 **Forschung.** Richard Mayer hat in über 200 Experimenten 15 Regeln für Lernmaterial aus Text und Bild geprüft, zum Beispiel: Überflüssiges weglassen, Text und Bild zusammenbringen, Inhalte in kleine Schritte teilen. Interessante Einzelheiten ohne Bezug zum Lernziel verschlechtern das Lernen (*g* = −0,33, Sundararajan & Adesope 2020). Eine freundliche Gestaltung als Rahmen schadet dagegen nicht (Brom et al. 2018).
 
-**Im Kompass.** P7: Alles für die Aufgabe ist gleichzeitig sichtbar, der Text steht kurz neben der Szene, Kulisse und Figuren bleiben im Rahmen.
+**Im Kompass.** P7: Alles für die Aufgabe ist gleichzeitig sichtbar, der Text steht kurz neben der Szene, Kulisse und Figuren bleiben im Rahmen. Das lebensnahe Aussehen des Gegenstands selbst gehört zur Aufgabe (P12, Abschnitt 8).
 
 **Einschränkung.** Überwiegend kurze Laborversuche mit Studierenden, deshalb „übertragen“. Die Regeln helfen vor allem Lernenden mit wenig Vorwissen; wer sich auskennt, profitiert weniger (Kalyuga 2007). Bestimmen die Lernenden ihr Tempo selbst, wie in einem Lernpaket, fällt der Vorteil kleiner aus (Noetel et al. 2022). Die Regel „höchstens ein hervorgehobener Knopf je Ansicht“ ist eine eigene Entscheidung aus der Erfahrung mit früheren Paketen.
 
@@ -107,9 +107,9 @@ Zu jedem Gedanken steht, was die Forschung sagt, was der Kompass daraus macht un
 
 **Forschung.** Lernen mit Simulationen fördert komplexe Fertigkeiten deutlich (*g* = 0,85, Chernikova et al. 2020). Aufwendige Simulatoren bringen kaum mehr als einfache; wichtig ist, dass das Wesentliche gut zu erkennen ist (Norman et al. 2012; Chernikova et al. 2024). Wer etwas Eigenes erzeugt, also erklärt oder begründet, lernt mehr als jemand, der nur bedient (Chi & Wylie 2014). Lernspiele wirken schwächer (*d* = 0,29, Wouters et al. 2013) und vor allem dann, wenn das Spiel selbst anleitet (+0,34, Wouters & van Oostendorp 2013) und der Lernstoff die Spielregel ist (Habgood & Ainsworth 2011).
 
-**Im Kompass.** P12: Ein Arbeitsgegenstand zieht sich durch das Paket, jede Station ist eine Szene, in der die Lernenden etwas tun. Echt ist die Funktion, nicht jede Einzelheit des Aussehens. Ein Spiel gibt es nur zum Üben oder mit Begründung.
+**Im Kompass.** P12: Ein Arbeitsgegenstand zieht sich durch das Paket, jede Station ist eine Szene, in der die Lernenden etwas tun. Er funktioniert wie in echt und sieht lebensnah aus: Man erkennt ihn auf einen Blick wieder, Fotorealismus ist nicht nötig. Ein Spiel gibt es nur zum Üben oder mit Begründung.
 
-**Einschränkung.** Das ist die größte Übertragung im Kompass. Alle 145 Studien der Metaanalyse zu Simulationen stammen aus der Hochschule, 126 davon aus dem Medizinstudium, und gut die Hälfte vergleicht nur vorher und nachher. Für kurze Pakete an einer Berufsschule ist mit kleineren Wirkungen zu rechnen. P12 ist trotzdem Pflicht, weil die Erfahrung aus den bisherigen Paketen dafür spricht: Die ersten Pakete nach dem Leitfaden waren oft lange Texte mit einem Quiz darunter.
+**Einschränkung.** Das ist die größte Übertragung im Kompass. Alle 145 Studien der Metaanalyse zu Simulationen stammen aus der Hochschule, 126 davon aus dem Medizinstudium, und gut die Hälfte vergleicht nur vorher und nachher. Für kurze Pakete an einer Berufsschule ist mit kleineren Wirkungen zu rechnen. P12 ist trotzdem Pflicht, weil die Erfahrung aus den bisherigen Paketen dafür spricht: Die ersten Pakete nach dem Leitfaden waren oft lange Texte mit einem Quiz darunter. Auch das lebensnahe Aussehen ist eine eigene Entscheidung (seit 18.11.2026): Die frühere Regel „sparsam im Aussehen“ führte zu langweiligen Paketen, und Lernende erwarten aus den Apps und Spielen ihres Alltags ein gewisses Maß an Grafik. Belegt ist nur, dass aufwendige Simulatoren für den Lernerfolg kaum mehr bringen als einfache und dass ansprechende Gestaltung eher leicht hilft, als dass sie schadet (Brom et al. 2018); ob das Aussehen die Lernenden länger bei der Sache hält, muss die Erprobung zeigen.
 
 ### 9. Selbstständiges Lernen muss angeleitet werden
 
@@ -140,7 +140,7 @@ Zu jedem Gedanken steht, was die Forschung sagt, was der Kompass daraus macht un
 | P9 | Hintergrund und Bedienhilfe trennen | nein | übertragen | van Merriënboer (4C/ID) |
 | P10 | Wiederholen verteilen, Aufgaben mischen | nein | direkt belegt, im Paket begrenzt | Latimier et al. 2021; Brunmair & Richter 2019 |
 | P11 | Selbststeuerung anleiten | nein | übertragen | Dignath & Büttner 2008; Dignath et al. 2023 |
-| P12 | Handeln am Gegenstand | **ja** | übertragen | Chernikova et al. 2020 |
+| P12 | Handeln am Gegenstand | **ja** | übertragen; lebensnahes Aussehen eigene Entscheidung | Chernikova et al. 2020 |
 | P13 | Ergebnisse sichern: Merkblatt | nein | übertragen | Kiewra; Gurlitt & Renkl 2008 |
 
 **Pflicht heißt nicht „am besten belegt“.** Bei der Auswahl der sieben Pflichtprinzipien zählt auch, ob sich ein Prinzip in jedem Paket mit vertretbarem Aufwand umsetzen lässt. P10 ist direkt belegt, aber kein Pflichtprinzip, weil ein einzelnes Paket Wiederholung kaum über Tage verteilen kann. P12 ist Pflicht, obwohl es übertragen ist.

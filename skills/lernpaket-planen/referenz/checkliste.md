@@ -21,7 +21,7 @@ Diese Punkte stecken in Engine und Stil und werden vom Prüfskript geprüft. Von
 
 - [ ] Lernziele sind überprüfbar formuliert; jedes wird in der Selbstüberprüfung mit mindestens zwei Fragen oder Prüfpunkten erfasst. (P8)
 - [ ] Die Form ist begründet (Simulation vor interaktiver Illustration vor Spiel zum Üben vor durchgehendem Lernspiel). Der Lernstoff steckt in den Regeln des Gegenstands oder Spiels (wer ihn nicht beherrscht, kommt nicht weiter, nicht erst in einem Quiz danach); ein Spiel vermittelt die Grundlagen selbst. Das Paket besteht die Plattform-Probe: Test, H5P oder Lückentext der Lernplattform könnten es nicht genauso. (P12)
-- [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist auf 1366 × 768 ganz zu sehen, in der Funktion echt und reagiert auf Fehler. Der Text daneben bleibt im Budget. (P12)
+- [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist auf 1366 × 768 ganz zu sehen, in der Funktion echt, im Aussehen lebensnah (der Gegenstand ist auf einen Blick wiederzuerkennen, ein Spiel sieht aus wie ein Spiel) und reagiert auf Fehler. Der Text daneben bleibt im Budget. (P12)
 - [ ] Vor jedem neuen Aufgabentyp gibt es eine Vorführung mit einer Frage zum Selbsterklären; Könner können sie überspringen. (P3)
 - [ ] Jede Station hat einen klaren Auftrag, eine Vorab-Frage als Leitfrage und eine Rückmeldung; jede Übung hat drei gestufte Tipps. (P4)
 - [ ] Jede Station endet mit einem Kurz-Check, der nicht zählt und zuerst die Vorab-Frage auflöst. (P5)
@@ -29,7 +29,7 @@ Diese Punkte stecken in Engine und Stil und werden vom Prüfskript geprüft. Von
 
 **Kern: Gestaltung (Muss)**
 
-- [ ] Im Arbeitsbereich der Szene steht nichts, was nicht zur Aufgabe gehört; Kulisse und Figuren bleiben im Kopf, auf der Startseite und beim Auftrag. (P7)
+- [ ] Im Arbeitsbereich der Szene steht nur, was zum Gegenstand, zu seinem Arbeitsplatz oder zur Spielwelt gehört: kein Schmuck ohne Bezug, keine Nebenhandlung, keine Bewegung nur zur Zierde. Was zur Aufgabe gehört, ist am leichtesten zu erkennen. (P7)
 - [ ] Text und zugehörige Grafik stehen zusammen, Beschriftungen direkt im Bild; alles, was für eine Aufgabe nötig ist, ist gleichzeitig sichtbar, und Tipps und Feedback verdecken nichts. (P7)
 - [ ] Fachbegriffe werden an der Station eingeführt, an der sie zuerst gebraucht werden. (P7)
 - [ ] Auf jedem Bildschirm ist ohne Suchen erkennbar, was zu tun ist; Fünf-Sekunden-Test bestanden, auch auf dem Tablet. (P7)

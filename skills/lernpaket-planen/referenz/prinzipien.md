@@ -63,11 +63,11 @@ Das frühere P14 (Szene zum Anfassen) ist Teil von P12. Querschnitt: früh einen
 ### P7 · Klare Bildschirme, ein nächster Schritt
 
 - Alles für die Aufgabe gleichzeitig sichtbar, Beschriftung im Bild; die Szene ist auf 1366 × 768 ganz zu sehen
-- Weglassen, was nicht zur Aufgabe gehört; Kulisse und Figuren nur im Kopf, auf der Startseite und beim Auftrag
+- Weglassen, was nicht zum Gegenstand, zu seinem Arbeitsplatz oder zur Spielwelt gehört: kein Schmuck ohne Bezug, keine Nebenhandlung, keine Bewegung nur zur Zierde. Das lebensnahe Aussehen des Gegenstands gehört dazu (P12)
 - Je Ansicht höchstens ein hervorgehobener Knopf; „Weiter“ wird erst nach der Aufgabe hervorgehoben (macht die Vorlage)
 - Textbudget: Station höchstens etwa 90 Wörter neben der Szene, Simulationsschritt etwa 60, Startseite etwa 40
 
-**Prüffrage:** Besteht jeder Bildschirm den Fünf-Sekunden-Test (was ist zu tun?), und steht im Arbeitsbereich nur, was zur Aufgabe gehört?
+**Prüffrage:** Besteht jeder Bildschirm den Fünf-Sekunden-Test (was ist zu tun?), und steht im Arbeitsbereich nur, was zum Gegenstand gehört, mit dem Wichtigen am deutlichsten?
 
 ### P8 · Ziele sichtbar, Selbstüberprüfung passt
 
@@ -82,12 +82,12 @@ Das frühere P14 (Szene zum Anfassen) ist Teil von P12. Querschnitt: früh einen
 - **Form in fester Reihenfolge wählen** (Phase „Erfinden“): A Simulation eines Arbeitsgegenstands → B interaktive Illustration für Abstraktes → C A oder B und ein Spiel zum Üben → D durchgehendes Lernspiel nur begründet
 - **Der Lernstoff steckt in den Regeln des Gegenstands:** Wer den Stoff nicht kann, kommt nicht weiter, nicht erst in einem Quiz danach
 - **Jede Station ist eine Szene**, in der die Lernenden etwas bewegen; erst die Szene planen, dann den Text
-- **Echt in der Funktion, sparsam im Aussehen:** Regeln, Abläufe und Folgen wie im Beruf, mit erfundenen Daten; gezeigt wird, was zur Aufgabe gehört
+- **Echt in der Funktion, lebensnah im Aussehen:** Regeln, Abläufe und Folgen wie im Beruf, mit erfundenen Daten; der Gegenstand ist auf einen Blick wiederzuerkennen (Form, Material, typische Einzelheiten, sichtbare Zustände), ein Spiel sieht aus wie ein Spiel. Fotorealismus ist nicht nötig, ein Kasten mit Beschriftung genügt nicht
 - **Wenn Spiel, dann lernt man im Spiel** (SQL-Island-Prinzip): ein neues Konzept je Schritt, der erste Zug vorgemacht, der Lernstoff ist die Spielregel
 - **Plattform-Probe:** Könnte die Lernplattform das genauso (Test, H5P, Lückentext)? Dann ist es kein Kern eines Lernpakets
 - Fehler haben Folgen und eine Erklärung; keine Ranglisten, kein Zeitdruck, keine Punkte ohne Zweck
 
-**Prüffrage:** Ist die Form begründet (A vor B vor C vor D), steckt der Lernstoff in den Regeln, und hat jede Station eine Szene, die ganz sichtbar ist und auf Fehler reagiert?
+**Prüffrage:** Ist die Form begründet (A vor B vor C vor D), steckt der Lernstoff in den Regeln, und hat jede Station eine Szene, die ganz sichtbar ist, lebensnah aussieht und auf Fehler reagiert?
 
 ## Ausbau
 

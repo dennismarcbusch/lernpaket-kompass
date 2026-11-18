@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 318" role="img" aria-label="Sieben Phasen: erst die Ziele, dann der Gegenstand, dann sofort ein Prototyp" font-family="Lexend, system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif" font-size="13">
+<title>Sieben Phasen: erst die Ziele, dann der Gegenstand, dann sofort ein Prototyp</title>
+<defs><marker id="pfeil" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse"><path d="M0 0L10 5L0 10z" fill="#8a93a3"/></marker></defs>
+<rect width="760" height="318" rx="12" fill="#ffffff"/>
+<text x="24" y="34" font-size="15" font-weight="600" fill="#1a2130">Sieben Phasen: erst die Ziele, dann der Gegenstand, dann sofort ein Prototyp</text>
+<g fill="none" stroke="#8a93a3" stroke-width="1.25">
+<path d="M188 100H204" marker-end="url(#pfeil)"/>
+<path d="M368 100H384" marker-end="url(#pfeil)"/>
+<path d="M548 100H564" marker-end="url(#pfeil)"/>
+<path d="M646 128V202" marker-end="url(#pfeil)"/>
+<path d="M564 230H548" marker-end="url(#pfeil)"/>
+<path d="M384 230H368" marker-end="url(#pfeil)"/>
+</g>
+<g fill="none" stroke="#8a93a3" stroke-width="1.25" stroke-dasharray="4 4">
+<path d="M466 258V294H646V258" marker-end="url(#pfeil)"/>
+<path d="M286 202V128" marker-end="url(#pfeil)"/>
+</g>
+<text x="556" y="286" text-anchor="middle" font-size="11.5" fill="#5b6473">Änderungen</text>
+<text x="296" y="169" font-size="11.5" fill="#5b6473">neue Version</text>
+<rect x="24" y="72" width="164" height="56" rx="8" fill="none" stroke="#8a93a3" stroke-width="1.25"/>
+<text x="106" y="96" text-anchor="middle" font-weight="600" fill="#1a2130">1 Klären</text>
+<text x="106" y="113" text-anchor="middle" font-size="11.5" fill="#5b6473">Steckbrief</text>
+<rect x="204" y="72" width="164" height="56" rx="8" fill="none" stroke="#8a93a3" stroke-width="1.25"/>
+<text x="286" y="96" text-anchor="middle" font-weight="600" fill="#1a2130">2 Zielen</text>
+<text x="286" y="113" text-anchor="middle" font-size="11.5" fill="#5b6473">Lernziel-Tabelle</text>
+<rect x="384" y="72" width="164" height="56" rx="8" fill="none" stroke="#8a93a3" stroke-width="1.25"/>
+<text x="466" y="96" text-anchor="middle" font-weight="600" fill="#1a2130">3 Erfinden</text>
+<text x="466" y="113" text-anchor="middle" font-size="11.5" fill="#5b6473">Konzept und Kurzplan</text>
+<rect x="564" y="72" width="164" height="56" rx="8" fill="#4338ca" fill-opacity="0.12" stroke="#4338ca" stroke-width="2"/>
+<text x="646" y="96" text-anchor="middle" font-weight="600" fill="#1a2130">4 Prototyp bauen</text>
+<text x="646" y="113" text-anchor="middle" font-size="11.5" fill="#1a2130">eine Station im Browser</text>
+<rect x="564" y="202" width="164" height="56" rx="8" fill="none" stroke="#8a93a3" stroke-width="1.25"/>
+<text x="646" y="226" text-anchor="middle" font-weight="600" fill="#1a2130">5 Entwerfen, ausbauen</text>
+<text x="646" y="243" text-anchor="middle" font-size="11.5" fill="#5b6473">Drehbuch, Fragen, Paket</text>
+<rect x="384" y="202" width="164" height="56" rx="8" fill="none" stroke="#8a93a3" stroke-width="1.25"/>
+<text x="466" y="226" text-anchor="middle" font-weight="600" fill="#1a2130">6 Erproben</text>
+<text x="466" y="243" text-anchor="middle" font-size="11.5" fill="#5b6473">Review und Schülertest</text>
+<rect x="204" y="202" width="164" height="56" rx="8" fill="none" stroke="#8a93a3" stroke-width="1.25"/>
+<text x="286" y="226" text-anchor="middle" font-weight="600" fill="#1a2130">7 Einsetzen, auswerten</text>
+<text x="286" y="243" text-anchor="middle" font-size="11.5" fill="#5b6473">Daten der Lernplattform</text>
+</svg>

@@ -536,9 +536,9 @@ window.PAKET = {
   spielwelt: { titel: 'Firmendex – fang sie dir alle!', tab: 'Spielen', start: firmendexSpiel },
 
   stationen: [
-    { id: 'S1', titel: 'Level 1 · Die Firmlinge der Stadt', lz: ['LZ1', 'LZ2', 'LZ3'], vorab: ['V1', 'V2', 'V3'], check: ['C1', 'C4', 'C5'],
+    { id: 'S1', titel: 'Level 1 · Die Firmlinge der Stadt', lz: ['LZ1', 'LZ2', 'LZ3'], check: ['C1', 'C4', 'C5'],
       mitdenken: { auftrag: 'Erklär deinem Sitznachbarn, warum der Umsatz in deinem Dex immer „???“ bleibt.', muster: 'Das Handelsregister zeigt die rechtlichen Verhältnisse einer Firma: Firma, Sitz, Kapital, Vertretung. Geschäftszahlen wie Umsatz oder Gewinn werden nicht eingetragen.' } },
-    { id: 'S2', titel: 'Level 2 · Das Amtsgericht', lz: ['LZ4', 'LZ5'], vorab: ['V4', 'V5'], check: ['C7', 'C10', 'C12'],
+    { id: 'S2', titel: 'Level 2 · Das Amtsgericht', lz: ['LZ4', 'LZ5'], check: ['C7', 'C10', 'C12'],
       mitdenken: { auftrag: 'Zeichne auf Papier zwei Spalten: 🥚 „schlüpft erst durch die Eintragung“ und 🔔 „wird bekannt gemacht“. Sortiere alle Schatten aus Level 2 ein.', muster: '🥚 Lindgrün GmbH, Nähwerk Lenz, Roth Digital UG. 🔔 Fischer Großhandel, Prokura bei Hartmann, neuer Geschäftsführer bei Kernwerk.' } }
   ],
 

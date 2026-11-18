@@ -18,7 +18,7 @@ Kurztest mit **drei bis fünf Schülern**, bevor das Paket in der Klasse eingese
 | 1 | | | | | | |
 | 2 | | | | | | |
 
-Auch notieren: Stellen, an denen jemand Text überspringt oder zurückscrollt · Knöpfe, die gesucht werden · Wörter, die nicht verstanden werden · Stellen, an denen jemand lacht, staunt oder aussteigt.
+Auch notieren: Stellen, an denen jemand Text überspringt oder zurückscrollt · Knöpfe, die gesucht werden · Wörter, die nicht verstanden werden · Stellen, an denen jemand lacht, staunt oder aussteigt · ob der Gegenstand sofort erkannt wird („Das ist ein Switch“) und ob etwas am Aussehen ablenkt.
 
 ## Üben und Selbstüberprüfung
 

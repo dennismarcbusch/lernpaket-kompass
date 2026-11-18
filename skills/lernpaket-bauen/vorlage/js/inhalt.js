@@ -37,12 +37,13 @@
                 typisch: [{antwort, feedback}].
      'hotspot'  svg: '<svg viewBox=…>…</svg>', bereiche: [{x,y,w,h | cx,cy,r,
                 label, richtig, feedback}] – genau ein Bereich ist richtig.
-   Jede Frage: id, lz, einsatz (['check'|'selbstueberpruefung'|'uebung'|'vorab']),
+   Jede Frage: id, lz, einsatz (['check'|'selbstueberpruefung'|'uebung']),
    frage, erklaerung (warum die richtige Antwort richtig ist), optional bild.
 
-   Station: Die Vorab-Frage (vorab) ist zugleich die Leitfrage – sie bleibt über
-   der Szene stehen und wird im Kurz-Check als erste Frage aufgelöst. Ein eigenes
-   Feld leitfrage braucht nur eine Station ohne Vorab-Frage.
+   Station: check nennt die 2–3 Fragen des Kurz-Checks. Dieselben Fragen sind die
+   Wissensabfrage, wenn jemand die Station überspringen will – mindestens eine
+   davon schwer zu erraten (Zahl, Text, Zuordnen, Mehrfachauswahl). Eine
+   Leitfrage (leitfrage, ein Satz) ist möglich, aber nicht nötig.
 
    tafel: zwei bis vier Tafelbild-Szenen für den Mittelteil des Inputs (siehe unten).
 
@@ -164,7 +165,7 @@ window.PAKET = {
 
   stationen: [
     {
-      id: 'S1', titel: 'Stellenwerte: So zählt ein Byte', lz: ['LZ1'], vorab: 'V1',
+      id: 'S1', titel: 'Stellenwerte: So zählt ein Byte', lz: ['LZ1'],
       auftrag: 'Der Router der Bäckerei Sommer zeigt <code>11000000</code>. Stell die Schalter genauso ein: Welche Dezimalzahl ist das?',
       inhalt: '<p>Jede Stelle hat einen <b>Stellenwert</b>: rechts 1, nach links immer doppelt so viel. Eine 1 heißt: Dieser Wert zählt mit.</p>',
       interaktion: function (box, api) {
@@ -189,7 +190,7 @@ window.PAKET = {
       check: ['F2', 'F4', 'F1']
     },
     {
-      id: 'S2', titel: 'Dezimal → binär', lz: ['LZ2'], vorab: 'V2',
+      id: 'S2', titel: 'Dezimal → binär', lz: ['LZ2'],
       auftrag: 'Der Drucker der Schreinerei Maier bekommt im letzten Byte die <b>150</b>. Stell 150 an den Schaltern ein – diesmal ohne Summenanzeige.',
       inhalt: '<p>Von links nach rechts: Passt der Stellenwert noch in den Rest, Schalter an und mit dem Rest weiter. Passt er nicht, bleibt der Schalter aus.</p>',
       interaktion: function (box, api) {
@@ -216,7 +217,7 @@ window.PAKET = {
       check: ['F7', 'F9', 'F6']
     },
     {
-      id: 'S3', titel: 'Wie viele Werte passen in n Bit?', lz: ['LZ3'], vorab: 'V3',
+      id: 'S3', titel: 'Wie viele Werte passen in n Bit?', lz: ['LZ3'],
       auftrag: 'Mira fragt: „Wie viele verschiedene Adressen passen eigentlich in 4 Bit?“ Füge Bits hinzu und beobachte, wie viele Muster entstehen.',
       inhalt: '<p>Mit n Bit gibt es <b>2<sup>n</sup></b> Muster, von 0 bis 2<sup>n</sup> − 1.</p>',
       interaktion: function (box, api) {
@@ -451,9 +452,6 @@ window.PAKET = {
 
 /* ---------- quelle/fragen.md (erzeugt) ---------- */
 (function (P, F) { P.fragen = (P.fragen || []).concat(F); })(window.PAKET, [
-  {"id": "V1", "lz": "LZ1", "einsatz": ["vorab"], "typ": "zahl", "frage": "Welche Dezimalzahl ist <code>10000001<\/code>?", "zahl": {"wert": 129}, "typisch": [{"wert": 2, "feedback": "Du hast nur die Einsen gezählt. Jede Stelle hat aber einen eigenen Wert: ganz links 128, ganz rechts 1."}, {"wert": 10000001, "feedback": "Das ist die Ziffernfolge als Dezimalzahl gelesen. Im Binärsystem hat jede Stelle einen Stellenwert."}], "erklaerung": "Die Eins ganz links ist 128 wert, die ganz rechts 1: 128 + 1 = 129."},
-  {"id": "V2", "lz": "LZ2", "einsatz": ["vorab"], "typ": "text", "frage": "Wie lautet <b>12<\/b> als 8-Bit-Binärzahl?", "akzeptiert": ["00001100", "0000 1100"], "typisch": [{"antwort": "1100", "feedback": "Der Wert stimmt, aber ein Byte hat immer 8 Stellen: vorne mit Nullen auffüllen."}, {"antwort": "00110000", "feedback": "Die Stellen sind vertauscht. Die kleinen Werte (8, 4, 2, 1) stehen rechts."}], "erklaerung": "12 = 8 + 4. Die Stellen für 8 und 4 sind 1, alle anderen 0: 00001100."},
-  {"id": "V3", "lz": "LZ3", "einsatz": ["vorab"], "typ": "zahl", "frage": "Wie viele verschiedene Werte lassen sich mit <b>3 Bit<\/b> darstellen?", "zahl": {"wert": 8}, "typisch": [{"wert": 6, "feedback": "Mit jedem Bit verdoppelt sich die Anzahl, sie wächst nicht nur um 2."}, {"wert": 7, "feedback": "7 ist der größte Wert (111). Dazu kommt noch die 0: also 8 Werte."}, {"wert": 3, "feedback": "3 ist die Anzahl der Bits, nicht der möglichen Werte."}], "erklaerung": "Jedes Bit verdoppelt die Möglichkeiten: 2 · 2 · 2 = 8 (von 000 bis 111)."},
   {"id": "F1", "lz": "LZ1", "einsatz": ["check", "selbstueberpruefung"], "typ": "zahl", "frage": "Welchen Dezimalwert hat <code>00001011<\/code>?", "zahl": {"wert": 11}, "typisch": [{"wert": 13, "feedback": "Du hast die Stellenwerte von links nach rechts vergeben. Die Stelle mit dem Wert 1 steht ganz rechts."}, {"wert": 1011, "feedback": "Das ist die Ziffernfolge als Dezimalzahl gelesen. Rechne mit den Stellenwerten 8, 4, 2, 1."}], "erklaerung": "Die Einsen stehen bei 8, 2 und 1: 8 + 2 + 1 = 11."},
   {"id": "F2", "lz": "LZ1", "einsatz": ["check"], "typ": "mc", "frage": "Welchen Stellenwert hat das Bit ganz links in einem Byte?", "optionen": [{"text": "128", "richtig": true}, {"text": "256", "feedback": "256 wäre die neunte Stelle. Ein Byte hat Stellenwerte von 1 bis 128."}, {"text": "8", "feedback": "8 ist die Anzahl der Bits in einem Byte, nicht der Stellenwert."}, {"text": "1", "feedback": "Der Stellenwert 1 steht ganz rechts."}], "erklaerung": "Von rechts: 1, 2, 4, 8, 16, 32, 64, 128 – die achte Stelle hat den Wert 2⁷ = 128."},
   {"id": "F3", "lz": "LZ1", "einsatz": ["selbstueberpruefung"], "typ": "zahl", "frage": "Welchen Dezimalwert hat <code>11000000<\/code>?", "zahl": {"wert": 192}, "typisch": [{"wert": 3, "feedback": "Du hast von links mit 1 und 2 angefangen. Die beiden Einsen stehen bei 128 und 64."}], "erklaerung": "128 + 64 = 192."},

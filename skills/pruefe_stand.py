@@ -10,7 +10,7 @@
    (quelle/paket.js) und Manifest der Vorlage. Das gebaute js/inhalt.js der Vorlage muss zu quelle/ passen
    (--setze baut es neu).
 2. Keine überholten Begriffe: Nach einer Umbenennung bleiben leicht alte Wörter in Referenz,
-   Vorlagen oder Beispielen stehen. Gesucht wird nach den Begriffen, die mit Kompass 4.0 ersetzt
+   Vorlagen oder Beispielen stehen. Gesucht wird nach den Begriffen, die mit Kompass 4.0 oder danach ersetzt
    wurden. Zeilen, die ausdrücklich von früher sprechen („älter“, „früher“, „entfällt“ …), und der
    Abschnitt „Offene Punkte“ des Leitfadens (Änderungsgeschichte) sind ausgenommen.
 Wird von skills/baue-skills.sh vor dem Bauen aufgerufen.
@@ -50,6 +50,7 @@ ALT = [
     (r"einsatz: \[[^\]]*'nachweis'", "einsatz 'selbstueberpruefung'"),
     (r'^\s*nachweis: \{', 'Feld selbstueberpruefung'),
     (r'^\s*bestehen: \d', 'Feld bereit'),
+    (r'sparsam im Aussehen|im Aussehen auf das Nötige reduziert', 'seit 18.11.2026: echt in der Funktion, lebensnah im Aussehen'),
 ]
 ERLAUBT = re.compile(r'älter|Älter|früher|Früher|damals|bisher|seit (Kompass )?4|vor Kompass 4|vor 4\.0|entf[äa]ll|überholt|weiter gelesen|umbenannt|statt Nachweis|aufgegangen|nicht mehr|nannten|Nachweis-Paket')
 # Dateien, in denen nach überholten Begriffen gesucht wird (generierte Kopien und dieses Skript nicht)

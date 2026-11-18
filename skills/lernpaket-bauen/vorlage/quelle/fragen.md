@@ -2,40 +2,6 @@
 
 Format: referenz/fragenformat.md, Abschnitt „Fragen in quelle/fragen.md“. Jede Frage beginnt mit ## ID · Lernziel · Typ · Einsatz; Zeilen mit # gliedern nur.
 
-# Vorab-Fragen
-
-## V1 · LZ1 · zahl · vorab
-
-Welche Dezimalzahl ist `10000001`?
-
-= 129
-- 2 → Du hast nur die Einsen gezählt. Jede Stelle hat aber einen eigenen Wert: ganz links 128, ganz rechts 1.
-- 10000001 → Das ist die Ziffernfolge als Dezimalzahl gelesen. Im Binärsystem hat jede Stelle einen Stellenwert.
-
-> Die Eins ganz links ist 128 wert, die ganz rechts 1: 128 + 1 = 129.
-
-## V2 · LZ2 · text · vorab
-
-Wie lautet **12** als 8-Bit-Binärzahl?
-
-= 00001100
-= 0000 1100
-- 1100 → Der Wert stimmt, aber ein Byte hat immer 8 Stellen: vorne mit Nullen auffüllen.
-- 00110000 → Die Stellen sind vertauscht. Die kleinen Werte (8, 4, 2, 1) stehen rechts.
-
-> 12 = 8 + 4. Die Stellen für 8 und 4 sind 1, alle anderen 0: 00001100.
-
-## V3 · LZ3 · zahl · vorab
-
-Wie viele verschiedene Werte lassen sich mit **3 Bit** darstellen?
-
-= 8
-- 6 → Mit jedem Bit verdoppelt sich die Anzahl, sie wächst nicht nur um 2.
-- 7 → 7 ist der größte Wert (111). Dazu kommt noch die 0: also 8 Werte.
-- 3 → 3 ist die Anzahl der Bits, nicht der möglichen Werte.
-
-> Jedes Bit verdoppelt die Möglichkeiten: 2 · 2 · 2 = 8 (von 000 bis 111).
-
 # LZ1 · Binär → dezimal
 
 ## F1 · LZ1 · zahl · check, selbstueberpruefung

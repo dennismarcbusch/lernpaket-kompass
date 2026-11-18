@@ -1,10 +1,10 @@
 /* =====================================================================
    Lernpaket-Engine (Lernpaket-Kompass) – setzt den Leitfaden technisch um.
    Diese Datei wird NICHT pro Paket verändert. Inhalte stehen in js/inhalt.js.
-   Aufbau: Start (Szene, Lernpfad mit Ziel-Etiketten, ein Knopf; Abkürzung
-   „Ich kenne mich schon aus“) → ① Entdecken (Station: Ziel, Vorab-Frage als
-   Leitfrage, Szene mit Lösungsbeispiel, Kurz-Check: erst die Auflösung der
-   Vorab-Frage, dann 2–3 Fragen, einmal je Lernziel die Einschätzung) → ② Üben
+   Aufbau: Start (Szene, Lernpfad mit Ziel-Etiketten, ein Knopf) → ① Entdecken
+   (Station: Ziel, Szene mit Lösungsbeispiel, Kurz-Check mit 2–3 Fragen, einmal
+   je Lernziel die Einschätzung; wer eine Station überspringen will, beantwortet
+   zuerst ihre Kurz-Check-Fragen als Wissensabfrage) → ② Üben
    (3 gestufte Tipps, Reflexion) → ③ Selbstüberprüfung (zählt nicht: Teil A
    Handlungsaufgabe, Teil B Fragenpool; ab 80 % sitzt das Thema) → ④ Abschluss
    (Auswertung je Lernziel neben der eigenen Einschätzung, Merkblatt).
@@ -114,8 +114,9 @@
 
   /* ---------- Speicher (suspend_data, max. 4096 Zeichen) ---------- */
   var KEY = 'lernpaket-' + (P.id || 'ohne-id');
-  // ej: Einschätzung je Lernziel nach dem Kurz-Check (1–3, einmal je Lernziel); vb: Vorab-Fragen (1 richtig, 0 falsch, -1 übersprungen)
-  var S = { ej: {}, vb: {}, sd: {}, st: {}, ue: {}, best: null, lz: {}, n: 0, skip: [], sp: {} };
+  // ej: Einschätzung je Lernziel nach dem Kurz-Check (1–3, einmal je Lernziel)
+  // us: übersprungene Stationen (Wissensabfrage bestanden; sie zählen als erledigt); uv: Versuch zu überspringen je Station (0 = nicht geschafft)
+  var S = { ej: {}, sd: {}, st: {}, ue: {}, best: null, lz: {}, n: 0, us: {}, uv: {}, sp: {} };
   (function laden() {
     var o = {};
     try { var s = SC.aktiv ? SC.get('cmi.suspend_data') : localStorage.getItem(KEY); o = s ? JSON.parse(s) : {}; } catch (_) { o = {}; }
@@ -153,9 +154,8 @@
     else if (lw > 45) hinweise.push('Startseite: Leitsituation hat ' + lw + ' Wörter, Ziel höchstens etwa 40.');
     if ((P.glossar || []).some(function (g) { return g.vorab === true; })) hinweise.push('Glossar: vorab: true stellt Begriffe an Station 1 vor. Besser vorab: "<Stations-id>" – dort, wo der Begriff gebraucht wird.');
     (P.glossar || []).forEach(function (g) { if (typeof g.vorab === 'string' && !STATIONEN.some(function (s) { return s.id === g.vorab; })) fehler.push('Glossar „' + g.begriff + '“: Station ' + g.vorab + ' gibt es nicht.'); });
-    var vb = alleVorab();
-    if (!vb.length) hinweise.push('Keine Vorab-Fragen (Station: vorab) – ohne sie gibt es keine Abkürzung für Lernende mit Vorwissen.');
-    vb.forEach(function (q) { if (leichtZuRaten(FR[q])) hinweise.push(q + ': Vorab-Frage ist leicht zu erraten (Einfachauswahl oder Hotspot). Besser Zahl, Text, Zuordnen oder Mehrfachauswahl, sonst trifft die Empfehlung zum Überspringen Glückspilze.'); });
+    // Vorab-Fragen gibt es nicht mehr: Ältere Inhalte laufen weiter, die Fragen werden aber nicht mehr gezeigt
+    if (P.vorwissen || STATIONEN.some(function (s) { return s.vorab !== undefined; })) hinweise.push('Vorab-Fragen gibt es nicht mehr (Station: vorab, PAKET.vorwissen); sie werden nicht mehr angezeigt. Eintrag entfernen und die Frage in den Kurz-Check (check) übernehmen oder streichen. Überspringen geht über die Wissensabfrage aus den Kurz-Check-Fragen.');
     (P.fragen || []).forEach(function (f) {
       id(f.id, 'Frage');
       if (!FR[f.id] || !lzIds()[f.lz]) fehler.push(f.id + ': Lernziel "' + f.lz + '" gibt es nicht.');
@@ -176,10 +176,10 @@
     if (WELTSPIEL && STATIONEN.some(function (s) { return (s.check || []).length > 3; })) hinweise.push('Spielmodus: Zwischenbilanz je Level mit höchstens 3 Fragen halten, damit das Spiel nicht zum Test wird.');
     if (!P.welt || !THEMEN[P.welt.thema]) hinweise.push('PAKET.welt.thema fehlt oder ist unbekannt (' + Object.keys(THEMEN).join(', ') + ') – jedes Paket bekommt eine eigene Welt.');
     if (!KIT) fehler.push('js/baukasten.js ist nicht (vor engine.js) eingebunden.');
-    // Kurz-Check: 2–3 Fragen, dazu kommt die Auflösung der Vorab-Frage (zusammen höchstens 4); ohne Vorab-Frage 2–4
+    // Kurz-Check: 2–3 Fragen (bis 4 geduldet). Er ist zugleich die Wissensabfrage beim Überspringen und darf deshalb nicht nur aus Fragen bestehen, die sich leicht erraten lassen
     function checkUmfang(s, c) {
-      var v = vorabFragen(s).length, max = v ? 3 : 4;
-      if (c.length < 2 || c.length > max) hinweise.push(s.id + ': Kurz-Check mit ' + (v ? '2–3 Fragen (die Vorab-Frage kommt als Auflösung dazu)' : '2–4 Fragen') + ', jetzt ' + c.length + '.');
+      if (c.length < 2 || c.length > 4) hinweise.push(s.id + ': Kurz-Check mit 2–3 Fragen, jetzt ' + c.length + '.');
+      if (c.length && c.every(function (q) { return leichtZuRaten(FR[q]); })) hinweise.push(s.id + ': Alle Kurz-Check-Fragen sind leicht zu erraten (Einfachauswahl oder Hotspot). Der Kurz-Check ist auch die Wissensabfrage beim Überspringen – mindestens eine Frage als Zahl, Text, Zuordnen oder Mehrfachauswahl.');
     }
     STATIONEN.forEach(function (s, i) {
       id(s.id, 'Station ' + (i + 1));
@@ -198,22 +198,19 @@
         if (sc.length && !sc.some(function (x) { return x.zeigen; })) hinweise.push(s.id + ': kein Schritt mit Vorführung (zeigen: true) – der erste neue Handgriff wird vorgemacht (P3).');
         if (sc.length > 6) hinweise.push(s.id + ': ' + sc.length + ' Schritte – ein Kapitel hat 2–6, lieber in zwei Kapitel teilen.');
         var cs = (s.check || []);
-        cs.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); if (vorabFragen(s).indexOf(q) >= 0) hinweise.push(s.id + ': Frage ' + q + ' steht als Vorab-Frage und im Kurz-Check – die Vorab-Frage wird nach den Schritten von selbst aufgelöst, aus check entfernen.'); });
+        cs.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); });
         checkUmfang(s, cs);
         return;
       }
       if (!s.auftrag) hinweise.push(s.id + ': Auftrag aus der Leitsituation fehlt.');
       if (!s.interaktion && !s.ohneInteraktion) fehler.push(s.id + ': keine Szene zum Anfassen (interaktion). Jede Station braucht etwas, das die Lernenden bewegen (Leitfaden P12). Nur in begründeten Ausnahmen ohneInteraktion: "Begründung" setzen.');
       if (!s.interaktion && s.ohneInteraktion) hinweise.push(s.id + ': Station ohne Szene – Begründung: ' + s.ohneInteraktion);
-      var hatVorab = vorabFragen(s).length > 0;
-      if (hatVorab && s.leitfrage) hinweise.push(s.id + ': Leitfrage und Vorab-Frage zugleich – die Vorab-Frage ist die Leitfrage der Station, leitfrage weglassen.');
-      var tw = woerter(s.auftrag) + (hatVorab ? 0 : woerter(s.leitfrage)) + woerter(s.inhalt);
+      var tw = woerter(s.auftrag) + woerter(s.leitfrage) + woerter(s.inhalt);
       if (tw > 90) hinweise.push(s.id + ': Textbudget überschritten (' + tw + ' Wörter in Auftrag, Leitfrage und Kurz erklärt; Ziel höchstens 90). Mehr in die Szene, weniger in den Text.');
       if (s.beispiel && s.beispiel.schritte && s.interaktion) hinweise.push(s.id + ': Lösungsbeispiel als Text (beispiel) – besser als Vorführung in der Szene (demo in der Interaktion).');
       if (s.interaktion && !s.selbsterklaerung && !(s.beispiel && s.beispiel.selbsterklaerung)) hinweise.push(s.id + ': keine Frage zum Selbsterklären (selbsterklaerung: {schritt, frage}) für die Vorführung.');
-      [].concat(s.vorab || []).forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Vorab-Frage ' + q + ' gibt es nicht.'); });
       var c = (s.check || []);
-      c.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); if ([].concat(s.vorab || []).indexOf(q) >= 0) hinweise.push(s.id + ': Frage ' + q + ' steht als Vorab-Frage und im Kurz-Check – die Vorab-Frage wird nach der Szene von selbst aufgelöst, aus check entfernen.'); });
+      c.forEach(function (q) { if (!FR[q]) fehler.push(s.id + ': Kurz-Check-Frage ' + q + ' gibt es nicht.'); });
       checkUmfang(s, c);
     });
     UEBUNGEN.forEach(function (u, i) {
@@ -258,22 +255,15 @@
     return { fehler: fehler, hinweise: hinweise };
   }
   function lzIds() { var o = {}; LZ.forEach(function (z) { o[z.id] = 1; }); return o; }
-  // Vorab-Fragen einer Station: s.vorab (id oder Liste); ältere Pakete: PAKET.vorwissen, nach Lernziel zugeordnet
-  function vorabFragen(s) {
-    if (s.vorab === false) return [];
-    if (s.vorab) return [].concat(s.vorab).filter(function (q) { return FR[q]; });
-    return (P.vorwissen || []).filter(function (q) { return FR[q] && (s.lz || []).indexOf(FR[q].lz) >= 0; });
-  }
-  function alleVorab() { var o = []; STATIONEN.forEach(function (s) { vorabFragen(s).forEach(function (q) { if (o.indexOf(q) < 0) o.push(q); }); }); return o; }
   function leichtZuRaten(f) {
     if (!f) return false;
     if (f.typ === 'hotspot') return true;
     return f.typ === 'mc' && !f.mehrfach && (f.optionen || []).filter(function (o) { return o.richtig; }).length === 1;
   }
-  // Überspringbar ist eine Station, deren Vorab-Fragen alle richtig beantwortet wurden
-  function skipNeu() {
-    S.skip = STATIONEN.filter(function (s) { var q = vorabFragen(s); return q.length && q.every(function (id) { return S.vb[id] === 1; }); }).map(function (s) { return s.id; });
-  }
+  // Überspringen (Stationen und Kapitel, nicht die Level eines Spiels): nur über die Wissensabfrage aus den
+  // Kurz-Check-Fragen, ein Versuch je Station. Ohne Kurz-Check gibt es nichts abzufragen.
+  function wissenFragen(s) { return (s.check || []).filter(function (q) { return FR[q]; }); }
+  function darfUeberspringen(s) { return !WELTSPIEL && !S.st[s.id] && S.uv[s.id] === undefined && wissenFragen(s).length > 0; }
 
   /* ---------- Fragen-Baustein ---------- */
   // modus 'lernen': Prüfen-Knopf, Feedback direkt an der Antwort, Nochmal, Lösung zeigen.
@@ -438,10 +428,13 @@
   var suLauf = null;      // laufender Versuch der Selbstüberprüfung (nicht gespeichert)
   var letzterVersuch = null; // Ergebnis des letzten Versuchs in dieser Sitzung
   var testHaken = [];     // Objekte aktueller Interaktionen (für automatische Tests)
+  var WISSEN = null;      // Index der Station, deren Wissensabfrage (Überspringen) gerade offen ist
 
   function zeige(teil, i) {
     if (teil === 'nachweis') teil = 'pruefen';  // älterer Name der Ansicht
+    if (teil === 'abkuerzung') teil = 'start';  // die Abkürzung über Vorab-Fragen gibt es nicht mehr
     if (teil !== 'pruefen' && suLauf && suLauf.phase !== 'fertig') suLauf = null;
+    WISSEN = null;
     ANSICHT = { teil: teil, i: i || 0 };
     render();
     haupt.focus({ preventScroll: true });
@@ -523,7 +516,10 @@
     haupt.innerHTML = '';
     var pr = pruefeInhalt();
     if (pr.fehler.length) haupt.appendChild(msg('<b>Hinweis für Autor:innen – der Inhalt hat Fehler:</b><br>' + pr.fehler.map(esc).join('<br>'), 'bad'));
-    ({ start: vStart, abkuerzung: vAbkuerzung, entdecken: WELTSPIEL ? vSpiel : SIM ? vSimulation : vStation, ueben: vUebung, pruefen: vPruefen, abschluss: vAbschluss }[ANSICHT.teil])();
+    // Wissensabfrage zum Überspringen: eigene Ansicht ohne Szene und Erklärungen, damit nichts nachgeschlagen wird
+    if (WISSEN !== null && !(ANSICHT.teil === 'entdecken' && WISSEN === ANSICHT.i && STATIONEN[WISSEN] && darfUeberspringen(STATIONEN[WISSEN]))) WISSEN = null;
+    if (WISSEN !== null) { vWissen(); return; }
+    ({ start: vStart, entdecken: WELTSPIEL ? vSpiel : SIM ? vSimulation : vStation, ueben: vUebung, pruefen: vPruefen, abschluss: vAbschluss }[ANSICHT.teil])();
   }
 
   /* ---------- Start ---------- */
@@ -589,7 +585,7 @@
     var begonnen = anzahl(S.st) || anzahl(S.ue) || S.n;
     var vor = begonnen ? 'Weiter: ' : 'Los geht’s: ';
     if (WELTSPIEL) { if (STATIONEN.some(function (s) { return !S.st[s.id]; })) return { t: 'entdecken', i: 0, label: begonnen ? 'Weiterspielen →' : 'Los geht’s →' }; }
-    else for (var i = 0; i < STATIONEN.length; i++) if (!S.st[STATIONEN[i].id] && S.skip.indexOf(STATIONEN[i].id) < 0) return { t: 'entdecken', i: i, label: vor + EH.e + ' ' + (i + 1) + ' →' };
+    else for (var i = 0; i < STATIONEN.length; i++) if (!S.st[STATIONEN[i].id]) return { t: 'entdecken', i: i, label: vor + EH.e + ' ' + (i + 1) + ' →' };
     for (var k = 0; k < UEBUNGEN.length; k++) if (!S.ue[UEBUNGEN[k].id]) return { t: 'ueben', i: k, label: vor + 'Übung ' + (k + 1) + ' →' };
     if (!S.n) return { t: 'pruefen', i: 0, label: vor + '③ Selbstüberprüfung →' };
     return { t: 'abschluss', i: 0, label: 'Zum ④ Abschluss →' };
@@ -608,10 +604,10 @@
     var stF = STATIONEN.filter(function (s) { return S.st[s.id]; }).length;
     var punkte = el('div', { class: 'lp-punkte' });
     STATIONEN.forEach(function (s, i) {
-      var skip = S.skip.indexOf(s.id) >= 0 && !S.st[s.id];
-      punkte.appendChild(el('button', { type: 'button', class: 'lp-punkt' + (S.st[s.id] ? ' fertig' : '') + (skip ? ' skip' : ''), title: s.titel + (skip ? ' – darfst du überspringen' : ''),
-        'aria-label': (WELTSPIEL ? 'Level ' : EH.e + ' ') + (i + 1) + ': ' + s.titel + (S.st[s.id] ? ' (erledigt)' : skip ? ' (darfst du überspringen)' : ''),
-        text: S.st[s.id] ? '✓' : skip ? '»' : String(i + 1), onclick: function () { zeige('entdecken', WELTSPIEL ? 0 : i); } }));
+      var skip = !!(S.st[s.id] && S.us[s.id]);  // übersprungen: Wissensabfrage bestanden, zählt als erledigt
+      punkte.appendChild(el('button', { type: 'button', class: 'lp-punkt' + (S.st[s.id] ? ' fertig' : '') + (skip ? ' skip' : ''), title: s.titel + (skip ? ' – übersprungen' : ''),
+        'aria-label': (WELTSPIEL ? 'Level ' : EH.e + ' ') + (i + 1) + ': ' + s.titel + (skip ? ' (übersprungen, Wissensabfrage bestanden)' : S.st[s.id] ? ' (erledigt)' : ''),
+        text: skip ? '»' : S.st[s.id] ? '✓' : String(i + 1), onclick: function () { zeige('entdecken', WELTSPIEL ? 0 : i); } }));
     });
     var wort = WELTSPIEL ? 'Level' : (STATIONEN.length === 1 ? EH.e : EH.m);
     // im Spielrahmen stehen die Stationen schon auf der Missionskarte
@@ -660,35 +656,55 @@
       haupt.appendChild(el('div', { class: 'card' }, figur(P.leitsituation)));
     }
     haupt.appendChild(lernpfad());
-    // unaufdringlicher Zusatzweg: Abkürzung für Lernende mit Vorwissen (das Tafelbild öffnet die Lehrkraft über den Knopf im Kopf)
-    var extra = el('div', { class: 'start-extra' });
-    if (alleVorab().length) extra.appendChild(el('button', { type: 'button', class: 'link', id: 'abkuerzung', text: 'Ich kenne mich schon aus →', onclick: function () { zeige('abkuerzung'); } }));
-    if (extra.children.length) haupt.appendChild(extra);
     var nx = naechsterSchritt();
     leiste((P.dauer ? 'Dauer: ' + esc(P.dauer) + ' · ' : '') + 'Dein Stand bleibt gespeichert.', nx.label, function () { zeige(nx.t, nx.i); });
   }
-  // Abkürzung: alle Vorab-Fragen auf einmal; was sitzt, wird auf dem Lernpfad als überspringbar markiert
-  function vAbkuerzung() {
-    var ids = alleVorab();
-    var c = el('div', { class: 'card' });
-    c.appendChild(el('h2', { text: 'Was kannst du schon?' }));
-    c.appendChild(el('p', { class: 'klein', html: 'Beantworte die Fragen ohne Hilfe. Was du sicher kannst, darfst du danach überspringen. Alle ' + EH.m + ' bleiben erreichbar, die Selbstüberprüfung am Ende ist für alle gleich. <span class="badge zaehlt-nicht">zählt nicht</span>' }));
-    var qs = ids.map(function (id, k) { var q = frage(FR[id], 'pruefung', { nr: k + 1 }); c.appendChild(q.el); return q; });
+
+  /* ---------- Überspringen: erst die Wissensabfrage ---------- */
+  // Der Knopf zum Überspringen steht unauffällig in der Fußleiste einer offenen Station. Er führt nicht weiter,
+  // sondern zur Wissensabfrage: die Kurz-Check-Fragen der Station, ohne Hilfe und ohne Rückmeldung je Frage.
+  // Alle richtig: Die Station gilt als erledigt (S.us, auf dem Lernpfad mit » markiert). Sonst ist der Versuch
+  // verbraucht (S.uv), die Lösungen bleiben verdeckt, und die Fragen kommen nach der Szene im Kurz-Check wieder.
+  function wissenOeffnen(i) { WISSEN = i; render(); haupt.focus({ preventScroll: true }); window.scrollTo(0, 0); }
+  function skipKnopf(i) { return el('button', { type: 'button', class: 'link', id: 'ueberspringen', text: EH.e + ' überspringen', onclick: function () { wissenOeffnen(i); } }); }
+  function vWissen() {
+    var i = ANSICHT.i, s = STATIONEN[i], nx = naechsteStation(i);
+    var ort = EH.e + ' ' + (i + 1) + ' von ' + STATIONEN.length + ' · überspringen';
+    function zurueck() { zeige('entdecken', i); }
+    function zurueckKnopf(text) { return el('button', { type: 'button', class: 'link', id: 'wissen-zurueck', text: text, onclick: zurueck }); }
+    var c = el('div', { class: 'card wissen' });
+    c.appendChild(stKopf(ort, null, s.titel));
+    var ids = wissenFragen(s);
+    var einl = el('p', { html: '<b>Kannst du das wirklich schon?</b> Beantworte ' + (ids.length === 1 ? 'die Frage' : 'die ' + ids.length + ' Fragen') + ' ohne Hilfe. Stimmen alle Antworten, gilt ' + EH.die + ' als erledigt. Du hast einen Versuch. <span class="badge zaehlt-nicht">zählt nicht</span>' });
+    c.appendChild(einl);
+    var fragen = el('div');
+    var qs = ids.map(function (id, k) { var q = frage(FR[id], 'pruefung', { nr: k + 1 }); fragen.appendChild(q.el); return q; });
+    c.appendChild(fragen);
     var erg = el('div', { 'aria-live': 'polite' });
     c.appendChild(erg);
     haupt.appendChild(c);
     function auswerten() {
-      qs.forEach(function (q) { var r = q.bewerten(); q.feedbackNachher(); S.vb[q.f.id] = r.score >= 1 ? 1 : 0; });
-      skipNeu(); speichern(); kopf();
-      var namen = S.skip.map(function (id) { return esc(STATIONEN.filter(function (x) { return x.id === id; })[0].titel); });
       erg.innerHTML = '';
-      erg.appendChild(msg(namen.length ? (WELTSPIEL ? '<b>Stark!</b> Diese Level fallen dir bestimmt leicht: ' : '<b>Stark!</b> Diese ' + EH.m + ' darfst du überspringen: ') + namen.join(', ') + '. Sie sind auf deinem Lernweg markiert.' : 'Hier ist noch einiges neu für dich. Arbeite ' + 'die ' + EH.m + ' der Reihe nach durch – dafür sind sie da.', namen.length ? 'ok' : ''));
-      var nx = naechsterSchritt();
-      leiste('Ausgewertet.', nx.label, function () { zeige(nx.t, nx.i); });
+      if (!qs.every(function (q) { return q.beantwortet(); })) { erg.appendChild(msg('Beantworte erst alle Fragen – oder geh zurück und bearbeite ' + EH.die + '.', 'warn')); return; }
+      var n = qs.filter(function (q) { return q.bewerten().score >= 1; }).length;
+      einl.hidden = true;
+      if (n === qs.length) {
+        S.st[s.id] = 1; S.us[s.id] = 1; speichern(); kopf();
+        qs.forEach(function (q) { q.feedbackNachher(); });
+        erg.appendChild(msg('<b>Alles richtig – das kannst du schon.</b> ' + EH.die.charAt(0).toUpperCase() + EH.die.slice(1) + ' gilt als erledigt. Bearbeiten kannst du ' + EH.die + ' trotzdem jederzeit.', 'ok'));
+        var ej = einschaetzung(lzZumEinschaetzen(s), n, qs.length); if (ej) erg.appendChild(ej);
+        leiste(ort, nx.label, function () { zeige(nx.t, nx.i); }, zurueckKnopf(EH.e + ' trotzdem ansehen'));
+      } else {
+        S.uv[s.id] = 0; speichern();
+        fragen.innerHTML = '';
+        erg.appendChild(msg('<b>' + n + ' von ' + qs.length + ' richtig.</b> Zum Überspringen müssen alle Antworten stimmen. Bearbeite ' + EH.die + ': Die Fragen kommen danach im Kurz-Check wieder, dann mit Erklärung.', 'warn'));
+        leiste(ort, EH.e + ' bearbeiten →', zurueck);
+      }
+      var wb = document.getElementById('weiter'); if (wb) wb.focus({ preventScroll: true });
       erg.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
-    testHaken.push({ art: 'abkuerzung', obj: { auswerten: auswerten, loesen: function () { qs.forEach(function (q) { q.loesungEinsetzen(); }); } } });
-    leiste(ids.length + (ids.length === 1 ? ' Frage' : ' Fragen'), 'Auswerten →', auswerten);
+    testHaken.push({ art: 'wissen', obj: { loesen: function () { qs.forEach(function (q) { q.loesungEinsetzen(); }); }, auswerten: auswerten, zurueck: zurueck } });
+    leiste(ort, 'Antworten prüfen', auswerten, zurueckKnopf('Doch nicht – zurück'));
   }
 
   /* ---------- Bausteine zum Mitdenken und Nachschlagen ---------- */
@@ -729,11 +745,11 @@
   function pfad(items, aktiv, teil, erledigt, praefix) {
     var nav = el('nav', { class: 'pfad', 'aria-label': praefix });
     items.forEach(function (s, i) {
-      var skip = S.skip.indexOf(s.id) >= 0 && !erledigt[s.id];
+      var skip = teil === 'entdecken' && !!(erledigt[s.id] && S.us[s.id]);  // übersprungen: Wissensabfrage bestanden
       var name = (s.mission && s.mission.ort) || s.titel || '';
       nav.appendChild(el('button', { type: 'button', class: 'pfad-punkt' + (erledigt[s.id] ? ' fertig' : '') + (skip ? ' skip' : '') + (i === aktiv ? ' aktiv' : ''), 'aria-current': i === aktiv ? 'step' : null,
-        title: name + (skip ? ' – darfst du überspringen' : ''), 'aria-label': (i + 1) + ': ' + name + (erledigt[s.id] ? ' (erledigt)' : skip ? ' (darfst du überspringen)' : ''),
-        text: erledigt[s.id] ? '✓' : skip ? '»' : String(i + 1), onclick: function () { zeige(teil, i); } }));
+        title: name + (skip ? ' – übersprungen' : ''), 'aria-label': (i + 1) + ': ' + name + (skip ? ' (übersprungen, Wissensabfrage bestanden)' : erledigt[s.id] ? ' (erledigt)' : ''),
+        text: skip ? '»' : erledigt[s.id] ? '✓' : String(i + 1), onclick: function () { zeige(teil, i); } }));
     });
     return nav;
   }
@@ -746,8 +762,8 @@
       zielHtml ? el('div', { class: 'st-ziel', html: '<span aria-hidden="true">🎯</span> <span class="sr">Ziel: </span>' + zielHtml }) : null
     ]), rechts || null]);
   }
-  // Wer alle Vorab-Fragen einer Station richtig hatte, kennt sich schon aus: Die Vorführung wird dann nicht hervorgehoben.
-  function kenntSchon(s) { var q = vorabFragen(s); return q.length > 0 && q.every(function (id) { return S.vb[id] === 1; }); }
+  // Eine übersprungene Station, die danach doch ganz bearbeitet wird (Szene und Kurz-Check), zählt als normal erledigt
+  function nichtMehrUebersprungen(s) { if (!S.us[s.id]) return false; delete S.us[s.id]; return true; }
 
   /* ---------- Bühne: Szene groß in der Mitte, Notiz daneben ---------- */
   // x: Station/Übung/Teil A; modus: 'station' | 'uebung' | 'pruefung' (Teil A der Selbstüberprüfung: ohne Rückmeldung)
@@ -882,44 +898,6 @@
     leisteSpiel();
   }
 
-  // Die Vorab-Frage ist zugleich die Leitfrage der Station: Sie bleibt über der Szene stehen und wird im Kurz-Check aufgelöst.
-  function leitHtml(ids, vor) {
-    var fr = ids.map(function (id) { return FR[id] ? FR[id].frage : ''; }).filter(Boolean).join(' · ');
-    return '💭 <b>' + vor + '</b> ' + fr + ' <span class="klein">Die Szene zeigt es dir, im Kurz-Check löst du auf.</span>';
-  }
-  function leitNotiz(ids) { return el('div', { class: 'vorab-notiz', html: leitHtml(ids, 'Deine Frage:') }); }
-  // Vorab-Frage vor der Szene (Pretesting): erst vermuten, dann ausprobieren; wer sie sicher kann, darf überspringen.
-  // weiter(kennt): kennt = true, wenn die Vermutung stimmte (dann wird die Vorführung nicht hervorgehoben).
-  function vorabKarte(ids, i, weiter) {
-    var k = el('div', { class: 'vorab-karte' });
-    k.appendChild(el('div', { class: 'vorab-kopf', html: '<b>Kurz vorab: Was vermutest du?</b> <span class="badge zaehlt-nicht">zählt nicht</span>' }));
-    k.appendChild(el('p', { class: 'klein', text: 'Erst vermuten, dann ausprobieren. Auch eine falsche Vermutung hilft dir beim Lernen.' }));
-    var qs = ids.map(function (id, n) { var q = frage(FR[id], 'pruefung', { nr: ids.length > 1 ? n + 1 : null }); k.appendChild(q.el); return q; });
-    var meld = el('div', { 'aria-live': 'polite' });
-    var bP = el('button', { type: 'button', class: 'vorab-pruefen primaer', text: 'Vermutung prüfen' });
-    var bW = el('button', { type: 'button', class: 'link', text: 'Weiß ich nicht – zur Szene' });
-    k.appendChild(el('div', { class: 'steuerung' }, [bP, bW]));
-    k.appendChild(meld);
-    function notiz(html) { k.innerHTML = ''; k.className = 'vorab-notiz'; k.appendChild(el('span', { html: html })); }
-    bP.addEventListener('click', function () {
-      if (!qs.every(function (q) { return q.beantwortet(); })) { meld.innerHTML = ''; meld.appendChild(msg('Schreib oder wähle erst eine Vermutung – oder geh direkt zur Szene.', 'warn')); return; }
-      var ok = 0;
-      qs.forEach(function (q) { var r = q.bewerten(); S.vb[q.f.id] = r.score >= 1 ? 1 : 0; if (r.score >= 1) ok++; });
-      skipNeu(); speichern();
-      if (ok === qs.length) {
-        var nx = naechsteStation(i);
-        k.innerHTML = '';
-        k.appendChild(msg('<b>Stimmt!</b> Du kennst dich hier offenbar schon aus und darfst ' + EH.diese + ' überspringen.', 'ok'));
-        k.appendChild(el('div', { class: 'steuerung' }, [
-          el('button', { type: 'button', class: 'primaer', text: EH.e + ' überspringen', onclick: function () { zeige(nx.t, nx.i); } }),
-          el('button', { type: 'button', class: 'link', text: 'Trotzdem ausprobieren', onclick: function () { notiz('✔ Du kennst dich schon aus – nutze ' + EH.die + ' zum Festigen.'); weiter(true); } })
-        ]));
-      } else { notiz(leitHtml(ids, 'Merk dir deine Vermutung:')); weiter(false); }
-    });
-    bW.addEventListener('click', function () { ids.forEach(function (id) { if (S.vb[id] === undefined) S.vb[id] = -1; }); speichern(); notiz(leitHtml(ids, 'Deine Frage:')); weiter(false); });
-    testHaken.push({ art: 'vorab', obj: { zurSzene: function () { bW.click(); }, loesen: function () { qs.forEach(function (q) { q.loesungEinsetzen(); }); bP.click(); } } });
-    return k;
-  }
   // Neue Begriffe der Station als Chips zum Antippen (Vortraining direkt vor der Szene)
   function neueBegriffe(s, i) {
     var g = (P.glossar || []).filter(function (x) { return x.vorab === s.id || (x.vorab === true && i === 0); });
@@ -989,7 +967,7 @@
     haupt.appendChild(raster);
     var ziele = (s.lz || []).map(lz).filter(function (z) { return z.text && z.text !== z.id; });
     function kapitelPunkte() { return pfad(STATIONEN, i, 'entdecken', S.st, SPIEL ? (SPIEL.titel || 'Missionen') : 'Kapitel'); }
-    var nav = kapitelPunkte(), kennt = false;
+    var nav = kapitelPunkte();
     lek.appendChild(stKopf((s.mission && s.mission.ort ? esc(s.mission.ort) + ' · ' : '') + 'Kapitel ' + (i + 1) + ' von ' + STATIONEN.length, nav, s.titel, ziele.map(function (z) { return z.text; }).join(' · ')));
     var koerper = el('div', { class: 'station-koerper' });
     lek.appendChild(koerper);
@@ -1003,7 +981,8 @@
     var checkBox = null, punkte = null, karte = null, k = k0;
     function pruefeFertig() {
       if (status.schritte && checkBox && !checkBox.open) checkBox.open = true;
-      if (status.schritte && status.check && !S.st[s.id]) {
+      if (status.schritte && status.check && (!S.st[s.id] || S.us[s.id])) {
+        nichtMehrUebersprungen(s);
         S.st[s.id] = 1; speichern(); kopf();
         var n2 = kapitelPunkte(); if (nav.parentNode) nav.parentNode.replaceChild(n2, nav); nav = n2;
         fertigMeldung.innerHTML = '';
@@ -1029,10 +1008,12 @@
     function leisteSetzen() {
       var info = 'Kapitel ' + (i + 1) + ' von ' + STATIONEN.length;
       function weiterKapitel() { zeige(nx.t, nx.i); }
+      // Überspringen: unauffällig neben dem Knopf, solange Schritte offen sind; es führt zuerst zur Wissensabfrage
+      var ex = darfUeberspringen(s) && !status.schritte ? skipKnopf(i) : null;
       if (S.st[s.id] && k >= ss.length - 1) leiste(info, nx.label, weiterKapitel);
-      else if (k < ss.length - 1) leiste(info + ' · Schritt ' + (k + 1) + ' von ' + ss.length, 'Nächster Schritt →', function () { geheZu(k + 1); }, null, !schrittFertig(s, k));
-      else if (k === ss.length - 1 && checkBox) leiste(info + ' · letzter Schritt', 'Weiter zum Kurz-Check →', function () { geheZu(ss.length); zumCheck(); }, null, !schrittFertig(s, k));
-      else if (checkBox && !status.check) leiste(info + ' · Kurz-Check offen', 'Zum Kurz-Check ↓', zumCheck, null, !status.schritte);
+      else if (k < ss.length - 1) leiste(info + ' · Schritt ' + (k + 1) + ' von ' + ss.length, 'Nächster Schritt →', function () { geheZu(k + 1); }, ex, !schrittFertig(s, k));
+      else if (k === ss.length - 1 && checkBox) leiste(info + ' · letzter Schritt', 'Weiter zum Kurz-Check →', function () { geheZu(ss.length); zumCheck(); }, ex, !schrittFertig(s, k));
+      else if (checkBox && !status.check) leiste(info + ' · Kurz-Check offen', 'Zum Kurz-Check ↓', zumCheck, ex, !status.schritte);
       else leiste(info, nx.label, weiterKapitel, null, !S.st[s.id]);
     }
     function geheZu(j) {
@@ -1081,7 +1062,7 @@
       // Vorführung: der Schritt wird im Gegenstand gezeigt (Lösungsbeispiel, P3)
       if (x.zeigen) {
         // Für Neulinge ist die Vorführung der nächste sinnvolle Schritt (P3) – dann ist sie hervorgehoben
-        steuer.appendChild(el('button', { type: 'button', class: 'zeig' + (!kennt && !schrittFertig(s, k) ? ' primaer' : ''), text: 'Zeig’s mir', onclick: function (e) {
+        steuer.appendChild(el('button', { type: 'button', class: 'zeig' + (!S.st[s.id] && !schrittFertig(s, k) ? ' primaer' : ''), text: 'Zeig’s mir', onclick: function (e) {
           try { x.loesen(SIMOBJ); } catch (er) { console.error(er); }
           var w = el('div', { class: 'feld demoschritt' }, [el('div', { class: 'feldtitel', text: 'Vorgeführt' })]);
           if (x.frage && x.warum) w.appendChild(selbsterklaeren(x.frage, x.warum)); else if (x.warum) w.appendChild(el('div', { class: 'warum', html: 'Warum: ' + x.warum }));
@@ -1098,8 +1079,7 @@
       karte.appendChild(tl);
       pruefen();
     }
-    function baue(k0) {
-      kennt = k0 === undefined ? kenntSchon(s) : !!k0;
+    function baue() {
       var nb = neueBegriffe(s, i); if (nb) koerper.appendChild(nb);
       punkte = el('div', { class: 'sim-punkte', role: 'group', 'aria-label': 'Schritte dieses Kapitels' });
       karte = el('div', { class: 'sim-schritt' });
@@ -1122,17 +1102,13 @@
         geheZu(ss.length);
       } } });
     }
-    var vf = vorabFragen(s), offen = vf.filter(function (id) { return S.vb[id] === undefined; });
-    if (offen.length && !S.st[s.id]) { koerper.appendChild(vorabKarte(offen, i, baue)); leiste('Kapitel ' + (i + 1) + ' von ' + STATIONEN.length, nx.label, function () { zeige(nx.t, nx.i); }, null, true); }
-    else { if (vf.length && !S.st[s.id] && !kenntSchon(s)) koerper.appendChild(leitNotiz(vf)); baue(); }
+    if (darfUeberspringen(s)) testHaken.push({ art: 'ueberspringen', obj: { oeffnen: function () { wissenOeffnen(i); } } });
+    baue();
   }
 
   // Kurz-Check einer Station (zählt nicht), am Ende Einschätzung je Lernziel; beiFertig, wenn alle Fragen geprüft sind
   function kurzCheck(s, offen, hinweis, beiFertig) {
-    // Zuerst wird die Vorab-Frage aufgelöst (wenn sie vorab nicht schon richtig war): Vorab-Fragen wirken nur,
-    // wenn die richtige Antwort danach auch gelernt wird. Sie zählt als Frage des Kurz-Checks.
-    var auf = vorabFragen(s).filter(function (id) { return S.vb[id] !== 1 && (s.check || []).indexOf(id) < 0; });
-    var ids = auf.concat(s.check || []);
+    var ids = (s.check || []).slice();
     var box = el('details', { class: 'check' });
     box.open = offen;
     box.appendChild(el('summary', { html: 'Kurz-Check · ' + ids.length + ' Fragen <span class="badge zaehlt-nicht">zählt nicht</span>' + (hinweis ? ' <span class="klein">– ' + hinweis + '</span>' : '') }));
@@ -1140,7 +1116,7 @@
     var geprueft = {}, richtig = {};
     var sum = el('div', { 'aria-live': 'polite' });
     ids.forEach(function (id, k) {
-      var q = frage(FR[id], 'lernen', { nr: k + 1, vorspann: auf.indexOf(id) >= 0 ? 'Deine Frage von vorhin – jetzt weißt du es:' : null, beiPruefung: function (res) {
+      var q = frage(FR[id], 'lernen', { nr: k + 1, beiPruefung: function (res) {
         geprueft[id] = 1; if (res.score >= 1) richtig[id] = 1;
         if (anzahl(geprueft) === ids.length) {
           sum.innerHTML = '';
@@ -1168,12 +1144,9 @@
     var koerper = el('div', { class: 'station-koerper' });
     var nx = naechsteStation(i);
     function weiter() { zeige(nx.t, nx.i); }
-    var vf = vorabFragen(s);
-    function baue(kennt) {
-      if (kennt === undefined) kennt = kenntSchon(s);
+    function baue() {
       var nb = neueBegriffe(s, i);
-      // Die Vorab-Frage ist die Leitfrage; eine eigene Leitfrage erscheint nur ohne Vorab-Frage
-      var mis = mission(s.auftrag || '', vf.length ? null : s.leitfrage, s.figur);
+      var mis = mission(s.auftrag || '', s.leitfrage, s.figur);
       koerper.appendChild(mis.el);
       var fertigMeldung = el('div', { 'aria-live': 'polite' });
       var status = { interaktion: !s.interaktion, check: !(s.check || []).length };
@@ -1183,12 +1156,16 @@
         if (zeigKnopf && (status.interaktion || S.st[s.id])) zeigKnopf.classList.remove('primaer');
         if (S.st[s.id]) leiste(ort, nx.label, weiter);
         else if (status.interaktion && checkBox && !status.check) leiste(ort + (s.interaktion ? ' · Szene geschafft' : ''), 'Zum Kurz-Check ↓', function () { checkBox.open = true; checkBox.scrollIntoView({ behavior: 'smooth', block: 'start' }); });
-        else leiste(ort, nx.label, weiter, null, true);
+        // Offene Station: kein „Weiter“. Wer sie überspringen will, geht über die Wissensabfrage (ein Versuch).
+        else if (darfUeberspringen(s)) leiste(ort, null, null, skipKnopf(i));
+        else if (S.uv[s.id] === 0) leiste(ort + ' · Zum Überspringen hat es nicht gereicht: erst die Szene, dann der Kurz-Check.');
+        else leiste(ort, nx.label, weiter, null, true);  // ohne Kurz-Check gibt es keine Wissensabfrage
       }
       function pruefeFertig() {
         if (status.interaktion && checkBox && !checkBox.open) { checkBox.open = true; }
-        var neu = status.interaktion && status.check && !S.st[s.id];
+        var neu = status.interaktion && status.check && (!S.st[s.id] || S.us[s.id]);
         if (neu) {
+          nichtMehrUebersprungen(s);
           S.st[s.id] = 1; speichern(); kopf();
           var n2 = punkte(); if (nav.parentNode) nav.parentNode.replaceChild(n2, nav); nav = n2;
           fertigMeldung.innerHTML = '';
@@ -1212,7 +1189,7 @@
           var ds = demoSteuerung(b, s.selbsterklaerung || (s.beispiel && s.beispiel.selbsterklaerung), mis);
           // Für Neulinge ist die Vorführung der nächste sinnvolle Schritt (P3) – dann ist sie hervorgehoben
           zeigKnopf = ds.knopf;
-          if (!kennt && !S.st[s.id]) zeigKnopf.classList.add('primaer');
+          if (!S.st[s.id]) zeigKnopf.classList.add('primaer');
           steuer.appendChild(ds.knopf);
           testHaken.push({ art: 'demo', obj: ds });
         }
@@ -1221,7 +1198,7 @@
         if (nb) koerper.appendChild(nb);
         if (s.bild) koerper.appendChild(el('div', { class: 'bild', html: s.bild }));
         if (s.inhalt) koerper.appendChild(el('div', { html: s.inhalt }));
-        var lb2 = legacyBeispiel(s); if (lb2) { lb2.open = S.skip.indexOf(s.id) < 0; koerper.appendChild(lb2); }
+        var lb2 = legacyBeispiel(s); if (lb2) { lb2.open = !S.us[s.id]; koerper.appendChild(lb2); }
         if (s.steckbrief) koerper.appendChild(el('details', {}, [el('summary', { text: 'Steckbrief' }), el('div', { html: s.steckbrief })]));
         if (s.beruf) koerper.appendChild(msg('<b>Wozu brauchst du das?</b> ' + s.beruf, ''));
       }
@@ -1236,9 +1213,8 @@
       koerper.appendChild(nach);
       leisteSetzen();
     }
-    var offen = vf.filter(function (id) { return S.vb[id] === undefined; });
-    if (offen.length && !S.st[s.id]) { m.appendChild(vorabKarte(offen, i, baue)); leiste(ort, nx.label, weiter, null, true); }
-    else { if (vf.length && !S.st[s.id] && !kenntSchon(s)) m.appendChild(leitNotiz(vf)); baue(); }
+    if (darfUeberspringen(s)) testHaken.push({ art: 'ueberspringen', obj: { oeffnen: function () { wissenOeffnen(i); } } });
+    baue();
     m.appendChild(koerper);
     haupt.appendChild(m);
   }
@@ -1526,8 +1502,8 @@
     einschaetzenBei: function (i) { return STATIONEN[i] ? lzZumEinschaetzen(STATIONEN[i]) : []; },
     pruefeInhalt: pruefeInhalt,
     woerter: woerter,
-    vorabFragen: vorabFragen,
-    alleVorab: alleVorab,
+    wissenFragen: function (i) { return STATIONEN[i] ? wissenFragen(STATIONEN[i]) : []; },
+    darfUeberspringen: function (i) { return !!STATIONEN[i] && darfUeberspringen(STATIONEN[i]); },
     zustand: function () { return JSON.parse(JSON.stringify(S)); },
     ansicht: function () { return ANSICHT; },
     zeige: zeige,

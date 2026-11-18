@@ -6,6 +6,7 @@
 # Aufruf (im Repo-Wurzelverzeichnis oder hier):  skills/baue-skills.sh
 set -euo pipefail
 cd "$(dirname "$0")"
+python3 leitfaden_sync.py >/dev/null   # Auszüge aus docs/leitfaden-lernpakete.md neu erzeugen
 python3 pruefe_stand.py
 SKILLS=(lernpaket-planen fragenpool-erstellen lernpaket-bauen lernpaket-pruefen lernpaket-auswerten)
 MIT_PRUEFSKRIPT=(lernpaket-bauen lernpaket-pruefen)

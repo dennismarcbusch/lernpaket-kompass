@@ -92,7 +92,7 @@ window.PAKET = {
       id: 'S1', titel: 'Wozu gibt es das Handelsregister?', lz: ['LZ1'],
       mission: { ort: 'Hartmann Elektro', symbol: '⚡', ende: 'Hartmann Elektro ist geprüft – Katja kann den Vertrag vorbereiten.' },
       auftrag: 'Hartmann Elektro will uns beliefern. Schau im Registerportal nach, ob die Firma eingetragen ist und wer für sie unterschreiben darf. Danach besprechen wir das.',
-      leitfrage: 'Wer führt das Handelsregister, wer darf einsehen, wozu ist es gut?',  // nur, weil diese Station keine Vorab-Frage hat – sonst ist die Vorab-Frage die Leitfrage
+      leitfrage: 'Wer führt das Handelsregister, wer darf einsehen, wozu ist es gut?',  // optional: ein Satz, der der Szene ein Ziel gibt
       inhalt: '<p>Das <b>Handelsregister</b> ist öffentlich. Das <b>Amtsgericht</b> führt es. Wer etwas ändern will, meldet es <b>elektronisch und öffentlich beglaubigt</b> an.</p>',
       selbsterklaerung: { schritt: 3, frage: 'Warum darf eigentlich jeder ins Handelsregister schauen, ohne einen Grund zu nennen?' },
       interaktion: function (box, api) {
