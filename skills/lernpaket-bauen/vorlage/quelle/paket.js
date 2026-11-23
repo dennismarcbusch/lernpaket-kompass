@@ -135,7 +135,7 @@ window.PAKET = {
   id: 'beispiel-bits-und-bytes',          // = Identifier im imsmanifest.xml
   titel: 'Bits & Bytes',
   untertitel: 'Binärzahlen lesen und schreiben',
-  version: '4.0',                       // Version dieses Pakets; eigene Pakete beginnen bei 1.0
+  version: '4.1',                       // Version dieses Pakets; eigene Pakete beginnen bei 1.0
   bereit: 80,                           // ab so viel Prozent sitzt das Thema (Selbstüberprüfung, zählt nicht)
   dauer: 'etwa 90 Minuten',
   welt: { thema: 'technik', kulisse: 'serverraum' },

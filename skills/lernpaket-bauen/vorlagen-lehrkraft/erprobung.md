@@ -13,7 +13,7 @@ Kurztest mit **drei bis fünf Schülern**, bevor das Paket in der Klasse eingese
 
 ## Während des Tests (je Station eine Zeile)
 
-| Station | Wusste sofort, was zu tun ist? | Vorab-Frage: ernsthaft vermutet? | Szene: wo gehakt, was falsch bedient? | Vorführung genutzt? | Kurz-Check: Fragen verstanden? | Zeit |
+| Station | Wusste sofort, was zu tun ist? | Überspringen versucht? Geschafft? | Szene: wo gehakt, was falsch bedient? | Vorführung genutzt? | Kurz-Check: Fragen verstanden? | Zeit |
 |---|---|---|---|---|---|---|
 | 1 | | | | | | |
 | 2 | | | | | | |

@@ -31,25 +31,26 @@ Das frühere P14 (Szene zum Anfassen) ist Teil von P12. Querschnitt: früh einen
 - Bei jedem neuen Aufgabentyp zuerst eine Vorführung in der Szene („Zeig’s mir“), an einem anderen Fall als der Aufgabe
 - Jeden Schritt kurz begründen; an einem entscheidenden Schritt eine Frage zum Selbsterklären („Warum …?“)
 - Danach ähnliche Aufgabe, dann veränderte; die Vorführung ist überspringbar
-- Wo ein Zusammenhang verstanden werden soll (kein Handgriff), darf die Szene zuerst erkundet werden; die Vorab-Frage gibt dem Erkunden ein Ziel
+- Wo ein Zusammenhang verstanden werden soll (kein Handgriff), darf die Szene zuerst erkundet werden; der Auftrag gibt dem Erkunden ein Ziel
 
 **Prüffrage:** Gibt es vor jedem neuen Aufgabentyp eine Vorführung mit Begründung je Schritt und einer Frage zum Selbsterklären, die man überspringen kann?
 
 ### P4 · Entdecken mit Auftrag
 
-- Konkreter Auftrag statt „Probiert mal aus“; die Vorab-Frage ist die Leitfrage der Station
+- Konkreter Auftrag statt „Probiert mal aus“
 - Eingebaute Prüfmöglichkeit: Die Szene zeigt die Folge
 - Rückmeldung nach jedem Versuch; in Übungen drei gestufte Tipps (Denkanstoß, Teillösung, Lösung)
 
-**Prüffrage:** Hat jede Station einen Auftrag, eine Vorab-Frage als Leitfrage und Rückmeldung nach jedem Versuch?
+**Prüffrage:** Hat jede Station einen Auftrag und Rückmeldung nach jedem Versuch?
 
 ### P5 · Abfragen statt nochmal lesen
 
-- Jede Station endet mit einem Kurz-Check ohne Note: erst die Auflösung der Vorab-Frage, dann 2–3 Fragen (ohne Vorab-Frage 2–4)
+- Jede Station endet mit einem Kurz-Check ohne Note: 2–3 Fragen, mindestens eine davon schwer zu erraten (Zahl, Text, Zuordnen, Mehrfachauswahl)
+- Der Kurz-Check ist zugleich die Wissensabfrage beim Überspringen: Wer eine Station überspringen will, beantwortet seine Fragen zuerst ohne Hilfe; alle müssen stimmen, es gibt einen Versuch (macht die Vorlage)
 - Mindestens eine Frage je Lernziel der Station
 - Sichtbar als „zählt nicht“ markiert, beliebig oft wiederholbar
 
-**Prüffrage:** Endet jede Station mit einem Kurz-Check, der zuerst die Vorab-Frage auflöst und sichtbar nicht zählt?
+**Prüffrage:** Endet jede Station mit einem Kurz-Check, der sichtbar nicht zählt und mindestens eine Frage enthält, die schwer zu erraten ist?
 
 ### P6 · Feedback, das erklärt
 
@@ -122,7 +123,7 @@ Das frühere P14 (Szene zum Anfassen) ist Teil von P12. Querschnitt: früh einen
 
 ### P11 · Selbststeuerung anleiten
 
-- Einschätzung, Fortschritt, Lernempfehlung und Abkürzung für Lernende mit Vorwissen liefert die Vorlage
+- Einschätzung, Fortschritt, Lernempfehlung und das Überspringen mit Wissensabfrage liefert die Vorlage
 - Von der Autorin: Reflexionsfrage mit Musterantwort je Übung; Aufträge zum Mitdenken (skizzieren, zusammenfassen, erklären)
 
 **Prüffrage:** Hat jede Übung eine Reflexionsfrage mit Musterantwort?

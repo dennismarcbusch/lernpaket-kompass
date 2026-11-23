@@ -7,7 +7,7 @@ Der Lernpaket-Kompass hilft Lehrkräften, interaktive Lernpakete für den eigene
 
 Programmierkenntnisse brauchst du nicht, und du musst auch keine Erfahrung mit KI-Werkzeugen mitbringen. Der Kompass ist für alle Fächer gedacht.
 
-Aktueller Stand: **Kompass 4.0** (eine Versionsnummer für Leitfaden, Skill und Vorlage; sie steht in der Datei [`VERSION`](VERSION)).
+Aktueller Stand: **Kompass 4.1** (eine Versionsnummer für Leitfaden, Skill und Vorlage; sie steht in der Datei [`VERSION`](VERSION)).
 
 ![Station aus dem Beispielpaket: ein nachgebauter Router mit acht Schaltern, daneben der Auftrag und eine kurze Erklärung](docs/bilder/vorlage-szene.webp)
 

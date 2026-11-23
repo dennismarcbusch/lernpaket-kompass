@@ -37,7 +37,7 @@ Wie lautet **100** als 8-Bit-Binärzahl?
 
 | Teil | Schreibweise |
 |---|---|
-| Kopf | `## F7 · LZ2 · mc · check, selbstueberpruefung` – ID, Lernziel, Typ (`mc`, `zuordnen`, `zahl`, `text`, `hotspot`), Einsatz (`check`, `selbstueberpruefung`, `uebung`, `vorab`, mehrere mit Komma) |
+| Kopf | `## F7 · LZ2 · mc · check, selbstueberpruefung` – ID, Lernziel, Typ (`mc`, `zuordnen`, `zahl`, `text`, `hotspot`), Einsatz (`check`, `selbstueberpruefung`, `uebung`, mehrere mit Komma) |
 | Fragetext | Absätze direkt unter dem Kopf; dazu Codeblöcke (```` ``` ````) und Tabellen (`\| … \|`). Listen gibt es im Fragetext nicht, weil `- ` eine Antwort beginnt. |
 | Bild | `![Beschreibung](bilder/datei.svg)` unter dem Fragetext; nur SVG, wird eingebettet. Die Beschreibung liest der Screenreader vor. |
 | Erklärung | Zeilen mit `> ` am Ende: warum die richtige Antwort richtig ist (P6). Pflicht. |
@@ -77,7 +77,7 @@ So steht eine Frage nach dem Build in `js/inhalt.js`; in dieser Form schreibt ma
 |---|---|---|
 | `id` | ja | eindeutig im Paket, z. B. `F7`. Wird als `S<Versuch>_F7` an die Lernplattform gemeldet und in der Auswertung genutzt. Nach dem ersten Einsatz nicht mehr umbenennen. |
 | `lz` | ja | Lernziel, z. B. `LZ2` |
-| `einsatz` | ja | Liste aus `check` (Kurz-Check), `selbstueberpruefung` (Pool für Teil B; älterer Name `nachweis` wird weiter gelesen), `uebung`, `vorab` (Vorab-Frage einer Station; früher `vorwissen`) |
+| `einsatz` | ja | Liste aus `check` (Kurz-Check), `selbstueberpruefung` (Pool für Teil B; älterer Name `nachweis` wird weiter gelesen), `uebung`. Den früheren Einsatz `vorab` gibt es nicht mehr; der Build bricht dort mit einem Hinweis ab |
 | `typ` | ja | `mc`, `zuordnen`, `zahl`, `text`, `hotspot` (siehe unten) |
 | `frage` | ja | Fragetext, HTML erlaubt |
 | `erklaerung` | ja | Warum die richtige Antwort richtig ist (Feedback, P6) |
@@ -108,9 +108,9 @@ So steht eine Frage nach dem Build in `js/inhalt.js`; in dieser Form schreibt ma
 | `spielwelt` | optional: **Spielmodus** `{titel, tab, start(box, api)}` – ein Spiel über alle Stationen (siehe „Spielmodus“ unten). Dann sind die Stationen Level: `{id, titel, lz, check (höchstens 3), mitdenken}` ohne eigene Szene. |
 | `leitsituation` | Einstiegstext der Figur (HTML), höchstens etwa 40 Wörter: der einzige Fließtext auf der Startseite |
 | `lernziele` | `[{id: 'LZ1', kurz, text: 'Ich kann …'}]` – drei bis acht. `kurz` (Pflicht, höchstens vier Wörter) steht als Etikett im Lernpfad der Startseite, `text` an jeder Station und im Abschluss |
-| `vorwissen` | veraltet: Liste von Fragen-IDs. Wird nach Lernziel den Stationen zugeordnet, wenn diese kein `vorab` haben. Neu: `vorab` an der Station |
+| `vorwissen` | entfällt: Vorab-Fragen gibt es nicht mehr. Der Eintrag wird nicht mehr gelesen; die Inhaltsprüfung nennt ihn als Hinweis |
 | `glossar` | `[{begriff, erklaerung, vorab}]` – alle Fachbegriffe, unter jeder Station und Übung aufklappbar. `vorab: 'S1'` stellt den Begriff an dieser Station als „Neu hier“ neben der Szene vor (Vortraining); `vorab: true` bedeutet Station 1 |
-| `stationen` | `[{id, titel, lz: [...], figur, mission, auftrag, inhalt, interaktion (Pflicht), selbsterklaerung: {schritt, frage}, steckbrief, vertiefung, mitdenken: {auftrag, muster}, beruf, check: [Fragen-IDs], vorab: Fragen-ID}]`. `vorab` ist die Vorab-Frage am Stationsanfang („Was vermutest du?“, zählt nicht) und zugleich die **Leitfrage**: Sie bleibt über der Szene stehen, und der Kurz-Check löst sie als erste Frage auf. Sie zielt auf den Kern der Station, ist schwer zu erraten (Zahl, Text, Zuordnen, Mehrfachauswahl) und steht nicht zusätzlich in `check`. Richtig beantwortet, darf die Station übersprungen werden; alle Vorab-Fragen zusammen bilden die Abkürzung „Ich kenne mich schon aus“. Ein eigenes Feld `leitfrage` nur an Stationen ohne Vorab-Frage. `check`: 2–3 Fragen (ohne Vorab-Frage 2–4). `vorab: false` schaltet die Zuordnung aus `vorwissen` ab. `inhalt` steht als „Kurz erklärt“ in der Notiz neben der Szene (höchstens etwa 40 Wörter). Ohne Szene nur mit `ohneInteraktion: 'Begründung'`; dann wird `beispiel: {titel, aufgabe, schritte: [{tun, warum}]}` als Text gezeigt. |
+| `stationen` | `[{id, titel, lz: [...], figur, mission, auftrag, inhalt, interaktion (Pflicht), selbsterklaerung: {schritt, frage}, steckbrief, vertiefung, mitdenken: {auftrag, muster}, beruf, check: [Fragen-IDs], leitfrage}]`. `check`: 2–3 Fragen für den Kurz-Check am Ende der Station. Dieselben Fragen sind die **Wissensabfrage**, wenn jemand die Station überspringen will (Knopf „Station überspringen“ in der Fußleiste einer offenen Station: eigener Bildschirm ohne Szene und Erklärungen; stimmen alle Antworten, gilt die Station als erledigt; sonst ist der eine Versuch verbraucht, die Lösungen bleiben verdeckt, und die Fragen kommen im Kurz-Check wieder). Mindestens eine Frage ist deshalb schwer zu erraten (Zahl, Text, Zuordnen, Mehrfachauswahl). `leitfrage` (optional, ein Satz) steht unter dem Auftrag. Das frühere Feld `vorab` (Vorab-Frage) entfällt; die Inhaltsprüfung nennt es als Hinweis. `inhalt` steht als „Kurz erklärt“ in der Notiz neben der Szene (höchstens etwa 40 Wörter). Ohne Szene nur mit `ohneInteraktion: 'Begründung'`; dann wird `beispiel: {titel, aufgabe, schritte: [{tun, warum}]}` als Text gezeigt. |
 | `uebungen` | `[{id, titel, lz, figur, auftrag, interaktion (wo möglich) oder frage (ID), tipps: [Denkanstoß, Teillösung, Lösung], mitdenken: {auftrag, muster}, reflexion: {frage, muster}, steckbrief}]` |
 | `selbstueberpruefung` | `{dauer, gewichtA (Prozent, Standard 50), einleitung, danach, teilA: {titel, figur, auftrag, inhalt, interaktion}, teilB: {proLZ: 2}}`. Zählt nicht, beliebig oft wiederholbar. `danach` (optional): ein Satz, was folgt, wenn das Thema sitzt, z. B. der Kompetenznachweis in der Lernplattform. Älterer Name `nachweis` wird weiter gelesen |
 | `merkblatt` | `[{lz, titel, zeilen: [{text mit ___, loesung}], fehler, beispiel, schema}]` |
@@ -170,7 +170,7 @@ simulation: { titel: 'Arbeitsplatz Einkauf · Registerportal und Prüfliste', st
   // api.kit, api.erklaere, api.meldung, api.sage wie in Szenen (stumm, während loesen nachgespielt wird)
   return partnerCheck(box, ['hartmann', 'ostwind'], api.geaendert);  // Objekt mit Zustand und Befehlen
 } },
-stationen: [ { id: 'K1', titel: 'Gibt es Hartmann Elektro wirklich?', lz: ['LZ1'], vorab: 'VA', check: ['C1', 'C2', 'C3'],
+stationen: [ { id: 'K1', titel: 'Gibt es Hartmann Elektro wirklich?', lz: ['LZ1'], check: ['C1', 'C2', 'C3'],
   schritte: [
     { zeigen: true, auftrag: 'Such die Firma im Registerportal.', erklaerung: 'Das Portal ist öffentlich …',
       frage: 'Warum darf jeder ins Register schauen?', warum: 'Wer Geschäfte macht, soll sich …',
@@ -188,7 +188,7 @@ stationen: [ { id: 'K1', titel: 'Gibt es Hartmann Elektro wirklich?', lz: ['LZ1'
 - **`loesen(sim)`** führt den Schritt vollständig aus (auch nötige Wege, etwa erst suchen, dann öffnen) und muss `pruefe` erfüllen. Es dient für „Lösung zeigen“, für den automatischen Test und für den **Wiedereinstieg**: Nach dem Neuladen baut die Engine den Gegenstand neu und spielt `loesen` aller früheren Schritte still nach. Gespeichert werden nur die erledigten Schritte, nicht der Gegenstand.
 - **`zeigen: true`** macht einen Schritt zur Vorführung („Zeig’s mir“): Die Figur macht ihn vor, `frage`/`warum` dienen als Frage zum Selbsterklären. Mindestens der erste Schritt eines Kapitels, in dem etwas Neues bedient wird.
 - **Zustand gehört dem Gegenstand:** Was die Lernenden tun, bleibt stehen, auch über Kapitel hinweg. „↺ Schritt neu“ baut den Gegenstand bis vor diesen Schritt neu auf.
-- **Kurz-Check** (erst die Auflösung der Vorab-Frage, dann 2–3 Fragen) öffnet sich, wenn alle Schritte des Kapitels erledigt sind, danach einmal je Lernziel die Einschätzung; die Vorab-Frage steht vor dem ersten Schritt und bleibt als Leitfrage stehen.
+- **Kurz-Check** (2–3 Fragen) öffnet sich, wenn alle Schritte des Kapitels erledigt sind, danach einmal je Lernziel die Einschätzung. Solange Schritte offen sind, steht in der Fußleiste „Kapitel überspringen“; es führt zuerst zur Wissensabfrage aus den Kurz-Check-Fragen.
 - **Üben und Selbstüberprüfung Teil A** bauen denselben Gegenstand mit **neuen Fällen** als `interaktion(box, api)` (Übung: `api.erledigt()`, Tipps; Selbstüberprüfung: `auswerten()` mit Prüfpunkten je Lernziel, keine Hilfen). Auch die Tafelbild-Szenen nutzen den Gegenstand (`zeichne`).
 - Eigener Stil des Gegenstands als `<style>` mit Präfix (z. B. `.pc-…`) in `quelle/paket.js`, damit die Vorlage unverändert bleibt.
 - Beispiel: `beispiele/simulation-handelsregister.js` („Partner-Check“: Registerportal und Prüfliste).
@@ -283,8 +283,8 @@ Regeln:
 ## Mengen (Richtwerte aus dem Leitfaden)
 
 - Szene: in jeder Station (Pflicht), mit Vorführung (`demo`, 2–4 Schritte) und Selbsterklär-Frage.
-- Text: höchstens etwa 90 Wörter in Auftrag und „Kurz erklärt“ je Station (die Vorab-Frage zählt nicht mit); im Simulationsmodus höchstens etwa 60 Wörter je Schritt, 2–6 Schritte je Kapitel.
-- Kurz-Check: 2–3 Fragen je Station, dazu kommt von selbst die Auflösung der Vorab-Frage (ohne Vorab-Frage 2–4); mindestens eine Frage je Lernziel der Station; ab Station 3 eine Frage zu früheren Stationen (P10).
+- Text: höchstens etwa 90 Wörter in Auftrag und „Kurz erklärt“ je Station; im Simulationsmodus höchstens etwa 60 Wörter je Schritt, 2–6 Schritte je Kapitel.
+- Kurz-Check: 2–3 Fragen je Station; mindestens eine Frage je Lernziel der Station und mindestens eine, die schwer zu erraten ist (Zahl, Text, Zuordnen, Mehrfachauswahl), weil der Kurz-Check auch die Wissensabfrage beim Überspringen ist; ab Station 3 eine Frage zu früheren Stationen (P10).
 - Selbstüberprüfung Teil B: `proLZ` = 2 Fragen je Lernziel pro Versuch; im Pool mindestens 4 je Lernziel, damit Wiederholungen nicht dieselben Fragen ziehen.
 - Teil A: Prüfpunkte so verteilen, dass jedes Lernziel zusammen mit Teil B mindestens zwei Prüfungen hat.
 - Selbsttest: 5 Fragen, aus allen Lernzielen gemischt.

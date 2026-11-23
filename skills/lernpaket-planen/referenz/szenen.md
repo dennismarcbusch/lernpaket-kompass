@@ -121,10 +121,10 @@ Technik: Inline-SVG und CSS im Paket (Verläufe, Schatten, kurze Übergänge), k
 
 ## Textbudget
 
-- Auftrag in der Sprechblase: ein bis zwei Sätze. Die Vorab-Frage ist die Leitfrage und zählt nicht zum Budget; eine eigene Leitfrage (ein Satz) nur an Stationen ohne Vorab-Frage.
+- Auftrag in der Sprechblase: ein bis zwei Sätze. Eine Leitfrage (ein Satz) ist möglich und zählt zum Budget.
 - „Kurz erklärt“ in der Notiz: höchstens etwa 40 Wörter. Mehr gehört in den Steckbrief (zugeklappt) oder in die Szene.
 - Erklärungen, die zur Handlung passen, kommen über `api.erklaere()` genau dann, wenn sie gebraucht werden.
-- Zusammen höchstens etwa 90 Wörter je Station (Inhaltsprüfung der Engine); im Simulationsmodus höchstens etwa 60 Wörter je Schritt. Das Prüfskript misst zusätzlich den sichtbaren Text neben der Szene (Hinweis ab 160 Wörtern, einschließlich Titel, Ziel, Vorab-Frage und Begriffen).
+- Zusammen höchstens etwa 90 Wörter je Station (Inhaltsprüfung der Engine); im Simulationsmodus höchstens etwa 60 Wörter je Schritt. Das Prüfskript misst zusätzlich den sichtbaren Text neben der Szene (Hinweis ab 160 Wörtern, einschließlich Titel, Ziel und Begriffen).
 - Die Szene ist auf 1366 × 768 ganz zu sehen: Station etwa 380 px hoch, Gegenstand im Simulationsmodus und Spielbühne etwa 600 px. Das Prüfskript misst die Unterkante gegen die Fußleiste.
 
 ## Erfundene Daten, echte Formen

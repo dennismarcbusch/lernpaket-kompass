@@ -18,8 +18,8 @@ Grundlage ist die **Kompass-Vorlage** in `vorlage/`: Sie enthält die Engine, di
 ## Was die Vorlage schon kann (nicht neu bauen)
 
 - **Rahmen:** eine Kopfzeile mit Titel und den Teilen samt Fortschritt; Stationen als Punkte im Kopf der Station; Fußleiste mit „Weiter“. Hervorgehoben ist je Ansicht höchstens ein Knopf, und „Weiter“ erst, wenn die Aufgabe erledigt ist. So ist die Szene auf 1366 × 768 ganz zu sehen.
-- **Start:** Szene mit Leitsituation, Lernpfad mit den vier Teilen und den Lernzielen als Etiketten, ein Knopf, Abkürzung „Ich kenne mich schon aus“.
-- **Station als Bühne:** Lernziel als Satz, Vorab-Frage vor der Szene (richtig → darf überspringen; sonst bleibt sie als Leitfrage stehen), Auftrag als Sprechblase, Szene groß in der Mitte, Notiz daneben (Live-Erklärungen, „Neu hier“, Kurz erklärt, Steckbrief), Vorführung „Zeig’s mir“ mit Frage zum Selbsterklären, Kurz-Check („zählt nicht“), der zuerst die Vorab-Frage auflöst und einmal je Lernziel mit der Einschätzung endet.
+- **Start:** Szene mit Leitsituation, Lernpfad mit den vier Teilen und den Lernzielen als Etiketten, ein Knopf.
+- **Station als Bühne:** Lernziel als Satz, Auftrag als Sprechblase, Szene groß in der Mitte, Notiz daneben (Live-Erklärungen, „Neu hier“, Kurz erklärt, Steckbrief), Vorführung „Zeig’s mir“ mit Frage zum Selbsterklären, Kurz-Check („zählt nicht“), der einmal je Lernziel mit der Einschätzung endet. In der Fußleiste einer offenen Station steht unauffällig „Station überspringen“: Das führt zuerst zur Wissensabfrage (die Kurz-Check-Fragen ohne Szene und Hilfe; alle richtig, ein Versuch).
 - **Modi:** Simulationsmodus (`simulation`: Schritte haken sich am Gegenstand ab, Wiedereinstieg durch Nachspielen der Lösungen), Spielmodus (`spielwelt`: Stationen = Level, Zwischenbilanz je Level), Spielrahmen mit Missionskarte (`spiel`).
 - **Üben:** drei gestufte Tipps, Reflexion mit Musterantwort, Aufträge zum Mitdenken.
 - **Selbstüberprüfung** (zählt nicht): Teil A Handlungsaufgabe, Teil B gezogen und gemischt (2 je Lernziel), ab 80 % „sitzt das Thema“, beliebig oft.
@@ -56,7 +56,7 @@ Das Präfix steht für das Projekt oder Fach und kommt aus dem Steckbrief (z. B.
 
 ### 2. Prototyp: eine Station, zwei Fragen
 
-Ersetze den Beispielinhalt in `quelle/paket.js` und `quelle/fragen.md` durch: Titel, **Welt** (`welt.thema`, `kulisse`, `symbol`), **Figur mit Aussehen**, Leitsituation, ggf. Spielrahmen, alle Lernziele, **Station 1 vollständig** mit Vorab-Frage und zwei Kurz-Check-Fragen. **Im Simulationsmodus** stattdessen: den Gegenstand mit allen Befehlen, die `loesen` braucht, und Kapitel 1 mit allen Schritten (`pruefe`, `loesen`). **Im Spielmodus**: Spielwelt mit Level 1 vollständig spielbar (geführter erster Fall, alle Fälle, Folgen, Erfolgskriterium) und dessen Zwischenbilanz. Sonst baue Station 1 in dieser Reihenfolge:
+Ersetze den Beispielinhalt in `quelle/paket.js` und `quelle/fragen.md` durch: Titel, **Welt** (`welt.thema`, `kulisse`, `symbol`), **Figur mit Aussehen**, Leitsituation, ggf. Spielrahmen, alle Lernziele, **Station 1 vollständig** mit zwei Kurz-Check-Fragen. **Im Simulationsmodus** stattdessen: den Gegenstand mit allen Befehlen, die `loesen` braucht, und Kapitel 1 mit allen Schritten (`pruefe`, `loesen`). **Im Spielmodus**: Spielwelt mit Level 1 vollständig spielbar (geführter erster Fall, alle Fälle, Folgen, Erfolgskriterium) und dessen Zwischenbilanz. Sonst baue Station 1 in dieser Reihenfolge:
 
 1. **Szene** aus dem Kurzplan mit dem Baukasten (`api.kit`) oder einem eigenen Gerät: Was sehen die Lernenden, was bewegen sie, woran erkennt das Paket den Erfolg, wie reagiert die Szene auf Fehler? Der Gegenstand sieht lebensnah aus: Zeichne die Merkmale aus dem Konzept („Woran erkennt man den Gegenstand wieder?“), nicht einen Kasten mit Beschriftung. Etwa 380 px hoch, damit sie ganz zu sehen ist.
 2. **Vorführung** (`demo`) an einem anderen Fall, 2–4 Schritte, mit `selbsterklaerung` an einem entscheidenden Schritt; `zuruecksetzen` stellt danach die Aufgabe her.
@@ -69,7 +69,7 @@ Teste (Schritt 5; im Prototyp sind rote Punkte zu Selbstüberprüfung und Daten�
 
 ### 3. Ausbau
 
-Mit Drehbuch und Fragenpool alle Stationen, Übungen, die Selbstüberprüfung (Teil A als Interaktion, Teil B aus dem Pool), Merkblatt, Selbsttest, die Vorab-Fragen aller Stationen und das Tafelbild ergänzen. Der Fragenpool kommt als `quelle/fragen.md` aus `fragenpool-erstellen` und wird unverändert übernommen; Korrekturen an Fragen machst du dort, nicht im gebauten `js/inhalt.js`.
+Mit Drehbuch und Fragenpool alle Stationen, Übungen, die Selbstüberprüfung (Teil A als Interaktion, Teil B aus dem Pool), Merkblatt, Selbsttest und das Tafelbild ergänzen. Der Fragenpool kommt als `quelle/fragen.md` aus `fragenpool-erstellen` und wird unverändert übernommen; Korrekturen an Fragen machst du dort, nicht im gebauten `js/inhalt.js`.
 
 Beim Schreiben der Texte:
 
@@ -80,8 +80,7 @@ Beim Schreiben der Texte:
 - Jede Station und Übung beginnt mit einem **Auftrag aus der Leitsituation** in der Sprechblase der Figur („Frau Maier bittet dich …“), nicht mit „Aufgabe 3“.
 - **Textbudget:** Auftrag 1–2 Sätze, „Kurz erklärt“ höchstens etwa 40 Wörter, zusammen höchstens etwa 90 Wörter je Station. Ausführliches in `vertiefung` oder `steckbrief`. Erklärungen lieber passend zur Handlung über `api.erklaere()`.
 - Lösungsbeispiel als **Vorführung in der Szene** (`demo`) mit Begründung je Schritt (`warum`) und einer Frage zum Selbsterklären (`selbsterklaerung`) an einem entscheidenden Schritt.
-- **Vorab-Frage je Station** (`vorab`): eine Frage zum Kern der Station, schwer zu erraten (Zahl, Text, Zuordnen oder Mehrfachauswahl). Sie ist die Leitfrage und wird im Kurz-Check von selbst aufgelöst – also nicht zusätzlich in `check` eintragen und kein Feld `leitfrage` setzen. Den Fragetext neutral formulieren; „Was vermutest du?“ steht schon darüber.
-- **Kurz-Check:** 2–3 Fragen in `check`. Die Einschätzung je Lernziel fügt die Engine selbst ein.
+- **Kurz-Check:** 2–3 Fragen in `check`, mindestens eine davon schwer zu erraten (Zahl, Text, Zuordnen oder Mehrfachauswahl): Dieselben Fragen sind die Wissensabfrage, wenn jemand die Station überspringen will. Die Einschätzung je Lernziel fügt die Engine selbst ein. Vorab-Fragen gibt es nicht mehr (kein Feld `vorab` an der Station, kein Einsatz `vorab`).
 - Übungen wo möglich ebenfalls als Szene, in einer **anderen** Situation als die Stationen; Tipps in drei Stufen (Denkanstoß, Teillösung, Lösung mit Begründung); nur eine Frage, wenn eine Szene keinen Mehrwert hat.
 - In einigen Stationen oder Übungen ein Auftrag zum Mitdenken (`mitdenken`): skizzieren, zusammenfassen, jemandem erklären – mit Muster.
 - **Startseite:** Leitsituation höchstens etwa 40 Wörter (der einzige Fließtext dort), jedes Lernziel mit Etikett `kurz` (höchstens vier Wörter). Alles andere gehört an die Stationen.
@@ -146,7 +145,7 @@ Wenn in einem Repository mit mehreren Paketen gearbeitet wird (z. B. PING): Pake
 
 Version in `quelle/paket.js` erhöhen (bei Paketen ohne `quelle/` in `js/inhalt.js`), Änderung im Steckbrief notieren, Fragen-IDs beibehalten (geänderte Frage = neue ID), danach Schritte 5 und 6.
 
-**Ältere Pakete auf die aktuelle Vorlage heben:** `js/engine.js`, `js/baukasten.js`, `js/tafel.js`, `css/` und `index.html` aus `vorlage/` übernehmen; `inhalt.js` bleibt. Die alten Namen `nachweis`, `bestehen` und `einsatz: ['nachweis']` werden weiter gelesen (die Inhaltsprüfung nennt sie als Hinweis); umbenennen in `selbstueberpruefung`, `bereit` und `einsatz: ['selbstueberpruefung']`. `leitfrage` an Stationen mit Vorab-Frage entfernen, Kurz-Checks auf 2–3 Fragen kürzen, zwei bis vier Tafelbild-Szenen ergänzen. Danach Schritte 5 und 6; `paket.py zip` entfernt den masteryscore.
+**Ältere Pakete auf die aktuelle Vorlage heben:** `js/engine.js`, `js/baukasten.js`, `js/tafel.js`, `css/` und `index.html` aus `vorlage/` übernehmen; `inhalt.js` bleibt. Die alten Namen `nachweis`, `bestehen` und `einsatz: ['nachweis']` werden weiter gelesen (die Inhaltsprüfung nennt sie als Hinweis); umbenennen in `selbstueberpruefung`, `bereit` und `einsatz: ['selbstueberpruefung']`. Vorab-Fragen entfernen (Feld `vorab` an den Stationen und Fragen mit Einsatz `vorab` in `quelle/fragen.md`, sonst bricht der Build ab; eine gute Vorab-Frage kann mit Einsatz `check` in den Kurz-Check wandern), Kurz-Checks auf 2–3 Fragen halten, zwei bis vier Tafelbild-Szenen ergänzen. Danach Schritte 5 und 6; `paket.py zip` entfernt den masteryscore.
 
 **Auf Quellen umstellen** (für Pakete, die weiter gepflegt werden): Ordner `quelle/` anlegen, `js/inhalt.js` nach `quelle/paket.js` verschieben, die Fragen aus `fragen: [...]` nach `quelle/fragen.md` übertragen (Format in `referenz/fragenformat.md`; Fragen, deren Grafik per Code entsteht, bleiben in `paket.js`), Text dabei von HTML auf Markdown umstellen (`<b>` → `**…**`, `<code>` → `` `…` ``). Fragen-IDs bleiben gleich. Dann `paket.py bauen` und Schritt 5.
 
@@ -154,4 +153,4 @@ Version in `quelle/paket.js` erhöhen (bei Paketen ohne `quelle/` in `js/inhalt.
 
 Fachliche Richtigkeit verantwortet die Lehrkraft; markiere Unsicheres ausdrücklich. Keine echten Schülerdaten, keine echten Firmennamen, keine Tracking- oder Fremddienste.
 
-Stand: Lernpaket-Kompass 4.0
+Stand: Lernpaket-Kompass 4.1

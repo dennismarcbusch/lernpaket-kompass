@@ -65,4 +65,4 @@ Alle Pfade in den Anleitungen beziehen sich auf den Ordner dieses Skills (`<skil
 - Keine Schülernamen oder anderen personenbezogenen Daten von Schülern, auch nicht in Beispielen.
 - Paket-IDs haben die Form `<präfix>-<name>`; das Präfix steht für Projekt oder Fach und kommt aus dem Steckbrief.
 
-Stand: Lernpaket-Kompass 4.0
+Stand: Lernpaket-Kompass 4.1

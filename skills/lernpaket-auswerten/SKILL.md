@@ -54,4 +54,4 @@ Die Lehrkraft entscheidet, welche Änderungen umgesetzt werden.
 
 **Nächster Schritt:** Änderungen mit `lernpaket-bauen` umsetzen (Version erhöhen, geänderte Fragen bekommen neue IDs), mit `lernpaket-pruefen` prüfen.
 
-Stand: Lernpaket-Kompass 4.0
+Stand: Lernpaket-Kompass 4.1

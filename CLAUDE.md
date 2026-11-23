@@ -14,7 +14,8 @@ Leitfaden (`docs/`) und Skill-Set für Claude (`skills/`) zum Bauen von SCORM-1.
 - Der Kern bleibt klein (sieben Prinzipien, P3–P8 und P12). Eine neue Regel wird erst Muss, wenn sie mit Schülern erprobt ist; was die Vorlage von selbst liefert, kommt ins Prüfskript, nicht in die Checkliste.
 - Das Paketende heißt Selbstüberprüfung und zählt nicht (Status `completed`, kein masteryscore); der Kompetenznachweis liegt außerhalb des Pakets.
 - Das Tafelbild ersetzt nur den Mittelteil des Inputs (zwei bis vier Szenen); kein eigener Ablaufplan, kein Hinweis auf der Startseite.
-- Die Startseite ist nur Überblick (Szene, Lernpfad mit Ziel-Etiketten, ein Knopf, keine Eingaben); Lernziel als Satz, Vorab-Frage, neue Begriffe und Einschätzung gehören an die Station. Startseitenprüfung im Prüfskript nicht aufweichen.
+- Die Startseite ist nur Überblick (Szene, Lernpfad mit Ziel-Etiketten, ein Knopf, keine Eingaben); Lernziel als Satz, neue Begriffe und Einschätzung gehören an die Station. Startseitenprüfung im Prüfskript nicht aufweichen.
+- Vorab-Fragen gibt es nicht mehr (seit 18. Nov. 2026). Überspringen geht nur über die Wissensabfrage: die Kurz-Check-Fragen der Station auf einem eigenen Bildschirm, ohne Szene und Hilfe, alle richtig, ein Versuch. Auf einer offenen Station mit Kurz-Check steht kein „Weiter“. Die Prüfung dazu im Prüfskript nicht aufweichen.
 - Paket-IDs: `<präfix>-<name>`, Präfix frei je Projekt oder Fach.
 - Skill-Beschreibungen höchstens 200 Zeichen, keine spitzen Klammern.
 - Keine personenbezogenen Daten von Schülern; ZIPs nicht einchecken.

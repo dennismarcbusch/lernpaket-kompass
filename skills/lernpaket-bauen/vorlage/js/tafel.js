@@ -257,7 +257,7 @@
   }
 
   window.TAFEL = {
-    version: '4.0',
+    version: '4.1',
     oeffnen: oeffnen, schliessen: schliessen, szene: szene,
     zustand: function () { return { offen: Z.offen, szene: Z.i, erklaerungen: Z.erkl, praesentation: Z.praes, stift: Z.stift, anzahl: SZ.length }; }
   };

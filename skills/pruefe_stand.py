@@ -44,13 +44,14 @@ ALT = [
     (r'Lernziel-Nachweis-Tabelle|lernziele-nachweis', 'Lernziel-Tabelle, lernziele-ueberpruefung.md'),
     (r'input-ablauf|Ablaufplan-Vorlage', 'tafelbild-notizen.md; der Ablauf steht in den Notizen der Folien'),
     (r'freiwillige[rn]? (Lehrer-)?Input', 'das Tafelbild ersetzt den Mittelteil des Inputs'),
-    (r'3–5 Fragen', 'Kurz-Check mit 2–3 Fragen und der Auflösung der Vorab-Frage'),
+    (r'3–5 Fragen', 'Kurz-Check mit 2–3 Fragen'),
     (r'N<Versuch>', 'Kennung S<Versuch>_<Frage-ID>'),
     (r'masteryscore(?: im Manifest)? ?(=|:)? ?80', 'kein masteryscore'),
     (r"einsatz: \[[^\]]*'nachweis'", "einsatz 'selbstueberpruefung'"),
     (r'^\s*nachweis: \{', 'Feld selbstueberpruefung'),
     (r'^\s*bestehen: \d', 'Feld bereit'),
     (r'sparsam im Aussehen|im Aussehen auf das Nötige reduziert', 'seit 18.11.2026: echt in der Funktion, lebensnah im Aussehen'),
+    (r'Vorab-Frage|Was vermutest du|Ich kenne mich schon aus', 'seit 18.11.2026 gibt es keine Vorab-Fragen; Überspringen über die Wissensabfrage aus dem Kurz-Check'),
 ]
 ERLAUBT = re.compile(r'älter|Älter|früher|Früher|damals|bisher|seit (Kompass )?4|vor Kompass 4|vor 4\.0|entf[äa]ll|überholt|weiter gelesen|umbenannt|statt Nachweis|aufgegangen|nicht mehr|nannten|Nachweis-Paket')
 # Dateien, in denen nach überholten Begriffen gesucht wird (generierte Kopien und dieses Skript nicht)
@@ -111,7 +112,7 @@ def begriffe_pruefen():
     fehler = []
     for d, ordner, dateien in os.walk(REPO):
         rel_d = os.path.relpath(d, REPO)
-        ordner[:] = [o for o in ordner if o not in ('.git', 'dist', 'node_modules', '__pycache__', 'schrift', 'referenz')]
+        ordner[:] = [o for o in ordner if o not in ('.git', '.claude', 'dist', 'node_modules', '__pycache__', 'schrift', 'referenz')]
         for f in sorted(dateien):
             rel = os.path.normpath(os.path.join(rel_d, f))
             if not f.endswith(SUCH_ENDUNGEN) or rel in AUSNAHME_DATEIEN:

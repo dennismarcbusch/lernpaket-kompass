@@ -22,9 +22,10 @@ Aufruf:
    Bedienung: je Ansicht höchstens ein hervorgehobener Knopf; „Weiter“ ist erst
    hervorgehoben, wenn die Aufgabe erledigt ist.
    Startseite als Überblick: ohne Scrollen (1366×768, 768×1024), höchstens etwa 40 Wörter
-   Fließtext, keine Eingaben, genau ein hervorgehobener Knopf. Vorab-Fragen vor der Szene,
-   Einschätzung einmal je Lernziel nach dem Kurz-Check, Abkürzung „Ich kenne mich schon
-   aus“ markiert die richtigen Stationen als überspringbar.
+   Fließtext, keine Eingaben, genau ein hervorgehobener Knopf. Einschätzung einmal je
+   Lernziel nach dem Kurz-Check.
+   Überspringen: nur über die Wissensabfrage (die Kurz-Check-Fragen der Station, ohne Szene
+   und ohne Hilfe, ein Versuch); auf einer offenen Station gibt es kein „Weiter“.
    Tafelbild (PAKET.tafel): alle Szenen und Werkzeuge werden durchgeschaltet; es schreibt
    nichts an die Lernplattform.
    Simulationsmodus (PAKET.simulation): jeder Schritt über die Knöpfe der Lektion lösbar,
@@ -226,6 +227,7 @@ def browser(root, href, bilder):
             _vorlage(pg, bilder)
             if pg.evaluate('!!(window.LERNPAKET && LERNPAKET.sim)'):
                 _simulation(ctx, url, bilder)
+            _ueberspringen(ctx, url, bilder)
             _startseite(ctx, url, bilder)
             _schmal(ctx, url, bilder, True)
             _tafel(ctx, url, bilder)
@@ -281,18 +283,13 @@ def _vorlage(pg, bilder):
     weiter_vorn = "(() => { const b = document.getElementById('weiter'); return !!(b && b.classList.contains('primaer')); })()"
     ohne_demo, ohne_buehne, viel_text, buehne_tief = [], [], [], []
     angeschnitten, verdeckt = [], []
-    vorab_fehlt, ohne_einsch, einsch_zuviel = [], [], []
+    ohne_einsch, einsch_zuviel = [], []
     weiter_frueh, weiter_fehlt = [], []
     for i, sid in enumerate(info['st']):
         pg.evaluate(f"LERNPAKET.zeige('entdecken', {i})")
         pg.wait_for_timeout(100)
         ansichten.append((f'Station {sid}', _primaer(pg)))
-        # Vorab-Frage steht vor der Szene; für die weiteren Messungen „Weiß ich nicht – zur Szene“
-        vk = pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'vorab').length")
-        if pg.evaluate(f"!!PAKET.stationen[{i}].vorab") and not info['spiel'] and not vk:
-            vorab_fehlt.append(sid)
-        if bilder and i == 0 and vk:
-            pg.screenshot(path=os.path.join(bilder, '1-station-vorab.png'), full_page=False)
+        # Ältere Vorlagen (bis 4.0.1) zeigen vor der Szene eine Vorab-Frage: für die Messungen zur Szene weitergehen
         pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'vorab').forEach(t => t.obj.zurSzene())")
         pg.wait_for_timeout(80)
         pg.evaluate('window.scrollTo(0, 0)')
@@ -353,7 +350,6 @@ def _vorlage(pg, bilder):
     punkt(not angeschnitten and not verdeckt, 'Interaktivität', 'Die Szene ist auf 1366 × 768 ganz zu sehen (Unterkante über der Fußleiste).' if not angeschnitten and not verdeckt
           else ('Szene auf 1366 × 768 unten angeschnitten: ' + ', '.join(angeschnitten) if angeschnitten else 'Szene auf 1366 × 768 nicht ganz zu sehen (siehe oben).'), gelb=True)
     punkt(not viel_text, 'Interaktivität', 'Textbudget eingehalten (sichtbarer Text neben der Szene).' if not viel_text else 'Viel sichtbarer Text neben der Szene: ' + ', '.join(viel_text) + ' – Ziel höchstens 160 Wörter.', gelb=True)
-    punkt(not vorab_fehlt, 'Selbststeuerung', 'Vorab-Fragen erscheinen vor der Szene.' if not vorab_fehlt else 'Vorab-Frage gesetzt, aber nicht angezeigt: ' + ', '.join(vorab_fehlt))
     punkt(not ohne_einsch and not einsch_zuviel, 'Selbststeuerung', 'Die Einschätzung kommt einmal je Lernziel, nach dem Kurz-Check (ein Klick).' if not ohne_einsch and not einsch_zuviel
           else ('Keine Einschätzung nach dem Kurz-Check: ' + ', '.join(ohne_einsch) if ohne_einsch else 'Einschätzung mehrfach je Lernziel abgefragt: ' + ', '.join(einsch_zuviel)), gelb=True)
     z = pg.evaluate('LERNPAKET.zustand()')
@@ -362,16 +358,6 @@ def _vorlage(pg, bilder):
     if neu and not info['spiel']:
         punkt(not weiter_frueh and not weiter_fehlt, 'Bedienung', '„Weiter“ ist erst hervorgehoben, wenn die Station erledigt ist.' if not weiter_frueh and not weiter_fehlt
               else ('„Weiter“ ist schon vor der Aufgabe hervorgehoben: ' + ', '.join(weiter_frueh) if weiter_frueh else '„Weiter“ ist nach dem Lösen nicht hervorgehoben: ' + ', '.join(weiter_fehlt)))
-    # Abkürzung „Ich kenne mich schon aus“: alle Vorab-Fragen richtig → Stationen überspringbar
-    if pg.evaluate("LERNPAKET.alleVorab ? LERNPAKET.alleVorab().length : 0"):
-        pg.evaluate("LERNPAKET.zeige('abkuerzung')")
-        pg.wait_for_timeout(80)
-        ansichten.append(('Abkürzung', _primaer(pg)))
-        pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'abkuerzung').forEach(t => { t.obj.loesen(); t.obj.auswerten(); })")
-        pg.wait_for_timeout(80)
-        soll = pg.evaluate("PAKET.stationen.filter(s => LERNPAKET.vorabFragen(s).length).map(s => s.id)")
-        ist = pg.evaluate('LERNPAKET.zustand().skip')
-        punkt(sorted(ist) == sorted(soll), 'Selbststeuerung', f'Abkürzung „Ich kenne mich schon aus“: mit allen Vorab-Fragen richtig sind {len(ist)} von {len(soll)} Stationen überspringbar.' if sorted(ist) == sorted(soll) else f'Abkürzung markiert {ist} statt {soll}.')
     z = pg.evaluate('LERNPAKET.zustand()')
     offen = [s for s in info['st'] if not z['st'].get(s)]
     punkt(not offen, 'Lösbarkeit', 'Alle Stationen sind mit der Musterlösung lösbar.' if not offen else 'Mit der Musterlösung nicht abschließbar: ' + ', '.join(offen))
@@ -539,6 +525,99 @@ def _simulation(ctx, url, bilder):
     pg.close()
 
 
+WISSEN_HAKEN = "LERNPAKET.aktuelleTeile().filter(t => t.art === 'wissen').forEach(t => t.obj.%s())"
+# Nach dem Einsetzen der Musterlösung genau eine Antwort verfälschen (Textfeld, sonst Auswahl, sonst Zuordnung)
+WISSEN_FALSCH = """(() => { const k = document.querySelector('.wissen'); if (!k) return false;
+    const t = k.querySelector('input[type=text], input[type=number], input:not([type])');
+    if (t) { t.value = 'zzz'; t.dispatchEvent(new Event('input', {bubbles: true})); return true; }
+    const r = [...k.querySelectorAll('input[type=radio]')].find(x => !x.checked);
+    if (r) { r.click(); return true; }
+    const s = k.querySelector('select'), o = s && [...s.options].find(x => x.value && x.value !== s.value);
+    if (o) { s.value = o.value; s.dispatchEvent(new Event('change', {bubbles: true})); return true; }
+    return false; })()"""
+
+
+def _ueberspringen(ctx, url, bilder):
+    """Überspringen geht nur über die Wissensabfrage: die Kurz-Check-Fragen der Station, ohne Szene,
+    ohne Hilfe, ein Versuch. Stationen und Kapitel; die Level eines Spiels lassen sich nicht überspringen."""
+    pg = ctx.new_page()
+    pg.goto(url)
+    pg.wait_for_timeout(400)
+    if not pg.evaluate("!!(window.LERNPAKET && LERNPAKET.darfUeberspringen) && !PAKET.spielwelt"):
+        pg.close()
+        return
+    sim = pg.evaluate('!!LERNPAKET.sim')
+    wort = 'Kapitel' if sim else 'Station'
+    kand = pg.evaluate("PAKET.stationen.map((s, i) => LERNPAKET.darfUeberspringen(i) ? i : -1).filter(i => i >= 0)")
+    if not kand:
+        punkt(False, 'Selbststeuerung', f'Überspringen ist nirgends möglich: Ohne Kurz-Check hat kein {wort} eine Wissensabfrage.', gelb=True)
+        pg.close()
+        return
+
+    def oeffne(i):
+        pg.evaluate(f"LERNPAKET.zeige('entdecken', {i})")
+        pg.wait_for_timeout(120)
+        return pg.evaluate("""(() => { const u = document.getElementById('ueberspringen'), w = document.getElementById('weiter');
+            return {da: !!(u && u.offsetParent !== null), vorn: !!(u && u.classList.contains('primaer')), weiter: !!w}; })()""")
+
+    i = kand[0]
+    sid, n = pg.evaluate(f'PAKET.stationen[{i}].id'), pg.evaluate(f'LERNPAKET.wissenFragen({i}).length')
+    f = oeffne(i)
+    ok = f['da'] and not f['vorn'] and (sim or not f['weiter'])
+    punkt(ok, 'Bedienung', f'Offene{"s" if sim else ""} {wort}: „überspringen“ steht unauffällig in der Fußleiste' + ('.' if sim else ', ein „Weiter“ gibt es dort nicht.') if ok
+          else (f'{sid}: Der Knopf zum Überspringen fehlt oder ist hervorgehoben.' if not f['da'] or f['vorn'] else f'{sid}: „Weiter“ steht schon auf der offenen Station – so käme man an der Wissensabfrage vorbei.'))
+    pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'ueberspringen').forEach(t => t.obj.oeffnen())")
+    pg.wait_for_timeout(120)
+    if bilder:
+        pg.screenshot(path=os.path.join(bilder, '1-wissensabfrage.png'), full_page=False)
+    w = pg.evaluate("""(() => { const k = document.querySelector('.wissen');
+        return {fragen: k ? k.querySelectorAll('.frage').length : -1, szene: !!document.querySelector('#haupt .buehne, #haupt .sim-gegenstand, #haupt .notiz')}; })()""")
+    ok = w['fragen'] == n and n > 0 and not w['szene'] and _primaer(pg) == 1
+    punkt(ok, 'Selbststeuerung', f'„Überspringen“ führt zur Wissensabfrage: die {n} Kurz-Check-Fragen, ohne Szene und Erklärungen.' if ok
+          else f'{sid}: Wissensabfrage zeigt {w["fragen"]} statt {n} Fragen' + (', die Szene ist noch zu sehen' if w['szene'] else '') + '.')
+    # ohne Antworten passiert nichts; mit einer falschen Antwort ist der Versuch verbraucht
+    pg.evaluate(WISSEN_HAKEN % 'auswerten')
+    z = pg.evaluate('LERNPAKET.zustand()')
+    leer_ok = not z['st'].get(sid) and sid not in z.get('uv', {})
+    pg.evaluate(WISSEN_HAKEN % 'loesen')
+    if pg.evaluate(WISSEN_FALSCH):
+        pg.evaluate(WISSEN_HAKEN % 'auswerten')
+        pg.wait_for_timeout(120)
+        z = pg.evaluate('LERNPAKET.zustand()')
+        rest = pg.evaluate("document.querySelectorAll('.wissen .frage').length")
+        nach = oeffne(i)
+        ok = leer_ok and not z['st'].get(sid) and z.get('uv', {}).get(sid) == 0 and rest == 0 and not nach['da'] and (sim or not nach['weiter'])
+        punkt(ok, 'Selbststeuerung', f'Wissensabfrage nicht bestanden: {"Das" if sim else "Die"} {wort} bleibt offen, die Lösungen bleiben verdeckt, einen zweiten Versuch gibt es nicht.' if ok
+              else f'{sid}: Nach einer falschen Antwort stimmt der Stand nicht (erledigt: {bool(z["st"].get(sid))}, Fragen noch sichtbar: {rest}, erneut überspringbar: {nach["da"]}).')
+    else:
+        pg.close()  # keine Frage ließ sich verfälschen: bestandenen Fall auf frischer Seite prüfen
+        pg = ctx.new_page()
+        pg.goto(url)
+        pg.wait_for_timeout(400)
+        kand = [i, i]
+    # bestanden: alle Antworten richtig
+    j = kand[1] if len(kand) > 1 else None
+    if j is None:
+        pg.close()
+        pg = ctx.new_page()
+        pg.goto(url)
+        pg.wait_for_timeout(400)
+        j = i
+    sj = pg.evaluate(f'PAKET.stationen[{j}].id')
+    oeffne(j)
+    pg.evaluate("LERNPAKET.aktuelleTeile().filter(t => t.art === 'ueberspringen').forEach(t => t.obj.oeffnen())")
+    pg.wait_for_timeout(120)
+    pg.evaluate(WISSEN_HAKEN % 'loesen')
+    pg.evaluate(WISSEN_HAKEN % 'auswerten')
+    pg.wait_for_timeout(120)
+    z = pg.evaluate('LERNPAKET.zustand()')
+    vorn = pg.evaluate("(() => { const b = document.getElementById('weiter'); return !!(b && b.classList.contains('primaer')); })()")
+    ok = z['st'].get(sj) == 1 and z.get('us', {}).get(sj) == 1 and vorn and _primaer(pg) == 1
+    punkt(ok, 'Selbststeuerung', f'Wissensabfrage bestanden: {"Das" if sim else "Die"} {wort} gilt als erledigt und ist als übersprungen markiert; „Weiter“ ist hervorgehoben.' if ok
+          else f'{sj}: Nach bestandener Wissensabfrage stimmt der Stand nicht (erledigt: {z["st"].get(sj)}, übersprungen: {z.get("us", {}).get(sj)}, „Weiter“ hervorgehoben: {vorn}).')
+    pg.close()
+
+
 def _startseite(ctx, url, bilder):
     """Startseite = Überblick: ohne Scrollen, wenig Fließtext, keine Eingaben (Leitfaden C2, Teil 0)."""
     zu_lang, eingaben, woerter = [], 0, 0
@@ -565,7 +644,7 @@ def _startseite(ctx, url, bilder):
         pg.close()
     punkt(not zu_lang, 'Startseite', 'Startseite passt ohne Scrollen auf Laptop (1366×768) und Tablet (768×1024).' if not zu_lang else 'Startseite braucht Scrollen: ' + '; '.join(zu_lang), gelb=True)
     punkt(woerter <= 45, 'Startseite', f'Wenig Fließtext auf der Startseite ({woerter} Wörter, Ziel höchstens etwa 40).' if woerter <= 45 else f'Zu viel Fließtext auf der Startseite: {woerter} Wörter (Ziel höchstens etwa 40). Leitsituation kürzen, Rest in Stationen.', gelb=True)
-    punkt(not eingaben, 'Startseite', 'Keine Eingaben auf der Startseite (Einschätzung und Vorab-Fragen stehen an den Stationen).' if not eingaben else f'{eingaben} Eingabefelder auf der Startseite – Einschätzung und Vorwissens-Fragen gehören an die Stationen.', gelb=True)
+    punkt(not eingaben, 'Startseite', 'Keine Eingaben auf der Startseite (die Einschätzung steht an den Stationen).' if not eingaben else f'{eingaben} Eingabefelder auf der Startseite – Eingaben gehören an die Stationen.', gelb=True)
 
 
 def _schmal(ctx, url, bilder, vorlage):

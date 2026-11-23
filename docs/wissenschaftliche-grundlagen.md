@@ -79,13 +79,13 @@ Zu jedem Gedanken steht, was die Forschung sagt, was der Kompass daraus macht un
 
 **Forschung.** Freies Ausprobieren ohne Anleitung schneidet schlechter ab als eine direkte Erklärung (*d* = −0,38). Entdecken mit Leitfragen, Hilfen und Rückmeldung schneidet besser ab als andere Unterrichtsformen (*d* = 0,30; beides Alfieri et al. 2011). Hilfe, die man erst anfordern muss, wird oft nicht genutzt, gerade von Lernenden mit wenig Vorwissen (Aleven et al. 2003).
 
-**Im Kompass.** P4: Jede Station hat einen konkreten Auftrag, eine Leitfrage und Rückmeldung nach jedem Versuch.
+**Im Kompass.** P4: Jede Station hat einen konkreten Auftrag und Rückmeldung nach jedem Versuch.
 
 ### 5. Sich abfragen statt noch einmal lesen
 
 **Forschung.** Wer Gelerntes aus dem Gedächtnis abruft, behält es besser als jemand, der den Stoff noch einmal liest. Das gilt im Labor wie in der Klasse und auch für Fragen mit Antworten zum Ankreuzen (Adesope et al. 2017). Eine große Übersicht über Lerntechniken bescheinigt dem Abfragen und dem verteilten Üben als einzigen „hohen Nutzen“ (Dunlosky et al. 2013). Wiederholung über mehrere Tage verteilt wirkt stärker als alles auf einmal (*g* = 0,74, Latimier et al. 2021), gemischte Aufgaben wirken stärker als sortierte (*g* = 0,42, Brunmair & Richter 2019). Auch eine Frage *vor* dem Lernen hilft, allerdings nur für genau das, wonach gefragt wurde (*g* = 0,54 gegenüber 0,04 für den übrigen Stoff, St. Hilaire et al. 2023).
 
-**Im Kompass.** P5: Jede Station endet mit einem Kurz-Check, der nicht zählt. Eine Vorab-Frage je Station zielt auf den Kern der Station. P10 und P13: Fragen aus früheren Stationen, gemischte Aufgaben am Ende und ein Merkblatt, das die Lernenden aus dem Gedächtnis ergänzen.
+**Im Kompass.** P5: Jede Station endet mit einem Kurz-Check, der nicht zählt. Wer eine Station überspringen will, beantwortet zuerst ihre Kurz-Check-Fragen ohne Hilfe (Wissensabfrage); Vorab-Fragen vor der Station gibt es seit dem 18.11.2026 nicht mehr (eigene Entscheidung). P10 und P13: Fragen aus früheren Stationen, gemischte Aufgaben am Ende und ein Merkblatt, das die Lernenden aus dem Gedächtnis ergänzen.
 
 **Einschränkung.** Verteilen über Tage lässt sich in einem Paket von 90 Minuten nur ansatzweise umsetzen. P10 ist deshalb nicht Pflicht.
 

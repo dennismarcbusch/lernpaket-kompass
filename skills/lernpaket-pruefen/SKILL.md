@@ -28,7 +28,7 @@ python3 <skill>/scripts/pruefe_paket.py <paket.zip oder ordner> --bilder <ordner
 
 ### 2. Bildschirme ansehen
 
-Sieh dir die Screenshots an und mache für jede Ansicht den **Fünf-Sekunden-Test**: Was ist hier zu tun? Dazu der **Wiedererkennungs-Test**: Erkennt man ohne den Text daneben, welcher Gegenstand das ist (Gerät, Programm, Dokument), und sieht ein Spiel aus wie ein Spiel? Achte auf: Szene ganz im Bild, im Arbeitsbereich nur, was zum Gegenstand, zu seinem Arbeitsplatz oder zur Spielwelt gehört, das Wichtige am deutlichsten, Auftrag oben, Beschriftung im Bild statt Legende, Feedback an der Antwort, nichts abgeschnitten auf Tablet-Breite. Zähle auf dem Bildschirm der ersten Station, wie viele verschiedene Aufforderungen gleichzeitig zu sehen sind; mehr als drei (Auftrag, Vorab-Frage oder Szene, ein Knopf) nennst du als Befund.
+Sieh dir die Screenshots an und mache für jede Ansicht den **Fünf-Sekunden-Test**: Was ist hier zu tun? Dazu der **Wiedererkennungs-Test**: Erkennt man ohne den Text daneben, welcher Gegenstand das ist (Gerät, Programm, Dokument), und sieht ein Spiel aus wie ein Spiel? Achte auf: Szene ganz im Bild, im Arbeitsbereich nur, was zum Gegenstand, zu seinem Arbeitsplatz oder zur Spielwelt gehört, das Wichtige am deutlichsten, Auftrag oben, Beschriftung im Bild statt Legende, Feedback an der Antwort, nichts abgeschnitten auf Tablet-Breite. Zähle auf dem Bildschirm der ersten Station, wie viele verschiedene Aufforderungen gleichzeitig zu sehen sind; mehr als drei (Auftrag, Szene, ein Knopf) nennst du als Befund.
 
 ### 3. Inhalt lesen
 
@@ -36,8 +36,8 @@ Lies die Quellen `quelle/paket.js` und `quelle/fragen.md` (bei Paketen ohne `que
 
 - **P12 (zuerst):** Ist die Form begründet (A Simulation, B interaktive Illustration, C Spiel nur zum Üben, D Lernspiel nur begründet)? Steckt der Lernstoff in den Regeln des Gegenstands bzw. des Spiels (wer den Stoff nicht kann, kommt nicht weiter, nicht erst in einem Quiz danach)? Bei einem Spiel: Vermittelt es die Grundlagen selbst? Besteht das Paket die Plattform-Probe – oder ließe es sich mit Test, H5P oder Lückentext genauso umsetzen? Dann ist es rot, auch wenn alles andere stimmt. Hat jede Station (jedes Level) eine Szene, in der die Lernenden etwas bewegen? Verhält sie sich wie im Beruf, und reagiert sie auf Fehler? Ein Arbeitsblatt mit Klick-Quiz ist rot. Sieht der Gegenstand lebensnah aus (Wiedererkennungs-Test, `referenz/szenen.md`)? Bemängeln: Kästen mit Beschriftung statt Gerät, ein nacktes Formular statt Portal, ein Spiel, das wie ein Quiz aussieht – mit dem Vorschlag, welche drei bis fünf Merkmale des Originals fehlen. Nicht bemängeln: dass die Szene kein Foto ist oder weniger Funktionen zeigt als das echte Programm.
 - **P3:** Vorführung vor jedem neuen Aufgabentyp, mit Begründung je Schritt und Frage zum Selbsterklären, überspringbar?
-- **P4:** Beginnt jede Station und Übung mit einem Auftrag? Hat jede Station eine Vorab-Frage zum Kern der Station (zugleich Leitfrage), die schwer zu erraten ist? Hat jede Übung drei gestufte Tipps?
-- **P5:** Kurz-Check an jeder Station mit 2–3 Fragen, mindestens eine je Lernziel der Station?
+- **P4:** Beginnt jede Station und Übung mit einem Auftrag? Hat jede Übung drei gestufte Tipps?
+- **P5:** Kurz-Check an jeder Station mit 2–3 Fragen, mindestens eine je Lernziel der Station? Ist mindestens eine davon schwer zu erraten (der Kurz-Check ist auch die Wissensabfrage beim Überspringen)? Stehen noch Vorab-Fragen im Paket (`vorab`), nennst du das als Befund: Es gibt sie nicht mehr.
 - **P6:** Hat jede Falschantwort ein eigenes Feedback, das eine Fehlvorstellung anspricht? Stichprobe von mindestens zehn Fragen, bei kleinen Pools alle.
 - **P7:** Textbudget eingehalten (Station etwa 90 Wörter, Simulationsschritt etwa 60, Startseite etwa 40)? Fachbegriffe dort eingeführt, wo sie gebraucht werden? Schmuck ohne Bezug zum Gegenstand im Arbeitsbereich, Bewegung nur zur Zierde?
 - **P8:** Lernziele in Schülersprache; jedes mit mindestens zwei Fragen oder Prüfpunkten in der Selbstüberprüfung; nichts geprüft, was nicht geübt wurde.
@@ -85,4 +85,4 @@ Formuliere Befunde sachlich und als Vorschlag, nicht als Urteil über die Kolleg
 
 **Nächster Schritt:** Änderungen mit `lernpaket-bauen` umsetzen und erneut prüfen.
 
-Stand: Lernpaket-Kompass 4.0
+Stand: Lernpaket-Kompass 4.1

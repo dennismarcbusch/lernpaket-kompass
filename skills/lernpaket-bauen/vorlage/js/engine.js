@@ -1497,7 +1497,7 @@
 
   /* ---------- Schnittstelle für automatische Tests ---------- */
   window.LERNPAKET = {
-    version: '4.0',  // Kompass-Version der Vorlage (eine Nummer für Leitfaden, Skills und Vorlage; siehe VERSION)
+    version: '4.1',  // Kompass-Version der Vorlage (eine Nummer für Leitfaden, Skills und Vorlage; siehe VERSION)
     bereit: BEREIT,
     einschaetzenBei: function (i) { return STATIONEN[i] ? lzZumEinschaetzen(STATIONEN[i]) : []; },
     pruefeInhalt: pruefeInhalt,

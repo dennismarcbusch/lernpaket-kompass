@@ -5,7 +5,7 @@ description: Erstellt Fragen für Lernpakete nach dem Lernpaket-Kompass – je L
 
 # Fragenpool erstellen (Phase 5, nach Prototyp und Drehbuch)
 
-Du schreibst die Fragen eines Lernpakets: Kurz-Checks, Fragenpool für die Selbstüberprüfung, Übungs-, Vorab- und Selbsttest-Fragen. Gute Fragen sind der Teil des Pakets, der am meisten Wirkung hat (Abrufen festigt Wissen, P5; erklärendes Feedback, P6), und zugleich der, bei dem fachliche Fehler am meisten schaden. Deshalb prüft die Lehrkraft jede Frage.
+Du schreibst die Fragen eines Lernpakets: Kurz-Checks, Fragenpool für die Selbstüberprüfung, Übungs- und Selbsttest-Fragen. Gute Fragen sind der Teil des Pakets, der am meisten Wirkung hat (Abrufen festigt Wissen, P5; erklärendes Feedback, P6), und zugleich der, bei dem fachliche Fehler am meisten schaden. Deshalb prüft die Lehrkraft jede Frage.
 
 **Lies vor dem Start:** `referenz/fragenformat.md` (Format und Mengen). Aus `referenz/prinzipien.md` brauchst du nur P5, P6 und P8.
 
@@ -21,10 +21,9 @@ Du schreibst die Fragen eines Lernpakets: Kurz-Checks, Fragenpool für die Selbs
 
 | Einsatz | Menge |
 |---|---|
-| Kurz-Check (`check`) | 2–3 je Station (die Vorab-Frage wird im Kurz-Check von selbst als Erstes aufgelöst; ohne Vorab-Frage 2–4), mindestens eine je Lernziel der Station; ab Station 3 eine Frage zu früheren Stationen |
+| Kurz-Check (`check`) | 2–3 je Station, mindestens eine je Lernziel der Station und mindestens eine, die schwer zu erraten ist (Zahl, Text, Zuordnen oder Mehrfachauswahl, keine Einfachauswahl und kein Hotspot): Der Kurz-Check ist auch die Wissensabfrage, wenn jemand die Station überspringen will; ab Station 3 eine Frage zu früheren Stationen |
 | Selbstüberprüfung (`selbstueberpruefung`) | mindestens 4 je Lernziel im Pool (pro Versuch werden 2 je Lernziel gezogen) |
 | Übung (`uebung`) | eine je Übung, wenn die Übung keine eigene Interaktion hat |
-| Vorab-Frage (`vorab`) | eine je Station, vor der Szene. Sie ist zugleich die Leitfrage und zielt auf den Kern der Station: Vorab-Fragen helfen vor allem bei genau dem, wonach gefragt wurde. Schwer zu erraten (Zahl, Text, Zuordnen oder Mehrfachauswahl, keine Einfachauswahl und kein Hotspot), nicht zusätzlich im Kurz-Check, möglichst nicht in der Selbstüberprüfung; Fragetext neutral, ohne „Was vermutest du?“; mit `erklaerung`, weil sie im Kurz-Check aufgelöst wird |
 | Selbsttest | 5 aus allen Lernzielen, für die Rückseite des Merkblatts (dürfen Fragen der Selbstüberprüfung sein) |
 
 Eine Frage darf mehrere Einsätze haben, aber Kurz-Check und Selbstüberprüfung sollten sich nur wenig überschneiden.
@@ -45,7 +44,7 @@ Eine Frage darf mehrere Einsätze haben, aber Kurz-Check und Selbstüberprüfung
 
 1. Für jedes Lernziel eine kurze Liste: typische Fehler → welche Fragen sie aufgreifen.
 2. Fragen schreiben, zunächst für ein Lernziel, und der Lehrkraft zeigen. Fragen nach Rückmeldung zum Stil, dann die übrigen.
-3. **Fragen in `quelle/fragen.md` schreiben** (Format: `referenz/fragenformat.md`, Abschnitt „Fragen in quelle/fragen.md“): je Frage `## ID · Lernziel · Typ · Einsatz`, Fragetext, Antworten mit `→ Feedback` an jeder Falschantwort, Erklärung mit `> `. Gliedere mit `# `-Zeilen nach Vorab-Fragen und Lernzielen. Die Datei ist zugleich die Vorlage für die fachliche Abnahme: Die Lehrkraft liest und korrigiert sie direkt, ohne JavaScript.
+3. **Fragen in `quelle/fragen.md` schreiben** (Format: `referenz/fragenformat.md`, Abschnitt „Fragen in quelle/fragen.md“): je Frage `## ID · Lernziel · Typ · Einsatz`, Fragetext, Antworten mit `→ Feedback` an jeder Falschantwort, Erklärung mit `> `. Gliedere mit `# `-Zeilen nach Lernzielen. Die Datei ist zugleich die Vorlage für die fachliche Abnahme: Die Lehrkraft liest und korrigiert sie direkt, ohne JavaScript.
 4. **Selbstkontrolle vor der Übergabe:**
 
    ```bash
@@ -62,4 +61,4 @@ Eine Frage darf mehrere Einsätze haben, aber Kurz-Check und Selbstüberprüfung
 
 **Nächster Schritt:** „Mit Drehbuch und Fragenpool baue ich jetzt den Rest des Pakets (Skill `lernpaket-bauen`).“
 
-Stand: Lernpaket-Kompass 4.0
+Stand: Lernpaket-Kompass 4.1

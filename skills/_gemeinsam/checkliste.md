@@ -14,6 +14,7 @@ Diese Punkte stecken in Engine und Stil und werden vom Prüfskript geprüft. Von
 - Lernziele als Etikett auf dem Lernpfad und als Satz an jeder Station; Auswertung je Lernziel. (P8)
 - Einschätzung einmal je Lernziel nach dem Kurz-Check, im Abschluss neben dem Ergebnis; Fortschrittsanzeige; Lernempfehlung. (P11)
 - Eine Kopfzeile; je Ansicht höchstens ein hervorgehobener Knopf; „Weiter“ ist erst nach der Aufgabe hervorgehoben. (P7)
+- Überspringen geht nur über die Wissensabfrage (Kurz-Check-Fragen ohne Szene und Hilfe, alle richtig, ein Versuch); auf einer offenen Station steht kein „Weiter“. (P11)
 - Die Selbstüberprüfung zählt nicht: Ergebnis als Information, Status „abgeschlossen“, kein masteryscore.
 - Wiedereinstieg nach Abbruch, Tastaturbedienung, Kontrast, keine externen Verbindungen, Versionsnummer in der Kopfzeile und auf den Ausdrucken.
 
@@ -23,8 +24,8 @@ Diese Punkte stecken in Engine und Stil und werden vom Prüfskript geprüft. Von
 - [ ] Die Form ist begründet (Simulation vor interaktiver Illustration vor Spiel zum Üben vor durchgehendem Lernspiel). Der Lernstoff steckt in den Regeln des Gegenstands oder Spiels (wer ihn nicht beherrscht, kommt nicht weiter, nicht erst in einem Quiz danach); ein Spiel vermittelt die Grundlagen selbst. Das Paket besteht die Plattform-Probe: Test, H5P oder Lückentext der Lernplattform könnten es nicht genauso. (P12)
 - [ ] Jede Station hat eine Szene, in der die Lernenden etwas bewegen; sie ist auf 1366 × 768 ganz zu sehen, in der Funktion echt, im Aussehen lebensnah (der Gegenstand ist auf einen Blick wiederzuerkennen, ein Spiel sieht aus wie ein Spiel) und reagiert auf Fehler. Der Text daneben bleibt im Budget. (P12)
 - [ ] Vor jedem neuen Aufgabentyp gibt es eine Vorführung mit einer Frage zum Selbsterklären; Könner können sie überspringen. (P3)
-- [ ] Jede Station hat einen klaren Auftrag, eine Vorab-Frage als Leitfrage und eine Rückmeldung; jede Übung hat drei gestufte Tipps. (P4)
-- [ ] Jede Station endet mit einem Kurz-Check, der nicht zählt und zuerst die Vorab-Frage auflöst. (P5)
+- [ ] Jede Station hat einen klaren Auftrag und eine Rückmeldung; jede Übung hat drei gestufte Tipps. (P4)
+- [ ] Jede Station endet mit einem Kurz-Check, der nicht zählt; mindestens eine seiner Fragen ist schwer zu erraten, weil er auch die Wissensabfrage beim Überspringen ist. (P5)
 - [ ] Jede Antwort bekommt ein Feedback mit Begründung; typische Fehler haben eigenes Feedback. (P6)
 
 **Kern: Gestaltung (Muss)**

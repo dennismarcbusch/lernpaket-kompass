@@ -15,7 +15,6 @@ Entsteht nach dem Prototyp: Station 1 ist gebaut und ausprobiert, die Rückmeldu
 
 - Szene mit Leitsituation (oben), Lernpfad mit den vier Teilen, Dauer und einem Knopf (automatisch)
 - Lernziele als Etiketten (Kurzname aus der Lernziel-Tabelle, höchstens vier Wörter)
-- Abkürzung „Ich kenne mich schon aus“: sammelt die Vorab-Fragen der Stationen (automatisch)
 - Keine Lernziel-Liste, keine Einschätzung, keine Fragen, kein Glossar auf der Startseite
 
 ## Glossar
@@ -30,14 +29,13 @@ Entsteht nach dem Prototyp: Station 1 ist gebaut und ausprobiert, die Rückmeldu
 - **Fälle im Gegenstand** fürs Entdecken: … · für Übungen (neu): … · für Selbstüberprüfung Teil A (neu): … · fürs Tafelbild: …
 
 ### Kapitel 1: <Titel> (LZ…)
-- **Vorab-Frage** (vor dem ersten Schritt; zugleich Leitfrage, schwer zu erraten): … Lösung: …
 - **Schritte** (2–6, je eine Handlung mit einem neuen Gedanken, je höchstens etwa 60 Wörter):
 
 | Nr. | Auftrag (Sprechblase, 1–2 Sätze) | Erfolg, wenn … (Zustand) | Kurz erklärt / Tipp | vorgemacht? Frage zum Selbsterklären |
 |---|---|---|---|---|
 | 1 | | | | ja: „Warum …?“ |
 
-- **Kurz-Check (2–3 Fragen, zählt nicht; die Vorab-Frage wird davor von selbst aufgelöst):** …
+- **Kurz-Check (2–3 Fragen, zählt nicht; mindestens eine schwer zu erraten, weil er auch die Wissensabfrage beim Überspringen ist):** …
 - **Mitdenken:** … Muster: …
 
 ## ① Entdecken – Level (nur im Spielmodus)
@@ -58,7 +56,6 @@ Entsteht nach dem Prototyp: Station 1 ist gebaut und ausprobiert, die Rückmeldu
   - Woran erkennt das Paket den Erfolg? …
   - Was passiert bei typischen Fehlern? (realistische Reaktion + Satz zur Fehlvorstellung) …
   - Bausteine: computer · browser · mail · formular · dokument · dialog · szene · sortieren · reihenfolge · regler · eigenes Gerät
-- **Vorab-Frage** (vor der Szene, „Was vermutest du?“; zugleich die Leitfrage der Station; zum Kern der Station; schwer zu erraten: Zahl, Text, Zuordnen oder Mehrfachauswahl): … Lösung: …
 - **Auftrag aus der Leitsituation (1–2 Sätze, Sprechblase):** …
 - **Vorführung „Zeig’s mir“ (anderer Fall, 2–4 Schritte in der Szene):** 1. … (Warum: …) 2. … (Warum: …) 3. …
 - **Frage zum Selbsterklären** (an Schritt …): „Warum …?“
@@ -68,7 +65,7 @@ Entsteht nach dem Prototyp: Station 1 ist gebaut und ausprobiert, die Rückmeldu
 - **Mitdenken (optional):** Skizzieren / in eigenen Worten zusammenfassen / jemandem erklären: … Muster: …
 - **Wozu brauchst du das?** …
 - **Story nach dem Lösen** (nur mit Spielrahmen): …
-- **Kurz-Check (2–3 Fragen, zählt nicht; die Vorab-Frage wird davor von selbst aufgelöst):** Themen … (ab Station 3 eine Wiederholungsfrage)
+- **Kurz-Check (2–3 Fragen, zählt nicht; mindestens eine schwer zu erraten, weil er auch die Wissensabfrage beim Überspringen ist):** Themen … (ab Station 3 eine Wiederholungsfrage)
 
 ### Station 2: …
 
@@ -111,7 +108,7 @@ Baustein für den Input der Lehrkraft: Das Tafelbild ersetzt nur den Mittelteil 
 | Prinzip | Status | Wo im Drehbuch |
 |---|---|---|
 | P3 Vorführung vor jedem neuen Aufgabentyp, mit Frage zum Selbsterklären | ☐ | |
-| P4 Jede Station mit Auftrag, Vorab-Frage als Leitfrage und Rückmeldung; Übungen mit drei Tipps | ☐ | |
+| P4 Jede Station mit Auftrag und Rückmeldung; Übungen mit drei Tipps | ☐ | |
 | P5 Kurz-Check an jeder Station (2–3 Fragen, zählt nicht) | ☐ | |
 | P6 Feedback, das erklärt; typische Fehler mit eigenem Feedback | ☐ | |
 | P7 Text im Budget; im Arbeitsbereich nur, was zum Gegenstand gehört | ☐ | |

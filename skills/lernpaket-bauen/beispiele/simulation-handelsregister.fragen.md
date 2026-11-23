@@ -26,15 +26,19 @@ Woran erkennst du im Registerportal sofort, in welcher Abteilung eine Firma steh
 
 # LZ1 · Register nutzen
 
-## C1 · LZ1 · mc · check
+## C1 · LZ1 · text · check
 
-Welche Stelle führt das Handelsregister?
+Welches Gericht führt das Handelsregister? Ein Wort genügt.
 
-- [x] Das Amtsgericht (Registergericht)
-- [ ] Das Landgericht → Das Landgericht ist für größere Streitfälle zuständig, das HR führt das Amtsgericht.
-- [ ] Die Industrie- und Handelskammer → Die IHK berät und prüft Anmeldungen mit, führt das Register aber nicht. Das macht das Amtsgericht.
+= Amtsgericht
+= Registergericht
+= das Amtsgericht
+= Amtsgerichte
+- Landgericht → Das Landgericht ist für größere Streitfälle zuständig, das HR führt das Amtsgericht.
+- Finanzamt → Das Finanzamt ist kein Gericht und führt das Register nicht.
+- IHK → Die IHK berät und prüft Anmeldungen mit, führt das Register aber nicht. Das macht das Amtsgericht.
 
-> Das Handelsregister wird beim zuständigen Amtsgericht geführt.
+> Das Handelsregister wird beim zuständigen Amtsgericht geführt (Registergericht).
 
 ## C2 · LZ1 · mc · check
 
@@ -71,13 +75,15 @@ Wenn falsch: Einzelunternehmen und Personengesellschaften → A, Kapitalgesellsc
 
 # LZ3 · Vertretung prüfen
 
-## C10 · LZ3 · mc · check
+## C10 · LZ3 · text · check
 
-Frau Brandt hat Handlungsvollmacht, Herr Okafor Prokura. Was steht im HR?
+Frau Brandt hat Handlungsvollmacht, Herr Okafor Prokura. Welche der beiden Vollmachten steht im Handelsregister? Ein Wort genügt.
 
-- [x] Nur die Prokura von Herrn Okafor
-- [ ] Beide Vollmachten → Handlungsvollmachten werden nicht eingetragen.
-- [ ] Keine von beiden → Die Prokura wird eingetragen, damit Geschäftspartner sie prüfen können.
+= Prokura
+= die Prokura
+- Handlungsvollmacht → Handlungsvollmachten werden nicht eingetragen. Im HR steht die Prokura.
+- beide → Handlungsvollmachten werden nicht eingetragen. Im HR steht nur die Prokura.
+- keine → Die Prokura wird eingetragen, damit Geschäftspartner sie prüfen können.
 
 > Prokura wird eingetragen, die Handlungsvollmacht nicht.
 
